@@ -89,7 +89,7 @@ class QPersonRow extends StatelessWidget {
             maxLines: restacked ? 2 : 1,
             overflow: TextOverflow.ellipsis,
             textScaler: context.structuralTextScaler,
-            style: q.text.caption.tinted(c.textSecondary),
+            style: q.text.archiveMeta.tinted(c.textSecondary),
           );
 
     final countdown = _CountdownBadge(

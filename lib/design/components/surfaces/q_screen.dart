@@ -11,6 +11,7 @@ class QScreen extends StatelessWidget {
   const QScreen({
     required this.child,
     this.bottom,
+    this.canvasColor,
     this.applyTopInset = true,
     this.applyBottomInset = true,
     super.key,
@@ -22,6 +23,10 @@ class QScreen extends StatelessWidget {
   /// never as a persistent app-wide bar.
   final Widget? bottom;
 
+  /// Optional page colour. Journal screens pass the journal desk colour so the
+  /// archive atmosphere is not overwritten by the collection canvas.
+  final Color? canvasColor;
+
   final bool applyTopInset;
   final bool applyBottomInset;
 
@@ -30,7 +35,7 @@ class QScreen extends StatelessWidget {
     final q = context.quiet;
 
     return ColoredBox(
-      color: q.color.canvas,
+      color: canvasColor ?? q.color.canvas,
       // Nothing else in the tree supplies this, because Kin has no Scaffold.
       // Without it, a bare Text would fall back to the framework's debug
       // style rather than to the product's.

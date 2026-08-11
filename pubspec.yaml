@@ -20,9 +20,11 @@ dependencies:
   go_router: ^17.3.0
   image: ^4.8.0
   image_picker: ^1.2.3
+  just_audio: ^0.10.6
   meta: ^1.17.0
   path: ^1.9.1
   path_provider: ^2.1.6
+  record: ^6.2.1
   riverpod_annotation: ^4.0.3
   shared_preferences: ^2.5.5
   sqlite3_flutter_libs: 0.5.39
@@ -56,3 +58,9 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Variable.ttf
+
+    # Archive — Journal typewriter. Bundled Courier Prime (OFL).
+    # Scoped to Journal writing and archival metadata — not Kin chrome.
+    - family: CourierPrime
+      fonts:
+        - asset: assets/fonts/CourierPrime-Regular.ttf

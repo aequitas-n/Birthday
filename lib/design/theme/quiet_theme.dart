@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' show ThemeExtension;
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_colors.dart';
+import 'package:kin/design/theme/quiet_journal.dart';
 import 'package:kin/design/tokens/elevation_tokens.dart';
 import 'package:kin/design/tokens/motion_tokens.dart';
 import 'package:kin/design/tokens/photo_tokens.dart';
@@ -26,6 +27,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     required this.mode,
     required this.color,
     required this.elevation,
+    this.journal = const QuietJournal.light(),
     this.text = const QuietTypography(),
     this.space = const QuietSpace(),
     this.layout = const QuietLayout(),
@@ -38,6 +40,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     : mode = QuietBrightness.light,
       color = const QuietColors.light(),
       elevation = const QuietElevation.light(),
+      journal = const QuietJournal.light(),
       text = const QuietTypography(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
@@ -49,6 +52,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     : mode = QuietBrightness.dark,
       color = const QuietColors.dark(),
       elevation = const QuietElevation.dark(),
+      journal = const QuietJournal.dark(),
       text = const QuietTypography(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
@@ -60,6 +64,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     : mode = QuietBrightness.amoled,
       color = const QuietColors.amoled(),
       elevation = const QuietElevation.amoled(),
+      journal = const QuietJournal.amoled(),
       text = const QuietTypography(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
@@ -88,12 +93,16 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
         QuietBrightness.dark => const QuietElevation.dark(),
         QuietBrightness.amoled => const QuietElevation.amoled(),
       },
+      journal: QuietJournal.of(collection, mode: mode),
     );
   }
 
   final QuietBrightness mode;
   final QuietColors color;
   final QuietElevation elevation;
+
+  /// Journal archive paper / ink / tape roles.
+  final QuietJournal journal;
 
   /// Typography. Named `text` rather than `type` because [ThemeExtension]
   /// already declares a `type` getter, and it is the key `ThemeData.extensions`
@@ -119,6 +128,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     QuietBrightness? mode,
     QuietColors? color,
     QuietElevation? elevation,
+    QuietJournal? journal,
     QuietTypography? text,
     QuietSpace? space,
     QuietLayout? layout,
@@ -130,6 +140,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       mode: mode ?? this.mode,
       color: color ?? this.color,
       elevation: elevation ?? this.elevation,
+      journal: journal ?? this.journal,
       text: text ?? this.text,
       space: space ?? this.space,
       layout: layout ?? this.layout,
@@ -148,6 +159,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       mode: t < 0.5 ? mode : other.mode,
       color: QuietColors.lerp(color, other.color, t),
       elevation: QuietElevation.lerp(elevation, other.elevation, t),
+      journal: journal.lerp(other.journal, t),
       text: other.text,
       space: other.space,
       layout: other.layout,

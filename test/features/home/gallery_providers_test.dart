@@ -65,17 +65,18 @@ void main() {
         );
       }
 
-      final entries = [
-        entry(name: 'Helo', pinned: false, daysUntil: 176),
-        entry(name: 'Hola', pinned: false, daysUntil: 3),
-        entry(name: 'PinnedLater', pinned: true, daysUntil: 40),
-        entry(name: 'PinnedSoon', pinned: true, daysUntil: 2),
-      ]..sort((a, b) {
-          if (a.isPinned != b.isPinned) return a.isPinned ? -1 : 1;
-          final byDays = a.daysUntil.compareTo(b.daysUntil);
-          if (byDays != 0) return byDays;
-          return a.person.sortKey.compareTo(b.person.sortKey);
-        });
+      final entries =
+          [
+            entry(name: 'Helo', pinned: false, daysUntil: 176),
+            entry(name: 'Hola', pinned: false, daysUntil: 3),
+            entry(name: 'PinnedLater', pinned: true, daysUntil: 40),
+            entry(name: 'PinnedSoon', pinned: true, daysUntil: 2),
+          ]..sort((a, b) {
+            if (a.isPinned != b.isPinned) return a.isPinned ? -1 : 1;
+            final byDays = a.daysUntil.compareTo(b.daysUntil);
+            if (byDays != 0) return byDays;
+            return a.person.sortKey.compareTo(b.person.sortKey);
+          });
 
       expect(entries.map((e) => e.displayName).toList(), [
         'PinnedSoon',

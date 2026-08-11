@@ -10,6 +10,9 @@ import 'photo_memory_flow.dart';
 import 'profile_sheet.dart';
 
 /// Ensures a profile exists, then opens the text detail editor (favorites etc.).
+///
+/// Pass [note] only when editing/removing an existing detail. For create,
+/// omit [note] and optionally pass [initialKind] (e.g. from a tapped row).
 Future<void> addDetailMemory({
   required BuildContext context,
   required WidgetRef ref,
@@ -17,6 +20,7 @@ Future<void> addDetailMemory({
   required int nextPosition,
   RelationshipProfile? profile,
   Note? note,
+  NoteKind? initialKind,
 }) async {
   final ensured = await ensureProfileForPerson(ref, person, profile);
   if (!context.mounted) return;
@@ -25,6 +29,7 @@ Future<void> addDetailMemory({
     profileId: ensured.id,
     position: nextPosition,
     note: note,
+    initialKind: initialKind,
   );
 }
 

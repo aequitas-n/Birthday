@@ -4,14 +4,14 @@ import 'package:kin/features/person/presentation/detail_kind_picker.dart';
 
 void main() {
   Note note(NoteKind kind, String value) => Note(
-        id: value,
-        profileId: 'p',
-        kind: kind,
-        value: value,
-        position: 0,
-        createdAt: DateTime.utc(2026),
-        updatedAt: DateTime.utc(2026),
-      );
+    id: value,
+    profileId: 'p',
+    kind: kind,
+    value: value,
+    position: 0,
+    createdAt: DateTime.utc(2026),
+    updatedAt: DateTime.utc(2026),
+  );
 
   test('groups notes into Favorites, Gift, Plan, Note in order', () {
     final grouped = groupNotesByDetailSection([
@@ -52,5 +52,44 @@ void main() {
       DetailKindSection.note,
       DetailKindSection.plan,
     ]);
+  });
+
+  test('favorites share one kind header per subtype cluster', () {
+    final flowers = [
+      note(NoteKind.flower, 'Ghds'),
+      note(NoteKind.flower, 'Vzhs'),
+      note(NoteKind.colour, 'Blue'),
+    ];
+    final headers = notesWithKindHeaders(
+      DetailKindSection.favorites,
+      flowers,
+    ).toList();
+
+    expect(headers.map((e) => e.$1), [
+      'Favorite flower',
+      null,
+      'Favorite color',
+    ]);
+    expect(headers.map((e) => e.$2.value), ['Ghds', 'Vzhs', 'Blue']);
+  });
+
+  test('favorite kinds omit repeated row subtitle', () {
+    expect(noteRowSubtitle(note(NoteKind.flower, 'Ghds')), isNull);
+    expect(noteRowSubtitle(note(NoteKind.plan, 'Trip')), isNull);
+    expect(
+      noteRowSubtitle(
+        Note(
+          id: 'c',
+          profileId: 'p',
+          kind: NoteKind.custom,
+          value: 'x',
+          label: 'Nickname',
+          position: 0,
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026),
+        ),
+      ),
+      'Nickname',
+    );
   });
 }

@@ -34,5 +34,13 @@ void main() {
         ]),
       );
     });
+
+    test('schema v7 includes journal fragment tables', () async {
+      expect(database.schemaVersion, 7);
+      expect(database.journalDays, isNotNull);
+      expect(database.journalEntries, isNotNull);
+      expect(database.journalEntryPhotos, isNotNull);
+      expect(database.journalEntryFragments, isNotNull);
+    });
   });
 }

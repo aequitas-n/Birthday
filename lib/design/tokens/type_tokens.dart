@@ -1,10 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
-/// The typography scale.
+/// The typography scale — one literary language across Today, Kin, and Journal.
 ///
-/// Two families, never a third. Styles carry no colour — colour is a semantic
-/// role applied at the use site via `TextStyle.tinted`.
+/// Semantic roles (not screen-specific fonts):
+/// - **Voice (Fraunces):** screen titles, person names, day numerals, moments
+/// - **Archive (Courier Prime):** journal body, dates, metadata, quiet labels
+/// - **Text / numerals (Inter):** controls, badges, functional chrome
+///
+/// Archive styles began on Journal and are now the product's literary
+/// metadata voice wherever dates, stamps, and secondary archival detail appear.
+///
+/// Styles carry no colour — colour is a semantic role applied at the use site
+/// via `TextStyle.tinted`.
 ///
 /// Letter spacing is a function of size, never a constant. Flutter's default
 /// of zero at every size is a large part of why untouched Flutter type reads
@@ -23,6 +31,17 @@ final class QuietTypography {
 
   static const _voice = 'Fraunces';
   static const _text = 'Inter';
+
+  /// Bundled Courier Prime for Journal archive writing (OFL).
+  ///
+  /// Falls back through platform monospace names if the asset fails to load.
+  static const _archive = 'CourierPrime';
+  static const _archiveFallback = <String>[
+    'Courier New',
+    'Courier',
+    'monospace',
+    _text,
+  ];
 
   /// Tabular, lining figures. Applied everywhere numbers must align.
   static const _numericFeatures = <FontFeature>[
@@ -388,6 +407,78 @@ final class QuietTypography {
 
   /// The label inside a chip or a pill.
   TextStyle get chipLabel => label;
+
+  // ── Archive: typewriter. Literary metadata & journal writing. ─────────
+  // Used for diary bodies and quiet dates/stamps across Today and Kin.
+
+  /// 18/28. Open diary page body — long-form reading/writing.
+  TextStyle get archiveBodyLarge => const TextStyle(
+    inherit: false,
+    fontFamily: _archive,
+    fontFamilyFallback: _archiveFallback,
+    fontSize: 18,
+    height: 28 / 18,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.18, // +0.010em
+  );
+
+  /// 16/26. The story itself — unhurried typewriter body.
+  TextStyle get archiveBody => const TextStyle(
+    inherit: false,
+    fontFamily: _archive,
+    fontFamilyFallback: _archiveFallback,
+    fontSize: 16,
+    height: 26 / 16,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.16, // +0.010em — typed rhythm
+  );
+
+  /// 15/22. Incident titles on fragments and in the editor.
+  TextStyle get archiveTitle => const TextStyle(
+    inherit: false,
+    fontFamily: _archive,
+    fontFamilyFallback: _archiveFallback,
+    fontSize: 15,
+    height: 22 / 15,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.15, // +0.010em
+  );
+
+  /// 12/16. Archival labels, timestamps, fragment indexes.
+  TextStyle get archiveMeta => const TextStyle(
+    inherit: false,
+    fontFamily: _archive,
+    fontFamilyFallback: _archiveFallback,
+    fontSize: 12,
+    height: 16 / 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.48, // +0.040em
+  );
+
+  /// 11/15. Captions under photographs.
+  TextStyle get archiveCaption => const TextStyle(
+    inherit: false,
+    fontFamily: _archive,
+    fontFamilyFallback: _archiveFallback,
+    fontSize: 11,
+    height: 15 / 11,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.22, // +0.020em
+  );
+
+  /// 11/14. Tiny archive labels (No. 1, MOOD).
+  TextStyle get archiveLabel => const TextStyle(
+    inherit: false,
+    fontFamily: _archive,
+    fontFamilyFallback: _archiveFallback,
+    fontSize: 11,
+    height: 14 / 11,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.66, // +0.060em
+  );
+
+  /// Alias for body — kept for call sites that want the typewriter role explicit.
+  TextStyle get archiveTypewriter => archiveBody;
 
   /// Type set over a photograph.
   ///

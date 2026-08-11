@@ -20,6 +20,9 @@ enum QuietGlyph {
   pin,
   gift,
   ellipsis,
+  settings,
+  journal,
+  kinMark,
 }
 
 /// Renders a [QuietGlyph].
@@ -222,6 +225,36 @@ class _QuietGlyphPainter extends CustomPainter {
           ..drawCircle(const Offset(5.5, 12), strokeWidth / scale, dot)
           ..drawCircle(const Offset(12, 12), strokeWidth / scale, dot)
           ..drawCircle(const Offset(18.5, 12), strokeWidth / scale, dot);
+
+      case QuietGlyph.settings:
+        canvas.drawCircle(const Offset(12, 12), 3, paint);
+        for (var i = 0; i < 8; i++) {
+          final angle = i * 0.785398;
+          final dx = 12 + 7 * _cos(angle);
+          final dy = 12 + 7 * _sin(angle);
+          canvas.drawLine(const Offset(12, 12), Offset(dx, dy), paint);
+        }
+
+      case QuietGlyph.journal:
+        canvas
+          ..drawPath(
+            Path()
+              ..moveTo(5, 6)
+              ..lineTo(19, 6)
+              ..lineTo(19, 20)
+              ..lineTo(5, 20)
+              ..close(),
+            paint,
+          )
+          ..drawLine(const Offset(12, 6), const Offset(12, 20), paint)
+          ..drawLine(const Offset(7, 10), const Offset(10, 10), paint)
+          ..drawLine(const Offset(14, 10), const Offset(17, 10), paint)
+          ..drawLine(const Offset(7, 14), const Offset(10, 14), paint);
+
+      case QuietGlyph.kinMark:
+        canvas
+          ..drawCircle(const Offset(9, 12), 3.5, paint)
+          ..drawCircle(const Offset(15, 12), 3.5, paint);
     }
 
     canvas.restore();
@@ -232,4 +265,25 @@ class _QuietGlyphPainter extends CustomPainter {
       old.glyph != glyph ||
       old.color != color ||
       old.strokeWidth != strokeWidth;
+}
+
+double _cos(double radians) => _trig(radians, isCos: true);
+
+double _sin(double radians) => _trig(radians, isCos: false);
+
+double _trig(double radians, {required bool isCos}) {
+  // Small-angle table step for eight spokes — no dart:math in painter hot path.
+  const values = <double>[
+    1,
+    0.707106781,
+    0,
+    -0.707106781,
+    -1,
+    -0.707106781,
+    0,
+    0.707106781,
+  ];
+  final index = ((radians / 0.785398).round()) & 7;
+  final v = values[index];
+  return isCos ? v : values[(index + 2) & 7];
 }

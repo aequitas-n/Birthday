@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/person_editor_launcher.dart';
 import 'package:kin/app/profile_creation_launcher.dart';
-import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
@@ -140,10 +139,10 @@ class _HomePane extends StatelessWidget {
   }
 }
 
-/// Compact home chrome: the product, the place, the two actions.
+/// Compact Kin chrome: literary title, then the Birthdays / People place.
 ///
-/// The inspirational sentence lives on welcome and empty states — never here.
-/// Everyday use needs the mode name above the fold, not a paragraph.
+/// Matches Journal's voice hierarchy — one screen title, not a stacked brand
+/// eyebrow competing with the mode name.
 class _Masthead extends StatelessWidget {
   const _Masthead({
     required this.mode,
@@ -165,17 +164,19 @@ class _Masthead extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Kin',
-                textScaler: context.structuralTextScaler,
-                style: q.text.eyebrow.tinted(q.color.textTertiary),
+              ExcludeSemantics(
+                child: QVoice(
+                  'Kin',
+                  style: q.text.voiceLg.tinted(q.color.textPrimary),
+                ),
               ),
               SizedBox(height: q.space.xs),
               // No crossfade: AnimatedSwitcher stacked both labels and flashed
               // "Birthdays" through "People". A plain swap matches the tap.
-              QVoice(
+              Text(
                 mode.label,
-                style: q.text.voiceMd.tinted(q.color.textPrimary),
+                textScaler: context.structuralTextScaler,
+                style: q.text.archiveMeta.tinted(q.color.textSecondary),
               ),
             ],
           ),
@@ -185,7 +186,11 @@ class _Masthead extends StatelessWidget {
           onPressed: onAdd,
           semanticLabel: 'Add someone',
         ),
-        QButton.tertiary(label: 'Settings', onPressed: onSettings),
+        QIconButton(
+          glyph: QuietGlyph.settings,
+          onPressed: onSettings,
+          semanticLabel: 'Settings',
+        ),
       ],
     );
   }

@@ -59,7 +59,9 @@ List<(DetailKindSection section, List<Note> notes)> groupNotesByDetailSection(
   Iterable<Note> notes, {
   List<DetailKindSection> order = DetailKindSection.defaultOrder,
 }) {
-  final textNotes = notes.where((n) => !n.isPhotoMemory).toList(growable: false);
+  final textNotes = notes
+      .where((n) => !n.isPhotoMemory)
+      .toList(growable: false);
   final grouped = <(DetailKindSection, List<Note>)>[];
 
   for (final section in order) {
@@ -219,7 +221,8 @@ class _DetailKindPickerState extends State<DetailKindPicker> {
           _SectionBlock(
             section: _order[index],
             selected: widget.selected,
-            highlighted: _hovering == _order[index] && _dragging != _order[index],
+            highlighted:
+                _hovering == _order[index] && _dragging != _order[index],
             dimmed: _dragging == _order[index],
             onSelected: widget.onSelected,
             onDragStarted: () => setState(() => _dragging = _order[index]),
@@ -377,23 +380,14 @@ String detailKindLabel(NoteKind kind) => _labelForKind(kind);
 
 /// Subtitle under a note in a sectioned list.
 ///
-/// Favorites keep their specific kind ("Favorite flower"). Plan / gift omit
-/// the label — the section header already says it. Free notes only show a
-/// remembered when-line when set.
+/// Favorite kinds omit the label — the subtype header above the cluster
+/// already says "Favorite flower". Plan / gift omit too (section header).
+/// Free notes only show a remembered when-line when set.
 String? noteRowSubtitle(Note note) {
   switch (note.kind) {
     case NoteKind.plan:
     case NoteKind.giftIdea:
     case NoteKind.photo:
-      return null;
-    case NoteKind.free:
-      return note.rememberedWhenDisplay;
-    case NoteKind.importantDate:
-      return 'Important date';
-    case NoteKind.custom:
-      final custom = note.label?.trim();
-      if (custom == null || custom.isEmpty) return null;
-      return custom;
     case NoteKind.flower:
     case NoteKind.colour:
     case NoteKind.food:
@@ -403,7 +397,34 @@ String? noteRowSubtitle(Note note) {
     case NoteKind.music:
     case NoteKind.restaurant:
     case NoteKind.place:
-      return _labelForKind(note.kind);
+      return null;
+    case NoteKind.free:
+      return note.rememberedWhenDisplay;
+    case NoteKind.importantDate:
+      return 'Important date';
+    case NoteKind.custom:
+      final custom = note.label?.trim();
+      if (custom == null || custom.isEmpty) return null;
+      return custom;
+  }
+}
+
+/// Expands a section's notes into rows with an optional subtype header.
+///
+/// Favorites already sort by kind, so contiguous flowers share one
+/// "Favorite flower" header. Other sections never emit kind headers.
+Iterable<(String? kindHeader, Note note)> notesWithKindHeaders(
+  DetailKindSection section,
+  List<Note> notes,
+) sync* {
+  NoteKind? previous;
+  for (final note in notes) {
+    String? header;
+    if (section == DetailKindSection.favorites && note.kind != previous) {
+      header = detailKindLabel(note.kind);
+    }
+    previous = note.kind;
+    yield (header, note);
   }
 }
 
@@ -417,10 +438,10 @@ String? noteListSubtitle(Note note) {
     NoteKind.plan || NoteKind.giftIdea || NoteKind.photo => null,
     NoteKind.free => note.rememberedWhenDisplay,
     NoteKind.custom => () {
-        final custom = note.label?.trim();
-        if (custom != null && custom.isNotEmpty) return custom;
-        return _labelForKind(NoteKind.custom);
-      }(),
+      final custom = note.label?.trim();
+      if (custom != null && custom.isNotEmpty) return custom;
+      return _labelForKind(NoteKind.custom);
+    }(),
     NoteKind.importantDate ||
     NoteKind.flower ||
     NoteKind.colour ||
@@ -430,7 +451,6 @@ String? noteListSubtitle(Note note) {
     NoteKind.movie ||
     NoteKind.music ||
     NoteKind.restaurant ||
-    NoteKind.place =>
-      _labelForKind(note.kind),
+    NoteKind.place => _labelForKind(note.kind),
   };
 }

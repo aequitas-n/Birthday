@@ -20,8 +20,11 @@ import 'package:kin/domain/models/settings.dart';
 import 'package:kin/domain/repositories/person_repository.dart';
 import 'package:kin/domain/repositories/settings_repository.dart';
 import 'package:kin/features/home/application/home_providers.dart';
+import 'package:kin/features/home/presentation/home_screen.dart';
+import 'package:kin/features/journal/application/journal_providers.dart';
 import 'package:kin/features/person_editor/application/person_editor_notifier.dart';
 import 'package:kin/features/person_editor/presentation/add_person_sheet.dart';
+import 'package:kin/features/today/application/today_providers.dart';
 
 void main() {
   testWidgets('adds a person from home in dark theme', (tester) async {
@@ -46,9 +49,17 @@ void main() {
           kinDatabaseProvider.overrideWithValue(database),
           settingsRepositoryProvider.overrideWithValue(settingsRepository),
           personRepositoryProvider.overrideWithValue(personRepository),
+          peopleStreamProvider.overrideWith(
+            (ref) => personRepository.watchAll(),
+          ),
           profilesStreamProvider.overrideWith(
             (ref) => Stream.value(const <RelationshipProfile>[]),
           ),
+          journalEntriesProvider.overrideWith(
+            (ref, key) => Stream.value(const []),
+          ),
+          todayUpcomingProvider.overrideWithValue(const []),
+          todayBirthdayProvider.overrideWithValue(const []),
           imageStoreProvider.overrideWithValue(const _NoopImageStore()),
           idGeneratorProvider.overrideWithValue(
             const _FixedIdGenerator('draft-001'),
@@ -73,15 +84,25 @@ void main() {
 
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
-    final container = ProviderScope.containerOf(
-      tester.element(find.byType(KinApp)),
-    );
 
-    expect(find.text('Add someone'), findsOneWidget);
-    await tester.tap(find.text('Add someone'));
+    // Launch is Universal Home — open Kin before the birthday add flow.
+    await tester.tap(find.bySemanticsLabel('Kin'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+
+    final addOnKin = find.descendant(
+      of: find.byType(HomeScreen),
+      matching: find.bySemanticsLabel('Add someone'),
+    );
+    expect(addOnKin, findsWidgets);
+    await tester.tap(addOnKin.first);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 450));
     expect(find.text('Add someone'), findsWidgets);
+
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(KinApp)),
+    );
 
     final notifier = container.read(personEditorProvider.notifier)
       ..setName('Asha Nair')
@@ -91,6 +112,7 @@ void main() {
       ..setLocation(cityDataset.firstWhere((city) => city.city == 'Chennai'));
     await notifier.save();
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
     Navigator.of(tester.element(find.byType(AddPersonSheet))).pop();
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));

@@ -3,12 +3,14 @@ import 'package:kin/core/clock.dart';
 import 'package:kin/core/id.dart';
 import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/local/files/image_store.dart';
+import 'package:kin/data/repositories/journal_repository_drift.dart';
 import 'package:kin/data/repositories/note_repository_drift.dart';
 import 'package:kin/data/repositories/person_repository_drift.dart';
 import 'package:kin/data/repositories/profile_repository_drift.dart';
 import 'package:kin/data/repositories/scheduled_notification_repository_drift.dart';
 import 'package:kin/data/repositories/settings_repository_drift.dart';
 import 'package:kin/domain/models/settings.dart';
+import 'package:kin/domain/repositories/journal_repository.dart';
 import 'package:kin/domain/repositories/note_repository.dart';
 import 'package:kin/domain/repositories/person_repository.dart';
 import 'package:kin/domain/repositories/profile_repository.dart';
@@ -38,6 +40,14 @@ final personRepositoryProvider = Provider<PersonRepository>((ref) {
 
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
   return DriftProfileRepository(
+    ref.watch(kinDatabaseProvider),
+    ref.watch(idGeneratorProvider),
+    ref.watch(clockProvider),
+  );
+});
+
+final journalRepositoryProvider = Provider<JournalRepository>((ref) {
+  return DriftJournalRepository(
     ref.watch(kinDatabaseProvider),
     ref.watch(idGeneratorProvider),
     ref.watch(clockProvider),

@@ -14,6 +14,9 @@ import 'package:kin/domain/models/person.dart';
 import 'package:kin/domain/models/settings.dart';
 import 'package:kin/domain/repositories/settings_repository.dart';
 import 'package:kin/features/home/application/home_providers.dart';
+import 'package:kin/features/journal/application/journal_providers.dart';
+import 'package:kin/notifications/application/notification_coordinator.dart';
+import 'package:kin/notifications/notification_service.dart';
 
 void main() {
   group('theme persistence', () {
@@ -69,6 +72,10 @@ void main() {
           appSettingsProvider.overrideWith((ref) => repository.watchSettings()),
           initialAppSettingsProvider.overrideWithValue(const AppSettings()),
           peopleStreamProvider.overrideWith((ref) => Stream.value(const [])),
+          profilesStreamProvider.overrideWith((ref) => Stream.value(const [])),
+          journalEntriesProvider.overrideWith(
+            (ref, key) => Stream.value(const []),
+          ),
           initialThemePreferenceProvider.overrideWithValue(
             const ThemePreference(),
           ),
@@ -94,13 +101,22 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 600));
 
-    expect(find.text('No one here yet.'), findsOneWidget);
+    expect(find.text('Nothing written yet.'), findsOneWidget);
+    expect(find.text('Coming up'), findsOneWidget);
     expect((await repository.readSettings()).onboardingCompletedAt, isNotNull);
+
+    await tester.tap(find.bySemanticsLabel('Kin'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('No one here yet.'), findsOneWidget);
   });
 
   testWidgets('onboarded users open home and can reach gallery from settings', (
     tester,
   ) async {
+    final database = KinDatabase(NativeDatabase.memory());
+    addTearDown(database.close);
+
     final onboarded = AppSettings(
       onboardingCompletedAt: DateTime.utc(2026, 7, 28),
     );
@@ -113,10 +129,32 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
+          kinDatabaseProvider.overrideWithValue(database),
+          notificationServiceProvider.overrideWithValue(
+            const NoopNotificationService(),
+          ),
+          notificationStatusProvider.overrideWith(
+            (ref) async => const NotificationRuntimeStatus(
+              notificationsEnabled: false,
+              notificationPermission: AndroidCapabilityState.notRequired,
+              exactAlarmPermission: AndroidCapabilityState.notRequired,
+              deviceTimeZone: 'UTC',
+              pendingCount: 0,
+              plannedCount: 0,
+              lastReconciledAt: null,
+            ),
+          ),
           settingsRepositoryProvider.overrideWithValue(repository),
           appSettingsProvider.overrideWith((ref) => repository.watchSettings()),
           initialAppSettingsProvider.overrideWithValue(onboarded),
           peopleStreamProvider.overrideWith((ref) => Stream.value(const [])),
+          profilesStreamProvider.overrideWith((ref) => Stream.value(const [])),
+          journalMonthMarkersProvider.overrideWith(
+            (ref, key) => Stream.value(const []),
+          ),
+          journalEntriesProvider.overrideWith(
+            (ref, key) => Stream.value(const []),
+          ),
           initialThemePreferenceProvider.overrideWithValue(
             const ThemePreference(),
           ),
@@ -130,13 +168,19 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 600));
 
-    expect(find.text('Birthdays'), findsWidgets);
-    expect(find.text('Kin'), findsOneWidget);
+    expect(find.textContaining('Today'), findsWidgets);
 
-    await tester.tap(find.text('Settings'));
+    await tester.tap(find.bySemanticsLabel('Settings'));
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 400));
-    await tester.ensureVisible(find.text('Design gallery'));
+    await tester.pump(const Duration(milliseconds: 800));
+
+    expect(find.text('Collections'), findsOneWidget);
+    final settingsList = find.byWidgetPredicate(
+      (widget) => widget is ListView && widget.scrollDirection == Axis.vertical,
+    );
+    await tester.drag(settingsList, const Offset(0, -320));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
     await tester.tap(find.text('Design gallery'));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));
@@ -194,6 +238,9 @@ void main() {
           initialAppSettingsProvider.overrideWithValue(onboarded),
           peopleStreamProvider.overrideWith((ref) => Stream.value(people)),
           profilesStreamProvider.overrideWith((ref) => Stream.value(const [])),
+          journalEntriesProvider.overrideWith(
+            (ref, key) => Stream.value(const []),
+          ),
           clockProvider.overrideWithValue(
             _FixedClock(DateTime.utc(2026, 7, 28, 6)),
           ),
@@ -209,6 +256,14 @@ void main() {
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 600));
+
+    // Universal Home surfaces the next people immediately.
+    expect(find.text('Priya Raman'), findsOneWidget);
+    expect(find.text('Coming up'), findsOneWidget);
+
+    await tester.tap(find.bySemanticsLabel('Kin'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 400));
 
     // Sentence case countdown still appears on today's row; section titles
     // only appear once there are enough people to need chapters.

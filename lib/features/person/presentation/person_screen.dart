@@ -215,8 +215,10 @@ class _IdentityCopy extends StatelessWidget {
   });
 
   final String? relationship;
+
   /// What you actually call them — nickname when set, otherwise their name.
   final String title;
+
   /// Legal / full name, shown under the nickname when both differ.
   final String? legalName;
   final String metric;
@@ -678,16 +680,28 @@ class _NotesPlateState extends ConsumerState<_NotesPlate> {
                 style: q.text.eyebrow.tinted(q.color.textTertiary),
               ),
               SizedBox(height: q.space.xs),
-              for (var i = 0; i < grouped[s].$2.length; i++) ...[
-                if (i > 0)
+              for (final (header, note) in notesWithKindHeaders(
+                grouped[s].$1,
+                grouped[s].$2,
+              )) ...[
+                if (header != null) ...[
+                  if (note != grouped[s].$2.first) SizedBox(height: q.space.md),
+                  Text(
+                    header,
+                    textScaler: context.structuralTextScaler,
+                    style: q.text.metadata.tinted(q.color.textSecondary),
+                  ),
+                  SizedBox(height: q.space.xs),
+                ] else if (note != grouped[s].$2.first)
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: q.space.xs),
                     child: const QHairline(),
                   ),
                 _DetailMemoryRow(
-                  note: grouped[s].$2[i],
+                  note: note,
                   person: widget.person,
                   profile: widget.profile,
+                  nextPosition: widget.nextPosition,
                 ),
               ],
             ],
@@ -701,20 +715,35 @@ class _DetailMemoryRow extends ConsumerWidget {
   const _DetailMemoryRow({
     required this.note,
     required this.person,
+    required this.nextPosition,
     this.profile,
   });
 
   final Note note;
   final Person person;
   final RelationshipProfile? profile;
+  final int nextPosition;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
     final subtitle = noteRowSubtitle(note);
+    final semantic = subtitle == null
+        ? (DetailKindSection.forKind(note.kind) == DetailKindSection.favorites
+              ? '${detailKindLabel(note.kind)}: ${note.value}'
+              : note.value)
+        : '$subtitle: ${note.value}';
 
     return QPressable(
       onTap: () => addDetailMemory(
+        context: context,
+        ref: ref,
+        person: person,
+        profile: profile,
+        nextPosition: nextPosition,
+        initialKind: note.kind,
+      ),
+      onLongPress: () => addDetailMemory(
         context: context,
         ref: ref,
         person: person,
@@ -723,10 +752,8 @@ class _DetailMemoryRow extends ConsumerWidget {
         note: note,
       ),
       radius: q.radius.md,
-      semanticLabel: subtitle == null
-          ? note.value
-          : '$subtitle: ${note.value}',
-      semanticHint: 'Edit or remove this detail',
+      semanticLabel: semantic,
+      semanticHint: 'Add another detail. Long press to remove.',
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: q.space.sm),
         child: Column(
@@ -805,7 +832,9 @@ Future<void> _showPersonActions(
   var index = choice;
   if (hasProfile) {
     if (index == 0) {
-      await ref.read(profileRepositoryProvider).save(
+      await ref
+          .read(profileRepositoryProvider)
+          .save(
             profile.copyWith(
               isPinned: !profile.isPinned,
               updatedAt: ref.read(clockProvider).now(),

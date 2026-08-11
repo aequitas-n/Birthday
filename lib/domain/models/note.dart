@@ -10,14 +10,17 @@ enum NoteKind {
   music,
   restaurant,
   giftIdea,
+
   /// Something you want to do *for* or *with* them — a trip, a café, a surprise.
   /// Distinct from favorites (about them) and gift ideas (things to give).
   plan,
+
   /// A place they love — a beach, a city, a neighbourhood. Not a restaurant.
   place,
   importantDate,
   free,
   custom,
+
   /// A photograph saved as a memory. [Note.value] holds the photos.id;
   /// [Note.label] is an optional caption.
   photo

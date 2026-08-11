@@ -55,7 +55,9 @@ Future<Note?> addPhotoMemory({
   );
 
   final trimmed = caption.trim();
-  final note = await ref.read(noteRepositoryProvider).save(
+  final note = await ref
+      .read(noteRepositoryProvider)
+      .save(
         Note(
           id: '',
           profileId: ensured.id,
@@ -78,7 +80,9 @@ Future<RelationshipProfile> ensureProfileForPerson(
 ) async {
   if (existing != null) return existing;
   final now = ref.read(clockProvider).now();
-  return ref.read(profileRepositoryProvider).save(
+  return ref
+      .read(profileRepositoryProvider)
+      .save(
         RelationshipProfile(
           id: '',
           personId: person.id,
@@ -99,7 +103,6 @@ Future<void> showPhotoMemoryReview({
     PageRouteBuilder<void>(
       // Solid page — a translucent scrim left the gallery grid peeking
       // through around the contained photo.
-      opaque: true,
       pageBuilder: (context, animation, secondaryAnimation) {
         return FadeTransition(
           opacity: animation,

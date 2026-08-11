@@ -51,6 +51,7 @@ Future<void> showNoteEditorSheet({
   required String profileId,
   required int position,
   Note? note,
+  NoteKind? initialKind,
 }) {
   QuietHaptics.open();
   return showQSheet<void>(
@@ -59,6 +60,7 @@ Future<void> showNoteEditorSheet({
       profileId: profileId,
       position: position,
       note: note,
+      initialKind: initialKind,
     ),
   );
 }
@@ -502,7 +504,12 @@ class _MemoriesBookState extends ConsumerState<_MemoriesBook> {
         ],
         for (final (section, sectionNotes) in grouped) ...[
           SizedBox(height: q.space.xxl),
-          _JournalSection(title: section.title, notes: sectionNotes),
+          _JournalSection(
+            section: section,
+            title: section.title,
+            notes: sectionNotes,
+            nextPosition: notes.length,
+          ),
         ],
       ],
     );
@@ -535,7 +542,10 @@ class _PhotoJournalSection extends ConsumerWidget {
               _PhotoJournalTile(
                 note: note,
                 displayName: displayName,
-                image: ref.watch(personPhotoProvider(note.photoId)).asData?.value,
+                image: ref
+                    .watch(personPhotoProvider(note.photoId))
+                    .asData
+                    ?.value,
               ),
           ],
         ),
@@ -631,17 +641,26 @@ class _PhotoMemoryActionsSheet extends ConsumerWidget {
       child: Text(
         'A moment you saved. Open it full-screen, or remove it if it no '
         'longer belongs here.',
-        style: context.quiet.text.body.tinted(context.quiet.color.textSecondary),
+        style: context.quiet.text.body.tinted(
+          context.quiet.color.textSecondary,
+        ),
       ),
     );
   }
 }
 
 class _JournalSection extends StatelessWidget {
-  const _JournalSection({required this.title, required this.notes});
+  const _JournalSection({
+    required this.section,
+    required this.title,
+    required this.notes,
+    required this.nextPosition,
+  });
 
+  final DetailKindSection section;
   final String title;
   final List<Note> notes;
+  final int nextPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -652,13 +671,25 @@ class _JournalSection extends StatelessWidget {
       children: [
         Text(title, style: q.text.headline.tinted(q.color.textPrimary)),
         SizedBox(height: q.space.sm),
-        for (final (index, note) in notes.indexed) ...[
-          if (index > 0)
+        for (final (header, note) in notesWithKindHeaders(section, notes)) ...[
+          if (header != null) ...[
+            if (note != notes.first) SizedBox(height: q.space.md),
+            Text(
+              header,
+              textScaler: context.structuralTextScaler,
+              style: q.text.metadata.tinted(q.color.textSecondary),
+            ),
+            SizedBox(height: q.space.xs),
+          ] else if (note != notes.first)
             Padding(
               padding: EdgeInsets.symmetric(vertical: q.space.xs),
               child: const QHairline(),
             ),
-          _MemoryRow(key: ValueKey<String>(note.id), note: note),
+          _MemoryRow(
+            key: ValueKey<String>(note.id),
+            note: note,
+            nextPosition: nextPosition,
+          ),
         ],
       ],
     );
@@ -666,29 +697,42 @@ class _JournalSection extends StatelessWidget {
 }
 
 class _MemoryRow extends StatelessWidget {
-  const _MemoryRow({required this.note, super.key});
+  const _MemoryRow({
+    required this.note,
+    required this.nextPosition,
+    super.key,
+  });
 
   final Note note;
+  final int nextPosition;
 
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
     final subtitle = noteRowSubtitle(note);
+    final semantic = subtitle == null
+        ? (DetailKindSection.forKind(note.kind) == DetailKindSection.favorites
+              ? '${detailKindLabel(note.kind)}: ${note.value}'
+              : note.value)
+        : '$subtitle: ${note.value}';
 
-    // Full editor covers category + value + remove. Value-only inline edit
-    // left the category frozen and gave no way to delete.
+    // Tap adds another detail (same category). Long-press opens Remove.
     return QPressable(
       onTap: () => showNoteEditorSheet(
+        context: context,
+        profileId: note.profileId,
+        position: nextPosition,
+        initialKind: note.kind,
+      ),
+      onLongPress: () => showNoteEditorSheet(
         context: context,
         profileId: note.profileId,
         position: note.position,
         note: note,
       ),
       radius: q.radius.md,
-      semanticLabel: subtitle == null
-          ? note.value
-          : '$subtitle: ${note.value}',
-      semanticHint: 'Edit or remove this detail',
+      semanticLabel: semantic,
+      semanticHint: 'Add another detail. Long press to remove.',
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: q.space.sm),
         child: Column(
@@ -718,11 +762,13 @@ class _NoteEditorSheet extends ConsumerStatefulWidget {
     required this.profileId,
     required this.position,
     this.note,
+    this.initialKind,
   });
 
   final String profileId;
   final int position;
   final Note? note;
+  final NoteKind? initialKind;
 
   bool get isEditing => note != null;
 
@@ -742,7 +788,7 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
   void initState() {
     super.initState();
     final existing = widget.note;
-    _kind = existing?.kind ?? NoteKind.flower;
+    _kind = existing?.kind ?? widget.initialKind ?? NoteKind.flower;
     _valueController = TextEditingController(text: existing?.value ?? '');
     _labelController = TextEditingController(
       text: existing?.kind == NoteKind.custom ? (existing?.label ?? '') : '',

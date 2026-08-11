@@ -224,4 +224,51 @@ abstract final class ColorTokens {
     Color(0xFF2A2725),
     Color(0xFF272525),
   ];
+
+  // ── Journal moods (muted, dusty — not social-app saturation) ───────────
+  static const moodJoyfulLight = Color(0xFFE8C4A8);
+  static const moodJoyfulDark = Color(0xFF5C4030);
+  static const moodCalmLight = Color(0xFFC8D5C4);
+  static const moodCalmDark = Color(0xFF3A4A3E);
+  static const moodSadLight = Color(0xFFB8C4D4);
+  static const moodSadDark = Color(0xFF3A4454);
+  static const moodReflectiveLight = Color(0xFFD4CCE0);
+  static const moodReflectiveDark = Color(0xFF4A4258);
+  static const moodNostalgicLight = Color(0xFFE0C8B8);
+  static const moodNostalgicDark = Color(0xFF544438);
+  static const moodAnxiousLight = Color(0xFFD8C8C0);
+  static const moodAnxiousDark = Color(0xFF4A403C);
+  static const moodGratefulLight = Color(0xFFD8DCC0);
+  static const moodGratefulDark = Color(0xFF4A503C);
+  static const moodExcitedLight = Color(0xFFE8C8B0);
+  static const moodExcitedDark = Color(0xFF584838);
+  static const moodNeutralLight = Color(0xFFE4E0D8);
+  static const moodNeutralDark = Color(0xFF3E3C38);
+
+  static const moodInkOnLight = Color(0xFF3A3530);
+  static const moodInkOnDark = Color(0xFFF0EBE4);
+
+  // ── Journal archive surfaces (aged paper, not a second brand palette) ──
+  // Derived relatives of the warm paper / charcoal families so Journal can
+  // feel like parchment without overriding Kin globally.
+  static const journalPaperLight = Color(0xFFF6F1E8);
+  static const journalPaperEdgeLight = Color(0xFFD8CFC2);
+  static const journalTapeLight = Color(0xFFDFD0B4);
+  static const journalClipLight = Color(0xFF9A9288);
+  static const journalPhotoMatLight = Color(0xFFF0EAE0);
+  static const journalShadowLight = Color(0x1A261E16);
+
+  static const journalPaperDark = Color(0xFF1B1915);
+  static const journalPaperEdgeDark = Color(0xFF3A3630);
+  static const journalTapeDark = Color(0xFF4A4336);
+  static const journalClipDark = Color(0xFF8A847A);
+  static const journalPhotoMatDark = Color(0xFF22201C);
+  static const journalShadowDark = Color(0x66000000);
+
+  static const journalPaperVoid = Color(0xFF0A0908);
+  static const journalPaperEdgeVoid = Color(0xFF2A2722);
+  static const journalTapeVoid = Color(0xFF3A352C);
+  static const journalClipVoid = Color(0xFF7A746C);
+  static const journalPhotoMatVoid = Color(0xFF12100E);
+  static const journalShadowVoid = Color(0x99000000);
 }

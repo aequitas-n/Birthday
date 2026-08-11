@@ -164,7 +164,6 @@ void main() {
     expect(find.text('Peonies'), findsOneWidget);
     expect(find.text('Favorite flower'), findsOneWidget);
     expect(find.text('A handwritten letter'), findsOneWidget);
-    expect(find.text('Gift idea'), findsOneWidget);
     expect(find.text('No memories yet'), findsNothing);
     // Nickname is the hero title; the full name sits under it — no quotes.
     expect(find.text('"Priya"'), findsNothing);
