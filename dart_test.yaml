@@ -1,0 +1,6 @@
+# Golden images are pixel-sensitive to the host platform's font rasteriser.
+# They are tagged so the correctness suite can run anywhere, while goldens are
+# verified on a single reference platform. See docs/13-roadmap.md Phase 1.
+tags:
+  golden:
+    description: Pixel comparisons. Regenerate on the reference platform only.

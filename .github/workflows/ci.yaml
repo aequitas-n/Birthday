@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: flutter analyze --fatal-infos --fatal-warnings
+
+      - name: Architecture guard
+        run: dart run tool/check_architecture.dart
+
+      - name: Verify generated files are current
+        run: |
+          if grep -rq "part '.*\.g\.dart'" lib/; then
+            dart run build_runner build --delete-conflicting-outputs
+            git diff --exit-code -- lib/
+          else
+            echo "No generated sources yet; skipping."
+          fi
+
+      # Golden images are pixel-sensitive to the host font rasteriser, so they
+      # are verified separately on the reference platform rather than here.
+      - name: Test
+        run: flutter test --exclude-tags golden --reporter expanded
+
+  goldens:
+    # Baselines are committed from the reference platform. This job fails when
+    # a change alters rendering, and uploads the diff for review.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Golden comparison
+        run: flutter test --tags golden --reporter expanded
+
+      - name: Upload golden failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-failures
+          path: test/**/failures/
+          if-no-files-found: ignore

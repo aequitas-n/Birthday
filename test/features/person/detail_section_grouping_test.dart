@@ -1,0 +1,56 @@
+import 'package:flutter_test/flutter_test.dart';
+import 'package:kin/domain/models/note.dart';
+import 'package:kin/features/person/presentation/detail_kind_picker.dart';
+
+void main() {
+  Note note(NoteKind kind, String value) => Note(
+        id: value,
+        profileId: 'p',
+        kind: kind,
+        value: value,
+        position: 0,
+        createdAt: DateTime.utc(2026),
+        updatedAt: DateTime.utc(2026),
+      );
+
+  test('groups notes into Favorites, Gift, Plan, Note in order', () {
+    final grouped = groupNotesByDetailSection([
+      note(NoteKind.plan, 'Trip'),
+      note(NoteKind.free, 'Said this'),
+      note(NoteKind.plan, 'Café'),
+      note(NoteKind.flower, 'Peonies'),
+      note(NoteKind.giftIdea, 'Mug'),
+    ]);
+
+    expect(grouped.map((e) => e.$1), [
+      DetailKindSection.favorites,
+      DetailKindSection.gift,
+      DetailKindSection.plan,
+      DetailKindSection.note,
+    ]);
+    expect(grouped[0].$2.single.value, 'Peonies');
+    expect(grouped[1].$2.single.value, 'Mug');
+    expect(grouped[2].$2.map((n) => n.value), ['Trip', 'Café']);
+    expect(grouped[3].$2.single.value, 'Said this');
+  });
+
+  test('respects custom section order', () {
+    final grouped = groupNotesByDetailSection(
+      [
+        note(NoteKind.plan, 'Trip'),
+        note(NoteKind.free, 'Said this'),
+      ],
+      order: const [
+        DetailKindSection.note,
+        DetailKindSection.plan,
+        DetailKindSection.favorites,
+        DetailKindSection.gift,
+      ],
+    );
+
+    expect(grouped.map((e) => e.$1), [
+      DetailKindSection.note,
+      DetailKindSection.plan,
+    ]);
+  });
+}
