@@ -271,4 +271,80 @@ abstract final class ColorTokens {
   static const journalClipVoid = Color(0xFF7A746C);
   static const journalPhotoMatVoid = Color(0xFF12100E);
   static const journalShadowVoid = Color(0x99000000);
+
+  // ── Vintage Diary (sole product theme) ────────────────────────────────
+  // Spec: assets/themes/Vintage-Diary/vintage_diary_app_visual_design_system.txt
+  static const vdCreamPrimary = Color(0xFFF4EEDF);
+  static const vdCreamSecondary = Color(0xFFE4D0C2);
+
+  /// Soft cream meta — readable on dark diary canvas (was too taupe at #A89282).
+  static const vdCreamTertiary = Color(0xFFC9B4A4);
+  static const vdCreamInverse = Color(0xFF332B27);
+
+  static const vdInkPrimary = Color(0xFF332B27);
+  static const vdInkSecondary = Color(0xFF594A43);
+  static const vdInkTertiary = Color(0xFF8A7A70);
+
+  static const vdBurgundy = Color(0xFF713D3A);
+  static const vdBurgundyMuted = Color(0xFF8A5148);
+  static const vdTerracotta = Color(0xFFA96755);
+  static const vdTerracottaSoft = Color(0xFFC99A87);
+  static const vdTerracottaPale = Color(0xFFDCC1B3);
+
+  static const vdPaperWarm = Color(0xFFF4EEDF);
+  static const vdPaperParchment = Color(0xFFEFE5D2);
+  static const vdPaperAged = Color(0xFFE7D8BE);
+  static const vdPaperHighlight = Color(0xFFFAF5EA);
+
+  /// Mid-tone of [Journal-Card.webp] — nav / flat fills that should match the card.
+  static const vdJournalCardCream = Color(0xFFEEE1CA);
+
+  static const vdDiaryCanvas = Color(0xFF2A1E18);
+  static const vdDiarySurface = Color(0xFF3A2E26);
+  static const vdDiaryRaised = Color(0xFF4A3A30);
+  static const vdDiarySunken = Color(0xFF1E1612);
+  static const vdDiaryHairline = Color(0xFF5C4A40);
+  static const vdDiaryHairlineStrong = Color(0xFF6E5A4E);
+
+  /// Legacy leather nav strip tokens — retained for stability; navigation
+  /// now uses cream parchment ([vdPaperWarm]) for desk contrast.
+  static const vdNavSurface = Color(0xFF3F3028);
+  static const vdNavBorder = Color(0xFF564538);
+  static const vdNavSurfaceDark = Color(0xFF32261F);
+  static const vdNavBorderDark = Color(0xFF4A3A30);
+  static const vdNavSurfaceAmoled = Color(0xFF1A1410);
+  static const vdNavBorderAmoled = Color(0xFF2E241C);
+
+  static const vdScrim = Color(0xCC1A120E);
+  static const vdSelection = Color(0x33713D3A);
+  static const vdAccentWash = Color(0xFF4A3228);
+  static const vdAccentWashDark = Color(0xFF5A3A30);
+  static const vdAccentWashAmoled = Color(0xFF3A281E);
+
+  static const vdCanvasDark = Color(0xFF1A120E);
+  static const vdSurfaceDark = Color(0xFF2A2018);
+  static const vdRaisedDark = Color(0xFF3A2E24);
+  static const vdSunkenDark = Color(0xFF120C08);
+  static const vdHairlineDark = Color(0xFF4E4036);
+  static const vdHairlineStrongDark = Color(0xFF6A5A4E);
+  static const vdTextPrimaryDark = Color(0xFFFAF5EA);
+  static const vdTextSecondaryDark = Color(0xFFE8D8C8);
+  static const vdTextTertiaryDark = Color(0xFFC9B4A4);
+  static const vdScrimDark = Color(0xE61A120E);
+
+  static const vdCanvasAmoled = Color(0xFF0A0806);
+  static const vdSurfaceAmoled = Color(0xFF14100C);
+  static const vdRaisedAmoled = Color(0xFF1E1814);
+  static const vdSunkenAmoled = Color(0xFF060504);
+  static const vdHairlineAmoled = Color(0xFF2A221C);
+  static const vdHairlineStrongAmoled = Color(0xFF3E342C);
+  static const vdScrimAmoled = Color(0xF00A0806);
+
+  static const vdJournalRule = Color(0xFFD8CFC2);
+  static const vdJournalRuleDark = Color(0xFFD0C4B4);
+  static const vdJournalRuleAmoled = Color(0xFFC4B4A0);
+  static const vdJournalShadow = Color(0x332B1E16);
+  static const vdJournalShadowDark = Color(0x4D000000);
+  static const vdJournalShadowAmoled = Color(0x66000000);
+  static const vdJournalEdgeAmoled = Color(0xFFC9B8A0);
 }

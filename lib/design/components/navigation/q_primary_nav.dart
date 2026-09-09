@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/navigation/q_diary_chrome_strip.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// Primary app destinations — Today, Kin, and Journal.
@@ -14,9 +15,10 @@ enum PrimaryDestination {
   final String label;
 }
 
-/// Custom bottom navigation — quiet, editorial, not Material stock chrome.
+/// Custom bottom navigation on the Vintage Diary parchment strip.
 ///
 /// Labels only: no icons. The underline carries selection.
+/// Cream strip background → brown ink (readable on the paper asset).
 class QPrimaryNav extends StatelessWidget {
   const QPrimaryNav({
     required this.selected,
@@ -31,32 +33,22 @@ class QPrimaryNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: q.color.surface,
-        border: Border(
-          top: BorderSide(
-            color: q.color.hairline,
-            width: context.hairlineWidth,
-          ),
-        ),
-      ),
-      child: SafeArea(
-        top: false,
-        child: SizedBox(
-          height: q.layout.minTouchTarget,
-          child: Row(
-            children: [
-              for (final destination in PrimaryDestination.values)
-                Expanded(
-                  child: _NavItem(
-                    destination: destination,
-                    selected: destination == selected,
-                    onTap: () => onSelected(destination),
-                  ),
+    return QDiaryChromeStrip(
+      safeBottom: true,
+      padding: EdgeInsets.symmetric(horizontal: q.space.sm),
+      child: SizedBox(
+        height: q.layout.minTouchTarget,
+        child: Row(
+          children: [
+            for (final destination in PrimaryDestination.values)
+              Expanded(
+                child: _NavItem(
+                  destination: destination,
+                  selected: destination == selected,
+                  onTap: () => onSelected(destination),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );
@@ -77,7 +69,8 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final color = selected ? q.color.textPrimary : q.color.textTertiary;
+    final nav = q.navigation;
+    final color = selected ? nav.inkActive : nav.inkInactive;
 
     return QPressable(
       onTap: onTap,
@@ -92,8 +85,8 @@ class _NavItem extends StatelessWidget {
               destination.label,
               textScaler: context.structuralTextScaler,
               style: selected
-                  ? q.text.buttonLabel.tinted(color)
-                  : q.text.metadata.tinted(color),
+                  ? q.text.uiNavigation.tinted(color)
+                  : q.text.uiCaption.tinted(color),
             ),
             SizedBox(height: q.space.hair),
             AnimatedOpacity(
@@ -101,7 +94,7 @@ class _NavItem extends StatelessWidget {
               opacity: selected ? 1 : 0,
               child: DecoratedBox(
                 decoration: ShapeDecoration(
-                  color: q.color.accent,
+                  color: nav.indicator,
                   shape: const StadiumBorder(),
                 ),
                 child: const SizedBox(width: 16, height: 2),

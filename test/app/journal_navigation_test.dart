@@ -11,10 +11,12 @@ import 'package:kin/core/clock.dart';
 import 'package:kin/core/id.dart';
 import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/repositories/journal_repository_drift.dart';
+import 'package:kin/domain/models/personal_reminder.dart';
 import 'package:kin/domain/models/settings.dart';
 import 'package:kin/domain/repositories/settings_repository.dart';
 import 'package:kin/features/home/application/home_providers.dart';
 import 'package:kin/features/journal/application/journal_providers.dart';
+import 'package:kin/features/reminders/application/reminder_providers.dart';
 
 void main() {
   testWidgets('bottom navigation switches Today, Kin, and Journal', (
@@ -55,6 +57,9 @@ void main() {
           ),
           journalMonthMarkersProvider.overrideWith(
             (ref, key) => Stream.value(const []),
+          ),
+          remindersForDateProvider.overrideWith(
+            (ref, key) => Stream.value(const <PersonalReminder>[]),
           ),
           initialThemePreferenceProvider.overrideWithValue(
             const ThemePreference(),

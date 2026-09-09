@@ -82,9 +82,10 @@ Visual language: `QuietJournal` desk + archive / Voice typography — editorial 
 
 | Role | Family | Use |
 |---|---|---|
-| Voice (`voice*`, `sectionTitle`) | Fraunces | Titles, names, day numerals |
-| Archive (`archive*`) | Courier Prime | Journal body + literary dates/metadata across Today & Kin |
-| Text / numerals | Inter | Controls, badges, functional chrome |
+| Editorial (`pageTitle`, `sectionTitle`, `emptyStateTitle`, `headline`) | Fraunces | Screen titles, section headings, sheet titles |
+| Voice (`voice*`, `personName`, `memoryTitle`) | Fraunces | Names, memory titles, editorial numerals |
+| Handwriting (`journalWriting`, `diaryNote`) | Caveat | Memory body, personal notes, prompts on paper |
+| Archive / universal (`ui*`, `archive*`, `body`) | Courier Prime | Dates, metadata, labels, buttons, nav |
 
 Kin Birthdays / People inherit archive metadata on person rows and a Voice `Kin` masthead so Kin and Journal read as one product.
 

@@ -1,7 +1,7 @@
 name: kin
 description: "Remember the people who matter, and the small things that make them feel known."
 publish_to: "none"
-version: 1.0.0-rc1+1
+version: 1.0.0-rc1+4
 
 environment:
   sdk: ^3.10.4
@@ -12,8 +12,6 @@ dependencies:
   drift_flutter: 0.2.0
   flutter:
     sdk: flutter
-
-  # State management. Reads are streams, writes are notifiers (docs/09).
   flutter_local_notifications: ^22.2.0
   flutter_riverpod: ^3.3.2
   flutter_timezone: ^5.1.0
@@ -25,7 +23,9 @@ dependencies:
   path: ^1.9.1
   path_provider: ^2.1.6
   record: ^6.2.1
+  riverpod: ^3.3.2
   riverpod_annotation: ^4.0.3
+  screen_retriever: ^0.2.2
   shared_preferences: ^2.5.5
   sqlite3_flutter_libs: 0.5.39
   timezone: ^0.11.1
@@ -47,20 +47,29 @@ flutter:
   uses-material-design: false
 
   fonts:
-    # Voice — human content: names, titles, remembered details.
-    # Variable axes: opsz, wght, SOFT, WONK (docs/05 §1).
+    # Secondary — literary / editorial (theme-owned).
+    # Variable axes: opsz, wght, SOFT, WONK (docs/05).
     - family: Fraunces
       fonts:
         - asset: assets/fonts/Fraunces-Variable.ttf
 
-    # Text — functional content: labels, body, inputs, numerals.
-    # Variable axes: opsz, wght.
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-Variable.ttf
-
-    # Archive — Journal typewriter. Bundled Courier Prime (OFL).
-    # Scoped to Journal writing and archival metadata — not Kin chrome.
+    # Universal — product-owned archive / utility across all themes.
     - family: CourierPrime
       fonts:
         - asset: assets/fonts/CourierPrime-Regular.ttf
+
+    # Primary — handwritten personality (Vintage Diary theme-owned).
+    # Caveat (OFL) — google/fonts ofl/caveat
+    - family: Caveat
+      fonts:
+        - asset: assets/fonts/Caveat-Variable.ttf
+
+  assets:
+    - assets/themes/Vintage-Diary/vintage-bg.webp
+    - assets/themes/Vintage-Diary/Journal-Card.webp
+    - assets/themes/Vintage-Diary/Calendar.webp
+    - assets/themes/Vintage-Diary/bottom-navbar.webp
+    - assets/themes/Vintage-Diary/user-strip.webp
+    - assets/themes/Vintage-Diary/search.webp
+    - assets/themes/Vintage-Diary/profile_card.webp
+    - assets/themes/Vintage-Diary/Mood-Illustrations/

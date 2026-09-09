@@ -2,7 +2,9 @@ import 'package:flutter/material.dart' show ThemeExtension;
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_colors.dart';
+import 'package:kin/design/theme/quiet_interactive.dart';
 import 'package:kin/design/theme/quiet_journal.dart';
+import 'package:kin/design/theme/quiet_navigation.dart';
 import 'package:kin/design/tokens/elevation_tokens.dart';
 import 'package:kin/design/tokens/motion_tokens.dart';
 import 'package:kin/design/tokens/photo_tokens.dart';
@@ -10,8 +12,7 @@ import 'package:kin/design/tokens/radius_tokens.dart';
 import 'package:kin/design/tokens/space_tokens.dart';
 import 'package:kin/design/tokens/type_tokens.dart';
 
-/// Which of the three concrete themes is in use.
-enum QuietBrightness { light, dark, amoled }
+export 'package:kin/design/theme/quiet_collection.dart' show QuietBrightness;
 
 /// The complete Quiet design language, carried on the element tree as a
 /// [ThemeExtension].
@@ -28,6 +29,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     required this.color,
     required this.elevation,
     this.journal = const QuietJournal.light(),
+    this.interactive = const QuietInteractive.light(),
+    this.navigation = const QuietNavigation.light(),
     this.text = const QuietTypography(),
     this.space = const QuietSpace(),
     this.layout = const QuietLayout(),
@@ -41,6 +44,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       color = const QuietColors.light(),
       elevation = const QuietElevation.light(),
       journal = const QuietJournal.light(),
+      interactive = const QuietInteractive.light(),
+      navigation = const QuietNavigation.light(),
       text = const QuietTypography(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
@@ -53,6 +58,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       color = const QuietColors.dark(),
       elevation = const QuietElevation.dark(),
       journal = const QuietJournal.dark(),
+      interactive = const QuietInteractive.dark(),
+      navigation = const QuietNavigation.dark(),
       text = const QuietTypography(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
@@ -65,6 +72,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       color = const QuietColors.amoled(),
       elevation = const QuietElevation.amoled(),
       journal = const QuietJournal.amoled(),
+      interactive = const QuietInteractive.amoled(),
+      navigation = const QuietNavigation.amoled(),
       text = const QuietTypography(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
@@ -94,6 +103,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
         QuietBrightness.amoled => const QuietElevation.amoled(),
       },
       journal: QuietJournal.of(collection, mode: mode),
+      interactive: QuietInteractive.of(dark: dark, amoled: amoled),
+      navigation: QuietNavigation.of(dark: dark, amoled: amoled),
     );
   }
 
@@ -103,6 +114,12 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
 
   /// Journal archive paper / ink / tape roles.
   final QuietJournal journal;
+
+  /// Interactive surfaces — CTAs, sheets, inputs, toggles.
+  final QuietInteractive interactive;
+
+  /// Bottom navigation strip — distinct from canvas and parchment cards.
+  final QuietNavigation navigation;
 
   /// Typography. Named `text` rather than `type` because [ThemeExtension]
   /// already declares a `type` getter, and it is the key `ThemeData.extensions`
@@ -129,6 +146,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
     QuietColors? color,
     QuietElevation? elevation,
     QuietJournal? journal,
+    QuietInteractive? interactive,
+    QuietNavigation? navigation,
     QuietTypography? text,
     QuietSpace? space,
     QuietLayout? layout,
@@ -141,6 +160,8 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       color: color ?? this.color,
       elevation: elevation ?? this.elevation,
       journal: journal ?? this.journal,
+      interactive: interactive ?? this.interactive,
+      navigation: navigation ?? this.navigation,
       text: text ?? this.text,
       space: space ?? this.space,
       layout: layout ?? this.layout,
@@ -154,12 +175,12 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
   QuietTheme lerp(covariant QuietTheme? other, double t) {
     if (other == null) return this;
     return QuietTheme(
-      // Metrics and timings are identical across themes, so only the colour
-      // and elevation recipes actually interpolate.
       mode: t < 0.5 ? mode : other.mode,
       color: QuietColors.lerp(color, other.color, t),
       elevation: QuietElevation.lerp(elevation, other.elevation, t),
       journal: journal.lerp(other.journal, t),
+      interactive: QuietInteractive.lerp(interactive, other.interactive, t),
+      navigation: QuietNavigation.lerp(navigation, other.navigation, t),
       text: other.text,
       space: other.space,
       layout: other.layout,

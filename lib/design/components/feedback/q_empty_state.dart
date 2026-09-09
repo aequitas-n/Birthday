@@ -61,14 +61,14 @@ class QEmptyState extends StatelessWidget {
                 headline,
                 textAlign: TextAlign.center,
                 textScaler: context.nameTextScaler,
-                style: q.text.voiceLg.tinted(q.color.textPrimary),
+                style: q.text.emptyStateTitle.tinted(q.color.textPrimary),
               ),
               if (support != null) ...[
                 SizedBox(height: q.space.md),
                 Text(
                   support!,
                   textAlign: TextAlign.center,
-                  style: q.text.bodyLg.tinted(q.color.textSecondary),
+                  style: q.text.emptyStateBody.tinted(q.color.textSecondary),
                 ),
               ],
               if (action != null) ...[

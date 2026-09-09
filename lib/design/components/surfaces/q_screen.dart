@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/theme/vintage_diary_background.dart';
 
 /// Kin's replacement for `Scaffold`.
 ///
@@ -23,8 +24,8 @@ class QScreen extends StatelessWidget {
   /// never as a persistent app-wide bar.
   final Widget? bottom;
 
-  /// Optional page colour. Journal screens pass the journal desk colour so the
-  /// archive atmosphere is not overwritten by the collection canvas.
+  /// Optional page colour. When set, replaces the Vintage Diary texture with a
+  /// flat fill — reserved for rare overrides (e.g. full-screen photo viewers).
   final Color? canvasColor;
 
   final bool applyTopInset;
@@ -33,28 +34,29 @@ class QScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final useTexture = canvasColor == null;
 
-    return ColoredBox(
-      color: canvasColor ?? q.color.canvas,
-      // Nothing else in the tree supplies this, because Kin has no Scaffold.
-      // Without it, a bare Text would fall back to the framework's debug
-      // style rather than to the product's.
-      child: DefaultTextStyle(
-        style: q.text.body.tinted(q.color.textPrimary),
-        child: SafeArea(
-          top: applyTopInset,
-          bottom: applyBottomInset && bottom == null,
-          child: bottom == null
-              ? child
-              : Column(
-                  children: [
-                    Expanded(child: child),
-                    SafeArea(top: false, child: bottom!),
-                  ],
-                ),
-        ),
+    final content = DefaultTextStyle(
+      style: q.inked(q.text.body),
+      child: SafeArea(
+        top: applyTopInset,
+        bottom: applyBottomInset && bottom == null,
+        child: bottom == null
+            ? child
+            : Column(
+                children: [
+                  Expanded(child: child),
+                  SafeArea(top: false, child: bottom!),
+                ],
+              ),
       ),
     );
+
+    if (!useTexture) {
+      return ColoredBox(color: canvasColor!, child: content);
+    }
+
+    return VintageDiaryCanvas(child: content);
   }
 }
 

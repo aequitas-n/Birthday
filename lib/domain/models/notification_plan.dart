@@ -1,33 +1,108 @@
 import 'package:kin/domain/models/reminder_rule.dart';
 import 'package:meta/meta.dart';
 
-enum NotificationPlanKind { birthdayToday, birthdayUpcoming }
+enum NotificationPlanSource {
+  birthday,
+  personal
+  ;
+
+  static NotificationPlanSource fromStorage(String value) {
+    return values.firstWhere(
+      (entry) => entry.name == value,
+      orElse: () => NotificationPlanSource.birthday,
+    );
+  }
+
+  String get storageValue => name;
+}
+
+enum NotificationPlanKind {
+  birthdayToday,
+  birthdayUpcoming,
+  personalReminder
+  ;
+
+  static NotificationPlanKind fromStorage(String value) {
+    return values.firstWhere(
+      (kind) => kind.name == value,
+      orElse: () =>
+          throw FormatException('Unknown notification plan kind: $value'),
+    );
+  }
+}
 
 @immutable
 class NotificationPayload {
   const NotificationPayload({
     required this.version,
-    required this.personId,
-    required this.ruleKind,
+    required this.source,
     required this.occurrenceYear,
-  });
+    this.personId,
+    this.reminderId,
+    this.ruleKind,
+  }) : assert(
+         (source == NotificationPlanSource.birthday &&
+                 personId != null &&
+                 ruleKind != null) ||
+             (source == NotificationPlanSource.personal && reminderId != null),
+         'Payload fields must match source.',
+       );
+
+  factory NotificationPayload.birthday({
+    required String personId,
+    required ReminderRuleKind ruleKind,
+    required int occurrenceYear,
+    int version = 1,
+  }) {
+    return NotificationPayload(
+      version: version,
+      source: NotificationPlanSource.birthday,
+      personId: personId,
+      ruleKind: ruleKind,
+      occurrenceYear: occurrenceYear,
+    );
+  }
+
+  factory NotificationPayload.personal({
+    required String reminderId,
+    required int occurrenceYear,
+    int version = 1,
+  }) {
+    return NotificationPayload(
+      version: version,
+      source: NotificationPlanSource.personal,
+      reminderId: reminderId,
+      occurrenceYear: occurrenceYear,
+    );
+  }
 
   final int version;
-  final String personId;
-  final ReminderRuleKind ruleKind;
+  final NotificationPlanSource source;
+  final String? personId;
+  final String? reminderId;
+  final ReminderRuleKind? ruleKind;
   final int occurrenceYear;
 
   @override
   bool operator ==(Object other) {
     return other is NotificationPayload &&
         other.version == version &&
+        other.source == source &&
         other.personId == personId &&
+        other.reminderId == reminderId &&
         other.ruleKind == ruleKind &&
         other.occurrenceYear == occurrenceYear;
   }
 
   @override
-  int get hashCode => Object.hash(version, personId, ruleKind, occurrenceYear);
+  int get hashCode => Object.hash(
+    version,
+    source,
+    personId,
+    reminderId,
+    ruleKind,
+    occurrenceYear,
+  );
 }
 
 @immutable
@@ -71,8 +146,7 @@ class LocalScheduledMoment {
 class NotificationPlan {
   const NotificationPlan({
     required this.stableId,
-    required this.personId,
-    required this.ruleId,
+    required this.source,
     required this.occurrenceYear,
     required this.fireAtUtc,
     required this.targetLocalInstant,
@@ -81,11 +155,16 @@ class NotificationPlan {
     required this.title,
     required this.body,
     required this.hidesSensitivePreview,
+    this.personId,
+    this.ruleId,
+    this.reminderId,
   });
 
   final int stableId;
-  final String personId;
-  final String ruleId;
+  final NotificationPlanSource source;
+  final String? personId;
+  final String? ruleId;
+  final String? reminderId;
   final int occurrenceYear;
   final DateTime fireAtUtc;
   final LocalScheduledMoment targetLocalInstant;
@@ -97,8 +176,10 @@ class NotificationPlan {
 
   NotificationPlan copyWith({
     int? stableId,
-    String? personId,
-    String? ruleId,
+    NotificationPlanSource? source,
+    Object? personId = _sentinel,
+    Object? ruleId = _sentinel,
+    Object? reminderId = _sentinel,
     int? occurrenceYear,
     DateTime? fireAtUtc,
     LocalScheduledMoment? targetLocalInstant,
@@ -110,8 +191,12 @@ class NotificationPlan {
   }) {
     return NotificationPlan(
       stableId: stableId ?? this.stableId,
-      personId: personId ?? this.personId,
-      ruleId: ruleId ?? this.ruleId,
+      source: source ?? this.source,
+      personId: personId == _sentinel ? this.personId : personId as String?,
+      ruleId: ruleId == _sentinel ? this.ruleId : ruleId as String?,
+      reminderId: reminderId == _sentinel
+          ? this.reminderId
+          : reminderId as String?,
       occurrenceYear: occurrenceYear ?? this.occurrenceYear,
       fireAtUtc: fireAtUtc ?? this.fireAtUtc,
       targetLocalInstant: targetLocalInstant ?? this.targetLocalInstant,
@@ -128,8 +213,10 @@ class NotificationPlan {
   bool operator ==(Object other) {
     return other is NotificationPlan &&
         other.stableId == stableId &&
+        other.source == source &&
         other.personId == personId &&
         other.ruleId == ruleId &&
+        other.reminderId == reminderId &&
         other.occurrenceYear == occurrenceYear &&
         other.fireAtUtc == fireAtUtc &&
         other.targetLocalInstant == targetLocalInstant &&
@@ -143,8 +230,10 @@ class NotificationPlan {
   @override
   int get hashCode => Object.hash(
     stableId,
+    source,
     personId,
     ruleId,
+    reminderId,
     occurrenceYear,
     fireAtUtc,
     targetLocalInstant,
@@ -170,3 +259,5 @@ class NotificationPlanReconciliation {
   final List<NotificationPlan> toRemove;
   final List<NotificationPlan> unchanged;
 }
+
+const _sentinel = Object();

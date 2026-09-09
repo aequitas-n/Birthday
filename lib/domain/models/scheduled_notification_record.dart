@@ -29,8 +29,7 @@ enum ScheduledNotificationState {
 class ScheduledNotificationRecord {
   const ScheduledNotificationRecord({
     required this.osId,
-    required this.personId,
-    required this.ruleId,
+    required this.source,
     required this.occurrenceYear,
     required this.fireAtUtc,
     required this.targetLocalInstant,
@@ -42,6 +41,9 @@ class ScheduledNotificationRecord {
     required this.hidesSensitivePreview,
     required this.state,
     required this.createdAt,
+    this.personId,
+    this.ruleId,
+    this.reminderId,
     this.noteIdUsed,
   });
 
@@ -54,8 +56,10 @@ class ScheduledNotificationRecord {
   }) {
     return ScheduledNotificationRecord(
       osId: plan.stableId,
+      source: plan.source,
       personId: plan.personId,
       ruleId: plan.ruleId,
+      reminderId: plan.reminderId,
       occurrenceYear: plan.occurrenceYear,
       fireAtUtc: plan.fireAtUtc.toUtc(),
       targetLocalInstant: plan.targetLocalInstant,
@@ -72,8 +76,10 @@ class ScheduledNotificationRecord {
   }
 
   final int osId;
-  final String personId;
-  final String ruleId;
+  final NotificationPlanSource source;
+  final String? personId;
+  final String? ruleId;
+  final String? reminderId;
   final int occurrenceYear;
   final DateTime fireAtUtc;
   final LocalScheduledMoment targetLocalInstant;
@@ -90,8 +96,10 @@ class ScheduledNotificationRecord {
   NotificationPlan toPlan() {
     return NotificationPlan(
       stableId: osId,
+      source: source,
       personId: personId,
       ruleId: ruleId,
+      reminderId: reminderId,
       occurrenceYear: occurrenceYear,
       fireAtUtc: fireAtUtc,
       targetLocalInstant: targetLocalInstant,
@@ -106,8 +114,10 @@ class ScheduledNotificationRecord {
   ScheduledNotificationRecord copyWith({ScheduledNotificationState? state}) {
     return ScheduledNotificationRecord(
       osId: osId,
+      source: source,
       personId: personId,
       ruleId: ruleId,
+      reminderId: reminderId,
       occurrenceYear: occurrenceYear,
       fireAtUtc: fireAtUtc,
       targetLocalInstant: targetLocalInstant,
@@ -127,8 +137,10 @@ class ScheduledNotificationRecord {
   bool operator ==(Object other) {
     return other is ScheduledNotificationRecord &&
         other.osId == osId &&
+        other.source == source &&
         other.personId == personId &&
         other.ruleId == ruleId &&
+        other.reminderId == reminderId &&
         other.occurrenceYear == occurrenceYear &&
         other.fireAtUtc == fireAtUtc &&
         other.targetLocalInstant == targetLocalInstant &&
@@ -146,8 +158,10 @@ class ScheduledNotificationRecord {
   @override
   int get hashCode => Object.hash(
     osId,
+    source,
     personId,
     ruleId,
+    reminderId,
     occurrenceYear,
     fireAtUtc,
     targetLocalInstant,

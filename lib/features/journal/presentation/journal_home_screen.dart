@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kin/app/router.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/motion/quiet_motion.dart';
@@ -50,7 +51,6 @@ class _JournalHomeScreenState extends ConsumerState<JournalHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final today = ref.watch(journalTodayProvider);
     final markersAsync = ref.watch(
       journalMonthMarkersProvider((_year, _month)),
@@ -63,106 +63,124 @@ class _JournalHomeScreenState extends ConsumerState<JournalHomeScreen> {
     final daysInMonth = DateTime(_year, _month + 1, 0).day;
 
     return QScreen(
-      canvasColor: j.desk,
       child: QMeasure(
-        child: ListView(
-          padding: EdgeInsets.fromLTRB(
-            context.gutter,
-            q.space.base,
-            context.gutter,
-            q.space.xl,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              'Journal',
-              textScaler: context.nameTextScaler,
-              style: q.text.voiceLg.tinted(j.ink),
-            ),
-            SizedBox(height: q.space.lg),
-            Row(
-              children: [
+            QDiaryTopBar(
+              title: 'Journal',
+              actions: [
                 QIconButton(
-                  glyph: QuietGlyph.chevronLeft,
-                  onPressed: () {
-                    if (_month == 1) {
-                      _goToMonth(_year - 1, 12);
-                    } else {
-                      _goToMonth(_year, _month - 1);
-                    }
-                  },
-                  semanticLabel: 'Previous month',
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        _monthTitle(_year, _month),
-                        textAlign: TextAlign.center,
-                        textScaler: context.nameTextScaler,
-                        style: q.text.sectionTitle.tinted(j.ink),
-                      ),
-                      SizedBox(height: q.space.xs),
-                      Text(
-                        _archiveLine(
-                          daysInMonth: daysInMonth,
-                          written: writtenDays,
-                          moods: moodDays,
-                        ),
-                        textAlign: TextAlign.center,
-                        style: q.text.archiveMeta.tinted(j.inkMuted),
-                      ),
-                    ],
-                  ),
-                ),
-                QIconButton(
-                  glyph: QuietGlyph.chevronRight,
-                  onPressed: () {
-                    if (_month == 12) {
-                      _goToMonth(_year + 1, 1);
-                    } else {
-                      _goToMonth(_year, _month + 1);
-                    }
-                  },
-                  semanticLabel: 'Next month',
+                  glyph: QuietGlyph.bell,
+                  onPressed: () => context.push(AppRoute.reminders.path),
+                  semanticLabel: 'Reminders',
                 ),
               ],
             ),
-            if (!isCurrentMonth) ...[
-              SizedBox(height: q.space.sm),
-              Center(
-                child: QPressable(
-                  onTap: _goToToday,
-                  semanticLabel: 'Return to today',
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: q.space.md,
-                      vertical: q.space.xs,
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.fromLTRB(
+                  context.gutter,
+                  q.space.lg,
+                  context.gutter,
+                  q.space.xl,
+                ),
+                children: [
+                  Row(
+                    children: [
+                      QIconButton(
+                        glyph: QuietGlyph.chevronLeft,
+                        onPressed: () {
+                          if (_month == 1) {
+                            _goToMonth(_year - 1, 12);
+                          } else {
+                            _goToMonth(_year, _month - 1);
+                          }
+                        },
+                        semanticLabel: 'Previous month',
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              _monthTitle(_year, _month),
+                              textAlign: TextAlign.center,
+                              textScaler: context.nameTextScaler,
+                              style: q.text.sectionTitle.tinted(
+                                q.color.textPrimary,
+                              ),
+                            ),
+                            SizedBox(height: q.space.xs),
+                            Text(
+                              _archiveLine(
+                                daysInMonth: daysInMonth,
+                                written: writtenDays,
+                                moods: moodDays,
+                              ),
+                              textAlign: TextAlign.center,
+                              style: q.inked(
+                                q.text.uiMetadata,
+                                tone: QuietInkTone.secondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      QIconButton(
+                        glyph: QuietGlyph.chevronRight,
+                        onPressed: () {
+                          if (_month == 12) {
+                            _goToMonth(_year + 1, 1);
+                          } else {
+                            _goToMonth(_year, _month + 1);
+                          }
+                        },
+                        semanticLabel: 'Next month',
+                      ),
+                    ],
+                  ),
+                  if (!isCurrentMonth) ...[
+                    SizedBox(height: q.space.sm),
+                    Center(
+                      child: QPressable(
+                        onTap: _goToToday,
+                        semanticLabel: 'Return to today',
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: q.space.md,
+                            vertical: q.space.xs,
+                          ),
+                          child: Text(
+                            'Today',
+                            style: q.inked(
+                              q.text.uiLabel,
+                              tone: QuietInkTone.secondary,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    child: Text(
-                      'Today',
-                      style: q.text.archiveLabel.tinted(j.inkMuted),
+                  ],
+                  SizedBox(height: q.space.lg),
+                  AnimatedSwitcher(
+                    duration: QuietMotion.of(context).fade,
+                    switchInCurve: QuietMotion.of(context).enter,
+                    switchOutCurve: QuietMotion.of(context).exit,
+                    child: JournalMonthCalendar(
+                      key: ValueKey('$_year-$_month'),
+                      year: _year,
+                      month: _month,
+                      today: today,
+                      markers: markers,
+                      onDaySelected: (date) {
+                        context.pushNamed(
+                          AppRoute.journalDay.name,
+                          pathParameters: {'date': date.storageKey},
+                        );
+                      },
                     ),
                   ),
-                ),
-              ),
-            ],
-            SizedBox(height: q.space.lg),
-            AnimatedSwitcher(
-              duration: QuietMotion.of(context).fade,
-              switchInCurve: QuietMotion.of(context).enter,
-              switchOutCurve: QuietMotion.of(context).exit,
-              child: JournalMonthCalendar(
-                key: ValueKey('$_year-$_month'),
-                year: _year,
-                month: _month,
-                today: today,
-                markers: markers,
-                onDaySelected: (date) {
-                  context.pushNamed(
-                    AppRoute.journalDay.name,
-                    pathParameters: {'date': date.storageKey},
-                  );
-                },
+                ],
               ),
             ),
           ],

@@ -2,10 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
-/// A wrapping row of selectable pills.
+/// A wrapping row of selectable vintage labels.
 ///
-/// Used for note kinds and for relationship, because picking from a short list
-/// always beats typing. See docs/02-ux-philosophy.md law 3.
+/// Used for note kinds and relationship. On parchment sheets they read as
+/// small archival tags — not Material pills.
 class QPillGroup extends StatelessWidget {
   const QPillGroup({
     required this.options,
@@ -54,25 +54,40 @@ class QPill extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final c = q.color;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
+
+    final Color fill;
+    final Color border;
+    final Color ink;
+    if (onParchment) {
+      fill = selected ? i.accent : i.input;
+      border = selected ? i.accent : i.inputBorder;
+      ink = selected ? i.primaryAction : i.ink;
+    } else {
+      fill = selected ? c.accentWash : c.surface;
+      border = selected ? c.accent : c.hairline;
+      ink = selected ? c.accent : c.textSecondary;
+    }
 
     return QPressable(
       onTap: onTap,
-      radius: q.radius.full,
+      radius: q.radius.sm,
       semanticLabel: label,
       selected: selected,
       child: DecoratedBox(
         decoration: ShapeDecoration(
-          color: selected ? c.accentWash : c.surface,
+          color: fill,
           shape: RoundedRectangleBorder(
             side: BorderSide(
-              color: selected ? c.accent : c.hairline,
+              color: border,
               width: selected ? 1.5 : context.hairlineWidth,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(q.radius.full)),
+            borderRadius: BorderRadius.all(Radius.circular(q.radius.sm)),
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: q.space.md + 2),
+          padding: EdgeInsets.symmetric(horizontal: q.space.md),
           child: SizedBox(
             height: height,
             child: Center(
@@ -80,9 +95,7 @@ class QPill extends StatelessWidget {
               child: Text(
                 label,
                 textScaler: context.structuralTextScaler,
-                style: q.text.chipLabel.tinted(
-                  selected ? c.accent : c.textSecondary,
-                ),
+                style: q.text.chipLabel.tinted(ink),
               ),
             ),
           ),

@@ -38,9 +38,9 @@ class QIconButton extends StatelessWidget {
     final enabled = onPressed != null;
 
     final color = switch (tone) {
-      QIconTone.primary => q.color.textPrimary,
-      QIconTone.secondary => q.color.textSecondary,
-      QIconTone.tertiary => q.color.textTertiary,
+      QIconTone.primary => context.controlInk,
+      QIconTone.secondary => context.controlInkSecondary,
+      QIconTone.tertiary => context.controlInkMuted,
       QIconTone.danger => q.color.danger,
       QIconTone.onImage => q.photo.onImagePrimary,
     };

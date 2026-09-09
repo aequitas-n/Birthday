@@ -85,7 +85,8 @@ class _ChoiceRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final ink = choice.destructive ? q.color.danger : q.color.textPrimary;
+    final i = q.interactive;
+    final ink = choice.destructive ? q.color.danger : context.controlInk;
 
     return QPressable(
       onTap: onTap,
@@ -106,7 +107,7 @@ class _ChoiceRow extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: selected
-                        ? q.text.body.tinted(q.color.accent)
+                        ? q.text.body.tinted(i.accent)
                         : q.text.body.tinted(ink),
                   ),
                   if (choice.support != null) ...[
@@ -115,7 +116,7 @@ class _ChoiceRow extends StatelessWidget {
                       choice.support!,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: q.text.metadata.tinted(q.color.textTertiary),
+                      style: q.text.metadata.tinted(context.controlInkMuted),
                     ),
                   ],
                 ],
@@ -126,7 +127,7 @@ class _ChoiceRow extends StatelessWidget {
             if (selected)
               QGlyphIcon(
                 QuietGlyph.check,
-                color: q.color.accent,
+                color: i.accent,
                 size: context.structuralTextScaler.scale(18),
               ),
           ],

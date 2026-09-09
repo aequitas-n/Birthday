@@ -1,83 +1,84 @@
 # 06 — Color System
 
-> **Implementation status:** The Ember ramp, all three semantic themes,
-> deterministic monogram tints, and theme preference resolver are implemented
-> in `lib/design/`. Persistence of the user preference belongs to the future
-> settings/data work; the current gallery preference is in-memory only.
+> **Implementation status:** Vintage Diary is the sole product theme. Raw
+> values live in `ColorTokens` (`vd*` prefix) and semantic roles on
+> `QuietColors`. See [VINTAGE_DIARY_THEME.md](VINTAGE_DIARY_THEME.md).
 
 ## The constraint
 
-**One accent. Everything else is warm neutral.** Colour never carries meaning
-alone; it always accompanies type, position, or shape.
+**One visual identity. One accent family.** Colour never carries meaning alone;
+it always accompanies type, position, or shape.
 
-Three modes ship: **Light**, **Dark**, **AMOLED**. All three are first-class —
-AMOLED is not "dark with black swapped in," it has its own hairline and
-elevation strategy.
+Three brightness adaptations ship — **Light**, **Dark**, **AMOLED** — all
+sharing the same Vintage Diary atmosphere (dark parchment, cream ink). AMOLED
+deepens the canvas to true black-brown; it is not a separate theme.
 
 ---
 
-## 1. The accent — `Ember`
+## Interactive surfaces
 
-A terracotta/clay warm orange. Chosen because it is the colour of candlelight
-and baked earth, it is emotionally correct for the product, and it is far from
-the indigo/purple that identifies default Flutter and Material seeds.
+Dark vintage desk ≠ cream parchment controls ≠ burgundy accents ≠ brown ink.
 
-| Step | Hex | Role |
+| Role | Token | Use |
 |---|---|---|
-| `ember.50` | `#FDF5F1` | Accent wash, light mode selection fill |
-| `ember.100` | `#F9E5DB` | Accent wash pressed |
-| `ember.200` | `#F0C9B4` | Disabled accent, dividers on accent surfaces |
-| `ember.300` | `#E4A585` | **Dark-mode accent text/icon** |
-| `ember.400` | `#D4805C` | Dark-mode accent fill, hover |
-| `ember.500` | `#BF6039` | **Light-mode accent** (primary) |
-| `ember.600` | `#A24E2D` | Light-mode pressed |
-| `ember.700` | `#7E3C23` | Accent on light wash text |
+| Desk primary CTA | `interactive.primaryAction` | Cream fill on vintage-bg |
+| Desk CTA ink | `interactive.primaryActionInk` | Brown ink on cream CTA |
+| Sheet / modal | `interactive.sheet` | Warm parchment bottom sheets |
+| Sheet ink | `interactive.ink*` | Brown type on parchment |
+| Toggle track/thumb | `interactive.toggle*` | Cream track + ink/burgundy thumb |
+| Navigation strip | `navigation.surface` | Cream parchment on desk, brown ink |
 
-Contrast verified:
+Ambient [QuietControlSurface] (`desk` vs `parchment`) flips CTA treatment so
+journal-card **Add memory** stays burgundy on cream paper while desk **Save**
+buttons become cream parchment.
 
-| Pair | Ratio | Passes |
-|---|---|---|
-| `ember.500` on `canvas.light` (`#FBFAF8`) | 4.62:1 | AA body |
-| `ember.700` on `ember.50` | 8.1:1 | AAA |
-| `ember.300` on `canvas.dark` (`#141311`) | 8.4:1 | AAA |
-| `ember.300` on `canvas.amoled` (`#000000`) | 9.6:1 | AAA |
+See [VINTAGE_DIARY_THEME.md](VINTAGE_DIARY_THEME.md).
+
+---
+
+## 1. The accent — faded burgundy
+
+Primary accent for **selection / indicators** uses `#713D3A`. On parchment
+hosts (sheets, journal cards), primary buttons still fill with burgundy.
+On the dark desk, primary buttons fill with cream parchment instead.
 
 ### Where accent is allowed
 
-Accent is rare on purpose. Its complete permitted usage:
+Same density rule — roughly 2% of any screen:
 
-1. The **today** indicator on the home screen (a filled dot + accent numeral)
-2. The **primary action** fill on exactly one button per screen
-3. **Focus rings**
-4. The **selected** state of a segmented control or picker
-5. The **birthday moment** screen
-
-That is the entire list. Accent never appears in body text, never in
-iconography at rest, never as a section header, never on more than roughly 2% of
-any screen's pixels.
+1. Today / nav indicators
+2. Primary button on parchment hosts
+3. Focus rings
+4. Selected picker/segment state
+5. Toggle ON thumb
 
 ---
 
 ## 2. Semantic roles
 
-Widgets consume these names. They never consume the ramps above.
+Widgets consume `QuietColors` roles. They never consume raw `ColorTokens`.
 
-### Light — warm paper
+### Vintage Diary (default)
 
 | Role | Hex | Notes |
 |---|---|---|
-| `canvas` | `#FBFAF8` | Warm off-white, never `#FFFFFF` |
-| `surface` | `#FFFFFF` | Level 1 |
-| `raised` | `#FFFFFF` | Level 2 + `elev.overlay` |
-| `sunken` | `#F4F2EE` | Input wells |
-| `hairline` | `#E7E3DC` | Default separator |
-| `hairlineStrong` | `#D5CFC5` | Emphasised separator, input borders |
-| `text.primary` | `#1A1815` | Warm near-black |
-| `text.secondary` | `#6B6560` | 5.9:1 on canvas |
-| `text.tertiary` | `#948D85` | 3.4:1 — never used below 15pt for content |
-| `text.inverse` | `#FBFAF8` | On accent fills |
-| `accent` | `#BF6039` | `ember.500` |
-| `accentWash` | `#FDF5F1` | `ember.50` |
+| `canvas` | `#2A1E18` | Dark aged paper (texture via asset) |
+| `surface` | `#3A2E26` | Level 1 on canvas |
+| `text.primary` | `#F4EEDF` | Warm cream |
+| `text.secondary` | `#E4D0C2` | Soft parchment |
+| `text.tertiary` | `#C9B4A4` | Meta on dark canvas |
+| `accent` | `#713D3A` | Faded burgundy |
+| `accentWash` | `#4A3228` | Selection / wash |
+
+Journal paper cards use `QuietJournal` (`paper`, `ink`, `edge`, `tape`).
+
+---
+
+## Legacy note
+
+Previous multi-collection presets (Ember, Ocean Mist, etc.) and warm-paper
+light themes are **removed**. Documentation below the fold describing those
+presets is historical reference only.
 | `danger` | `#8F2F2F` | Deep, cool-shifted — reads distinct from Ember |
 | `dangerWash` | `#F9EDEC` | |
 | `scrim` | `rgba(20,18,16,.32)` | |

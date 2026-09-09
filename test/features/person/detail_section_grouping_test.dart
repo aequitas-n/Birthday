@@ -34,6 +34,25 @@ void main() {
     expect(grouped[3].$2.single.value, 'Said this');
   });
 
+  test('hides retired gift ideas from the active gift section', () {
+    final grouped = groupNotesByDetailSection([
+      note(NoteKind.giftIdea, 'Mug'),
+      Note(
+        id: 'given',
+        profileId: 'p',
+        kind: NoteKind.giftIdea,
+        value: 'Scarf',
+        position: 1,
+        isRetired: true,
+        createdAt: DateTime.utc(2026),
+        updatedAt: DateTime.utc(2026),
+      ),
+    ]);
+
+    expect(grouped.map((e) => e.$1), [DetailKindSection.gift]);
+    expect(grouped.single.$2.map((n) => n.value), ['Mug']);
+  });
+
   test('respects custom section order', () {
     final grouped = groupNotesByDetailSection(
       [

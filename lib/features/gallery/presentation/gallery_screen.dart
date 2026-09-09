@@ -1,9 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kin/app/theme_controller.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
-import 'package:kin/design/components/controls/q_collection_picker.dart';
 import 'package:kin/design/components/feedback/q_arc.dart';
 import 'package:kin/design/components/feedback/q_chip.dart';
 import 'package:kin/design/components/feedback/q_empty_state.dart';
@@ -12,6 +10,7 @@ import 'package:kin/design/components/fields/q_note_kind_picker.dart';
 import 'package:kin/design/components/media/q_avatar.dart';
 import 'package:kin/design/components/rows/q_person_row.dart';
 import 'package:kin/design/components/rows/q_section_header.dart';
+import 'package:kin/design/components/rows/q_section_title.dart';
 import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_card.dart';
@@ -45,7 +44,6 @@ class GalleryScreen extends ConsumerWidget {
           children: const [
             _GalleryTitle(),
             _CollectionSection(),
-            _ThemeSwitcher(),
             _TypographySection(),
             _ColourSection(),
             _CardSection(),
@@ -89,67 +87,15 @@ class _GalleryTitle extends StatelessWidget {
   }
 }
 
-class _CollectionSection extends ConsumerWidget {
+class _CollectionSection extends StatelessWidget {
   const _CollectionSection();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final collection = ref.watch(themePreferenceProvider).collection;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const QSectionHeader('Collections', isFirst: true),
-        QCollectionPicker(
-          selected: collection,
-          onSelected: (value) =>
-              ref.read(themePreferenceProvider.notifier).setCollection(value),
-        ),
-      ],
-    );
-  }
-}
-
-class _ThemeSwitcher extends ConsumerWidget {
-  const _ThemeSwitcher();
-
-  static const Map<ThemeChoice, String> _labels = {
-    ThemeChoice.system: 'System',
-    ThemeChoice.light: 'Light',
-    ThemeChoice.dark: 'Dark',
-  };
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final q = context.quiet;
-    final preference = ref.watch(themePreferenceProvider);
-    final notifier = ref.read(themePreferenceProvider.notifier);
-
-    final isDarkResolved = q.isDark;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const QSectionHeader('Appearance'),
-        QPillGroup(
-          options: _labels.values.toList(),
-          selected: _labels[preference.choice],
-          onSelected: (label) {
-            final choice = _labels.entries
-                .firstWhere((e) => e.value == label)
-                .key;
-            notifier.setChoice(choice);
-          },
-        ),
-        if (isDarkResolved) ...[
-          SizedBox(height: q.space.md),
-          QPillGroup(
-            options: const ['Pure black'],
-            selected: preference.amoled ? 'Pure black' : null,
-            onSelected: (_) => notifier.setAmoled(enabled: !preference.amoled),
-          ),
-        ],
-      ],
+  Widget build(BuildContext context) {
+    return const QSectionTitle(
+      'Vintage Diary',
+      support: 'The sole product theme — an old personal journal.',
+      isFirst: true,
     );
   }
 }
@@ -165,29 +111,21 @@ class _TypographySection extends StatelessWidget {
     // In descending order of voice, so the specimen list is itself a diagram
     // of the hierarchy.
     final specimens = <(String, TextStyle)>[
-      ('voice.xxl — Priya', q.text.voiceXxl),
-      ('voice.xl — Priya Raman', q.text.voiceXl),
-      ('voice.lg — Priya Raman', q.text.voiceLg),
-      ('voice.md — Peonies, the pale ones', q.text.voiceMd),
-      ('voice.sm — Peonies, the pale ones', q.text.voiceSm),
-      ('sectionTitle — What you remember', q.text.sectionTitle),
-      ('title — Add someone', q.text.title),
-      ('headline — Remember more than the date', q.text.headline),
-      ('bodyLg — She loves peonies.', q.text.bodyLg),
-      ('body — Sister, Chennai', q.text.body),
-      ('dateLine — Born 28 July 1997', q.text.dateLine),
-      ('relationship — Oldest friend', q.text.relationship),
-      ('label — Turn on reminders', q.text.label),
-      ('buttonLabel — Add someone', q.text.buttonLabel),
-      ('caption — Removed 4 days ago', q.text.caption),
-      ('metadata — 28 July · Chennai', q.text.metadata),
-      ('tiny — 12', q.text.tiny),
-      ('EYEBROW — FAVOURITE FLOWER', q.text.eyebrow),
-      ('numeral.xl — 222', q.text.numeralXl),
-      ('numeral.hero — 12', q.text.numeralHero),
-      ('numeral.lg — 29', q.text.numeralLg),
-      ('numeral.md — in 3', q.text.numeralMd),
-      ('numeral.sm — 344 days', q.text.numeralSm),
+      ('pageTitle — Today', q.text.pageTitle),
+      ('sectionTitle — Today’s journal', q.text.sectionTitle),
+      ('displayTitle — celebratory', q.text.displayTitle),
+      ('emptyStateTitle / diaryNote — Nothing written yet', q.text.diaryNote),
+      ('editorialBody — 26', q.text.editorialBody),
+      ('personName — Ganesh', q.text.personName),
+      ('memoryTitle — memory title', q.text.memoryTitle),
+      ('journalWriting — What do you want to remember?', q.text.journalWriting),
+      ('uiDate — 26 August 2026', q.text.uiDate),
+      ('uiTimestamp — 7:30 PM', q.text.uiTimestamp),
+      ('uiMetadata — 12 memories', q.text.uiMetadata),
+      ('uiButton — Add memory', q.text.uiButton),
+      ('uiNavigation — Today', q.text.uiNavigation),
+      ('uiBody — Nothing planned yet.', q.text.uiBody),
+      ('uiCount — 346 days', q.text.uiCount),
     ];
 
     return Column(

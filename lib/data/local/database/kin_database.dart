@@ -102,10 +102,15 @@ class ReminderRules extends Table {
 
 class ScheduledNotifications extends Table {
   IntColumn get osId => integer().named('os_id')();
+  TextColumn get source => text().withDefault(const Constant('birthday'))();
   TextColumn get personId =>
-      text().named('person_id').references(People, #id)();
+      text().named('person_id').nullable().references(People, #id)();
   TextColumn get ruleId =>
-      text().named('rule_id').references(ReminderRules, #id)();
+      text().named('rule_id').nullable().references(ReminderRules, #id)();
+  TextColumn get reminderId => text()
+      .named('reminder_id')
+      .nullable()
+      .references(PersonalReminders, #id)();
   IntColumn get occurrenceYear => integer().named('occurrence_year')();
   IntColumn get fireAtUtc => integer().named('fire_at_utc')();
   IntColumn get fireAtDeviceLocal => integer().named('fire_at_device_local')();
@@ -123,6 +128,25 @@ class ScheduledNotifications extends Table {
   Set<Column<Object>> get primaryKey => {osId};
 }
 
+@DataClassName('PersonalReminderRow')
+class PersonalReminders extends Table {
+  TextColumn get id => text()();
+  TextColumn get localDate => text().named('local_date')();
+  TextColumn get localTime => text().named('local_time')();
+  TextColumn get dayPart => text().named('day_part')();
+  TextColumn get body => text().named('body').withLength(min: 1, max: 280)();
+  TextColumn get timezone => text()();
+  IntColumn get position => integer()();
+  IntColumn get createdAt => integer().named('created_at')();
+  IntColumn get updatedAt => integer().named('updated_at')();
+  IntColumn get deletedAt => integer().named('deleted_at').nullable()();
+  IntColumn get syncRev =>
+      integer().named('sync_rev').withDefault(const Constant(0))();
+
+  @override
+  Set<Column<Object>> get primaryKey => {id};
+}
+
 class Settings extends Table {
   IntColumn get id => integer().withDefault(const Constant(0))();
   TextColumn get themeMode =>
@@ -138,6 +162,8 @@ class Settings extends Table {
       integer().named('onboarding_completed_at').nullable()();
   TextColumn get deviceTimezoneCache =>
       text().named('device_timezone_cache').nullable()();
+  TextColumn get reminderTimezone =>
+      text().named('reminder_timezone').nullable()();
   IntColumn get lastReconciledAt =>
       integer().named('last_reconciled_at').nullable()();
 
@@ -232,6 +258,7 @@ class JournalEntryFragments extends Table {
     Notes,
     Photos,
     ReminderRules,
+    PersonalReminders,
     ScheduledNotifications,
     Settings,
     SyncState,
@@ -245,7 +272,7 @@ class KinDatabase extends _$KinDatabase {
   KinDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
   @override
-  int get schemaVersion => 7;
+  int get schemaVersion => 8;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -277,6 +304,11 @@ class KinDatabase extends _$KinDatabase {
             await m.createTable(journalEntryFragments);
             await _createJournalFragmentIndexes();
             await _migrateJournalBodiesToFragments();
+          case 7:
+            await m.createTable(personalReminders);
+            await m.addColumn(settings, settings.reminderTimezone);
+            await _migrateScheduledNotificationsForPersonalReminders();
+            await _createPersonalReminderIndexes();
         }
       }
     },
@@ -287,6 +319,69 @@ class KinDatabase extends _$KinDatabase {
       }
     },
   );
+
+  Future<void> _migrateScheduledNotificationsForPersonalReminders() async {
+    await customStatement('PRAGMA foreign_keys = OFF');
+    await customStatement('''
+CREATE TABLE scheduled_notifications_new (
+  os_id INTEGER NOT NULL PRIMARY KEY,
+  source TEXT NOT NULL DEFAULT 'birthday',
+  person_id TEXT NULL REFERENCES people(id),
+  rule_id TEXT NULL REFERENCES reminder_rules(id),
+  reminder_id TEXT NULL REFERENCES personal_reminders(id),
+  occurrence_year INTEGER NOT NULL,
+  fire_at_utc INTEGER NOT NULL,
+  fire_at_device_local INTEGER NOT NULL,
+  device_tz TEXT NOT NULL,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  note_id_used TEXT NULL REFERENCES notes(id),
+  state TEXT NOT NULL,
+  snapshot_json TEXT NOT NULL DEFAULT '{}',
+  created_at INTEGER NOT NULL
+)
+''');
+    await customStatement('''
+INSERT INTO scheduled_notifications_new (
+  os_id, source, person_id, rule_id, reminder_id, occurrence_year,
+  fire_at_utc, fire_at_device_local, device_tz, title, body,
+  note_id_used, state, snapshot_json, created_at
+)
+SELECT
+  os_id,
+  'birthday',
+  person_id,
+  rule_id,
+  NULL,
+  occurrence_year,
+  fire_at_utc,
+  fire_at_device_local,
+  device_tz,
+  title,
+  body,
+  note_id_used,
+  state,
+  snapshot_json,
+  created_at
+FROM scheduled_notifications
+''');
+    await customStatement('DROP TABLE scheduled_notifications');
+    await customStatement(
+      'ALTER TABLE scheduled_notifications_new RENAME TO scheduled_notifications',
+    );
+    await customStatement('PRAGMA foreign_keys = ON');
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_scheduled_notifications_state_fire '
+      'ON scheduled_notifications (state, fire_at_utc)',
+    );
+  }
+
+  Future<void> _createPersonalReminderIndexes() async {
+    await customStatement(
+      'CREATE INDEX IF NOT EXISTS idx_personal_reminders_date_position '
+      'ON personal_reminders (local_date, deleted_at, position)',
+    );
+  }
 
   static QueryExecutor _openConnection() {
     return LazyDatabase(() async {
@@ -401,6 +496,7 @@ SET nickname = NULL,
       'CREATE INDEX idx_scheduled_notifications_state_fire '
       'ON scheduled_notifications (state, fire_at_utc)',
     );
+    await _createPersonalReminderIndexes();
     await _createJournalIndexes();
   }
 

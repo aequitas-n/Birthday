@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show materialTextSelectionHandleControls;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// A sunken well with a floating eyebrow.
@@ -137,9 +136,19 @@ class _QFieldState extends State<QField>
   Widget build(BuildContext context) {
     final q = context.quiet;
     final c = q.color;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
     final hasError = widget.error != null;
 
-    final fill = _focused ? c.canvas : c.sunken;
+    final fill = onParchment
+        ? (_focused ? i.inputFocused : i.input)
+        : (_focused ? c.canvas : c.sunken);
+
+    final textColor = onParchment ? i.ink : c.textPrimary;
+    // Field eyebrows must read as clearly as body copy on parchment sheets —
+    // secondary/muted browns wash out on cream and look "missing".
+    final labelColor = onParchment ? i.ink : c.textSecondary;
+    final placeholderColor = onParchment ? i.inkSecondary : c.textTertiary;
 
     // The border is always present at a constant width, and only its colour
     // changes. A border contributes to the shape's dimensions, so varying its
@@ -148,8 +157,8 @@ class _QFieldState extends State<QField>
     final borderColor = hasError
         ? c.danger
         : _focused
-        ? c.accent
-        : fill;
+        ? (onParchment ? i.accent : c.accent)
+        : (onParchment ? i.inputBorder : fill);
 
     final editable = EditableText(
       key: editableTextKey,
@@ -170,9 +179,9 @@ class _QFieldState extends State<QField>
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
       onEditingComplete: widget.onEditingComplete,
-      style: q.text.bodyLg.tinted(c.textPrimary),
-      cursorColor: c.accent,
-      backgroundCursorColor: c.textTertiary,
+      style: q.text.bodyLg.tinted(textColor),
+      cursorColor: onParchment ? i.accent : c.accent,
+      backgroundCursorColor: placeholderColor,
       selectionColor: c.selection,
       selectionControls: _selectionControls,
       cursorWidth: 1.5,
@@ -183,25 +192,33 @@ class _QFieldState extends State<QField>
       showSelectionHandles: true,
     );
 
-    final well = QSurface(
-      level: _focused ? QuietLevel.canvas : QuietLevel.sunken,
-      radius: q.radius.sm,
-      borderColor: borderColor,
-      borderWidth: QField.focusBorderWidth,
-      padding: EdgeInsets.symmetric(
-        horizontal: q.space.md + 2,
-        vertical: q.space.md,
+    final well = DecoratedBox(
+      decoration: ShapeDecoration(
+        color: fill,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(q.radius.sm)),
+          side: BorderSide(
+            color: borderColor,
+            width: QField.focusBorderWidth,
+          ),
+        ),
       ),
-      child: Stack(
-        children: [
-          if (widget.placeholder != null)
-            _Placeholder(
-              controller: _controller,
-              text: widget.placeholder!,
-              style: q.text.bodyLg.tinted(c.textTertiary),
-            ),
-          _gestures.buildGestureDetector(child: editable),
-        ],
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: q.space.md + 2,
+          vertical: q.space.md,
+        ),
+        child: Stack(
+          children: [
+            if (widget.placeholder != null)
+              _Placeholder(
+                controller: _controller,
+                text: widget.placeholder!,
+                style: q.text.bodyLg.tinted(placeholderColor),
+              ),
+            _gestures.buildGestureDetector(child: editable),
+          ],
+        ),
       ),
     );
 
@@ -215,7 +232,7 @@ class _QFieldState extends State<QField>
             Text(
               widget.label!.toUpperCase(),
               textScaler: context.structuralTextScaler,
-              style: q.text.eyebrow.tinted(c.textTertiary),
+              style: q.text.eyebrow.tinted(labelColor),
             ),
             SizedBox(height: q.space.sm),
           ],
@@ -273,7 +290,11 @@ class _HelperLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final style = q.text.caption.tinted(
-      isError ? q.color.danger : q.color.textTertiary,
+      isError
+          ? q.color.danger
+          : (context.isParchmentControls
+                ? q.interactive.inkSecondary
+                : q.color.textTertiary),
     );
 
     return SizedBox(

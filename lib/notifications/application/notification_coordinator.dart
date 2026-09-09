@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kin/app/app_providers.dart';
@@ -5,16 +7,20 @@ import 'package:kin/core/clock.dart';
 import 'package:kin/data/local/database/kin_database.dart' as db;
 import 'package:kin/data/timezone/device_timezone.dart';
 import 'package:kin/domain/models/birthday_occurrence.dart';
+import 'package:kin/domain/models/local_calendar_date.dart';
 import 'package:kin/domain/models/note.dart';
 import 'package:kin/domain/models/notification_plan.dart';
 import 'package:kin/domain/models/person.dart';
 import 'package:kin/domain/models/reminder_rule.dart';
 import 'package:kin/domain/models/scheduled_notification_record.dart';
 import 'package:kin/domain/models/settings.dart';
+import 'package:kin/domain/repositories/personal_reminder_repository.dart';
 import 'package:kin/domain/repositories/scheduled_notification_repository.dart';
 import 'package:kin/domain/repositories/settings_repository.dart';
 import 'package:kin/domain/services/occurrence_calculator.dart';
+import 'package:kin/domain/services/personal_reminder_planner.dart';
 import 'package:kin/domain/services/reminder_planner.dart';
+import 'package:kin/domain/services/reminder_timezone.dart';
 import 'package:kin/notifications/notification_service.dart';
 import 'package:kin/notifications/scheduler/platform_scheduler.dart';
 
@@ -28,6 +34,12 @@ final occurrenceCalculatorProvider = Provider<OccurrenceCalculator>((ref) {
 
 final reminderPlannerProvider = Provider<ReminderPlanner>((ref) {
   return const ReminderPlanner();
+});
+
+final personalReminderPlannerProvider = Provider<PersonalReminderPlanner>((
+  ref,
+) {
+  return const PersonalReminderPlanner();
 });
 
 final platformSchedulerProvider = Provider<PlatformScheduler>((ref) {
@@ -48,6 +60,8 @@ final notificationCoordinatorProvider = Provider<NotificationCoordinator>((
     notificationService: ref.watch(notificationServiceProvider),
     occurrenceCalculator: ref.watch(occurrenceCalculatorProvider),
     reminderPlanner: ref.watch(reminderPlannerProvider),
+    personalReminderPlanner: ref.watch(personalReminderPlannerProvider),
+    personalReminderRepository: ref.watch(personalReminderRepositoryProvider),
     scheduledRepository: ref.watch(scheduledNotificationRepositoryProvider),
     settingsRepository: ref.watch(settingsRepositoryProvider),
     scheduler: ref.watch(platformSchedulerProvider),
@@ -65,6 +79,21 @@ final notificationDebugSnapshotProvider =
       return ref.watch(notificationCoordinatorProvider).debugSnapshot();
     });
 
+/// Reconcile birthday reminders after a mutation without blocking navigation.
+///
+/// Person delete/update must pop immediately; [NotificationCoordinator.synchronize]
+/// can take seconds on Android while cancelling OS alarms one-by-one.
+void scheduleNotificationSync(WidgetRef ref) {
+  unawaited(() async {
+    try {
+      await ref.read(notificationCoordinatorProvider).synchronize();
+      ref.invalidate(notificationStatusProvider);
+    } on Object {
+      // Reminder sync is best-effort.
+    }
+  }());
+}
+
 class NotificationCoordinator {
   NotificationCoordinator({
     required db.KinDatabase database,
@@ -73,6 +102,8 @@ class NotificationCoordinator {
     required NotificationService notificationService,
     required OccurrenceCalculator occurrenceCalculator,
     required ReminderPlanner reminderPlanner,
+    required PersonalReminderPlanner personalReminderPlanner,
+    required PersonalReminderRepository personalReminderRepository,
     required ScheduledNotificationRepository scheduledRepository,
     required SettingsRepository settingsRepository,
     required PlatformScheduler scheduler,
@@ -82,6 +113,8 @@ class NotificationCoordinator {
        _notificationService = notificationService,
        _occurrenceCalculator = occurrenceCalculator,
        _reminderPlanner = reminderPlanner,
+       _personalReminderPlanner = personalReminderPlanner,
+       _personalReminderRepository = personalReminderRepository,
        _scheduledRepository = scheduledRepository,
        _settingsRepository = settingsRepository,
        _scheduler = scheduler;
@@ -92,6 +125,8 @@ class NotificationCoordinator {
   final NotificationService _notificationService;
   final OccurrenceCalculator _occurrenceCalculator;
   final ReminderPlanner _reminderPlanner;
+  final PersonalReminderPlanner _personalReminderPlanner;
+  final PersonalReminderRepository _personalReminderRepository;
   final ScheduledNotificationRepository _scheduledRepository;
   final SettingsRepository _settingsRepository;
   final PlatformScheduler _scheduler;
@@ -336,7 +371,24 @@ class NotificationCoordinator {
         ),
       );
     }
-    allPlans.sort((a, b) => a.fireAtUtc.compareTo(b.fireAtUtc));
+
+    final todayLocal = LocalCalendarDate.fromLocalDateTime(nowUtc.toLocal());
+    final personalReminders = await _personalReminderRepository
+        .readLiveFutureAndToday(today: todayLocal);
+    final reminderTimeZone = resolveReminderIana(
+      settings: settings,
+      deviceIana: deviceTimeZone,
+    );
+    allPlans
+      ..addAll(
+        _personalReminderPlanner.planAll(
+          reminders: personalReminders,
+          reminderTimeZone: reminderTimeZone,
+          notificationsEnabled: settings.notificationsEnabled,
+          nowUtc: nowUtc,
+        ),
+      )
+      ..sort((a, b) => a.fireAtUtc.compareTo(b.fireAtUtc));
     return allPlans;
   }
 

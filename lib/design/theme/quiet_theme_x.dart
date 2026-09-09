@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/theme/quiet_control_surface.dart';
+import 'package:kin/design/theme/quiet_surface_ink.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
+
+export 'package:kin/design/theme/quiet_control_surface.dart';
+export 'package:kin/design/theme/quiet_surface_ink.dart';
 
 /// The single access point for the design language.
 ///
 /// ```dart
 /// final q = context.quiet;
-/// Text('Priya', style: q.text.voiceLg.tinted(q.color.textPrimary));
+/// // Surface-aware type (preferred):
+/// Text('Priya', style: q.inked(q.text.pageTitle));
+/// Text(date, style: q.inked(q.text.uiDate, tone: QuietInkTone.secondary));
+/// // On cream paper / calendar:
+/// Text(note, style: q.inked(q.text.diaryNote, surface: QuietSurfaceKind.paper));
 /// ```
 extension QuietThemeX on BuildContext {
   /// The active [QuietTheme].
@@ -53,10 +62,6 @@ extension QuietThemeX on BuildContext {
   ).clamp(maxScaleFactor: quiet.text.heroScaleCap);
 
   /// Height of a hero photograph on this viewport.
-  ///
-  /// A fraction of the viewport rather than a fixed height, bounded at both
-  /// ends: a hero that scales without limit stops being a portrait and starts
-  /// being a wallpaper.
   double get heroHeight {
     final q = quiet;
     final height = MediaQuery.sizeOf(this).height;
@@ -67,10 +72,6 @@ extension QuietThemeX on BuildContext {
   }
 
   /// Applies photographic ink and a legibility shadow to a typography token.
-  ///
-  /// Type over an image cannot use a theme colour: the image is the one
-  /// surface the app does not own, so its ink is fixed and carries its own
-  /// shadow instead of relying on the scrim alone.
   TextStyle onImage(TextStyle style, {bool secondary = false}) {
     final q = quiet;
     return q.text
@@ -85,14 +86,60 @@ extension QuietThemeX on BuildContext {
   bool get restacksRows =>
       MediaQuery.textScalerOf(this).scale(15) / 15 >
       quiet.layout.textScaleRestackThreshold;
+
+  /// Primary readable ink for the ambient control surface (desk cream or
+  /// parchment brown).
+  Color get controlInk {
+    final q = quiet;
+    return q.interactive.chromeInk(
+      controlSurface,
+      deskInk: q.color.textPrimary,
+    );
+  }
+
+  Color get controlInkSecondary {
+    final q = quiet;
+    return q.interactive.chromeInkSecondary(
+      controlSurface,
+      deskInk: q.color.textSecondary,
+    );
+  }
+
+  Color get controlInkMuted {
+    final q = quiet;
+    return q.interactive.chromeInkMuted(
+      controlSurface,
+      deskInk: q.color.textTertiary,
+    );
+  }
+}
+
+/// Theme helpers for surface-aware ink (canvas vs paper).
+extension QuietThemeSurfaceX on QuietTheme {
+  /// Ink block for [kind] — cream on diary canvas, brown on paper/calendar.
+  QuietSurfaceInk on(QuietSurfaceKind kind) => QuietSurfaceInk.fromTheme(
+    kind: kind,
+    color: color,
+    journal: journal,
+  );
+
+  /// Cream-on-dark diary chrome.
+  QuietSurfaceInk get canvas => on(QuietSurfaceKind.canvas);
+
+  /// Brown-on-cream paper / calendar / card chrome.
+  QuietSurfaceInk get paper => on(QuietSurfaceKind.paper);
+
+  /// Typography role + surface ink in one call.
+  ///
+  /// Defaults to [QuietSurfaceKind.canvas] (most screens sit on vintage-bg).
+  TextStyle inked(
+    TextStyle role, {
+    QuietSurfaceKind surface = QuietSurfaceKind.canvas,
+    QuietInkTone tone = QuietInkTone.primary,
+  }) => on(surface).inked(role, tone: tone);
 }
 
 /// Applies a semantic colour role to a typography token.
-///
-/// Typography tokens are deliberately colourless so a style can never smuggle
-/// a hardcoded colour past the theme. This lives beside [QuietThemeX] rather
-/// than with the tokens so components never need to import the raw token
-/// files — see the ARCH-04 rule in `tool/check_architecture.dart`.
 extension QuietTextStyleX on TextStyle {
   TextStyle tinted(Color color) => copyWith(color: color);
 }

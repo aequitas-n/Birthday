@@ -2,14 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
-import 'package:kin/design/theme/quiet_colors.dart';
-import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/tokens/color_tokens.dart';
 
 /// Semantic surfaces for the Journal archive experience.
 ///
-/// Same diary, different atmosphere: paper/ink track the active
-/// [QuietCollection] neutrals rather than forcing one global beige.
+/// Vintage Diary: cream parchment cards with brown-black ink, sitting on the
+/// dark aged diary background.
 @immutable
 final class QuietJournal {
   const QuietJournal({
@@ -27,94 +25,59 @@ final class QuietJournal {
     required this.washStrength,
   });
 
-  /// Ember / warm light — aged archival paper on warm canvas.
+  /// Vintage Diary — cream paper card on dark desk.
   const QuietJournal.light()
-    : desk = ColorTokens.paperCanvas,
-      paper = ColorTokens.journalPaperLight,
-      paperSunken = ColorTokens.paperSunken,
-      ink = ColorTokens.paperInkPrimary,
-      inkMuted = ColorTokens.paperInkSecondary,
-      edge = ColorTokens.journalPaperEdgeLight,
-      rule = ColorTokens.paperHairline,
-      tape = ColorTokens.journalTapeLight,
-      clip = ColorTokens.journalClipLight,
-      photoMat = ColorTokens.journalPhotoMatLight,
-      shadow = ColorTokens.journalShadowLight,
-      washStrength = 0.42;
+    : desk = ColorTokens.vdDiaryCanvas,
+      paper = ColorTokens.vdPaperWarm,
+      paperSunken = ColorTokens.vdPaperParchment,
+      ink = ColorTokens.vdInkPrimary,
+      inkMuted = ColorTokens.vdInkSecondary,
+      edge = ColorTokens.vdPaperAged,
+      rule = ColorTokens.vdJournalRule,
+      tape = ColorTokens.vdTerracottaPale,
+      clip = ColorTokens.vdInkTertiary,
+      photoMat = ColorTokens.vdPaperHighlight,
+      shadow = ColorTokens.vdJournalShadow,
+      washStrength = 0.48;
 
   const QuietJournal.dark()
-    : desk = ColorTokens.charcoalCanvas,
-      paper = ColorTokens.journalPaperDark,
-      paperSunken = ColorTokens.charcoalSunken,
-      ink = ColorTokens.charcoalInkPrimary,
-      inkMuted = ColorTokens.charcoalInkSecondary,
-      edge = ColorTokens.journalPaperEdgeDark,
-      rule = ColorTokens.charcoalHairline,
-      tape = ColorTokens.journalTapeDark,
-      clip = ColorTokens.journalClipDark,
-      photoMat = ColorTokens.journalPhotoMatDark,
-      shadow = ColorTokens.journalShadowDark,
-      washStrength = 0.38;
+    : desk = ColorTokens.vdCanvasDark,
+      paper = ColorTokens.vdPaperWarm,
+      paperSunken = ColorTokens.vdPaperParchment,
+      ink = ColorTokens.vdInkPrimary,
+      inkMuted = ColorTokens.vdInkSecondary,
+      edge = ColorTokens.vdPaperAged,
+      rule = ColorTokens.vdJournalRuleDark,
+      tape = ColorTokens.vdTerracottaSoft,
+      clip = ColorTokens.vdInkTertiary,
+      photoMat = ColorTokens.vdPaperHighlight,
+      shadow = ColorTokens.vdJournalShadowDark,
+      washStrength = 0.44;
 
   const QuietJournal.amoled()
-    : desk = ColorTokens.voidCanvas,
-      paper = ColorTokens.journalPaperVoid,
-      paperSunken = ColorTokens.voidRaised,
-      ink = ColorTokens.voidInkPrimary,
-      inkMuted = ColorTokens.voidInkSecondary,
-      edge = ColorTokens.journalPaperEdgeVoid,
-      rule = ColorTokens.voidHairline,
-      tape = ColorTokens.journalTapeVoid,
-      clip = ColorTokens.journalClipVoid,
-      photoMat = ColorTokens.journalPhotoMatVoid,
-      shadow = ColorTokens.journalShadowVoid,
-      washStrength = 0.32;
+    : desk = ColorTokens.vdCanvasAmoled,
+      paper = ColorTokens.vdPaperParchment,
+      paperSunken = ColorTokens.vdPaperAged,
+      ink = ColorTokens.vdInkPrimary,
+      inkMuted = ColorTokens.vdInkSecondary,
+      edge = ColorTokens.vdJournalEdgeAmoled,
+      rule = ColorTokens.vdJournalRuleAmoled,
+      tape = ColorTokens.vdTerracottaPale,
+      clip = ColorTokens.vdInkTertiary,
+      photoMat = ColorTokens.vdPaperWarm,
+      shadow = ColorTokens.vdJournalShadowAmoled,
+      washStrength = 0.4;
 
-  /// Resolves journal atmosphere from collection neutrals + brightness.
+  /// Resolves journal atmosphere — always Vintage Diary parchment.
   factory QuietJournal.of(
-    QuietCollection collection, {
+    QuietCollection _, {
     required QuietBrightness mode,
   }) {
-    if (mode == QuietBrightness.amoled) {
-      return const QuietJournal.amoled();
-    }
-    final dark = mode == QuietBrightness.dark;
-    final neutrals = QuietNeutrals.of(collection.neutrals, dark: dark);
-    final accentWash = QuietColors.of(
-      collection,
-      dark: dark,
-    ).accentWash;
-
-    // Slightly aged paper relative to the collection surface — same diary,
-    // room lighting changes with the collection.
-    final paper = Color.lerp(neutrals.surface, accentWash, dark ? 0.06 : 0.1)!;
-    final photoMat = Color.lerp(
-      neutrals.surface,
-      neutrals.sunken,
-      dark ? 0.35 : 0.55,
-    )!;
-    final tape = Color.lerp(
-      accentWash,
-      neutrals.hairlineStrong,
-      dark ? 0.45 : 0.35,
-    )!;
-
-    return QuietJournal(
-      desk: neutrals.canvas,
-      paper: paper,
-      paperSunken: neutrals.sunken,
-      ink: neutrals.inkPrimary,
-      inkMuted: neutrals.inkSecondary,
-      edge: neutrals.hairlineStrong,
-      rule: neutrals.hairline,
-      tape: tape,
-      clip: neutrals.inkTertiary,
-      photoMat: photoMat,
-      shadow: dark
-          ? ColorTokens.journalShadowDark
-          : ColorTokens.journalShadowLight,
-      washStrength: dark ? 0.36 : 0.42,
-    );
+    return switch (mode) {
+      QuietBrightness.amoled => const QuietJournal.amoled(),
+      QuietBrightness.dark => const QuietJournal.dark(),
+      QuietBrightness.light => const QuietJournal.light(),
+    };
   }
 
   /// Page / desk behind artifacts (collection canvas).

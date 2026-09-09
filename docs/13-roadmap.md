@@ -39,7 +39,7 @@ architecture.
 - Guard rules: no `DateTime.now()` outside `core/clock.dart`; no `TextStyle`
   literals outside `design/`; no Material component imports in `features/`
 - `build_runner` wiring, CI (analyze, test, format check, codegen freshness)
-- Bundle Fraunces and Inter as variable font assets
+- Bundle Caveat, Fraunces, and Courier Prime as theme/product font assets
 
 **Exit:** CI green on an empty app. A deliberately-planted `ElevatedButton` in
 `features/` fails the build.

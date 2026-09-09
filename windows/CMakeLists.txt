@@ -55,7 +55,22 @@ add_subdirectory("runner")
 
 # Generated plugin build rules, which manage building the plugins and adding
 # them to the application.
-include(flutter/generated_plugins.cmake)
+#
+# Kin's desktop phone-preview uses a no-op notification service, but
+# flutter_local_notifications still registers a Windows FFI plugin that
+# requires Visual Studio ATL headers (atlbase.h). Strip it so Windows
+# builds work without the ATL workload; Android/iOS are unaffected.
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/flutter/generated_plugins.cmake"
+  _kin_generated_plugins)
+string(REPLACE
+  "  flutter_local_notifications_windows\n"
+  ""
+  _kin_generated_plugins
+  "${_kin_generated_plugins}")
+file(WRITE
+  "${CMAKE_CURRENT_BINARY_DIR}/generated_plugins_filtered.cmake"
+  "${_kin_generated_plugins}")
+include("${CMAKE_CURRENT_BINARY_DIR}/generated_plugins_filtered.cmake")
 
 
 # === Installation ===

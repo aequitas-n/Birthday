@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,116 +8,128 @@ import 'package:kin/app/router.dart';
 import 'package:kin/core/clock.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
-import 'package:kin/design/components/journal/q_journal_fragment.dart';
+import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/journal/q_journal_card_deck.dart';
 import 'package:kin/design/components/journal/q_journal_mood_picker.dart';
+import 'package:kin/design/components/journal/q_mood_illustration.dart';
+import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
 import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
-import 'package:kin/design/motion/quiet_motion.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_day.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/journal_mood.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
 import 'package:kin/features/journal/application/journal_providers.dart';
 // ignore: always_use_package_imports -- ARCH-03
-import 'journal_fragment_layout.dart';
-// ignore: always_use_package_imports -- ARCH-03
 import 'journal_memory_editor.dart';
 
-/// One journal day — an opened diary page of archival fragments.
-class JournalDayScreen extends ConsumerWidget {
+/// One journal day — a physical deck of identical diary memory cards.
+class JournalDayScreen extends ConsumerStatefulWidget {
   const JournalDayScreen({required this.dateKey, super.key});
 
   final String dateKey;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<JournalDayScreen> createState() => _JournalDayScreenState();
+}
+
+class _JournalDayScreenState extends ConsumerState<JournalDayScreen> {
+  static const _moodSheetCancelled = Object();
+  final _deckKey = GlobalKey<QJournalCardDeckState>();
+  var _frontPosition = 1;
+
+  @override
+  Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
-    final date = LocalCalendarDate.parseStorage(dateKey);
-    final day = ref.watch(journalDayProvider(dateKey));
-    final entries = ref.watch(journalEntriesProvider(dateKey));
+    final date = LocalCalendarDate.parseStorage(widget.dateKey);
+    final day = ref.watch(journalDayProvider(widget.dateKey));
+    final entries = ref.watch(journalEntriesProvider(widget.dateKey));
     final entryList = entries.asData?.value ?? const <JournalEntry>[];
     final dayMood = day.asData?.value?.mood;
 
     return QScreen(
-      canvasColor: j.desk,
       child: QMeasure(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            QDiaryTopBar(
+              leading: QIconButton(
+                glyph: QuietGlyph.chevronLeft,
+                onPressed: () => context.pop(),
+                semanticLabel: 'Back',
+              ),
+              actions: [
+                QIconButton(
+                  glyph: QuietGlyph.plus,
+                  onPressed: () => _addEntry(context, date, entryList),
+                  semanticLabel: 'Add memory',
+                ),
+              ],
+            ),
+            // Stable screen header — not part of the card flex region.
             Padding(
               padding: EdgeInsets.fromLTRB(
-                context.gutter - q.space.sm,
-                q.space.base,
                 context.gutter,
-                0,
+                q.space.sm,
+                context.gutter,
+                q.space.sm,
               ),
-              child: Row(
-                children: [
-                  QIconButton(
-                    glyph: QuietGlyph.chevronLeft,
-                    onPressed: () => context.pop(),
-                    semanticLabel: 'Back',
-                  ),
-                  const Spacer(),
-                  QIconButton(
-                    glyph: QuietGlyph.plus,
-                    onPressed: () => _addEntry(context, ref, date, entryList),
-                    semanticLabel: 'Add memory',
-                  ),
-                ],
-              ),
+              child: _DayHeader(date: date, mood: dayMood),
             ),
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.fromLTRB(
-                  context.gutter,
-                  q.space.md,
-                  context.gutter,
-                  q.space.emptiness,
-                ),
-                children: [
-                  _DayHeader(date: date, mood: dayMood),
-                  SizedBox(height: q.space.lg),
-                  if (entryList.isEmpty)
-                    _EmptyDay(
-                      onAdd: () => _addEntry(context, ref, date, entryList),
-                    )
-                  else
-                    _ArchiveComposition(
-                      dateKey: dateKey,
-                      entries: entryList,
-                    ),
-                  SizedBox(height: q.space.xl),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: QButton.tertiary(
-                      label: dayMood == null
-                          ? "Set the day's mood"
-                          : 'Change day mood',
-                      onPressed: () => _setDayMood(
-                        context,
-                        ref,
-                        date,
-                        day.asData?.value,
-                      ),
-                    ),
+            if (entryList.isEmpty)
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: context.gutter),
+                  child: _EmptyDay(
+                    onAdd: () => _addEntry(context, date, entryList),
                   ),
-                  if (entryList.isNotEmpty) ...[
-                    SizedBox(height: q.space.md),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: QButton.primary(
-                        label: 'Add memory',
-                        onPressed: () =>
-                            _addEntry(context, ref, date, entryList),
-                      ),
-                    ),
-                  ],
-                ],
+                ),
+              )
+            else
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: context.gutter),
+                  child: _StableDeckColumn(
+                    deckKey: _deckKey,
+                    dateKey: widget.dateKey,
+                    entries: entryList,
+                    frontPosition: _frontPosition,
+                    onOpen: (entry) {
+                      context.pushNamed(
+                        AppRoute.journalEntry.name,
+                        pathParameters: {
+                          'date': widget.dateKey,
+                          'entryId': entry.id,
+                        },
+                      );
+                    },
+                    onFrontChanged: (position) {
+                      if (_frontPosition != position) {
+                        setState(() => _frontPosition = position);
+                      }
+                    },
+                  ),
+                ),
+              ),
+            // Mood action — reserved band; illustration may hang upward.
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                context.gutter,
+                entryList.isEmpty ? 0 : q.space.md,
+                context.gutter,
+                q.space.md + MediaQuery.paddingOf(context).bottom * 0.25,
+              ),
+              child: _DayMoodFooter(
+                mood: dayMood,
+                onPressed: () => _setDayMood(
+                  context,
+                  date,
+                  day.asData?.value,
+                ),
               ),
             ),
           ],
@@ -126,7 +140,6 @@ class JournalDayScreen extends ConsumerWidget {
 
   Future<void> _addEntry(
     BuildContext context,
-    WidgetRef ref,
     LocalCalendarDate date,
     List<JournalEntry> entries,
   ) async {
@@ -144,25 +157,24 @@ class JournalDayScreen extends ConsumerWidget {
 
   Future<void> _setDayMood(
     BuildContext context,
-    WidgetRef ref,
     LocalCalendarDate date,
     JournalDay? existing,
   ) async {
     var selected = existing?.mood;
-    final result = await showQSheet<JournalMood?>(
+    final result = await showQSheet<Object?>(
       context: context,
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setModalState) {
             final q = context.quiet;
-            final j = q.journal;
             return QSheet(
               title: 'Day mood',
               bottom: QBottomActions(
                 children: [
                   QButton.tertiary(
                     label: 'Not now',
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () =>
+                        Navigator.of(context).pop(_moodSheetCancelled),
                   ),
                   QButton.primary(
                     label: 'Save',
@@ -175,11 +187,10 @@ class JournalDayScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'MOOD',
-                    textScaler: context.structuralTextScaler,
-                    style: q.text.archiveLabel.tinted(j.inkMuted),
+                    'How did this day feel?',
+                    style: q.text.uiBody.tinted(context.controlInkSecondary),
                   ),
-                  SizedBox(height: q.space.md),
+                  SizedBox(height: q.space.lg),
                   QJournalMoodPicker(
                     selectedId: selected?.storageValue,
                     options: [
@@ -201,9 +212,8 @@ class JournalDayScreen extends ConsumerWidget {
         );
       },
     );
-    if (result == null && selected == null) return;
-    final mood = result;
-    if (mood == null) return;
+    if (identical(result, _moodSheetCancelled)) return;
+    final mood = result as JournalMood?;
     final now = ref.read(clockProvider).now();
     await ref
         .read(journalRepositoryProvider)
@@ -215,6 +225,244 @@ class JournalDayScreen extends ConsumerWidget {
             updatedAt: now,
           ),
         );
+  }
+}
+
+class _StableDeckColumn extends ConsumerWidget {
+  const _StableDeckColumn({
+    required this.deckKey,
+    required this.dateKey,
+    required this.entries,
+    required this.frontPosition,
+    required this.onOpen,
+    required this.onFrontChanged,
+  });
+
+  final GlobalKey<QJournalCardDeckState> deckKey;
+  final String dateKey;
+  final List<JournalEntry> entries;
+  final int frontPosition;
+  final ValueChanged<JournalEntry> onOpen;
+  final ValueChanged<int> onFrontChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final q = context.quiet;
+    final viewportH = MediaQuery.sizeOf(context).height;
+    final targetH = (viewportH * q.layout.journalDayCardHeightFraction).clamp(
+      q.layout.journalDayCardMinHeight,
+      q.layout.journalDayCardMaxHeight,
+    );
+
+    return Column(
+      children: [
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              // Cap from viewport — do not stretch into leftover Expanded space.
+              final deckH = math.min(targetH, constraints.maxHeight);
+              return Center(
+                child: SizedBox(
+                  height: deckH,
+                  width: constraints.maxWidth,
+                  child: _DeckRegion(
+                    deckKey: deckKey,
+                    dateKey: dateKey,
+                    entries: entries,
+                    onOpen: onOpen,
+                    onFrontChanged: onFrontChanged,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: q.space.xs, bottom: q.space.sm),
+          child: QJournalDeckCounter(
+            position: frontPosition.clamp(1, entries.length),
+            total: entries.length,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DeckRegion extends ConsumerWidget {
+  const _DeckRegion({
+    required this.deckKey,
+    required this.dateKey,
+    required this.entries,
+    required this.onOpen,
+    required this.onFrontChanged,
+  });
+
+  final GlobalKey<QJournalCardDeckState> deckKey;
+  final String dateKey;
+  final List<JournalEntry> entries;
+  final ValueChanged<JournalEntry> onOpen;
+  final ValueChanged<int> onFrontChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = <QJournalDeckItem>[
+      for (final entry in entries)
+        QJournalDeckItem(
+          id: entry.id,
+          title: entry.title,
+          body: entry.body,
+          moodId: entry.mood?.storageValue,
+          moodLabel: entry.mood?.displayName,
+          fragmentLabel: _fragmentLabel(ref, entry),
+          photo: _photoFor(ref, entry),
+        ),
+    ];
+
+    final byId = {for (final e in entries) e.id: e};
+
+    return QJournalCardDeck(
+      key: deckKey,
+      items: items,
+      onOpen: (item) {
+        final entry = byId[item.id];
+        if (entry != null) onOpen(entry);
+      },
+      onFrontChanged: (item) {
+        final index = entries.indexWhere((e) => e.id == item.id);
+        if (index >= 0) onFrontChanged(index + 1);
+      },
+    );
+  }
+
+  String? _fragmentLabel(WidgetRef ref, JournalEntry entry) {
+    final photos = ref.watch(journalEntryPhotosProvider(entry.id));
+    final list = photos.asData?.value ?? const [];
+    if (list.isNotEmpty) return 'photograph';
+    if (entry.body.trim().isNotEmpty) return 'writing';
+    return null;
+  }
+
+  Widget? _photoFor(WidgetRef ref, JournalEntry entry) {
+    final photos = ref.watch(journalEntryPhotosProvider(entry.id));
+    final list = photos.asData?.value ?? const [];
+    if (list.isEmpty) return null;
+    final image = ref.watch(journalPhotoProvider(list.first.photoId));
+    return image.when(
+      data: (provider) =>
+          provider == null ? null : Image(image: provider, fit: BoxFit.cover),
+      loading: () => const SizedBox.expand(),
+      error: (_, _) => null,
+    );
+  }
+}
+
+class _DayMoodFooter extends StatelessWidget {
+  const _DayMoodFooter({
+    required this.mood,
+    required this.onPressed,
+  });
+
+  final JournalMood? mood;
+  final VoidCallback onPressed;
+
+  /// Day-mood companion art — hangs upward; only a fraction reserves layout.
+  static const _artWidthOfViewport = 0.26;
+
+  /// How much of the art height participates in layout (rest hangs up).
+  static const _artLayoutFraction = 0.42;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final moodId = mood?.storageValue;
+    final label = mood == null ? "Set the day's mood" : 'Change day mood';
+    final screenW = MediaQuery.sizeOf(context).width;
+    final artWidth = screenW * _artWidthOfViewport;
+    final artHeight = artWidth / VintageMoodTheme.aspectRatio;
+    final layoutArtH = artHeight * _artLayoutFraction;
+
+    // Stable action-band height — illustration may overflow upward into the
+    // deck breathing room without collapsing the card when mood appears.
+    final actionBand = context.structuralTextScaler.scale(48.0);
+    final bandH = moodId == null
+        ? actionBand
+        : math.max(actionBand, layoutArtH);
+
+    return SizedBox(
+      height: bandH,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: _DiaryMoodAction(
+              label: label,
+              onPressed: onPressed,
+            ),
+          ),
+          if (moodId != null)
+            Positioned(
+              right: 0,
+              bottom: -q.space.xs,
+              child: IgnorePointer(
+                child: QMoodIllustration(
+                  moodId: moodId,
+                  size: MoodIllustrationSize.dayFooter,
+                  width: artWidth,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Courier diary action with a hairline underline — clickable, not Material.
+class _DiaryMoodAction extends StatelessWidget {
+  const _DiaryMoodAction({
+    required this.label,
+    required this.onPressed,
+  });
+
+  final String label;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final ink = q.inked(q.text.uiBody).color ?? q.canvas.primary;
+
+    return QPressable(
+      onTap: onPressed,
+      radius: q.radius.sm,
+      semanticLabel: label,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: q.space.sm,
+          horizontal: q.space.xs,
+        ),
+        child: IntrinsicWidth(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                label,
+                textScaler: context.structuralTextScaler,
+                style: q.inked(q.text.uiBody),
+              ),
+              SizedBox(height: q.space.xs),
+              ColoredBox(
+                color: ink.withValues(alpha: 0.55),
+                child: SizedBox(height: context.hairlineWidth),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -252,47 +500,44 @@ class _DayHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final weekday =
         _weekdays[DateTime(date.year, date.month, date.day).weekday - 1];
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: j.rule, width: context.hairlineWidth),
+    return Column(
+      children: [
+        Text(
+          'Journal of the Day',
+          textAlign: TextAlign.center,
+          textScaler: context.nameTextScaler,
+          style: q.inked(q.text.pageTitle),
         ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(bottom: q.space.md),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              _months[date.month - 1].toUpperCase(),
-              textScaler: context.structuralTextScaler,
-              style: q.text.archiveLabel.tinted(j.inkMuted),
-            ),
-            Text(
-              '${date.day}',
-              textScaler: context.nameTextScaler,
-              style: q.text.voiceXl.tinted(j.ink),
-            ),
-            SizedBox(height: q.space.xs),
-            Text(
-              weekday,
-              style: q.text.archiveMeta.tinted(j.inkMuted),
-            ),
-            if (mood != null) ...[
-              SizedBox(height: q.space.xs),
-              Text(
-                mood!.displayName,
-                textScaler: context.structuralTextScaler,
-                style: q.text.archiveLabel.tinted(j.inkMuted),
-              ),
-            ],
-          ],
+        SizedBox(height: q.space.xs),
+        Text(
+          'Your memories, one card at a time.',
+          textAlign: TextAlign.center,
+          textScaler: context.structuralTextScaler,
+          style: q.inked(q.text.uiCaption, tone: QuietInkTone.secondary),
         ),
-      ),
+        SizedBox(height: q.space.sm),
+        Text(
+          '${_months[date.month - 1]} ${date.day} · $weekday',
+          textAlign: TextAlign.center,
+          textScaler: context.structuralTextScaler,
+          style: q.inked(q.text.uiDate, tone: QuietInkTone.secondary),
+        ),
+        if (mood != null) ...[
+          SizedBox(height: q.space.hair),
+          Text(
+            mood!.displayName.toUpperCase(),
+            textAlign: TextAlign.center,
+            textScaler: context.structuralTextScaler,
+            style: q.inked(
+              q.text.uiMetadata,
+              tone: QuietInkTone.secondary,
+            ),
+          ),
+        ],
+      ],
     );
   }
 }
@@ -305,7 +550,6 @@ class _EmptyDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: q.space.xl),
       child: Column(
@@ -313,172 +557,16 @@ class _EmptyDay extends StatelessWidget {
         children: [
           Text(
             'Nothing written here yet.',
-            style: q.text.voiceMd.tinted(j.ink),
+            style: q.inked(q.text.emptyStateTitle),
           ),
           SizedBox(height: q.space.sm),
           Text(
             'Begin with something you remember.',
-            style: q.text.archiveBody.tinted(j.inkMuted),
+            style: q.inked(q.text.emptyStateBody, tone: QuietInkTone.secondary),
           ),
           SizedBox(height: q.space.xl),
           QButton.primary(label: 'Add memory', onPressed: onAdd),
         ],
-      ),
-    );
-  }
-}
-
-class _ArchiveComposition extends ConsumerWidget {
-  const _ArchiveComposition({
-    required this.dateKey,
-    required this.entries,
-  });
-
-  final String dateKey;
-  final List<JournalEntry> entries;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final motion = QuietMotion.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        for (final (index, entry) in entries.indexed)
-          _FragmentSlot(
-            key: ValueKey(entry.id),
-            dateKey: dateKey,
-            entry: entry,
-            index: index,
-            delay: motion.staggerFor(index),
-          ),
-      ],
-    );
-  }
-}
-
-class _FragmentSlot extends ConsumerStatefulWidget {
-  const _FragmentSlot({
-    required this.dateKey,
-    required this.entry,
-    required this.index,
-    required this.delay,
-    super.key,
-  });
-
-  final String dateKey;
-  final JournalEntry entry;
-  final int index;
-  final Duration delay;
-
-  @override
-  ConsumerState<_FragmentSlot> createState() => _FragmentSlotState();
-}
-
-class _FragmentSlotState extends ConsumerState<_FragmentSlot>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _opacity;
-  late final Animation<Offset> _offset;
-  var _started = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 280),
-    );
-    _opacity = CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic);
-    _offset = Tween<Offset>(
-      begin: const Offset(0, 0.03),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_started) return;
-    _started = true;
-    final motion = QuietMotion.of(context);
-    _controller.duration = motion.move(const Duration(milliseconds: 280));
-    if (motion.reduced) {
-      _controller.value = 1;
-      return;
-    }
-    Future<void>.delayed(widget.delay, () {
-      if (mounted) _controller.forward();
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final photos = ref.watch(journalEntryPhotosProvider(widget.entry.id));
-    final photoList = photos.asData?.value ?? const [];
-    final hasPhotos = photoList.isNotEmpty;
-    final layout = JournalFragmentLayout.resolve(
-      entryId: widget.entry.id,
-      position: widget.entry.position,
-      dateKey: widget.dateKey,
-      hasPhotos: hasPhotos,
-      bodyLength: widget.entry.body.length,
-      title: widget.entry.title,
-    );
-
-    Widget? thumb;
-    if (hasPhotos) {
-      final first = photoList.first;
-      final image = ref.watch(journalPhotoProvider(first.photoId));
-      thumb = image.when(
-        data: (provider) => provider == null
-            ? const SizedBox.expand()
-            : Image(image: provider, fit: BoxFit.cover),
-        loading: () => const SizedBox.expand(),
-        error: (_, _) => const SizedBox.expand(),
-      );
-    }
-
-    return FadeTransition(
-      opacity: _opacity,
-      child: SlideTransition(
-        position: _offset,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: layout.topGap,
-            left: layout.leadingInset,
-            right: layout.trailingInset,
-          ),
-          child: QJournalFragment(
-            title: widget.entry.title,
-            bodyPreview: widget.entry.body.isEmpty ? null : widget.entry.body,
-            moodId: widget.entry.mood?.storageValue,
-            moodLabel: widget.entry.mood?.displayName,
-            archiveIndex: 'No. ${widget.index + 1}',
-            kind: layout.kind,
-            hasPhotos: hasPhotos,
-            photoThumb: thumb,
-            rotation: layout.rotation,
-            widthFactor: layout.widthFactor,
-            showTape: layout.showTape,
-            showClip: layout.showClip,
-            seed: layout.seed,
-            onTap: () {
-              context.pushNamed(
-                AppRoute.journalEntry.name,
-                pathParameters: {
-                  'date': widget.dateKey,
-                  'entryId': widget.entry.id,
-                },
-              );
-            },
-          ),
-        ),
       ),
     );
   }

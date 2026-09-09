@@ -69,7 +69,11 @@ class QJournalPhotoPrint extends StatelessWidget {
                   if (caption != null && caption!.isNotEmpty) caption,
                 ].whereType<String>().join(' — '),
                 textScaler: context.structuralTextScaler,
-                style: q.text.archiveCaption.tinted(j.inkMuted),
+                style: q.inked(
+                  q.text.archiveCaption,
+                  surface: QuietSurfaceKind.paper,
+                  tone: QuietInkTone.secondary,
+                ),
               ),
             ],
             if (onRemove != null) ...[

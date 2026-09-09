@@ -30,8 +30,8 @@ Future<void> loadQuietFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
   for (final family in const {
     'Fraunces': 'assets/fonts/Fraunces-Variable.ttf',
-    'Inter': 'assets/fonts/Inter-Variable.ttf',
     'CourierPrime': 'assets/fonts/CourierPrime-Regular.ttf',
+    'Caveat': 'assets/fonts/Caveat-Variable.ttf',
   }.entries) {
     final bytes = File(family.value).readAsBytesSync();
     await (FontLoader(

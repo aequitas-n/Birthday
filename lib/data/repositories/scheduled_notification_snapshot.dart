@@ -6,10 +6,15 @@ import 'package:kin/domain/models/reminder_rule.dart';
 String encodeScheduleSnapshot(NotificationPlan plan) {
   return jsonEncode(<String, Object?>{
     'kind': plan.kind.name,
+    'source': plan.source.storageValue,
     'payload': <String, Object?>{
       'version': plan.payload.version,
-      'personId': plan.payload.personId,
-      'ruleKind': plan.payload.ruleKind.storageValue,
+      'source': plan.payload.source.storageValue,
+      if (plan.payload.personId != null) 'personId': plan.payload.personId,
+      if (plan.payload.reminderId != null)
+        'reminderId': plan.payload.reminderId,
+      if (plan.payload.ruleKind != null)
+        'ruleKind': plan.payload.ruleKind!.storageValue,
       'occurrenceYear': plan.payload.occurrenceYear,
     },
     'targetLocalInstant': <String, Object?>{
@@ -22,15 +27,12 @@ String encodeScheduleSnapshot(NotificationPlan plan) {
       'second': plan.targetLocalInstant.second,
     },
     'hidesSensitivePreview': plan.hidesSensitivePreview,
+    if (plan.reminderId != null) 'reminderId': plan.reminderId,
   });
 }
 
 NotificationPlanKind decodePlanKind(String value) {
-  return NotificationPlanKind.values.firstWhere(
-    (kind) => kind.name == value,
-    orElse: () =>
-        throw FormatException('Unknown notification plan kind: $value'),
-  );
+  return NotificationPlanKind.fromStorage(value);
 }
 
 LocalScheduledMoment decodeTargetLocalInstant(Map<String, dynamic> json) {
@@ -66,22 +68,45 @@ LocalScheduledMoment decodeTargetLocalInstant(Map<String, dynamic> json) {
 
 NotificationPayload decodePayloadMap(Map<String, dynamic> json) {
   final version = json['version'];
-  final personId = json['personId'];
-  final ruleKind = json['ruleKind'];
   final occurrenceYear = json['occurrenceYear'];
-
-  if (version is! int ||
-      personId is! String ||
-      ruleKind is! String ||
-      occurrenceYear is! int) {
+  if (version is! int || occurrenceYear is! int) {
     throw const FormatException('Payload snapshot is missing required fields.');
   }
 
-  return NotificationPayload(
-    version: version,
+  final sourceRaw = json['source'];
+  final source = sourceRaw is String
+      ? NotificationPlanSource.fromStorage(sourceRaw)
+      : (json['reminderId'] is String
+            ? NotificationPlanSource.personal
+            : NotificationPlanSource.birthday);
+
+  if (source == NotificationPlanSource.personal) {
+    final reminderId = json['reminderId'];
+    if (reminderId is! String) {
+      throw const FormatException(
+        'Personal payload snapshot requires reminderId.',
+      );
+    }
+    return NotificationPayload.personal(
+      reminderId: reminderId,
+      occurrenceYear: occurrenceYear,
+      version: version,
+    );
+  }
+
+  final personId = json['personId'];
+  final ruleKind = json['ruleKind'];
+  if (personId is! String || ruleKind is! String) {
+    throw const FormatException(
+      'Birthday payload snapshot is missing required fields.',
+    );
+  }
+
+  return NotificationPayload.birthday(
     personId: personId,
     ruleKind: ReminderRuleKind.fromStorage(ruleKind),
     occurrenceYear: occurrenceYear,
+    version: version,
   );
 }
 

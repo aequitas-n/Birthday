@@ -1,39 +1,58 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kin/app/app_providers.dart';
+import 'package:kin/core/clock.dart';
+import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/media/q_photo.dart';
-import 'package:kin/design/components/surfaces/q_card.dart';
-import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/tokens/color_tokens.dart';
+import 'package:kin/design/tokens/vintage_diary_tokens.dart';
+import 'package:kin/design/tokens/vintage_portrait_geometry.dart';
+import 'package:kin/features/home/application/gallery_memory.dart';
 import 'package:kin/features/home/application/gallery_providers.dart';
 import 'package:kin/features/person/application/person_detail_providers.dart';
 
-/// A portrait in the relationship gallery.
-///
-/// The photograph is the card. Previously the image sat inside a frame with the
-/// name printed on the mount below it, which is a contact-list row wearing a
-/// card: it produced two competing rectangles and a lot of dead paper. Here the
-/// image bleeds to all four corners and the words sit in the picture, the way
-/// they do on a pass in Wallet or a cover in Photos.
+/// How much of a portrait card's editorial copy is shown.
+enum ProfilePortraitDepth {
+  /// The card in hand — full hierarchy.
+  active,
+
+  /// Reserved for compact contexts (search results, etc.).
+  neighbour,
+}
+
+/// Vintage diary portrait — `profile_card.webp` is the surface; photo and text
+/// are layered directly on top with no nested card or parchment plate.
 class ProfilePortraitCard extends ConsumerWidget {
   const ProfilePortraitCard({
     required this.entry,
     required this.onTap,
+    required this.width,
     required this.height,
     this.heroTag,
+    this.depth = ProfilePortraitDepth.active,
+    this.memory,
     super.key,
   });
 
   final GalleryEntry entry;
   final VoidCallback onTap;
+  final double width;
   final double height;
   final Object? heroTag;
+  final ProfilePortraitDepth depth;
+  final GalleryMemorySummary? memory;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
     final photo = ref.watch(personPhotoProvider(entry.profile.photoId));
     final relationship = entry.relationshipLabel;
+    final isActive = depth == ProfilePortraitDepth.active;
+
+    final width = this.width;
+    final photoBottom = VintagePortraitLayout.photoBottomNorm(width);
 
     final Widget portrait = QPhoto(
       displayName: entry.primaryName,
@@ -41,111 +60,233 @@ class ProfilePortraitCard extends ConsumerWidget {
       photo: photo.asData?.value,
     );
 
-    return QCard(
-      tone: QCardTone.gallery,
+    final plate = SizedBox(
+      width: width,
+      height: height,
+      child: Stack(
+        fit: StackFit.expand,
+        clipBehavior: Clip.none,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(q.radius.sm),
+            child: Image.asset(
+              VintageDiaryAssets.profileCard,
+              fit: BoxFit.cover,
+              alignment: Alignment.topCenter,
+              width: width,
+              height: height,
+              gaplessPlayback: true,
+              filterQuality: FilterQuality.high,
+            ),
+          ),
+          Positioned(
+            left: width * ProfileCardGeometry.photoLeft,
+            right: width * (1 - ProfileCardGeometry.photoRight),
+            top: height * ProfileCardGeometry.photoTop,
+            bottom: height * (1 - photoBottom),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: ColorTokens.vdInkPrimary.withValues(alpha: 0.22),
+                  width: context.hairlineWidth * 2,
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(q.space.xs),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(q.radius.xs),
+                  child: heroTag == null
+                      ? portrait
+                      : Hero(tag: heroTag!, child: portrait),
+                ),
+              ),
+            ),
+          ),
+          _ParchmentTextAnchor(
+            width: width,
+            height: height,
+            child: _ProfileNameInk(name: entry.primaryName),
+          ),
+        ],
+      ),
+    );
+
+    final card = QPressable(
       onTap: onTap,
+      radius: q.radius.md,
       semanticLabel: [
         entry.primaryName,
         if (entry.isPinned) 'Pinned',
         if (relationship != null) relationship,
-        entry.countdownLabel(),
+        if (isActive) entry.countdownLabel(),
+        if (memory != null && memory!.hasMemories) memory!.countLabel(),
       ].join(', '),
-      child: SizedBox(
-        height: height,
-        width: double.infinity,
-        child: QClip(
-          radius: q.radius.xxl,
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              RepaintBoundary(
-                child: heroTag == null
-                    ? portrait
-                    : Hero(tag: heroTag!, child: portrait),
-              ),
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: q.photo.cardScrim,
-                        stops: q.photo.cardScrimStops,
-                      ),
-                    ),
+      child: plate,
+    );
+
+    final composed = !isActive
+        ? card
+        : SizedBox(
+            width: width,
+            height: height,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                card,
+                Positioned(
+                  top: height * ProfileCardGeometry.photoTop + q.space.xs,
+                  right:
+                      width * (1 - ProfileCardGeometry.photoRight) + q.space.xs,
+                  child: _PinButton(
+                    pinned: entry.isPinned,
+                    onToggle: () => _togglePin(ref),
+                  ),
+                ),
+              ],
+            ),
+          );
+
+    return SizedBox(
+      width: double.infinity,
+      height: height,
+      child: composed,
+    );
+  }
+
+  Future<void> _togglePin(WidgetRef ref) async {
+    final now = ref.read(clockProvider).now();
+    await ref
+        .read(profileRepositoryProvider)
+        .save(
+          entry.profile.copyWith(
+            isPinned: !entry.isPinned,
+            updatedAt: now,
+          ),
+        );
+  }
+}
+
+/// Positions copy relative to the profile card — not a visual container.
+class _ParchmentTextAnchor extends StatelessWidget {
+  const _ParchmentTextAnchor({
+    required this.width,
+    required this.height,
+    required this.child,
+  });
+
+  final double width;
+  final double height;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      left: width * ProfileCardGeometry.textLeft,
+      right: width * (1 - ProfileCardGeometry.textRight),
+      bottom: height * ProfileCardGeometry.textBottom,
+      child: child,
+    );
+  }
+}
+
+/// Person name printed directly on the parchment artwork.
+class _ProfileNameInk extends StatelessWidget {
+  const _ProfileNameInk({required this.name});
+
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final paper = q.paper;
+
+    return Text(
+      name,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
+      textScaler: context.nameTextScaler,
+      textHeightBehavior: q.text.displayHeightBehavior,
+      style: paper.inked(q.text.personName),
+    );
+  }
+}
+
+/// Empty-gallery invitation — two lines and a rule, no nested surface.
+class _CreateProfileInk extends StatelessWidget {
+  const _CreateProfileInk();
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final paper = q.paper;
+    final rule = paper.border.withValues(alpha: 0.5);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'A place for someone',
+          textAlign: TextAlign.center,
+          textScaler: context.structuralTextScaler,
+          textHeightBehavior: q.text.displayHeightBehavior,
+          style: paper.inked(q.text.sectionTitle),
+        ),
+        SizedBox(height: q.space.xs),
+        Text(
+          'Create a profile',
+          textAlign: TextAlign.center,
+          textScaler: context.structuralTextScaler,
+          textHeightBehavior: q.text.displayHeightBehavior,
+          style: paper.inked(
+            q.text.uiBody,
+            tone: QuietInkTone.secondary,
+          ),
+        ),
+        SizedBox(height: q.space.sm),
+        Align(
+          child: SizedBox(
+            width: 120,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: rule,
+                    width: context.hairlineWidth,
                   ),
                 ),
               ),
-              Positioned(
-                left: q.space.xl,
-                right: q.space.xl,
-                bottom: q.space.xl,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (entry.isPinned) ...[
-                      Text(
-                        'Pinned',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textScaler: context.heroTextScaler,
-                        style: context.onImage(
-                          q.text.relationship,
-                          secondary: true,
-                        ),
-                      ),
-                      SizedBox(height: q.space.xs),
-                    ] else if (relationship != null) ...[
-                      Text(
-                        relationship,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textScaler: context.heroTextScaler,
-                        style: context.onImage(
-                          q.text.relationship,
-                          secondary: true,
-                        ),
-                      ),
-                      SizedBox(height: q.space.xs),
-                    ],
-                    if (entry.isPinned && relationship != null) ...[
-                      Text(
-                        relationship,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textScaler: context.heroTextScaler,
-                        style: context.onImage(
-                          q.text.metadata,
-                          secondary: true,
-                        ),
-                      ),
-                      SizedBox(height: q.space.xs),
-                    ],
-                    Text(
-                      entry.primaryName,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textScaler: context.heroTextScaler,
-                      textHeightBehavior: q.text.displayHeightBehavior,
-                      style: context.onImage(q.text.voiceLg),
-                    ),
-                    SizedBox(height: q.space.md),
-                    Text(
-                      entry.countdownLabel(),
-                      maxLines: 1,
-                      textScaler: context.heroTextScaler,
-                      style: context.onImage(
-                        q.text.numeralSm,
-                        secondary: true,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              child: SizedBox(height: q.space.hair),
+            ),
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PinButton extends StatelessWidget {
+  const _PinButton({required this.pinned, required this.onToggle});
+
+  final bool pinned;
+  final VoidCallback onToggle;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final ink = pinned ? ColorTokens.vdBurgundy : ColorTokens.vdInkSecondary;
+
+    return QPressable(
+      onTap: onToggle,
+      radius: q.radius.full,
+      semanticLabel: pinned ? 'Unpin from top' : 'Pin to top',
+      child: Padding(
+        padding: EdgeInsets.all(q.space.sm),
+        child: QGlyphIcon(
+          QuietGlyph.pin,
+          color: ink,
+          size: context.structuralTextScaler.scale(18),
         ),
       ),
     );
@@ -156,53 +297,40 @@ class ProfilePortraitCard extends ConsumerWidget {
 class CreateProfilePortraitCard extends StatelessWidget {
   const CreateProfilePortraitCard({
     required this.onTap,
+    required this.width,
     required this.height,
     super.key,
   });
 
   final VoidCallback onTap;
+  final double width;
   final double height;
 
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
 
-    return QCard(
-      tone: QCardTone.gallery,
+    return QPressable(
       onTap: onTap,
+      radius: q.radius.md,
       semanticLabel: 'Create a relationship profile',
-      padding: EdgeInsets.all(q.space.xxl),
       child: SizedBox(
+        width: width,
         height: height,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            Text(
-              'A place for someone',
-              style: q.text.voiceMd.tinted(q.color.textPrimary),
+            Image.asset(
+              VintageDiaryAssets.profileCard,
+              fit: BoxFit.cover,
+              alignment: Alignment.topCenter,
+              gaplessPlayback: true,
+              filterQuality: FilterQuality.high,
             ),
-            SizedBox(height: q.space.md),
-            Text(
-              'Their photograph, their nickname, and the details you would '
-              'hate to have to ask about.',
-              style: q.text.body.tinted(q.color.textSecondary),
-            ),
-            SizedBox(height: q.space.xl),
-            Row(
-              children: [
-                QGlyphIcon(
-                  QuietGlyph.plus,
-                  color: q.color.accent,
-                  size: context.structuralTextScaler.scale(18),
-                ),
-                SizedBox(width: q.space.sm),
-                Text(
-                  'Create a profile',
-                  style: q.text.buttonLabel.tinted(q.color.accent),
-                ),
-              ],
+            _ParchmentTextAnchor(
+              width: width,
+              height: height,
+              child: const _CreateProfileInk(),
             ),
           ],
         ),
@@ -212,45 +340,66 @@ class CreateProfilePortraitCard extends StatelessWidget {
 }
 
 /// The card at the end of a populated carousel.
-///
-/// The same silhouette as the portraits beside it — same radius, same lift —
-/// because a differently shaped card at the end of the stack reads as a
-/// different kind of object rather than as one more place to put someone.
 class AddProfileCarouselCard extends StatelessWidget {
   const AddProfileCarouselCard({
     required this.onTap,
+    required this.width,
     required this.height,
     super.key,
   });
 
   final VoidCallback onTap;
+  final double width;
   final double height;
 
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final paper = q.paper;
 
-    return QCard(
-      tone: QCardTone.gallery,
+    return QPressable(
       onTap: onTap,
+      radius: q.radius.md,
       semanticLabel: 'Add a relationship profile',
-      padding: EdgeInsets.all(q.space.xxl),
       child: SizedBox(
+        width: width,
         height: height,
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            QGlyphIcon(
-              QuietGlyph.plus,
-              color: q.color.textTertiary,
-              size: context.structuralTextScaler.scale(24),
+            Opacity(
+              opacity: 0.92,
+              child: Image.asset(
+                VintageDiaryAssets.profileCard,
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+                gaplessPlayback: true,
+                filterQuality: FilterQuality.high,
+              ),
             ),
-            SizedBox(height: q.space.base),
-            Text(
-              'Someone else',
-              textAlign: TextAlign.center,
-              style: q.text.body.tinted(q.color.textSecondary),
+            _ParchmentTextAnchor(
+              width: width,
+              height: height,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  QGlyphIcon(
+                    QuietGlyph.plus,
+                    color: paper.secondary,
+                    size: context.structuralTextScaler.scale(22),
+                  ),
+                  SizedBox(height: q.space.xs),
+                  Text(
+                    'Someone else',
+                    textAlign: TextAlign.center,
+                    textScaler: context.structuralTextScaler,
+                    style: paper.inked(
+                      q.text.uiBody,
+                      tone: QuietInkTone.secondary,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

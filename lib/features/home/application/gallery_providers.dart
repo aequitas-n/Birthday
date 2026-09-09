@@ -1,8 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kin/app/app_providers.dart';
 import 'package:kin/core/clock.dart';
+import 'package:kin/domain/models/note.dart';
 import 'package:kin/domain/models/person.dart';
 import 'package:kin/domain/models/profile.dart';
 import 'package:kin/features/home/application/home_providers.dart';
+// ignore: always_use_package_imports -- ARCH-03: relative within a feature
+import 'gallery_memory.dart';
 
 /// A profile card in the relationship gallery.
 class GalleryEntry {
@@ -88,6 +92,48 @@ final galleryEntriesProvider = Provider<List<GalleryEntry>>((ref) {
   entries.sort(_compareGalleryEntries);
   return entries;
 });
+
+/// Memory counts and latest previews keyed by profile id.
+final galleryMemorySummariesProvider =
+    StreamProvider<Map<String, GalleryMemorySummary>>((ref) {
+      final database = ref.watch(kinDatabaseProvider);
+      final query = database.select(database.notes)
+        ..where((tbl) => tbl.deletedAt.isNull());
+      return query.watch().map((rows) {
+        final grouped = <String, List<Note>>{};
+        for (final row in rows) {
+          final note = Note(
+            id: row.id,
+            profileId: row.profileId,
+            kind: NoteKind.fromStorage(row.kind),
+            label: row.kindLabel,
+            value: row.value,
+            isRetired: row.isRetired,
+            position: row.position,
+            createdAt: DateTime.fromMillisecondsSinceEpoch(
+              row.createdAt,
+              isUtc: true,
+            ),
+            updatedAt: DateTime.fromMillisecondsSinceEpoch(
+              row.updatedAt,
+              isUtc: true,
+            ),
+            deletedAt: row.deletedAt == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(
+                    row.deletedAt!,
+                    isUtc: true,
+                  ),
+            syncRev: row.syncRev,
+          );
+          grouped.putIfAbsent(note.profileId, () => []).add(note);
+        }
+        return grouped.map(
+          (profileId, notes) =>
+              MapEntry(profileId, GalleryMemorySummary.fromNotes(notes)),
+        );
+      });
+    });
 
 /// Birthdays that do not yet have a relationship profile.
 final unlinkedBirthdaysProvider = Provider<List<Person>>((ref) {

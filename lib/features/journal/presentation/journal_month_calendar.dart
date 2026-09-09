@@ -3,6 +3,7 @@ import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/motion/quiet_motion.dart';
 import 'package:kin/design/theme/journal_mood_colors.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/theme/vintage_diary_background.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
 import 'package:kin/domain/repositories/journal_repository.dart';
 
@@ -28,65 +29,53 @@ class JournalMonthCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final cells = _buildCells();
     final markerByDate = {
       for (final marker in markers) marker.localDate.storageKey: marker,
     };
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: j.paper,
-        border: Border.all(color: j.edge, width: context.hairlineWidth),
-      ),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(
-          q.space.sm,
-          q.space.md,
-          q.space.sm,
-          q.space.md,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                for (final label in _weekdays)
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        label,
-                        textScaler: context.structuralTextScaler,
-                        style: q.text.archiveLabel.tinted(j.inkMuted),
-                      ),
+    // Calendar.png is cream parchment — brown ink for contrast.
+    return VintageDiaryCalendarSurface(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              for (final label in _weekdays)
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      label,
+                      textScaler: context.structuralTextScaler,
+                      style: q.inked(q.text.decorativeLabel, surface: QuietSurfaceKind.paper, tone: QuietInkTone.secondary),
                     ),
                   ),
-              ],
+                ),
+            ],
+          ),
+          SizedBox(height: q.space.sm),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 7,
+              mainAxisSpacing: 2,
+              crossAxisSpacing: 2,
             ),
-            SizedBox(height: q.space.sm),
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 7,
-                mainAxisSpacing: 2,
-                crossAxisSpacing: 2,
-              ),
-              itemCount: cells.length,
-              itemBuilder: (context, index) {
-                final cell = cells[index];
-                final marker = markerByDate[cell.date.storageKey];
-                return _DayCell(
-                  date: cell.date,
-                  inMonth: cell.inMonth,
-                  isToday: cell.date == today,
-                  marker: marker,
-                  onTap: cell.inMonth ? () => onDaySelected(cell.date) : null,
-                );
-              },
-            ),
-          ],
-        ),
+            itemCount: cells.length,
+            itemBuilder: (context, index) {
+              final cell = cells[index];
+              final marker = markerByDate[cell.date.storageKey];
+              return _DayCell(
+                date: cell.date,
+                inMonth: cell.inMonth,
+                isToday: cell.date == today,
+                marker: marker,
+                onTap: cell.inMonth ? () => onDaySelected(cell.date) : null,
+              );
+            },
+          ),
+        ],
       ),
     );
   }
@@ -151,20 +140,23 @@ class _DayCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
+    final paper = q.paper;
     final mood = marker?.dayMood;
     final entryCount = marker?.entryCount ?? 0;
     final hasEntries = marker?.hasEntries ?? false;
 
     Color? circleFill;
-    var textColor = inMonth ? j.ink : j.inkMuted.withValues(alpha: 0.4);
+    var textColor = inMonth
+        ? paper.primary
+        : paper.secondary.withValues(alpha: 0.4);
     if (mood != null && inMonth) {
       final (fill, ink) = JournalMoodColors.resolve(
         mood.storageValue,
-        dark: q.isDark,
+        // Calendar parchment is cream — paper mood washes, not dark-canvas ones.
+        dark: false,
       );
-      // Solid enough to read as the day's mood, soft enough for paper.
-      circleFill = fill.withValues(alpha: q.isDark ? 0.72 : 0.88);
+      // Soft ink stain on parchment.
+      circleFill = fill.withValues(alpha: 0.88);
       textColor = ink;
     }
 
@@ -182,7 +174,7 @@ class _DayCell extends StatelessWidget {
         fill: circleFill,
         ring: isToday,
         ringColor: circleFill == null
-            ? j.ink.withValues(alpha: 0.7)
+            ? paper.primary.withValues(alpha: 0.7)
             : textColor.withValues(alpha: 0.45),
         memoryMark: hasEntries && inMonth,
         markColor: textColor.withValues(alpha: 0.7),
@@ -193,8 +185,9 @@ class _DayCell extends StatelessWidget {
         child: Text(
           '${date.day}',
           textScaler: context.structuralTextScaler,
-          style: (isToday || circleFill != null ? q.text.headline : q.text.body)
-              .tinted(textColor),
+          style:
+              (isToday || circleFill != null ? q.text.uiCount : q.text.uiBody)
+                  .tinted(textColor),
         ),
       ),
     );

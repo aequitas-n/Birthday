@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/core/clock.dart';
-import 'package:kin/design/components/journal/q_journal_fragment.dart';
+import 'package:kin/design/components/journal/q_journal_card_deck.dart';
 import 'package:kin/design/components/journal/q_journal_mood_picker.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/domain/models/journal_day.dart';
@@ -70,10 +70,10 @@ void main() {
 
     expect(find.text('Nothing written here yet.'), findsOneWidget);
     expect(find.text('Add memory'), findsOneWidget);
-    expect(find.text('24'), findsOneWidget);
+    expect(find.textContaining('24'), findsOneWidget);
   });
 
-  testWidgets('day with memories renders archival fragments', (tester) async {
+  testWidgets('day with memories renders a physical card deck', (tester) async {
     const date = LocalCalendarDate(year: 2026, month: 10, day: 24);
     final entries = [
       JournalEntry(
@@ -81,7 +81,7 @@ void main() {
         localDate: date,
         title: 'Found an old letter',
         body: 'In the desk drawer.',
-        mood: JournalMood.nostalgic,
+        mood: JournalMood.affection,
         position: 0,
         createdAt: DateTime.utc(2026, 10, 24),
         updatedAt: DateTime.utc(2026, 10, 24),
@@ -104,7 +104,7 @@ void main() {
             (ref, key) => Stream.value(
               JournalDay(
                 localDate: date,
-                mood: JournalMood.reflective,
+                mood: JournalMood.calm,
                 createdAt: DateTime.utc(2026, 10, 24),
                 updatedAt: DateTime.utc(2026, 10, 24),
               ),
@@ -125,10 +125,11 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 500));
 
-    expect(find.text('Found an old letter'), findsOneWidget);
-    expect(find.text('Walked through the rain'), findsOneWidget);
-    expect(find.byType(QJournalFragment), findsNWidgets(2));
-    expect(find.text('Reflective'), findsOneWidget);
+    expect(find.byType(QJournalCardDeck), findsOneWidget);
+    expect(find.text('Found an old letter'), findsWidgets);
+    expect(find.text('1 of 2'), findsOneWidget);
+    expect(find.text('CALM'), findsOneWidget);
+    expect(find.text('Journal of the Day'), findsOneWidget);
   });
 
   testWidgets('mood picker communicates label and selection', (tester) async {

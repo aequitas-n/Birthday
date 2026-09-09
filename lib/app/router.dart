@@ -10,6 +10,7 @@ import 'package:kin/features/journal/presentation/journal_day_screen.dart';
 import 'package:kin/features/journal/presentation/journal_entry_screen.dart';
 import 'package:kin/features/journal/presentation/journal_home_screen.dart';
 import 'package:kin/features/person/presentation/person_screen.dart';
+import 'package:kin/features/reminders/presentation/reminder_planner_screen.dart';
 import 'package:kin/features/settings/presentation/notification_debug_screen.dart';
 import 'package:kin/features/settings/presentation/settings_screen.dart';
 import 'package:kin/features/today/presentation/today_screen.dart';
@@ -23,6 +24,7 @@ enum AppRoute {
   journalDay('/journal/:date'),
   journalEntry('/journal/:date/:entryId'),
   person('/person/:id'),
+  reminders('/reminders'),
   settings('/settings'),
   gallery('/gallery'),
   debugNotifications('/debug/notifications')
@@ -128,6 +130,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => _quietPushPage(
           key: state.pageKey,
           child: PersonScreen(personId: state.pathParameters['id'] ?? ''),
+        ),
+      ),
+      GoRoute(
+        path: AppRoute.reminders.path,
+        name: AppRoute.reminders.name,
+        parentNavigatorKey: _rootNavigatorKey,
+        pageBuilder: (context, state) => _quietPushPage(
+          key: state.pageKey,
+          child: const ReminderPlannerScreen(),
         ),
       ),
       GoRoute(

@@ -22,12 +22,15 @@ class QHairline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.quiet.color;
+    final q = context.quiet;
+    final color = context.isParchmentControls
+        ? (strong ? q.interactive.inkMuted : q.interactive.sheetBorder)
+        : (strong ? q.color.hairlineStrong : q.color.hairline);
     return Padding(
       padding: EdgeInsetsDirectional.only(start: indent, end: endIndent),
       child: SizedBox(
         height: context.hairlineWidth,
-        child: ColoredBox(color: strong ? c.hairlineStrong : c.hairline),
+        child: ColoredBox(color: color),
       ),
     );
   }

@@ -63,8 +63,10 @@ class DriftScheduledNotificationRepository
         .insertOnConflictUpdate(
           ScheduledNotificationsCompanion.insert(
             osId: Value(plan.stableId),
-            personId: plan.personId,
-            ruleId: plan.ruleId,
+            source: Value(plan.source.storageValue),
+            personId: Value(plan.personId),
+            ruleId: Value(plan.ruleId),
+            reminderId: Value(plan.reminderId),
             occurrenceYear: plan.occurrenceYear,
             fireAtUtc: plan.fireAtUtc.toUtc().millisecondsSinceEpoch,
             fireAtDeviceLocal: deviceLocal,
@@ -116,11 +118,18 @@ class DriftScheduledNotificationRepository
     final targetJson =
         snapshot['targetLocalInstant'] as Map<String, dynamic>? ?? {};
     final payloadJson = snapshot['payload'] as Map<String, dynamic>? ?? {};
+    final source = NotificationPlanSource.fromStorage(
+      row.source.isEmpty
+          ? (snapshot['source'] as String? ?? 'birthday')
+          : row.source,
+    );
 
     return ScheduledNotificationRecord(
       osId: row.osId,
+      source: source,
       personId: row.personId,
       ruleId: row.ruleId,
+      reminderId: row.reminderId,
       occurrenceYear: row.occurrenceYear,
       fireAtUtc: DateTime.fromMillisecondsSinceEpoch(
         row.fireAtUtc,

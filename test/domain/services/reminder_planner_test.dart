@@ -472,6 +472,7 @@ void main() {
         desired.last.copyWith(body: 'Old body'),
         NotificationPlan(
           stableId: 999,
+          source: NotificationPlanSource.birthday,
           personId: 'person-9',
           ruleId: 'old',
           occurrenceYear: 2025,
@@ -485,8 +486,7 @@ void main() {
             minute: 0,
           ),
           kind: NotificationPlanKind.birthdayUpcoming,
-          payload: const NotificationPayload(
-            version: 1,
+          payload: NotificationPayload.birthday(
             personId: 'person-9',
             ruleKind: ReminderRuleKind.daysBefore,
             occurrenceYear: 2025,

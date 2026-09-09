@@ -3,12 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
+import 'package:kin/design/components/feedback/q_arc.dart';
 import 'package:kin/design/components/journal/q_journal_photo_print.dart';
+import 'package:kin/design/components/journal/q_mood_illustration.dart';
 import 'package:kin/design/components/sheets/q_choice_sheet.dart';
+import 'package:kin/design/components/surfaces/q_diary_well.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/feedback/quiet_haptics.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/journal_fragment.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
@@ -32,22 +36,30 @@ class JournalEntryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
-    final j = q.journal;
     final entry = ref.watch(journalEntryProvider(entryId));
     final fragments = ref.watch(journalEntryFragmentsProvider(entryId));
     final date = LocalCalendarDate.parseStorage(dateKey);
 
     final model = entry.asData?.value;
     if (model == null && entry.isLoading) {
-      return QScreen(canvasColor: j.desk, child: const SizedBox.shrink());
+      return QScreen(
+        child: Center(
+          child: SizedBox.square(
+            dimension: 16,
+            child: QArc(color: q.color.textTertiary),
+          ),
+        ),
+      );
     }
     if (model == null) {
       return QScreen(
-        canvasColor: j.desk,
         child: Center(
           child: Text(
             'This memory is no longer here.',
-            style: q.text.archiveBody.tinted(j.inkMuted),
+            style: q.inked(
+              q.text.emptyStateBody,
+              tone: QuietInkTone.secondary,
+            ),
           ),
         ),
       );
@@ -56,7 +68,6 @@ class JournalEntryScreen extends ConsumerWidget {
     final fragmentList = fragments.asData?.value ?? const <JournalFragment>[];
 
     return QScreen(
-      canvasColor: j.desk,
       child: QMeasure(
         child: ListView(
           padding: EdgeInsets.fromLTRB(
@@ -90,29 +101,43 @@ class JournalEntryScreen extends ConsumerWidget {
             Text(
               _formatDate(date),
               textScaler: context.structuralTextScaler,
-              style: q.text.archiveMeta.tinted(j.inkMuted),
+              style: q.inked(q.text.uiDate, tone: QuietInkTone.secondary),
             ),
             SizedBox(height: q.space.sm),
             Text(
               model.title,
               textScaler: context.nameTextScaler,
-              style: q.text.voiceLg.tinted(j.ink),
+              style: q.inked(q.text.memoryTitle),
             ),
             if (model.mood != null) ...[
               SizedBox(height: q.space.sm),
-              Text(
-                model.mood!.displayName.toUpperCase(),
-                textScaler: context.structuralTextScaler,
-                style: q.text.archiveLabel.tinted(j.inkMuted),
+              Row(
+                children: [
+                  QMoodIllustration(
+                    moodId: model.mood!.storageValue,
+                    size: MoodIllustrationSize.picker,
+                  ),
+                  SizedBox(width: q.space.sm),
+                  Text(
+                    model.mood!.displayName.toUpperCase(),
+                    textScaler: context.structuralTextScaler,
+                    style: q.inked(
+                      q.text.uiMetadata,
+                      tone: QuietInkTone.secondary,
+                    ),
+                  ),
+                ],
               ),
             ],
             if (fragmentList.isEmpty && model.body.isNotEmpty) ...[
               SizedBox(height: q.space.xl),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 520),
-                child: Text(
-                  model.body,
-                  style: q.text.archiveBodyLarge.tinted(j.ink),
+                child: QDiaryWell(
+                  child: Text(
+                    model.body,
+                    style: q.inked(q.text.journalWriting),
+                  ),
                 ),
               ),
             ],
@@ -195,7 +220,6 @@ class _FragmentReader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
-    final j = q.journal;
 
     switch (fragment.kind) {
       case JournalFragmentKind.writing:
@@ -205,7 +229,9 @@ class _FragmentReader extends ConsumerWidget {
           label: 'Writing fragment',
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 520),
-            child: Text(text, style: q.text.archiveBodyLarge.tinted(j.ink)),
+            child: QDiaryWell(
+              child: Text(text, style: q.inked(q.text.journalWriting)),
+            ),
           ),
         );
       case JournalFragmentKind.list:
@@ -215,17 +241,19 @@ class _FragmentReader extends ConsumerWidget {
           label: 'List fragment',
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 520),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (final item in items) ...[
-                  Text(
-                    '•  $item',
-                    style: q.text.archiveBodyLarge.tinted(j.ink),
-                  ),
-                  SizedBox(height: q.space.xs),
+            child: QDiaryWell(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (final item in items) ...[
+                    Text(
+                      '•  $item',
+                      style: q.inked(q.text.journalWriting),
+                    ),
+                    SizedBox(height: q.space.xs),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
         );
@@ -254,7 +282,7 @@ class _FragmentReader extends ConsumerWidget {
         if (path == null || path.isEmpty || !JournalAudioModule.enabled) {
           return Text(
             'Audio',
-            style: q.text.archiveBody.tinted(j.inkMuted),
+            style: q.inked(q.text.uiBody, tone: QuietInkTone.secondary),
           );
         }
         return JournalAudioPlayback(

@@ -52,13 +52,13 @@ class QSectionTitle extends StatelessWidget {
                 Text(
                   title,
                   textScaler: context.nameTextScaler,
-                  style: q.text.sectionTitle.tinted(q.color.textPrimary),
+                  style: q.text.sectionTitle.tinted(context.controlInk),
                 ),
                 if (support != null && support!.isNotEmpty) ...[
                   SizedBox(height: q.space.xs),
                   Text(
                     support!,
-                    style: q.text.metadata.tinted(q.color.textTertiary),
+                    style: q.text.metadata.tinted(context.controlInkSecondary),
                   ),
                 ],
               ],
@@ -86,7 +86,7 @@ class QSectionCount extends StatelessWidget {
       child: Text(
         '$value',
         textScaler: context.structuralTextScaler,
-        style: q.text.numeralSm.tinted(q.color.textTertiary),
+        style: q.text.numeralSm.tinted(context.controlInkMuted),
       ),
     );
   }

@@ -77,7 +77,7 @@ class QPersonRow extends StatelessWidget {
       textScaler: context.nameTextScaler,
       // A shade heavier on the day itself. The only weight change in the
       // timeline, and it is what makes the eye land on today's row first.
-      style: (_isToday ? q.text.voiceSmEmphasis : q.text.voiceSm).tinted(
+      style: (_isToday ? q.text.voiceSmEmphasis : q.text.personName).tinted(
         c.textPrimary,
       ),
     );
@@ -89,7 +89,7 @@ class QPersonRow extends StatelessWidget {
             maxLines: restacked ? 2 : 1,
             overflow: TextOverflow.ellipsis,
             textScaler: context.structuralTextScaler,
-            style: q.text.archiveMeta.tinted(c.textSecondary),
+            style: q.text.uiMetadata.tinted(c.textSecondary),
           );
 
     final countdown = _CountdownBadge(

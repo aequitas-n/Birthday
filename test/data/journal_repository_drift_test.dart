@@ -34,7 +34,7 @@ void main() {
       final saved = await repository.upsertDay(
         JournalDay(
           localDate: date,
-          mood: JournalMood.reflective,
+          mood: JournalMood.calm,
           createdAt: DateTime.utc(2026, 10, 15),
           updatedAt: DateTime.utc(2026, 10, 15),
         ),
@@ -42,7 +42,7 @@ void main() {
 
       final watched = await repository.watchDay(date).first;
       expect(saved.localDate, date);
-      expect(watched?.mood, JournalMood.reflective);
+      expect(watched?.mood, JournalMood.calm);
     });
 
     test('creates multiple entries on the same day with ordering', () async {
@@ -128,7 +128,7 @@ void main() {
       await repository.upsertDay(
         JournalDay(
           localDate: date,
-          mood: JournalMood.grateful,
+          mood: JournalMood.affection,
           createdAt: DateTime.utc(2026, 8, 11),
           updatedAt: DateTime.utc(2026, 8, 11),
         ),
@@ -152,7 +152,7 @@ void main() {
         (m) => m.localDate == date,
       );
       expect(marker.entryCount, 1);
-      expect(marker.dayMood, JournalMood.grateful);
+      expect(marker.dayMood, JournalMood.affection);
     });
 
     test(

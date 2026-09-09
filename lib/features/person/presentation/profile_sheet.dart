@@ -80,9 +80,12 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
   late final TextEditingController _nicknameController;
   late final TextEditingController _customRelationshipController;
   RelationshipKind? _relationship;
+  RelationshipProfile? _cachedLiveProfile;
   DraftPhoto? _draftPhoto;
   bool _removePhoto = false;
   bool _saving = false;
+  bool _showNameError = false;
+  String? _photoError;
 
   @override
   void initState() {
@@ -97,6 +100,19 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
     _nameController.addListener(() {
       if (mounted) setState(() {});
     });
+    if (widget.profile == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _refreshLiveProfile());
+    }
+  }
+
+  Future<void> _refreshLiveProfile() async {
+    final profile = await ref
+        .read(profileRepositoryProvider)
+        .readForPerson(widget.person.id);
+    if (!mounted || profile == null) return;
+    if (profile != _cachedLiveProfile) {
+      setState(() => _cachedLiveProfile = profile);
+    }
   }
 
   @override
@@ -110,17 +126,18 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final effectiveProfile = widget.profile ?? _cachedLiveProfile;
     final existingPhoto = ref.watch(
-      personPhotoProvider(_removePhoto ? null : widget.profile?.photoId),
+      personPhotoProvider(_removePhoto ? null : effectiveProfile?.photoId),
     );
-    final notes = widget.profile == null
+    final notes = effectiveProfile == null
         ? const <Note>[]
         : (ref.watch(personNotesProvider(widget.person.id)).asData?.value ??
               const <Note>[]);
 
     final hasPhoto =
         _draftPhoto != null ||
-        (widget.profile?.photoId != null && !_removePhoto);
+        (effectiveProfile?.photoId != null && !_removePhoto);
     final sheetTitle = _nameController.text.trim().isEmpty
         ? widget.person.displayName
         : _nameController.text.trim();
@@ -153,12 +170,23 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
               hasPhoto: hasPhoto,
               onTap: () => _showPhotoActions(context),
             ),
+            if (_photoError != null) ...[
+              SizedBox(height: q.space.sm),
+              Text(
+                _photoError!,
+                style: q.text.metadata.tinted(q.color.danger),
+              ),
+            ],
             SizedBox(height: q.space.xxl),
             QField(
               controller: _nameController,
               label: 'Name',
               placeholder: 'Their name',
               helper: 'The name on their birthday — you can change it anytime.',
+              error: _showNameError ? 'Add a name.' : null,
+              onChanged: (_) {
+                if (_showNameError) setState(() => _showNameError = false);
+              },
             ),
             SizedBox(height: q.space.xl),
             QField(
@@ -187,13 +215,14 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
                 placeholder: 'How do you describe them?',
               ),
             ],
-            if (widget.profile != null)
-              _MemoriesBook(
-                notes: notes,
-                profileId: widget.profile!.id,
-                person: widget.person,
-                profile: widget.profile,
-              ),
+            SizedBox(height: q.space.xxl),
+            _MemoriesBook(
+              notes: notes,
+              profileId: effectiveProfile?.id ?? '',
+              person: widget.person,
+              profile: effectiveProfile,
+              onMemoriesChanged: _refreshLiveProfile,
+            ),
           ],
         ),
       ),
@@ -201,9 +230,10 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
   }
 
   Future<void> _showPhotoActions(BuildContext context) async {
+    final effectiveProfile = widget.profile ?? _cachedLiveProfile;
     final canRemove =
         _draftPhoto != null ||
-        (widget.profile?.photoId != null && !_removePhoto);
+        (effectiveProfile?.photoId != null && !_removePhoto);
 
     final choice = await showQChoiceSheet(
       context: context,
@@ -240,9 +270,18 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
     if (file == null) return;
     final bytes = await file.readAsBytes();
     final decoded = img.decodeImage(bytes);
-    if (decoded == null) return;
+    if (decoded == null) {
+      if (mounted) {
+        setState(
+          () => _photoError =
+              'That photo could not be read. Try another image.',
+        );
+      }
+      return;
+    }
     final normalized = _normalizePhoto(decoded);
     setState(() {
+      _photoError = null;
       _removePhoto = false;
       _draftPhoto = DraftPhoto(
         bytes: Uint8List.fromList(img.encodeJpg(normalized, quality: 85)),
@@ -254,12 +293,24 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
 
   Future<void> _save() async {
     final name = _nameController.text.trim();
-    if (name.isEmpty || _saving) return;
+    if (name.isEmpty) {
+      setState(() => _showNameError = true);
+      return;
+    }
+    if (_saving) return;
 
     setState(() => _saving = true);
     try {
       final now = ref.read(clockProvider).now();
-      final existing = widget.profile;
+      var existing = widget.profile ?? _cachedLiveProfile;
+      if (existing == null) {
+        existing = await ref
+            .read(profileRepositoryProvider)
+            .readForPerson(widget.person.id);
+        if (existing != null && mounted) {
+          setState(() => _cachedLiveProfile = existing);
+        }
+      }
       var photoId = _removePhoto ? null : existing?.photoId;
       if (_draftPhoto != null) {
         photoId = await _persistPhoto(draft: _draftPhoto!, now: now);
@@ -432,12 +483,14 @@ class _MemoriesBook extends ConsumerStatefulWidget {
     required this.profileId,
     required this.person,
     required this.profile,
+    this.onMemoriesChanged,
   });
 
   final List<Note> notes;
   final String profileId;
   final Person person;
   final RelationshipProfile? profile;
+  final VoidCallback? onMemoriesChanged;
 
   @override
   ConsumerState<_MemoriesBook> createState() => _MemoriesBookState();
@@ -480,19 +533,25 @@ class _MemoriesBookState extends ConsumerState<_MemoriesBook> {
           trailing: QButton.tertiary(
             label: 'Add',
             glyph: QuietGlyph.plus,
-            onPressed: () => showAddMemoryChooser(
-              context: context,
-              ref: ref,
-              person: person,
-              profile: profile,
-              nextPosition: notes.length,
-            ),
+            onPressed: () async {
+              await showAddMemoryChooser(
+                context: context,
+                ref: ref,
+                person: person,
+                profile: profile,
+                nextPosition: notes.length,
+              );
+              widget.onMemoriesChanged?.call();
+            },
           ),
         ),
         if (notes.isEmpty)
           Text(
-            'Nothing yet. Save a photo, note what they love, or a plan '
-            'you want to make for them.',
+            profile == null
+                ? 'Add a photo, note what they love, or a plan you want to '
+                    'make for them — details save as you go.'
+                : 'Nothing yet. Save a photo, note what they love, or a plan '
+                    'you want to make for them.',
             style: q.text.body.tinted(q.color.textSecondary),
           ),
         if (photoNotes.isNotEmpty) ...[
@@ -783,6 +842,7 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
   late final TextEditingController _timeController;
   late NoteKind _kind;
   bool _saving = false;
+  bool _showErrors = false;
 
   @override
   void initState() {
@@ -812,6 +872,20 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final existing = widget.note;
+    final isActiveGift =
+        existing != null &&
+        existing.kind == NoteKind.giftIdea &&
+        !existing.isRetired;
+    final valueError = _showErrors && _valueController.text.trim().isEmpty
+        ? 'Write something to remember.'
+        : null;
+    final customLabelError =
+        _showErrors &&
+            _kind == NoteKind.custom &&
+            _labelController.text.trim().isEmpty
+        ? 'Name this detail.'
+        : null;
 
     return QSheet(
       title: widget.isEditing ? 'Edit detail' : 'Add a detail',
@@ -826,6 +900,11 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
             QButton.tertiary(
               label: 'Not now',
               onPressed: () => Navigator.of(context).pop(),
+            ),
+          if (isActiveGift)
+            QButton.tertiary(
+              label: 'Mark as given',
+              onPressed: _saving ? null : _markGiven,
             ),
           QButton.primary(
             label: 'Save',
@@ -849,6 +928,10 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
                 controller: _labelController,
                 label: 'Category',
                 placeholder: 'What do you want to remember?',
+                error: customLabelError,
+                onChanged: (_) {
+                  if (_showErrors) setState(() => _showErrors = false);
+                },
               ),
             ],
             SizedBox(height: q.space.xl),
@@ -859,6 +942,10 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
                   : _noteLabelForKind(_kind),
               placeholder: _placeholderForKind(_kind),
               maxLines: 4,
+              error: valueError,
+              onChanged: (_) {
+                if (_showErrors) setState(() => _showErrors = false);
+              },
             ),
             if (_kind == NoteKind.free) ...[
               SizedBox(height: q.space.xl),
@@ -883,13 +970,14 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
 
   Future<void> _save() async {
     final value = _valueController.text.trim();
-    if (value.isEmpty || _saving) return;
-
     final customLabel = _kind == NoteKind.custom
         ? _labelController.text.trim()
         : null;
-    if (_kind == NoteKind.custom &&
-        (customLabel == null || customLabel.isEmpty)) {
+    if (value.isEmpty ||
+        (_kind == NoteKind.custom &&
+            (customLabel == null || customLabel.isEmpty)) ||
+        _saving) {
+      setState(() => _showErrors = true);
       return;
     }
 
@@ -927,6 +1015,21 @@ class _NoteEditorSheetState extends ConsumerState<_NoteEditorSheet> {
                     updatedAt: now,
                   ),
           );
+      if (mounted) Navigator.of(context).pop();
+    } finally {
+      _saving = false;
+      if (mounted) setState(() {});
+    }
+  }
+
+  Future<void> _markGiven() async {
+    final existing = widget.note;
+    if (existing == null || _saving) return;
+
+    _saving = true;
+    setState(() {});
+    try {
+      await ref.read(noteRepositoryProvider).retire(existing.id, value: true);
       if (mounted) Navigator.of(context).pop();
     } finally {
       _saving = false;

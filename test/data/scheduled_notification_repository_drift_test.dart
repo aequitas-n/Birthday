@@ -24,6 +24,7 @@ void main() {
     NotificationPlan samplePlan({required int stableId}) {
       return NotificationPlan(
         stableId: stableId,
+        source: NotificationPlanSource.birthday,
         personId: 'person-1',
         ruleId: 'default-days-7',
         occurrenceYear: 2026,
@@ -37,8 +38,7 @@ void main() {
           minute: 0,
         ),
         kind: NotificationPlanKind.birthdayUpcoming,
-        payload: const NotificationPayload(
-          version: 1,
+        payload: NotificationPayload.birthday(
           personId: 'person-1',
           ruleKind: ReminderRuleKind.daysBefore,
           occurrenceYear: 2026,

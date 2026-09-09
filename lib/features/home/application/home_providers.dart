@@ -112,6 +112,9 @@ class HomeEntry {
     return '$date · $place';
   }
 
+  /// Day + month only for hanging birthday strips, e.g. `7 August`.
+  String get birthdayDateLabel => _formatBirthdayDate(nextBirthday);
+
   /// Secondary countdown, e.g. `344 days`.
   String get countdownText {
     return switch (daysUntil) {

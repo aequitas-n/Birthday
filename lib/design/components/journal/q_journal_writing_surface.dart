@@ -4,9 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show materialTextSelectionHandleControls;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_diary_well.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
-/// Diary writing surface — open paper page, not a Material field.
+/// Diary writing well on the dark vintage canvas — cream outline, open page.
+///
+/// Uses [QuietSurfaceKind.canvas] ink from the theme (transparent fill, cream
+/// border + type). Do not hardcode cream/brown here.
 class QJournalWritingSurface extends StatefulWidget {
   const QJournalWritingSurface({
     this.controller,
@@ -15,7 +19,6 @@ class QJournalWritingSurface extends StatefulWidget {
     this.minLines = 8,
     this.autofocus = false,
     this.enabled = true,
-    this.bordered = false,
     this.onChanged,
     super.key,
   });
@@ -26,10 +29,6 @@ class QJournalWritingSurface extends StatefulWidget {
   final int minLines;
   final bool autofocus;
   final bool enabled;
-
-  /// When false (default), the well is open paper with only a quiet rule —
-  /// not an outlined box.
-  final bool bordered;
   final ValueChanged<String>? onChanged;
 
   @override
@@ -85,8 +84,7 @@ class _QJournalWritingSurfaceState extends State<QJournalWritingSurface>
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
-    final style = q.text.archiveBodyLarge.tinted(j.ink);
+    final style = q.inked(q.text.journalWriting);
     final empty = _controller.text.isEmpty;
     final focused = _focus.hasFocus;
 
@@ -96,7 +94,7 @@ class _QJournalWritingSurfaceState extends State<QJournalWritingSurface>
       focusNode: _focus,
       style: style,
       cursorColor: q.color.accent,
-      backgroundCursorColor: j.paper,
+      backgroundCursorColor: q.color.canvas,
       maxLines: null,
       minLines: widget.minLines,
       keyboardType: TextInputType.multiline,
@@ -114,45 +112,25 @@ class _QJournalWritingSurfaceState extends State<QJournalWritingSurface>
     return Semantics(
       textField: true,
       label: 'Story',
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: j.paper,
-          border: widget.bordered
-              ? Border.all(
-                  color: focused ? q.color.accent : j.edge,
-                  width: focused ? 1.5 : context.hairlineWidth,
-                )
-              : Border(
-                  bottom: BorderSide(
-                    color: focused ? j.edge : j.rule,
-                    width: focused ? 1 : context.hairlineWidth,
+      child: QDiaryWell(
+        focused: focused,
+        child: Stack(
+          children: [
+            if (empty)
+              IgnorePointer(
+                child: Text(
+                  widget.placeholder,
+                  style: q.inked(
+                    q.text.journalWriting,
+                    tone: QuietInkTone.secondary,
                   ),
                 ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-            widget.bordered ? q.space.md : 0,
-            q.space.sm,
-            widget.bordered ? q.space.md : 0,
-            q.space.md,
-          ),
-          child: Stack(
-            children: [
-              if (empty)
-                IgnorePointer(
-                  child: Text(
-                    widget.placeholder,
-                    style: q.text.archiveBodyLarge.tinted(
-                      j.inkMuted.withValues(alpha: 0.55),
-                    ),
-                  ),
-                ),
-              _gestures.buildGestureDetector(
-                behavior: HitTestBehavior.translucent,
-                child: editable,
               ),
-            ],
-          ),
+            _gestures.buildGestureDetector(
+              behavior: HitTestBehavior.translucent,
+              child: editable,
+            ),
+          ],
         ),
       ),
     );

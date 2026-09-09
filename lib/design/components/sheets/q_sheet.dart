@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// The primary presentation surface.
@@ -8,6 +7,9 @@ import 'package:kin/design/theme/quiet_theme_x.dart';
 /// sheet arrives from somewhere and can be dismissed by the same gesture that
 /// summoned it — a dialog just appears in the middle of the screen and demands
 /// an answer.
+///
+/// Vintage Diary: warm parchment pulled up from the dark desk — not a dark
+/// brown slab that merges into vintage-bg.
 ///
 /// See docs/08-components.md §4.
 class QSheet extends StatelessWidget {
@@ -34,6 +36,7 @@ class QSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final i = q.interactive;
     final media = MediaQuery.of(context);
     final keyboard = media.viewInsets.bottom;
     // Home-indicator inset only — never the keyboard. The keyboard is handled
@@ -41,7 +44,7 @@ class QSheet extends StatelessWidget {
     // growing a hollow band between content and keys.
     final safeBottom = media.viewPadding.bottom;
 
-    return Padding(
+    final sheet = Padding(
       padding: EdgeInsets.only(bottom: keyboard),
       child: MediaQuery.removeViewInsets(
         context: context,
@@ -50,64 +53,83 @@ class QSheet extends StatelessWidget {
           constraints: BoxConstraints(
             maxHeight: media.size.height * maxHeightFraction,
           ),
-          child: QSurface(
-            level: QuietLevel.raised,
-            elevation: QuietElevationLevel.overlay,
-            radius: q.radius.xl,
-            topCornersOnly: true,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (showGrabber) ...[
-                  SizedBox(height: q.space.sm),
-                  Container(
-                    width: grabberWidth,
-                    height: grabberHeight,
-                    decoration: BoxDecoration(
-                      color: q.color.hairlineStrong,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(grabberHeight / 2),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: i.sheet,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(q.radius.xl),
+              ),
+              boxShadow: q.elevation.overlay,
+              border: Border(
+                top: BorderSide(
+                  color: i.sheetBorder,
+                  width: context.hairlineWidth,
+                ),
+              ),
+            ),
+            child: DefaultTextStyle(
+              style: q.text.body.tinted(i.ink),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (showGrabber) ...[
+                    SizedBox(height: q.space.sm),
+                    Center(
+                      child: Container(
+                        width: grabberWidth,
+                        height: grabberHeight,
+                        decoration: BoxDecoration(
+                          color: i.inkMuted.withValues(alpha: 0.55),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(grabberHeight / 2),
+                          ),
+                        ),
                       ),
                     ),
+                  ],
+                  Flexible(
+                    child: ClipRect(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(
+                          q.space.xxl,
+                          q.space.lg,
+                          q.space.xxl,
+                          0,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (title != null) ...[
+                              Text(
+                                title!,
+                                textAlign: TextAlign.start,
+                                textScaler: context.nameTextScaler,
+                                style: q.text.sectionTitle.tinted(i.ink),
+                              ),
+                              SizedBox(height: q.space.lg),
+                            ],
+                            Flexible(child: child),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (bottom != null) bottom!,
+                  SizedBox(
+                    height: keyboard > 0 ? q.space.sm : safeBottom + q.space.sm,
                   ),
                 ],
-                Flexible(
-                  child: ClipRect(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        q.space.xxl,
-                        q.space.xl,
-                        q.space.xxl,
-                        0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (title != null) ...[
-                            Text(
-                              title!,
-                              style: q.text.title.tinted(q.color.textPrimary),
-                            ),
-                            SizedBox(height: q.space.xl),
-                          ],
-                          Flexible(child: child),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                if (bottom != null) bottom!,
-                // When the keyboard is up the outer pad already clears it, so
-                // only a hair of breathing room is needed under the actions.
-                SizedBox(
-                  height: keyboard > 0 ? q.space.sm : safeBottom + q.space.sm,
-                ),
-              ],
+              ),
             ),
           ),
         ),
       ),
+    );
+
+    return QuietControlSurfaceScope(
+      surface: QuietControlSurface.parchment,
+      child: sheet,
     );
   }
 }
@@ -132,6 +154,8 @@ class QBottomActions extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(children.length <= 2, 'A sheet offers at most two actions.');
     final q = context.quiet;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
 
     return AnimatedContainer(
       duration: q.motion.quick,
@@ -139,13 +163,13 @@ class QBottomActions extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: showDivider ? q.color.hairline : q.color.canvas,
+            color: showDivider
+                ? (onParchment ? i.sheetBorder : q.color.hairline)
+                : (onParchment ? i.sheet : q.color.canvas),
             width: context.hairlineWidth,
           ),
         ),
       ),
-      // Tight on purpose: a tall action strip reads as wasted chrome sitting
-      // on top of the keyboard.
       padding: EdgeInsets.fromLTRB(
         q.space.xxl,
         q.space.sm,

@@ -51,14 +51,14 @@ class ReminderPlanner {
               ruleId: rule.id,
               occurrenceYear: occurrence.occurrenceYear,
             ),
+            source: NotificationPlanSource.birthday,
             personId: person.id,
             ruleId: rule.id,
             occurrenceYear: occurrence.occurrenceYear,
             fireAtUtc: fireAtUtc,
             targetLocalInstant: targetLocal,
             kind: _planKind(rule.kind),
-            payload: NotificationPayload(
-              version: 1,
+            payload: NotificationPayload.birthday(
               personId: person.id,
               ruleKind: rule.kind,
               occurrenceYear: occurrence.occurrenceYear,
@@ -76,7 +76,7 @@ class ReminderPlanner {
       if (byTime != 0) return byTime;
       final byRank = b.rank.compareTo(a.rank);
       if (byRank != 0) return byRank;
-      return a.plan.ruleId.compareTo(b.plan.ruleId);
+      return (a.plan.ruleId ?? '').compareTo(b.plan.ruleId ?? '');
     });
 
     return _collapseDuplicates(

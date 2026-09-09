@@ -15,6 +15,7 @@ import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/local/files/image_store.dart';
 import 'package:kin/data/timezone/city_dataset.dart';
 import 'package:kin/domain/models/person.dart';
+import 'package:kin/domain/models/personal_reminder.dart';
 import 'package:kin/domain/models/profile.dart';
 import 'package:kin/domain/models/settings.dart';
 import 'package:kin/domain/repositories/person_repository.dart';
@@ -24,15 +25,15 @@ import 'package:kin/features/home/presentation/home_screen.dart';
 import 'package:kin/features/journal/application/journal_providers.dart';
 import 'package:kin/features/person_editor/application/person_editor_notifier.dart';
 import 'package:kin/features/person_editor/presentation/add_person_sheet.dart';
+import 'package:kin/features/reminders/application/reminder_providers.dart';
 import 'package:kin/features/today/application/today_providers.dart';
 
 void main() {
-  testWidgets('adds a person from home in dark theme', (tester) async {
+  testWidgets('adds a person from home', (tester) async {
     final database = KinDatabase(NativeDatabase.memory());
     final personRepository = _MemoryPersonRepository();
     final settingsRepository = _MemorySettingsRepository(
       initial: AppSettings(
-        themeMode: StoredThemeMode.dark,
         onboardingCompletedAt: DateTime.utc(2026, 7),
       ),
     );
@@ -58,6 +59,9 @@ void main() {
           journalEntriesProvider.overrideWith(
             (ref, key) => Stream.value(const []),
           ),
+          remindersForDateProvider.overrideWith(
+            (ref, key) => Stream.value(const <PersonalReminder>[]),
+          ),
           todayUpcomingProvider.overrideWithValue(const []),
           todayBirthdayProvider.overrideWithValue(const []),
           imageStoreProvider.overrideWithValue(const _NoopImageStore()),
@@ -67,18 +71,14 @@ void main() {
           clockProvider.overrideWithValue(const _FixedClock()),
           initialAppSettingsProvider.overrideWithValue(
             AppSettings(
-              themeMode: StoredThemeMode.dark,
               onboardingCompletedAt: DateTime.utc(2026, 7),
             ),
           ),
           initialThemePreferenceProvider.overrideWithValue(
-            const ThemePreference(choice: ThemeChoice.dark),
+            const ThemePreference(),
           ),
         ],
-        child: const MediaQuery(
-          data: MediaQueryData(platformBrightness: Brightness.dark),
-          child: KinApp(),
-        ),
+        child: const KinApp(),
       ),
     );
 

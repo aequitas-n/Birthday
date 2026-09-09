@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/tokens/color_tokens.dart';
+import 'package:kin/design/tokens/type_tokens.dart';
 
 /// A deliberately minimal [ThemeData].
 ///
@@ -49,9 +50,9 @@ ThemeData buildMaterialShim(QuietTheme quiet) {
       selectionHandleColor: c.accent,
     ),
 
-    // Any Text that somehow escapes a Quiet component still renders in the
-    // product's own typeface rather than falling back to Roboto.
-    fontFamily: 'Inter',
+    // Escape hatch for stray Text — product universal archive face, never
+    // a fourth theme personality.
+    fontFamily: QuietTypography.universalFamily,
     textTheme: TextTheme(
       displayLarge: t.voiceXl,
       displayMedium: t.voiceLg,

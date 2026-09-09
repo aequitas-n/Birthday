@@ -39,7 +39,6 @@ class _QJournalAddFragmentCueState extends State<QJournalAddFragmentCue> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
 
     if (!_open) {
       return Semantics(
@@ -57,7 +56,7 @@ class _QJournalAddFragmentCueState extends State<QJournalAddFragmentCue> {
               ),
               child: Text(
                 '+',
-                style: q.text.label.tinted(j.inkMuted),
+                style: q.inked(q.text.label),
               ),
             ),
           ),
@@ -95,7 +94,7 @@ class _QJournalAddFragmentCueState extends State<QJournalAddFragmentCue> {
                   ),
                   child: Text(
                     '×',
-                    style: q.text.label.tinted(j.inkMuted),
+                    style: q.inked(q.text.label, tone: QuietInkTone.secondary),
                   ),
                 ),
               ),
@@ -119,7 +118,7 @@ class _FragmentChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
+    final paper = q.paper;
 
     return QPressable(
       onTap: onTap,
@@ -128,8 +127,8 @@ class _FragmentChip extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(q.radius.full),
-          border: Border.all(color: j.edge, width: context.hairlineWidth),
-          color: j.paper,
+          border: Border.all(color: paper.border, width: context.hairlineWidth),
+          color: paper.fill,
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -139,7 +138,7 @@ class _FragmentChip extends StatelessWidget {
           child: Text(
             label,
             textScaler: context.structuralTextScaler,
-            style: q.text.label.tinted(j.ink),
+            style: q.inked(q.text.label, surface: QuietSurfaceKind.paper),
           ),
         ),
       ),

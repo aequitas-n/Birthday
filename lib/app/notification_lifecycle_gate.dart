@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
 import 'package:kin/app/router.dart';
+import 'package:kin/domain/models/notification_plan.dart';
 import 'package:kin/notifications/application/notification_coordinator.dart';
 import 'package:kin/notifications/notification_service.dart';
 
@@ -85,9 +86,16 @@ class _NotificationLifecycleGateState
 
   void _openLaunchRequest(NotificationLaunchRequest request) {
     if (!mounted) return;
-    GoRouter.of(
-      context,
-    ).pushNamed(AppRoute.person.name, pathParameters: {'id': request.personId});
+    final router = GoRouter.of(context);
+    if (request.source == NotificationPlanSource.personal ||
+        (request.personId == null || request.personId!.isEmpty)) {
+      router.pushNamed(AppRoute.reminders.name);
+      return;
+    }
+    router.pushNamed(
+      AppRoute.person.name,
+      pathParameters: {'id': request.personId!},
+    );
   }
 
   @override

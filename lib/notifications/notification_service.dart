@@ -4,15 +4,19 @@ enum AndroidCapabilityState { granted, denied, notRequired }
 
 class NotificationLaunchRequest {
   const NotificationLaunchRequest({
-    required this.personId,
+    required this.source,
     required this.notificationId,
-    required this.ruleKind,
     required this.occurrenceYear,
+    this.personId,
+    this.reminderId,
+    this.ruleKind,
   });
 
-  final String personId;
+  final NotificationPlanSource source;
+  final String? personId;
+  final String? reminderId;
   final int? notificationId;
-  final String ruleKind;
+  final String? ruleKind;
   final int occurrenceYear;
 }
 
@@ -40,19 +44,17 @@ class NoopNotificationService implements NotificationService {
   Future<void> schedule(NotificationPlan plan) async {}
 
   @override
-  Future<void> cancel(int notificationId) async {}
+  Future<void> cancel(int id) async {}
 
   @override
   Future<void> cancelAll() async {}
 
   @override
-  Future<Set<int>> pendingNotificationIds() async {
-    return const <int>{};
-  }
+  Future<Set<int>> pendingNotificationIds() async => const {};
 
   @override
   Future<List<PendingPlatformNotification>> pendingNotifications() async {
-    return const <PendingPlatformNotification>[];
+    return const [];
   }
 
   @override
@@ -61,12 +63,12 @@ class NoopNotificationService implements NotificationService {
   }
 
   @override
-  Future<AndroidCapabilityState> requestNotificationsPermission() async {
+  Future<AndroidCapabilityState> exactAlarmState() async {
     return AndroidCapabilityState.notRequired;
   }
 
   @override
-  Future<AndroidCapabilityState> exactAlarmState() async {
+  Future<AndroidCapabilityState> requestNotificationsPermission() async {
     return AndroidCapabilityState.notRequired;
   }
 
@@ -82,9 +84,7 @@ class NoopNotificationService implements NotificationService {
   Future<void> openExactAlarmSettings() async {}
 
   @override
-  Future<NotificationLaunchRequest?> consumeLaunchRequest() async {
-    return null;
-  }
+  Future<NotificationLaunchRequest?> consumeLaunchRequest() async => null;
 
   @override
   Stream<NotificationLaunchRequest> get launchRequests =>
@@ -96,7 +96,7 @@ abstract interface class NotificationService {
 
   Future<void> schedule(NotificationPlan plan);
 
-  Future<void> cancel(int notificationId);
+  Future<void> cancel(int id);
 
   Future<void> cancelAll();
 
@@ -106,9 +106,9 @@ abstract interface class NotificationService {
 
   Future<AndroidCapabilityState> notificationsPermissionState();
 
-  Future<AndroidCapabilityState> requestNotificationsPermission();
-
   Future<AndroidCapabilityState> exactAlarmState();
+
+  Future<AndroidCapabilityState> requestNotificationsPermission();
 
   Future<AndroidCapabilityState> requestExactAlarmPermission();
 

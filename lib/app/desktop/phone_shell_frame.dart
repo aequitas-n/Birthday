@@ -5,82 +5,116 @@ import 'package:kin/app/desktop/shell_window_controls.dart';
 /// A laptop/browser window that looks and behaves like a phone in a shell.
 ///
 /// The real app sits in a fixed 390×844 canvas so design review matches mobile.
-class DesktopPhoneShell extends StatelessWidget {
+class DesktopPhoneShell extends StatefulWidget {
   const DesktopPhoneShell({required this.child, super.key});
 
   final Widget child;
 
+  @override
+  State<DesktopPhoneShell> createState() => _DesktopPhoneShellState();
+}
+
+class _DesktopPhoneShellState extends State<DesktopPhoneShell> {
   static const _bezel = Color(0xFF141414);
   static const _bezelEdge = Color(0xFF2A2A2A);
   static const _desk = Color(0xFF0B0B0B);
 
   @override
+  void initState() {
+    super.initState();
+    // Recover if native placement still left the frameless window off-screen
+    // (title/drag strip unreachable). Bottom chrome is also a drag target.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      nudgeDesktopPhoneShellOnScreen();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ColoredBox(
       color: _desk,
-      child: Center(
-        child: FittedBox(
-          child: SizedBox(
-            width: kPhoneShellWindowSize.width,
-            height: kPhoneShellWindowSize.height,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-              child: Column(
-                children: [
-                  const _ShellTitleBar(),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: _bezel,
-                        borderRadius: BorderRadius.circular(36),
-                        border: Border.all(color: _bezelEdge, width: 2),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color(0x66000000),
-                            blurRadius: 28,
-                            offset: Offset(0, 14),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Any visible desk/bezel chrome can drag the window back on-screen.
+          const ShellMoveArea(child: SizedBox.expand()),
+          Center(
+            child: FittedBox(
+              child: SizedBox(
+                width: kPhoneShellWindowSize.width,
+                height: kPhoneShellWindowSize.height,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+                  child: Column(
+                    children: [
+                      const _ShellTitleBar(),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: _bezel,
+                            borderRadius: BorderRadius.circular(36),
+                            border: Border.all(color: _bezelEdge, width: 2),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x66000000),
+                                blurRadius: 28,
+                                offset: Offset(0, 14),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 12, 10, 10),
-                        child: Column(
-                          children: [
-                            const _Notch(),
-                            const SizedBox(height: 8),
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(28),
-                                child: MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(
-                                    size: kPhoneCanvasSize,
-                                    padding: const EdgeInsets.only(top: 8),
-                                    viewPadding: const EdgeInsets.only(top: 8),
-                                    viewInsets: EdgeInsets.zero,
-                                    devicePixelRatio: 2,
-                                    textScaler: TextScaler.noScaling,
-                                  ),
-                                  child: SizedBox(
-                                    width: kPhoneCanvasSize.width,
-                                    height: kPhoneCanvasSize.height,
-                                    child: child,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10, 12, 10, 10),
+                            child: Column(
+                              children: [
+                                const ShellMoveArea(child: _Notch()),
+                                const SizedBox(height: 8),
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(28),
+                                    child: MediaQuery(
+                                      data: MediaQuery.of(context).copyWith(
+                                        size: kPhoneCanvasSize,
+                                        padding: const EdgeInsets.only(top: 8),
+                                        viewPadding: const EdgeInsets.only(
+                                          top: 8,
+                                        ),
+                                        viewInsets: EdgeInsets.zero,
+                                        devicePixelRatio: 2,
+                                        textScaler: TextScaler.noScaling,
+                                      ),
+                                      child: SizedBox(
+                                        width: kPhoneCanvasSize.width,
+                                        height: kPhoneCanvasSize.height,
+                                        child: widget.child,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                const SizedBox(height: 8),
+                                // When the window is clipped at the top, this
+                                // is often the only reachable drag handle.
+                                const ShellMoveArea(
+                                  child: SizedBox(
+                                    height: 28,
+                                    child: Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: _HomeIndicator(),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 8),
-                            const _HomeIndicator(),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

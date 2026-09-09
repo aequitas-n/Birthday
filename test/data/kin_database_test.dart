@@ -35,12 +35,14 @@ void main() {
       );
     });
 
-    test('schema v7 includes journal fragment tables', () async {
-      expect(database.schemaVersion, 7);
+    test('schema v8 includes personal reminders', () async {
+      expect(database.schemaVersion, 8);
       expect(database.journalDays, isNotNull);
       expect(database.journalEntries, isNotNull);
       expect(database.journalEntryPhotos, isNotNull);
       expect(database.journalEntryFragments, isNotNull);
+      expect(database.personalReminders, isNotNull);
+      expect(database.scheduledNotifications, isNotNull);
     });
   });
 }

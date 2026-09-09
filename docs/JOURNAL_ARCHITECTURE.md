@@ -129,7 +129,8 @@ Calm doorway — not a dashboard:
 3. Birthday today (when relevant)  
 4. Coming up  
 
-Typography: Fraunces for titles/names, Courier Prime for archive/metadata, Inter for controls.
+Typography: Caveat for expressive headings, Fraunces for titles/names,
+Courier Prime for archive/metadata/controls.
 
 ---
 

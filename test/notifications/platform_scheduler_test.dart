@@ -106,6 +106,7 @@ void main() {
     }) {
       return NotificationPlan(
         stableId: stableId,
+        source: NotificationPlanSource.birthday,
         personId: personId,
         ruleId: ruleId,
         occurrenceYear: 2026,
@@ -119,8 +120,7 @@ void main() {
           minute: 0,
         ),
         kind: NotificationPlanKind.birthdayUpcoming,
-        payload: NotificationPayload(
-          version: 1,
+        payload: NotificationPayload.birthday(
           personId: personId,
           ruleKind: ReminderRuleKind.daysBefore,
           occurrenceYear: 2026,

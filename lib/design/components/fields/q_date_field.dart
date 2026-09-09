@@ -2,10 +2,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/fields/q_field.dart';
-import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
+/// Birthday day / month / year row — responsive widths, never clipped labels.
+///
+/// Flex bias: Day (narrow) · Month (widest, full month names) · Year (medium).
+/// Year placeholder stays short; optional-year guidance lives in [helper].
 class QDateField extends StatelessWidget {
   const QDateField({
     required this.dayController,
@@ -35,6 +38,10 @@ class QDateField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
+    final eyebrow = onParchment ? i.ink : q.color.textSecondary;
+    final helperInk = onParchment ? i.inkSecondary : q.color.textTertiary;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,51 +49,60 @@ class QDateField extends StatelessWidget {
         Text(
           'BIRTHDAY',
           textScaler: context.structuralTextScaler,
-          style: q.text.eyebrow.tinted(q.color.textTertiary),
+          style: q.text.eyebrow.tinted(eyebrow),
         ),
         SizedBox(height: q.space.sm),
-        Row(
-          children: [
-            Expanded(
-              child: QField(
-                controller: dayController,
-                focusNode: dayFocusNode,
-                placeholder: 'Day',
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                textCapitalization: TextCapitalization.none,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                maxLength: 2,
-                showHelperLine: false,
-                onChanged: onDayChanged,
-              ),
-            ),
-            SizedBox(width: q.space.md),
-            Expanded(
-              flex: 2,
-              child: _MonthButton(
-                label: monthLabel ?? 'Month',
-                isPlaceholder: monthLabel == null,
-                onPressed: onMonthPressed,
-              ),
-            ),
-            SizedBox(width: q.space.md),
-            Expanded(
-              flex: 2,
-              child: QField(
-                controller: yearController,
-                focusNode: yearFocusNode,
-                placeholder: 'Year (optional)',
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.done,
-                textCapitalization: TextCapitalization.none,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                maxLength: 4,
-                showHelperLine: false,
-                onChanged: onYearChanged,
-              ),
-            ),
-          ],
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final gap = q.space.sm;
+            final dayPlaceholder = constraints.maxWidth < 340 ? 'D' : 'Day';
+
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: QField(
+                    controller: dayController,
+                    focusNode: dayFocusNode,
+                    placeholder: dayPlaceholder,
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                    textCapitalization: TextCapitalization.none,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    maxLength: 2,
+                    showHelperLine: false,
+                    onChanged: onDayChanged,
+                  ),
+                ),
+                SizedBox(width: gap),
+                Expanded(
+                  flex: 5,
+                  child: _MonthButton(
+                    label: monthLabel ?? 'Month',
+                    isPlaceholder: monthLabel == null,
+                    onPressed: onMonthPressed,
+                  ),
+                ),
+                SizedBox(width: gap),
+                Expanded(
+                  flex: 3,
+                  child: QField(
+                    controller: yearController,
+                    focusNode: yearFocusNode,
+                    placeholder: 'Year',
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.done,
+                    textCapitalization: TextCapitalization.none,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    maxLength: 4,
+                    showHelperLine: false,
+                    onChanged: onYearChanged,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
         SizedBox(height: q.space.sm - 2),
         SizedBox(
@@ -97,7 +113,7 @@ class QDateField extends StatelessWidget {
                     : Text(
                         helper!,
                         textScaler: context.structuralTextScaler,
-                        style: q.text.caption.tinted(q.color.textTertiary),
+                        style: q.text.caption.tinted(helperInk),
                       )
               : Text(
                   error!,
@@ -124,34 +140,57 @@ class _MonthButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
+    final fill = onParchment ? i.input : q.color.sunken;
+    final border = onParchment ? i.inputBorder : q.color.hairline;
+    final ink = onParchment
+        ? (isPlaceholder ? i.inkSecondary : i.ink)
+        : (isPlaceholder ? q.color.textTertiary : q.color.textPrimary);
+
     return QPressable(
       onTap: onPressed,
       radius: q.radius.sm,
       semanticLabel: 'Choose month',
-      child: QSurface(
-        level: QuietLevel.sunken,
-        radius: q.radius.sm,
-        padding: EdgeInsets.symmetric(
-          horizontal: q.space.md + 2,
-          vertical: q.space.md,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Text(
-                label,
-                style: q.text.bodyLg.tinted(
-                  isPlaceholder ? q.color.textTertiary : q.color.textPrimary,
-                ),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: QField.singleLineHeight),
+        child: DecoratedBox(
+          decoration: ShapeDecoration(
+            color: fill,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(q.radius.sm)),
+              side: BorderSide(
+                color: border,
+                width: QField.focusBorderWidth,
               ),
             ),
-            SizedBox(width: q.space.xs),
-            QGlyphIcon(
-              QuietGlyph.chevronDown,
-              color: q.color.textTertiary,
-              size: context.structuralTextScaler.scale(18),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: q.space.md,
+              vertical: q.space.md,
             ),
-          ],
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.fade,
+                    textScaler: context.structuralTextScaler,
+                    style: q.text.bodyLg.tinted(ink),
+                  ),
+                ),
+                SizedBox(width: q.space.xs),
+                QGlyphIcon(
+                  QuietGlyph.chevronDown,
+                  color: onParchment ? i.inkMuted : q.color.textTertiary,
+                  size: context.structuralTextScaler.scale(18),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -1,0 +1,237 @@
+VINTAGE DIARY APP — BUTTONS, ACTIONS & DECORATION
+======================================================
+
+CORE PRINCIPLE
+--------------
+Do NOT put a different image behind every button.
+
+The app should feel like a real usable product first, with the vintage diary atmosphere coming from paper, typography, color, subtle texture, and carefully placed archival details.
+
+Avoid turning every UI element into a scrapbook element.
+
+
+1. PRIMARY "ADD MEMORY" BUTTON
+------------------------------
+Keep the button as a solid faded burgundy block.
+
+Recommended color:
+#713D3A
+
+Use:
+- Cream / warm ivory text
+- Clear, readable typography
+- Medium-to-bold weight
+- Very subtle paper grain inside the button
+- Slightly softened / gently rounded corners
+
+Optional:
+- Extremely subtle ink/paper texture
+
+Do NOT:
+- Put a photograph inside the button
+- Put a large stamp inside the button
+- Add flowers
+- Use a busy image background
+
+The primary CTA should immediately read as an action.
+
+Think:
+"faded burgundy ink block"
+
+
+2. "SEE ALL BIRTHDAYS"
+----------------------
+Do not make this a large traditional button.
+
+Treat it as a simple text action/link.
+
+Example:
+"See all birthdays →"
+
+Recommended:
+- Brown-black or muted burgundy text
+- Small arrow
+- Optional tiny hand-drawn underline
+- Plenty of surrounding whitespace
+
+This keeps the screen light and editorial.
+
+
+3. REMINDERS
+------------
+Keep the Reminders section mostly clean.
+
+Do not put a stamp or decorative image inside the section header.
+
+The bell icon can use a subtle faded burgundy / brown-black ink treatment.
+
+If reminders exist, individual reminder items can use tiny visual markers:
+- Small ink dot
+- Tiny star
+- Small handwritten mark
+- Minimal archival symbol
+
+Keep these subtle.
+
+The content itself should remain the focus.
+
+
+4. TOP "+" ACTION
+-----------------
+Keep the top "+" action minimal.
+
+Preferred:
+- Simple burgundy or brown-black "+" icon
+- Optional subtle paper-toned circular touch target
+
+Avoid a large decorative button.
+
+The header already has enough visual hierarchy, so the action should remain lightweight.
+
+
+5. WHERE TO USE STAMPS
+----------------------
+Do NOT put vintage stamps directly on functional buttons.
+
+Use stamps as atmospheric decoration around larger sections.
+
+Examples:
+- Faint postal cancellation near the Journal section
+- Small archival stamp near Reminders
+- Tiny date/postmark near Birthdays
+- Faded postal detail near a memory section
+
+The stamp should look like it was printed or absorbed into the paper decades ago.
+
+It should be:
+- Very faded
+- Low contrast
+- Partially visible
+- Slightly imperfect
+- Brown, sepia, burgundy, or terracotta
+
+Never make a stamp the main visual focus.
+
+
+6. SECTION-SPECIFIC DECORATION
+-----------------------------
+Use different vintage details according to the content.
+
+JOURNAL:
+- Faded handwritten ink
+- Botanical line-art
+- Small ink mark
+
+REMINDERS:
+- Tiny archival/postal mark
+- Small ink symbol
+
+BIRTHDAYS:
+- Small botanical flower
+- Faded date stamp
+- Tiny handwritten annotation
+
+MEMORIES:
+- Faded burgundy ink mark
+- Botanical detail
+- Small archival stamp
+
+This makes the interface feel intentionally designed rather than randomly decorated.
+
+
+7. OVERALL VISUAL HIERARCHY
+---------------------------
+BACKGROUND
+Aged cream / parchment paper
+
+SECTIONS
+Mostly clean paper + very subtle paper texture
+
+CARDS
+Richer vintage imagery + paper texture + photos / memories
+
+PRIMARY CTA
+Faded burgundy ink block
+
+DECORATION
+Small stamps + botanical marks + handwritten annotations
+
+TYPOGRAPHY
+Brown-black ink
+
+
+8. IMPORTANT DESIGN RULE
+------------------------
+The interface should feel like:
+
+"A beautiful digital diary that happens to contain vintage physical details."
+
+It should NOT feel like:
+
+"A scrapbook where every UI element has been decorated."
+
+
+9. BUTTON DESIGN RULES
+----------------------
+Functional UI should remain visually simple.
+
+Buttons need to communicate:
+- What can be tapped
+- What action will happen
+- Which action is primary
+
+Decorative elements should never reduce:
+- Readability
+- Contrast
+- Touch clarity
+- Information hierarchy
+
+
+10. RECOMMENDED COLOR SYSTEM
+----------------------------
+Brown-black ink:
+#332B27
+
+Deep faded burgundy:
+#713D3A
+
+Muted burgundy:
+#8A5148
+
+Faded terracotta:
+#A96755
+
+Soft terracotta:
+#C99A87
+
+Warm cream:
+#F4EEDF
+
+Aged parchment:
+#EFE5D2
+
+
+11. FINAL UI PHILOSOPHY
+-----------------------
+Keep the buttons simple.
+
+Let the cards and large surfaces carry the richer visual storytelling.
+
+Use stamps, flowers, handwritten marks, and archival details as subtle environmental decoration.
+
+The result should feel:
+- Premium
+- Calm
+- Nostalgic
+- Personal
+- Readable
+- Usable
+- Sophisticated
+
+Visual balance:
+
+PAPER → TYPOGRAPHY → CARDS → ACTIONS → SMALL VINTAGE DETAILS
+
+Not:
+
+STAMPS → DECORATION → BUTTONS → EVERYTHING ELSE

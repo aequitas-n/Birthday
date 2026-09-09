@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
-import 'package:kin/app/theme_controller.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/feedback/q_empty_state.dart';
 import 'package:kin/design/components/rows/q_section_header.dart';
@@ -16,7 +15,6 @@ class FoundationScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
-    final theme = ref.watch(themePreferenceProvider);
     final settings = ref.watch(appSettingsProvider);
 
     return QScreen(
@@ -45,10 +43,9 @@ class FoundationScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _KeyValueRow(
-                    label: 'Appearance',
-                    value:
-                        '${theme.choice.name}${theme.amoled ? ' + AMOLED' : ''}',
+                  const _KeyValueRow(
+                    label: 'Theme',
+                    value: 'Vintage Diary',
                   ),
                   SizedBox(height: q.space.base),
                   const _KeyValueRow(

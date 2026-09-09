@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 
 /// The complete glyph inventory.
 ///
-/// Twelve marks, and no more. Kin does not ship an icon font: at this count a
-/// font is heavier than the paths, and drawing them ourselves guarantees they
-/// stay optically matched to the type rather than to someone else's grid.
+/// Kin does not ship an icon font: at this count a font is heavier than the
+/// paths, and drawing them ourselves guarantees they stay optically matched to
+/// the type rather than to someone else's grid.
 ///
 /// Specified in docs/04-design-system.md §9.
 enum QuietGlyph {
@@ -23,6 +23,10 @@ enum QuietGlyph {
   settings,
   journal,
   kinMark,
+  bell,
+  sun,
+  moon,
+  dawn,
 }
 
 /// Renders a [QuietGlyph].
@@ -255,6 +259,66 @@ class _QuietGlyphPainter extends CustomPainter {
         canvas
           ..drawCircle(const Offset(9, 12), 3.5, paint)
           ..drawCircle(const Offset(15, 12), 3.5, paint);
+
+      case QuietGlyph.bell:
+        canvas
+          ..drawPath(
+            Path()
+              ..moveTo(6, 16)
+              ..lineTo(6, 11)
+              ..cubicTo(6, 7.5, 8.5, 4.5, 12, 4.5)
+              ..cubicTo(15.5, 4.5, 18, 7.5, 18, 11)
+              ..lineTo(18, 16)
+              ..lineTo(20, 18.5)
+              ..lineTo(4, 18.5)
+              ..close(),
+            paint,
+          )
+          ..drawLine(const Offset(10.5, 18.5), const Offset(10.5, 20), paint)
+          ..drawLine(const Offset(13.5, 18.5), const Offset(13.5, 20), paint)
+          ..drawLine(const Offset(10.5, 20), const Offset(13.5, 20), paint);
+
+      case QuietGlyph.sun:
+        canvas.drawCircle(const Offset(12, 12), 3.5, paint);
+        for (var i = 0; i < 8; i++) {
+          final angle = i * 0.785398;
+          const inner = 6.2;
+          const outer = 9.2;
+          final dx = _cos(angle);
+          final dy = _sin(angle);
+          canvas.drawLine(
+            Offset(12 + inner * dx, 12 + inner * dy),
+            Offset(12 + outer * dx, 12 + outer * dy),
+            paint,
+          );
+        }
+
+      case QuietGlyph.moon:
+        canvas.drawPath(
+          Path()
+            ..moveTo(15.5, 5.5)
+            ..cubicTo(11.5, 5.8, 8.5, 9.2, 8.5, 13.2)
+            ..cubicTo(8.5, 17.4, 11.8, 20.8, 16, 20.8)
+            ..cubicTo(17.5, 20.8, 18.9, 20.4, 20, 19.6)
+            ..cubicTo(16.2, 19.2, 13.2, 16, 13.2, 12.1)
+            ..cubicTo(13.2, 9.2, 14.6, 6.7, 15.5, 5.5)
+            ..close(),
+          paint,
+        );
+
+      case QuietGlyph.dawn:
+        canvas
+          ..drawLine(const Offset(4, 16.5), const Offset(20, 16.5), paint)
+          ..drawPath(
+            Path()
+              ..moveTo(7, 16.5)
+              ..cubicTo(7, 12.5, 9.2, 9.5, 12, 9.5)
+              ..cubicTo(14.8, 9.5, 17, 12.5, 17, 16.5),
+            paint,
+          )
+          ..drawLine(const Offset(12, 5), const Offset(12, 7.5), paint)
+          ..drawLine(const Offset(6.5, 8.5), const Offset(8, 10), paint)
+          ..drawLine(const Offset(17.5, 8.5), const Offset(16, 10), paint);
     }
 
     canvas.restore();

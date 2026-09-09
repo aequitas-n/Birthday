@@ -27,7 +27,7 @@ class QSectionHeader extends StatelessWidget {
       child: Text(
         label.toUpperCase(),
         textScaler: context.structuralTextScaler,
-        style: q.text.eyebrow.tinted(q.color.textTertiary),
+        style: q.text.eyebrow.tinted(context.controlInk),
       ),
     );
   }

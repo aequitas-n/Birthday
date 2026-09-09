@@ -9,33 +9,29 @@ import 'package:kin/app/kin_app.dart';
 import 'package:kin/app/theme_controller.dart';
 import 'package:kin/core/clock.dart';
 import 'package:kin/data/local/database/kin_database.dart';
-import 'package:kin/data/repositories/settings_repository_drift.dart';
+import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/domain/models/person.dart';
+import 'package:kin/domain/models/personal_reminder.dart';
 import 'package:kin/domain/models/settings.dart';
 import 'package:kin/domain/repositories/settings_repository.dart';
 import 'package:kin/features/home/application/home_providers.dart';
 import 'package:kin/features/journal/application/journal_providers.dart';
+import 'package:kin/features/reminders/application/reminder_providers.dart';
 import 'package:kin/notifications/application/notification_coordinator.dart';
 import 'package:kin/notifications/notification_service.dart';
 
 void main() {
-  group('theme persistence', () {
-    late KinDatabase database;
-    late DriftSettingsRepository repository;
+  group('theme preference', () {
+    test('always resolves Vintage Diary regardless of platform brightness', () {
+      const preference = ThemePreference();
 
-    setUp(() {
-      database = KinDatabase(NativeDatabase.memory());
-      repository = DriftSettingsRepository(database);
+      expect(preference.resolve(Brightness.dark).mode, QuietBrightness.light);
+      expect(preference.resolve().collection, QuietCollection.vintageDiary);
     });
 
-    tearDown(() async {
-      await database.close();
-    });
-
-    test('theme controller persists appearance changes', () async {
+    test('ThemePreference is a singleton identity', () {
       final container = ProviderContainer(
         overrides: [
-          settingsRepositoryProvider.overrideWithValue(repository),
           initialThemePreferenceProvider.overrideWithValue(
             const ThemePreference(),
           ),
@@ -43,16 +39,14 @@ void main() {
       );
       addTearDown(container.dispose);
 
-      container
-          .read(themePreferenceProvider.notifier)
-          .setChoice(ThemeChoice.dark);
-      container.read(themePreferenceProvider.notifier).setAmoled(enabled: true);
-
-      await Future<void>.delayed(Duration.zero);
-      final settings = await repository.readSettings();
-
-      expect(settings.themeMode, StoredThemeMode.dark);
-      expect(settings.amoled, isTrue);
+      expect(
+        container.read(themePreferenceProvider).resolve().collection,
+        QuietCollection.vintageDiary,
+      );
+      expect(
+        container.read(themePreferenceProvider).resolve().mode,
+        QuietBrightness.light,
+      );
     });
   });
 
@@ -75,6 +69,9 @@ void main() {
           profilesStreamProvider.overrideWith((ref) => Stream.value(const [])),
           journalEntriesProvider.overrideWith(
             (ref, key) => Stream.value(const []),
+          ),
+          remindersForDateProvider.overrideWith(
+            (ref, key) => Stream.value(const <PersonalReminder>[]),
           ),
           initialThemePreferenceProvider.overrideWithValue(
             const ThemePreference(),
@@ -155,6 +152,9 @@ void main() {
           journalEntriesProvider.overrideWith(
             (ref, key) => Stream.value(const []),
           ),
+          remindersForDateProvider.overrideWith(
+            (ref, key) => Stream.value(const <PersonalReminder>[]),
+          ),
           initialThemePreferenceProvider.overrideWithValue(
             const ThemePreference(),
           ),
@@ -174,7 +174,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 800));
 
-    expect(find.text('Collections'), findsOneWidget);
+    expect(find.text('Appearance'), findsOneWidget);
     final settingsList = find.byWidgetPredicate(
       (widget) => widget is ListView && widget.scrollDirection == Axis.vertical,
     );
@@ -241,6 +241,9 @@ void main() {
           journalEntriesProvider.overrideWith(
             (ref, key) => Stream.value(const []),
           ),
+          remindersForDateProvider.overrideWith(
+            (ref, key) => Stream.value(const <PersonalReminder>[]),
+          ),
           clockProvider.overrideWithValue(
             _FixedClock(DateTime.utc(2026, 7, 28, 6)),
           ),
@@ -271,7 +274,7 @@ void main() {
     expect(find.text('This week'), findsNothing);
     expect(find.text('Later'), findsNothing);
     expect(find.text('Later this year'), findsNothing);
-    expect(find.text('TODAY'), findsNothing);
+    expect(find.text('TODAY'), findsOneWidget);
     expect(find.text('Birthdays'), findsWidgets);
     expect(find.text("Everyone you'd hate to forget."), findsNothing);
     expect(find.text('Priya Raman'), findsOneWidget);

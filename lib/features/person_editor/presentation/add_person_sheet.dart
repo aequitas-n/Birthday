@@ -123,7 +123,7 @@ class _AddPersonSheetState extends ConsumerState<AddPersonSheet> {
           children: [
             Text(
               'Name, birthday, and where they are. That is enough.',
-              style: q.text.bodyLg.tinted(q.color.textSecondary),
+              style: q.text.bodyLg.tinted(context.controlInkSecondary),
             ),
             SizedBox(height: q.space.xl),
             QField(

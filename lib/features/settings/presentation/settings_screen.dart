@@ -3,10 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
-import 'package:kin/app/theme_controller.dart';
+import 'package:kin/app/place_picker_sheet.dart';
+import 'package:kin/data/timezone/city_dataset.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
-import 'package:kin/design/components/controls/q_collection_picker.dart';
-import 'package:kin/design/components/controls/q_segmented.dart';
 import 'package:kin/design/components/controls/q_toggle.dart';
 import 'package:kin/design/components/rows/q_section_title.dart';
 import 'package:kin/design/components/rows/q_setting_row.dart';
@@ -32,7 +31,6 @@ class SettingsScreen extends ConsumerWidget {
           orElse: () => ref.watch(initialAppSettingsProvider),
         );
     final notificationStatus = ref.watch(notificationStatusProvider);
-    final theme = ref.watch(themePreferenceProvider);
 
     return QScreen(
       child: QMeasure(
@@ -55,55 +53,22 @@ class SettingsScreen extends ConsumerWidget {
                 Expanded(
                   child: QVoice(
                     'Settings',
-                    style: q.text.voiceLg.tinted(q.color.textPrimary),
+                    style: q.text.pageTitle.tinted(q.color.textPrimary),
                   ),
                 ),
               ],
             ),
             const QSectionTitle(
-              'Collections',
-              support: 'Each one changes the paper, not just the accent.',
+              'Appearance',
+              support:
+                  'Vintage Diary — an old personal journal brought into a modern interface.',
               isFirst: true,
             ),
-            QCollectionPicker(
-              selected: theme.collection,
-              onSelected: (collection) => ref
-                  .read(themePreferenceProvider.notifier)
-                  .setCollection(collection),
+            const QSettingRow(
+              label: 'Theme',
+              subtitle: 'Vintage Diary',
             ),
-            const QSectionTitle('Appearance'),
-            QSegmented(
-              options: const ['System', 'Light', 'Dark'],
-              selected: switch (theme.choice) {
-                ThemeChoice.system => 'System',
-                ThemeChoice.light => 'Light',
-                ThemeChoice.dark => 'Dark',
-              },
-              onSelected: (value) {
-                final choice = switch (value) {
-                  'Light' => ThemeChoice.light,
-                  'Dark' => ThemeChoice.dark,
-                  _ => ThemeChoice.system,
-                };
-                ref.read(themePreferenceProvider.notifier).setChoice(choice);
-              },
-            ),
-            SizedBox(height: q.space.base),
-            if (theme.choice != ThemeChoice.light) ...[
-              QSettingRow(
-                label: 'Pure black',
-                subtitle: 'Only in dark mode.',
-                trailing: QToggle(
-                  value: theme.amoled,
-                  onChanged: (value) {
-                    ref
-                        .read(themePreferenceProvider.notifier)
-                        .setAmoled(enabled: value);
-                  },
-                ),
-              ),
-              const QHairline(),
-            ],
+            const QHairline(),
             const QSectionTitle('Privacy'),
             QSettingRow(
               label: 'Show details on lock screen',
@@ -133,6 +98,15 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const QHairline(),
             QSettingRow(
+              label: 'Reminder timezone',
+              subtitle:
+                  'Personal reminders fire in this zone — not the birthday one.',
+              value: _reminderTimezoneLabel(settings),
+              showChevron: true,
+              onTap: () => _pickReminderTimezone(context, ref, settings),
+            ),
+            const QHairline(),
+            QSettingRow(
               label: 'Notification permission',
               subtitle:
                   'Android 13 and later may ask before showing reminders.',
@@ -145,9 +119,9 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const QHairline(),
             QSettingRow(
-              label: 'Exact birthday timing',
+              label: 'Exact reminder timing',
               subtitle:
-                  'If unavailable, Kin still reminds you with softer timing.',
+                  'Needed for on-the-minute reminders. Without it, Android may fire a few minutes early or late.',
               value: notificationStatus.maybeWhen(
                 data: (value) => _permissionLabel(value.exactAlarmPermission),
                 orElse: () => 'Checking',
@@ -177,6 +151,35 @@ class SettingsScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  String _reminderTimezoneLabel(AppSettings settings) {
+    final iana = settings.reminderTimezone;
+    if (iana == null || iana.isEmpty) return 'Same as this phone';
+    for (final city in cityDataset) {
+      if (city.ianaTimezone == iana) return city.city;
+    }
+    return iana;
+  }
+
+  Future<void> _pickReminderTimezone(
+    BuildContext context,
+    WidgetRef ref,
+    AppSettings settings,
+  ) async {
+    final city = await showPlacePickerSheet(context: context);
+    if (city == null) return;
+    final updated = settings.copyWith(reminderTimezone: city.ianaTimezone);
+    await ref.read(settingsRepositoryProvider).saveSettings(updated);
+    await ref
+        .read(personalReminderRepositoryProvider)
+        .updateTimezoneForAllLive(city.ianaTimezone);
+    try {
+      await ref.read(notificationCoordinatorProvider).synchronize();
+    } on Object {
+      // Scheduling is best-effort while wiring lands.
+    }
+    ref.invalidate(appSettingsProvider);
   }
 
   Future<void> _updateSettings(WidgetRef ref, AppSettings settings) {

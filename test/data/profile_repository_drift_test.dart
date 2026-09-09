@@ -55,6 +55,38 @@ void main() {
       expect(watched?.nickname, 'Priya');
       expect(watched?.relationship, RelationshipKind.family);
     });
+
+    test('persists pin state across reads', () async {
+      final saved = await repository.save(
+        RelationshipProfile(
+          id: '',
+          personId: 'person-1',
+          nickname: 'Priya',
+          isPinned: true,
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026),
+        ),
+      );
+
+      expect(saved.isPinned, isTrue);
+
+      final reloaded = await repository.readForPerson('person-1');
+      expect(reloaded?.isPinned, isTrue);
+
+      final freshRepo = DriftProfileRepository(
+        database,
+        const _FixedIdGenerator('profile-002'),
+        const _FixedClock(),
+      );
+      final cold = await freshRepo.readForPerson('person-1');
+      expect(cold?.isPinned, isTrue);
+
+      await repository.save(
+        saved.copyWith(isPinned: false, updatedAt: DateTime.utc(2026, 8)),
+      );
+      final unpinned = await freshRepo.readForPerson('person-1');
+      expect(unpinned?.isPinned, isFalse);
+    });
   });
 }
 

@@ -16,14 +16,15 @@ import 'package:kin/design/components/journal/q_journal_add_fragment_cue.dart';
 import 'package:kin/design/components/journal/q_journal_mood_picker.dart';
 import 'package:kin/design/components/journal/q_journal_photo_print.dart';
 import 'package:kin/design/components/journal/q_journal_writing_surface.dart';
+import 'package:kin/design/components/journal/q_mood_illustration.dart';
 import 'package:kin/design/components/sheets/q_choice_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/feedback/quiet_haptics.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
-import 'package:kin/design/theme/journal_mood_colors.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/journal_fragment.dart';
 import 'package:kin/domain/models/journal_mood.dart';
@@ -117,11 +118,9 @@ class _JournalMemoryEditorState extends ConsumerState<JournalMemoryEditor> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final editing = widget.existing != null;
 
     return QScreen(
-      canvasColor: j.desk,
       child: QMeasure(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -145,7 +144,10 @@ class _JournalMemoryEditorState extends ConsumerState<JournalMemoryEditor> {
                       _formatDate(widget.date),
                       textAlign: TextAlign.center,
                       textScaler: context.structuralTextScaler,
-                      style: q.text.archiveMeta.tinted(j.inkMuted),
+                      style: q.inked(
+                        q.text.uiDate,
+                        tone: QuietInkTone.secondary,
+                      ),
                     ),
                   ),
                   SizedBox(width: q.space.xl),
@@ -175,7 +177,7 @@ class _JournalMemoryEditorState extends ConsumerState<JournalMemoryEditor> {
                   if (_fragments.isEmpty) ...[
                     Text(
                       'What do you want to remember?',
-                      style: q.text.archiveBody.tinted(j.inkMuted),
+                      style: q.inked(q.text.emptyStateBody),
                     ),
                     SizedBox(height: q.space.lg),
                     QJournalAddFragmentCue(
@@ -219,7 +221,6 @@ class _JournalMemoryEditorState extends ConsumerState<JournalMemoryEditor> {
         return StatefulBuilder(
           builder: (context, setModalState) {
             final q = context.quiet;
-            final j = q.journal;
             return QSheet(
               title: 'Mood',
               bottom: QBottomActions(
@@ -241,9 +242,9 @@ class _JournalMemoryEditorState extends ConsumerState<JournalMemoryEditor> {
                 children: [
                   Text(
                     'How did this memory feel?',
-                    style: q.text.archiveBody.tinted(j.inkMuted),
+                    style: q.text.uiBody.tinted(context.controlInkSecondary),
                   ),
-                  SizedBox(height: q.space.md),
+                  SizedBox(height: q.space.lg),
                   QJournalMoodPicker(
                     selectedId: selected?.storageValue,
                     options: [
@@ -418,11 +419,7 @@ class _MoodButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final label = mood?.displayName ?? 'Add mood';
-    final (fill, ink) = mood == null
-        ? (j.rule, j.inkMuted)
-        : JournalMoodColors.resolve(mood!.storageValue, dark: q.isDark);
 
     return Align(
       alignment: Alignment.centerLeft,
@@ -436,66 +433,26 @@ class _MoodButton extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CustomPaint(
-                size: const Size(18, 8),
-                painter: _MoodStainPainter(
-                  color: fill.withValues(alpha: mood == null ? 0.35 : 0.9),
+              if (mood != null)
+                QMoodIllustration(
+                  moodId: mood!.storageValue,
+                  size: MoodIllustrationSize.picker,
+                )
+              else
+                Text(
+                  '·',
+                  style: q.text.uiMetadata.tinted(q.canvas.secondary),
                 ),
-              ),
               SizedBox(width: q.space.sm),
               Text(
                 label,
-                style: q.text.archiveMeta.tinted(mood == null ? j.inkMuted : ink),
+                style: q.text.uiMetadata.tinted(q.canvas.primary),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class _MoodStainPainter extends CustomPainter {
-  const _MoodStainPainter({required this.color});
-
-  final Color color;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = color;
-    final path = Path()
-      ..moveTo(0, size.height * 0.55)
-      ..quadraticBezierTo(
-        size.width * 0.25,
-        0,
-        size.width * 0.5,
-        size.height * 0.35,
-      )
-      ..quadraticBezierTo(
-        size.width * 0.75,
-        size.height * 0.7,
-        size.width,
-        size.height * 0.45,
-      )
-      ..quadraticBezierTo(
-        size.width * 0.7,
-        size.height,
-        size.width * 0.4,
-        size.height * 0.75,
-      )
-      ..quadraticBezierTo(
-        size.width * 0.15,
-        size.height * 0.9,
-        0,
-        size.height * 0.55,
-      )
-      ..close();
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant _MoodStainPainter oldDelegate) {
-    return oldDelegate.color != color;
   }
 }
 
@@ -693,7 +650,6 @@ class _FragmentEditor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -709,7 +665,7 @@ class _FragmentEditor extends StatelessWidget {
                   JournalFragmentKind.audio => 'Audio',
                 },
                 textScaler: context.structuralTextScaler,
-                style: q.text.archiveLabel.tinted(j.inkMuted),
+                style: q.inked(q.text.uiCaption, tone: QuietInkTone.secondary),
               ),
             ),
             QIconButton(
@@ -751,7 +707,6 @@ class _ListFragmentEditor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
 
     return Column(
       children: [
@@ -782,7 +737,7 @@ class _ListFragmentEditor extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text(
             'Press Enter or add another point.',
-            style: q.text.archiveCaption.tinted(j.inkMuted),
+            style: q.inked(q.text.uiCaption, tone: QuietInkTone.secondary),
           ),
         ),
       ],
@@ -817,8 +772,7 @@ class _ListItemFieldState extends State<_ListItemField> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
-    final style = q.text.archiveBodyLarge.tinted(j.ink);
+    final style = q.inked(q.text.journalWriting);
 
     return Padding(
       padding: EdgeInsets.only(bottom: q.space.sm),
@@ -841,7 +795,7 @@ class _ListItemFieldState extends State<_ListItemField> {
                 focusNode: _focus,
                 style: style,
                 cursorColor: q.color.accent,
-                backgroundCursorColor: j.desk,
+                backgroundCursorColor: q.color.canvas,
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
                 textInputAction: TextInputAction.done,
@@ -877,7 +831,7 @@ class _PhotoFragmentView extends ConsumerWidget {
     if (image == null) {
       return Text(
         'Photograph',
-        style: q.text.archiveBody.tinted(q.journal.inkMuted),
+        style: q.inked(q.text.uiBody, tone: QuietInkTone.secondary),
       );
     }
 
@@ -916,11 +870,10 @@ class _AudioFragmentView extends StatelessWidget {
         caption: 'New recording',
       );
     }
+    final q = context.quiet;
     return Text(
       'Audio',
-      style: context.quiet.text.archiveBody.tinted(
-        context.quiet.journal.inkMuted,
-      ),
+      style: q.inked(q.text.uiBody, tone: QuietInkTone.secondary),
     );
   }
 }
@@ -977,8 +930,7 @@ class _DiaryTitleLineState extends State<_DiaryTitleLine>
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
-    final style = q.text.voiceLg.tinted(j.ink);
+    final style = q.inked(q.text.memoryTitle);
     final empty = widget.controller.text.isEmpty;
     final focused = widget.focusNode.hasFocus;
 
@@ -988,7 +940,7 @@ class _DiaryTitleLineState extends State<_DiaryTitleLine>
       focusNode: widget.focusNode,
       style: style,
       cursorColor: q.color.accent,
-      backgroundCursorColor: j.desk,
+      backgroundCursorColor: q.color.canvas,
       maxLines: null,
       minLines: 1,
       keyboardType: TextInputType.text,
@@ -1011,7 +963,7 @@ class _DiaryTitleLineState extends State<_DiaryTitleLine>
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: focused ? j.edge : j.rule,
+              color: focused ? q.color.hairlineStrong : q.color.hairline,
               width: focused ? 1 : context.hairlineWidth,
             ),
           ),
@@ -1025,8 +977,9 @@ class _DiaryTitleLineState extends State<_DiaryTitleLine>
                   child: Text(
                     'Untitled',
                     textScaler: context.nameTextScaler,
-                    style: q.text.voiceLg.tinted(
-                      j.inkMuted.withValues(alpha: 0.45),
+                    style: q.inked(
+                      q.text.memoryTitle,
+                      tone: QuietInkTone.secondary,
                     ),
                   ),
                 ),

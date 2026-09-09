@@ -124,7 +124,6 @@ class _RecordAudioSheetState extends State<_RecordAudioSheet> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
 
     return QSheet(
       title: 'Keep a moment in sound',
@@ -138,7 +137,7 @@ class _RecordAudioSheetState extends State<_RecordAudioSheet> {
                 : _path == null
                 ? 'Tap Record to begin.'
                 : 'Ready to keep.',
-            style: q.text.archiveBody.tinted(j.inkMuted),
+            style: q.inked(q.text.uiBody, tone: QuietInkTone.secondary),
           ),
           SizedBox(height: q.space.xl),
           QButton.primary(
@@ -274,7 +273,6 @@ class _JournalAudioPlaybackState extends ConsumerState<JournalAudioPlayback> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final caption = (widget.caption?.trim().isNotEmpty ?? false)
         ? widget.caption!.trim()
         : 'Voice note';
@@ -302,20 +300,20 @@ class _JournalAudioPlaybackState extends ConsumerState<JournalAudioPlayback> {
               Text(
                 'VOICE NOTE',
                 textScaler: context.structuralTextScaler,
-                style: q.text.archiveLabel.tinted(j.inkMuted),
+                style: q.inked(q.text.uiMetadata, tone: QuietInkTone.secondary),
               ),
               SizedBox(height: q.space.sm),
               if (_missing)
                 Text(
                   'This recording is no longer on this device.',
-                  style: q.text.archiveBody.tinted(j.inkMuted),
+                  style: q.inked(q.text.uiBody, tone: QuietInkTone.secondary),
                 )
               else ...[
                 Row(
                   children: [
                     Text(
                       _playing ? '||' : '>',
-                      style: q.text.archiveMeta.tinted(j.ink),
+                      style: q.inked(q.text.uiMetadata),
                     ),
                     SizedBox(width: q.space.md),
                     Expanded(
@@ -329,7 +327,7 @@ class _JournalAudioPlaybackState extends ConsumerState<JournalAudioPlayback> {
                               children: [
                                 DecoratedBox(
                                   decoration: BoxDecoration(
-                                    color: j.rule,
+                                    color: q.color.hairline,
                                     borderRadius: BorderRadius.circular(
                                       q.radius.full,
                                     ),
@@ -341,7 +339,7 @@ class _JournalAudioPlaybackState extends ConsumerState<JournalAudioPlayback> {
                                     widthFactor: progress,
                                     child: DecoratedBox(
                                       decoration: BoxDecoration(
-                                        color: j.ink,
+                                        color: q.canvas.primary,
                                         borderRadius: BorderRadius.circular(
                                           q.radius.full,
                                         ),
@@ -358,12 +356,18 @@ class _JournalAudioPlaybackState extends ConsumerState<JournalAudioPlayback> {
                             children: [
                               Text(
                                 _format(_position),
-                                style: q.text.archiveCaption.tinted(j.inkMuted),
+                                style: q.inked(
+                                  q.text.uiCaption,
+                                  tone: QuietInkTone.secondary,
+                                ),
                               ),
                               const Spacer(),
                               Text(
                                 _format(_duration),
-                                style: q.text.archiveCaption.tinted(j.inkMuted),
+                                style: q.inked(
+                                  q.text.uiCaption,
+                                  tone: QuietInkTone.secondary,
+                                ),
                               ),
                             ],
                           ),
@@ -373,7 +377,10 @@ class _JournalAudioPlaybackState extends ConsumerState<JournalAudioPlayback> {
                   ],
                 ),
                 SizedBox(height: q.space.sm),
-                Text(caption, style: q.text.archiveTitle.tinted(j.ink)),
+                Text(
+                  caption,
+                  style: q.inked(q.text.sectionTitle),
+                ),
               ],
             ],
           ),

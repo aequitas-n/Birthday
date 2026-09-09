@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
-import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 class QToggle extends StatelessWidget {
@@ -23,10 +22,13 @@ class QToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final i = q.interactive;
     final enabled = onChanged != null;
     final motion = q.motion;
 
-    final trackColor = value ? q.color.accent : q.color.sunken;
+    // Cream parchment track + ink/burgundy thumb — never submerged brown-on-brown.
+    final trackColor = value ? i.toggleTrackOn : i.toggleTrackOff;
+    final thumbColor = value ? i.toggleThumbOn : i.toggleThumbOff;
     final thumbAlignment = value ? Alignment.centerRight : Alignment.centerLeft;
 
     return Opacity(
@@ -45,17 +47,23 @@ class QToggle extends StatelessWidget {
             padding: const EdgeInsets.all(_padding),
             decoration: ShapeDecoration(
               color: trackColor,
-              shape: const StadiumBorder(),
+              shape: StadiumBorder(
+                side: BorderSide(
+                  color: i.sheetBorder,
+                  width: context.hairlineWidth,
+                ),
+              ),
             ),
             child: AnimatedAlign(
               duration: motion.base,
               curve: motion.emphasized,
               alignment: thumbAlignment,
-              child: QSurface(
-                width: _thumb,
-                height: _thumb,
-                radius: q.radius.full,
-                elevation: QuietElevationLevel.hairline,
+              child: DecoratedBox(
+                decoration: ShapeDecoration(
+                  color: thumbColor,
+                  shape: const CircleBorder(),
+                  shadows: q.elevation.lift,
+                ),
                 child: const SizedBox.square(dimension: _thumb),
               ),
             ),

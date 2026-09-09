@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_arc.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
-import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -76,7 +75,7 @@ class QButton extends StatefulWidget {
   static const double minHeight = 44;
   static const double maxWidth = 320;
   static const double glyphSize = 18;
-  static const double disabledOpacity = 0.38;
+  static const double disabledOpacity = 0.62;
 
   @override
   State<QButton> createState() => _QButtonState();
@@ -113,13 +112,25 @@ class _QButtonState extends State<QButton> {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final c = q.color;
+    final i = q.interactive;
+    final host = QuietControlSurfaceScope.of(context);
     final enabled = widget.onPressed != null && !widget.loading;
+
+    // Desk → cream parchment CTA + brown ink.
+    // Parchment host (sheet / journal card) → burgundy CTA + cream ink.
+    final primaryFill = i.actionFill(host);
+    final primaryInk = i.actionInk(host, c.textInverse);
+    final primaryPress = i.actionPressed(host, c.accentPressed);
 
     final foreground = switch (widget.variant) {
       _ when widget.destructive => c.danger,
-      QButtonVariant.primary => c.textInverse,
-      QButtonVariant.secondary => c.textPrimary,
-      QButtonVariant.tertiary => c.textSecondary,
+      QButtonVariant.primary => primaryInk,
+      QButtonVariant.secondary =>
+        host == QuietControlSurface.parchment ? i.ink : i.primaryActionInk,
+      QButtonVariant.tertiary =>
+        host == QuietControlSurface.parchment
+            ? i.inkSecondary
+            : c.textSecondary,
     };
 
     // The primary action is the only one set in the button token's full weight.
@@ -168,14 +179,12 @@ class _QButtonState extends State<QButton> {
       ),
     );
 
-    // The primary fill is the accent, which QSurface cannot express because
-    // its levels are neutrals only.
     final painted = switch (widget.variant) {
       QButtonVariant.primary => DecoratedBox(
         decoration: ShapeDecoration(
-          color: c.accent,
+          color: primaryFill,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(q.radius.sm)),
+            borderRadius: BorderRadius.all(Radius.circular(q.radius.md)),
           ),
         ),
         child: SizedBox(
@@ -183,12 +192,25 @@ class _QButtonState extends State<QButton> {
           child: Center(child: content),
         ),
       ),
-      QButtonVariant.secondary => QSurface(
-        radius: q.radius.sm,
-        height: QButton.minHeight,
-        elevation: QuietElevationLevel.hairline,
-        borderColor: c.hairlineStrong,
-        child: Center(child: content),
+      QButtonVariant.secondary => DecoratedBox(
+        decoration: ShapeDecoration(
+          color: host == QuietControlSurface.parchment
+              ? i.selectedSurface
+              : i.secondaryAction,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(q.radius.sm)),
+            side: BorderSide(
+              color: host == QuietControlSurface.parchment
+                  ? i.sheetBorder
+                  : i.secondaryActionBorder,
+              width: context.hairlineWidth,
+            ),
+          ),
+        ),
+        child: SizedBox(
+          height: QButton.minHeight,
+          child: Center(child: content),
+        ),
       ),
       QButtonVariant.tertiary => SizedBox(
         height: QButton.minHeight,
@@ -203,11 +225,15 @@ class _QButtonState extends State<QButton> {
         child: IntrinsicWidth(
           child: QPressable(
             enabled: enabled,
-            radius: q.radius.sm,
+            radius: widget.variant == QButtonVariant.primary
+                ? q.radius.md
+                : q.radius.sm,
             semanticLabel: widget.label,
             pressTint: widget.variant == QButtonVariant.primary
-                ? c.accentPressed
-                : c.sunken,
+                ? primaryPress
+                : (host == QuietControlSurface.parchment
+                      ? i.selectedSurface
+                      : c.sunken),
             onTap: enabled
                 ? () {
                     unawaited(HapticFeedback.selectionClick());

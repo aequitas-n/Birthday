@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local asset optimization scratch (PNG backups + WebP trials)
+/tools/_opt_trial/
+/tools/_opt_backup_png/
+
+# Golden test failure dumps
+**/goldens/failures/
+

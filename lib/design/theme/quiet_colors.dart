@@ -35,143 +35,96 @@ final class QuietColors {
     required this.scrim,
     required this.selection,
     required this.monogramTints,
+    required this.transparent,
   });
 
-  /// Warm paper. Autumn Ember, resolved light.
+  /// Vintage Diary — standard contrast on the dark parchment background.
   const QuietColors.light()
-    : brightness = Brightness.light,
-      collection = QuietCollection.ember,
-      heroTint = ColorTokens.ember700,
-      canvas = ColorTokens.paperCanvas,
-      surface = ColorTokens.paperSurface,
-      raised = ColorTokens.paperSurface,
-      sunken = ColorTokens.paperSunken,
-      hairline = ColorTokens.paperHairline,
-      hairlineStrong = ColorTokens.paperHairlineStrong,
-      textPrimary = ColorTokens.paperInkPrimary,
-      textSecondary = ColorTokens.paperInkSecondary,
-      textTertiary = ColorTokens.paperInkTertiary,
-      textInverse = ColorTokens.paperCanvas,
-      accent = ColorTokens.ember500,
-      accentPressed = ColorTokens.ember600,
-      accentWash = ColorTokens.ember50,
-      danger = ColorTokens.dangerLight,
-      dangerWash = ColorTokens.dangerWashLight,
-      scrim = ColorTokens.scrimLight,
-      selection = ColorTokens.selectionLight,
-      monogramTints = ColorTokens.monogramLight;
+    : brightness = Brightness.dark,
+      collection = QuietCollection.vintageDiary,
+      heroTint = ColorTokens.vdBurgundy,
+      canvas = ColorTokens.vdDiaryCanvas,
+      surface = ColorTokens.vdDiarySurface,
+      raised = ColorTokens.vdDiaryRaised,
+      sunken = ColorTokens.vdDiarySunken,
+      hairline = ColorTokens.vdDiaryHairline,
+      hairlineStrong = ColorTokens.vdDiaryHairlineStrong,
+      textPrimary = ColorTokens.vdCreamPrimary,
+      textSecondary = ColorTokens.vdCreamSecondary,
+      textTertiary = ColorTokens.vdCreamTertiary,
+      textInverse = ColorTokens.vdCreamPrimary,
+      accent = ColorTokens.vdBurgundy,
+      accentPressed = ColorTokens.vdBurgundyMuted,
+      accentWash = ColorTokens.vdAccentWash,
+      danger = ColorTokens.dangerDark,
+      dangerWash = ColorTokens.dangerWashDark,
+      scrim = ColorTokens.vdScrim,
+      selection = ColorTokens.vdSelection,
+      monogramTints = ColorTokens.monogramDark,
+      transparent = ColorTokens.transparent;
 
-  /// Warm charcoal. Autumn Ember, resolved dark.
+  /// Vintage Diary — slightly brighter cream for reduced-glare reading.
   const QuietColors.dark()
     : brightness = Brightness.dark,
-      collection = QuietCollection.ember,
-      heroTint = ColorTokens.ember700,
-      canvas = ColorTokens.charcoalCanvas,
-      surface = ColorTokens.charcoalSurface,
-      raised = ColorTokens.charcoalRaised,
-      sunken = ColorTokens.charcoalSunken,
-      hairline = ColorTokens.charcoalHairline,
-      hairlineStrong = ColorTokens.charcoalHairlineStrong,
-      textPrimary = ColorTokens.charcoalInkPrimary,
-      textSecondary = ColorTokens.charcoalInkSecondary,
-      textTertiary = ColorTokens.charcoalInkTertiary,
-      textInverse = ColorTokens.charcoalCanvas,
-      accent = ColorTokens.ember300,
-      accentPressed = ColorTokens.ember400,
-      accentWash = ColorTokens.accentWashDark,
+      collection = QuietCollection.vintageDiary,
+      heroTint = ColorTokens.vdBurgundyMuted,
+      canvas = ColorTokens.vdCanvasDark,
+      surface = ColorTokens.vdSurfaceDark,
+      raised = ColorTokens.vdRaisedDark,
+      sunken = ColorTokens.vdSunkenDark,
+      hairline = ColorTokens.vdHairlineDark,
+      hairlineStrong = ColorTokens.vdHairlineStrongDark,
+      textPrimary = ColorTokens.vdTextPrimaryDark,
+      textSecondary = ColorTokens.vdTextSecondaryDark,
+      textTertiary = ColorTokens.vdTextTertiaryDark,
+      textInverse = ColorTokens.vdTextPrimaryDark,
+      accent = ColorTokens.vdTerracottaSoft,
+      accentPressed = ColorTokens.vdTerracotta,
+      accentWash = ColorTokens.vdAccentWashDark,
       danger = ColorTokens.dangerDark,
       dangerWash = ColorTokens.dangerWashDark,
-      scrim = ColorTokens.scrimDark,
-      selection = ColorTokens.selectionDark,
-      monogramTints = ColorTokens.monogramDark;
+      scrim = ColorTokens.vdScrimDark,
+      selection = ColorTokens.vdSelection,
+      monogramTints = ColorTokens.monogramDark,
+      transparent = ColorTokens.transparent;
 
-  /// True black. Canvas and surface are identical, so hairlines carry the
-  /// entire visual structure of every screen.
+  /// Vintage Diary — deepest black-brown for AMOLED, same identity.
   const QuietColors.amoled()
     : brightness = Brightness.dark,
-      collection = QuietCollection.ember,
-      heroTint = ColorTokens.ember700,
-      canvas = ColorTokens.voidCanvas,
-      surface = ColorTokens.voidCanvas,
-      raised = ColorTokens.voidRaised,
-      sunken = ColorTokens.voidCanvas,
-      hairline = ColorTokens.voidHairline,
-      hairlineStrong = ColorTokens.voidHairlineStrong,
-      textPrimary = ColorTokens.voidInkPrimary,
-      textSecondary = ColorTokens.voidInkSecondary,
-      textTertiary = ColorTokens.voidInkTertiary,
-      textInverse = ColorTokens.voidCanvas,
-      accent = ColorTokens.ember300,
-      accentPressed = ColorTokens.ember400,
-      accentWash = ColorTokens.accentWashVoid,
+      collection = QuietCollection.vintageDiary,
+      heroTint = ColorTokens.vdBurgundy,
+      canvas = ColorTokens.vdCanvasAmoled,
+      surface = ColorTokens.vdSurfaceAmoled,
+      raised = ColorTokens.vdRaisedAmoled,
+      sunken = ColorTokens.vdSunkenAmoled,
+      hairline = ColorTokens.vdHairlineAmoled,
+      hairlineStrong = ColorTokens.vdHairlineStrongAmoled,
+      textPrimary = ColorTokens.vdTextPrimaryDark,
+      textSecondary = ColorTokens.vdCreamSecondary,
+      textTertiary = ColorTokens.vdCreamTertiary,
+      textInverse = ColorTokens.vdTextPrimaryDark,
+      accent = ColorTokens.vdTerracottaSoft,
+      accentPressed = ColorTokens.vdTerracotta,
+      accentWash = ColorTokens.vdAccentWashAmoled,
       danger = ColorTokens.dangerDark,
       dangerWash = ColorTokens.dangerWashDark,
-      scrim = ColorTokens.scrimVoid,
-      selection = ColorTokens.selectionDark,
-      monogramTints = ColorTokens.monogramDark;
+      scrim = ColorTokens.vdScrimAmoled,
+      selection = ColorTokens.vdSelection,
+      monogramTints = ColorTokens.monogramDark,
+      transparent = ColorTokens.transparent;
 
-  /// Resolves a [QuietCollection] against a brightness.
-  ///
-  /// Only four values per collection are authored — the accent and its pressed
-  /// state, at each brightness. Washes, selection, focus, hero tints and
-  /// monogram stock are computed here, which is the whole reason a new
-  /// collection costs a single enum row instead of forty hex codes.
-  ///
-  /// Autumn Ember short-circuits to the const instances above: it is the
-  /// default, it is built on every frame before the user has chosen anything,
-  /// and hand-authored values should never drift from derived ones.
+  /// Resolves Vintage Diary at the requested contrast level.
   factory QuietColors.of(
-    QuietCollection collection, {
+    QuietCollection _, {
     required bool dark,
     bool amoled = false,
   }) {
-    if (collection == QuietCollection.ember) {
-      if (!dark) return const QuietColors.light();
-      return amoled ? const QuietColors.amoled() : const QuietColors.dark();
-    }
-
-    final neutrals = amoled
-        ? const QuietNeutrals.pureBlack()
-        : QuietNeutrals.of(collection.neutrals, dark: dark);
-    final accent = collection.accent(dark: dark);
-
-    return QuietColors(
-      brightness: dark ? Brightness.dark : Brightness.light,
-      collection: collection,
-      // A hero gradient tinted with the raw accent reads as a colour filter
-      // over someone's face. Pulled most of the way to black, it reads as
-      // evening light instead.
-      heroTint: Color.lerp(accent, ColorTokens.voidCanvas, 0.55)!,
-      canvas: neutrals.canvas,
-      surface: neutrals.surface,
-      raised: neutrals.raised,
-      sunken: neutrals.sunken,
-      hairline: neutrals.hairline,
-      hairlineStrong: neutrals.hairlineStrong,
-      textPrimary: neutrals.inkPrimary,
-      textSecondary: neutrals.inkSecondary,
-      textTertiary: neutrals.inkTertiary,
-      textInverse: neutrals.canvas,
-      accent: accent,
-      accentPressed: collection.accentPressed(dark: dark),
-      // Dark surfaces need more accent to register as tinted at all.
-      accentWash: Color.lerp(neutrals.surface, accent, dark ? 0.18 : 0.1)!,
-      danger: dark ? ColorTokens.dangerDark : ColorTokens.dangerLight,
-      dangerWash: dark
-          ? ColorTokens.dangerWashDark
-          : ColorTokens.dangerWashLight,
-      scrim: amoled
-          ? ColorTokens.scrimVoid
-          : (dark ? ColorTokens.scrimDark : ColorTokens.scrimLight),
-      selection: accent.withValues(alpha: 0.2),
-      monogramTints: _monogramFamily(neutrals: neutrals, accent: accent),
-    );
+    if (amoled) return const QuietColors.amoled();
+    if (dark) return const QuietColors.dark();
+    return const QuietColors.light();
   }
 
   /// Six tints for people without a photo, in the collection's own family.
-  ///
-  /// Stepped between the sunken and hairline neutrals and tinted 4% toward the
-  /// accent — enough that two adjacent avatars are distinguishable, far too
   factory QuietColors.lerp(QuietColors a, QuietColors b, double t) {
     if (identical(a, b)) return a;
     return QuietColors(
@@ -196,6 +149,7 @@ final class QuietColors {
       scrim: Color.lerp(a.scrim, b.scrim, t)!,
       selection: Color.lerp(a.selection, b.selection, t)!,
       monogramTints: t < 0.5 ? a.monogramTints : b.monogramTints,
+      transparent: Color.lerp(a.transparent, b.transparent, t)!,
     );
   }
 
@@ -247,25 +201,8 @@ final class QuietColors {
   /// paper stock, not as colour-coding.
   final List<Color> monogramTints;
 
-  /// Six tints for people without a photo, in the collection's own family.
-  ///
-  /// Stepped between the sunken and hairline neutrals and tinted 4% toward the
-  /// accent — enough that two adjacent avatars are distinguishable, far too
-  /// little to read as colour-coding.
-  static List<Color> _monogramFamily({
-    required QuietNeutrals neutrals,
-    required Color accent,
-  }) {
-    const steps = <double>[0, 0.18, 0.36, 0.54, 0.72, 0.9];
-    return <Color>[
-      for (final step in steps)
-        Color.lerp(
-          Color.lerp(neutrals.sunken, neutrals.hairlineStrong, step),
-          accent,
-          0.04,
-        )!,
-    ];
-  }
+  /// Fully transparent — for overlays on the diary background.
+  final Color transparent;
 
   /// Deterministic tint for a person, so an avatar never changes colour
   /// between launches.

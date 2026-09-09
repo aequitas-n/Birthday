@@ -11,3 +11,5 @@ const Size kPhoneCanvasSize = Size(390, 844);
 const Size kPhoneShellWindowSize = Size(430, 920);
 
 Future<void> configureDesktopPhoneShell() async {}
+
+Future<void> nudgeDesktopPhoneShellOnScreen() async {}

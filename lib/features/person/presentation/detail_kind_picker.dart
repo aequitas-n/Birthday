@@ -67,6 +67,7 @@ List<(DetailKindSection section, List<Note> notes)> groupNotesByDetailSection(
   for (final section in order) {
     final inSection = textNotes
         .where((n) => section.kinds.contains(n.kind))
+        .where((n) => !(n.kind == NoteKind.giftIdea && n.isRetired))
         .toList();
     if (section == DetailKindSection.favorites) {
       inSection.sort(
@@ -265,6 +266,14 @@ class _SectionBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
+    final marker = highlighted
+        ? i.accent
+        : (onParchment
+              ? i.inkMuted.withValues(alpha: 0.55)
+              : q.color.canvas);
+    final feedbackFill = onParchment ? i.sheetElevated : q.color.raised;
 
     return DragTarget<DetailKindSection>(
       onWillAcceptWithDetails: (details) {
@@ -280,8 +289,8 @@ class _SectionBlock extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border(
                 left: BorderSide(
-                  color: highlighted ? q.color.accent : q.color.canvas,
-                  width: 2,
+                  color: marker,
+                  width: highlighted ? 2.5 : 1.5,
                 ),
               ),
             ),
@@ -297,7 +306,7 @@ class _SectionBlock extends StatelessWidget {
                     onDraggableCanceled: (_, _) => onDragEnded(),
                     feedback: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: q.color.raised,
+                        color: feedbackFill,
                         borderRadius: BorderRadius.circular(q.radius.sm),
                         boxShadow: [
                           BoxShadow(
@@ -314,7 +323,7 @@ class _SectionBlock extends StatelessWidget {
                         ),
                         child: Text(
                           section.title.toUpperCase(),
-                          style: q.text.eyebrow.tinted(q.color.accent),
+                          style: q.text.eyebrow.tinted(i.accent),
                         ),
                       ),
                     ),
@@ -354,6 +363,11 @@ class _SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final i = q.interactive;
+    final onParchment = context.isParchmentControls;
+    final ink = onParchment ? i.inkSecondary : q.color.textTertiary;
+    final affordance = onParchment ? i.inkMuted : q.color.textTertiary;
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: q.space.xs),
       child: Row(
@@ -362,12 +376,12 @@ class _SectionHeader extends StatelessWidget {
             child: Text(
               title.toUpperCase(),
               textScaler: context.structuralTextScaler,
-              style: q.text.eyebrow.tinted(q.color.textTertiary),
+              style: q.text.eyebrow.tinted(ink),
             ),
           ),
           Text(
             '≡',
-            style: q.text.metadata.tinted(q.color.textTertiary),
+            style: q.text.metadata.tinted(affordance),
           ),
         ],
       ),

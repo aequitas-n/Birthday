@@ -50,6 +50,7 @@ class DriftSettingsRepository implements SettingsRepository {
               _toMillis(settings.onboardingCompletedAt),
             ),
             deviceTimezoneCache: Value(settings.deviceTimezoneCache),
+            reminderTimezone: Value(settings.reminderTimezone),
             lastReconciledAt: Value(_toMillis(settings.lastReconciledAt)),
           ),
         );
@@ -63,6 +64,7 @@ class DriftSettingsRepository implements SettingsRepository {
       notificationsEnabled: row.notificationsEnabled,
       onboardingCompletedAt: _fromMillis(row.onboardingCompletedAt),
       deviceTimezoneCache: row.deviceTimezoneCache,
+      reminderTimezone: row.reminderTimezone,
       lastReconciledAt: _fromMillis(row.lastReconciledAt),
     );
   }

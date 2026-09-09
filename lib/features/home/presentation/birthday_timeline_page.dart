@@ -5,18 +5,14 @@ import 'package:kin/app/person_editor_launcher.dart';
 import 'package:kin/app/router.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/feedback/q_empty_state.dart';
-import 'package:kin/design/components/rows/q_person_row.dart';
-import 'package:kin/design/components/surfaces/q_hairline.dart';
+import 'package:kin/design/components/feedback/q_pane_loading.dart';
+import 'package:kin/design/components/rows/q_birthday_strip.dart';
 import 'package:kin/design/motion/quiet_motion.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/features/home/application/home_providers.dart';
 import 'package:kin/features/person/application/person_detail_providers.dart';
 
-/// Below this many people the timeline is one list. Grouping only appears when
-/// there is enough of a year left to need chapters.
-const _groupThreshold = 6;
-
-/// Birthday timeline — the "when" mode.
+/// Birthday timeline — hanging paper tags, one strip per person.
 class BirthdayTimelinePage extends ConsumerWidget {
   const BirthdayTimelinePage({super.key});
 
@@ -25,11 +21,13 @@ class BirthdayTimelinePage extends ConsumerWidget {
     final people = ref.watch(peopleStreamProvider);
 
     if (people.isLoading) {
-      return const SizedBox.shrink();
+      return const QPaneLoading(minHeight: 200);
     }
     if ((people.asData?.value ?? const []).isEmpty) {
-      return _TimelineEmptyState(
-        onAdd: () => showAddPersonFlow(context, ref),
+      return Center(
+        child: _TimelineEmptyState(
+          onAdd: () => showAddPersonFlow(context, ref),
+        ),
       );
     }
     return const _HomeTimeline();
@@ -54,60 +52,88 @@ class _TimelineEmptyState extends StatelessWidget {
 class _HomeTimeline extends ConsumerWidget {
   const _HomeTimeline();
 
+  static const _months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final q = context.quiet;
     final groups = ref.watch(homeGroupsProvider);
-    final total = groups.fold<int>(
-      0,
-      (sum, group) => sum + group.entries.length,
-    );
-    // Few people: one continuous list. Sections only earn their keep when the
-    // year is long enough that "who is next" needs chapters.
-    final showSections = total >= _groupThreshold && groups.length > 1;
-    final indent = personRowHairlineIndent(context);
+    // Preserve proximity ordering (today → later), then chapter by calendar month.
+    final entries = [
+      for (final group in groups) ...group.entries,
+    ];
+    final chapters = _monthChapters(entries);
 
     return _EntranceFrame(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (showSections)
-            for (final group in groups) ...[
-              _TimelineSectionTitle(
-                group.section.label,
-                isFirst: group == groups.first,
+      child: ListView.builder(
+        padding: EdgeInsets.only(bottom: q.space.section),
+        itemCount: chapters.length,
+        itemBuilder: (context, chapterIndex) {
+          final chapter = chapters[chapterIndex];
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _MonthHeading(
+                title: chapter.$1,
+                isFirst: chapterIndex == 0,
               ),
-              ..._rowsFor(context, group.entries, indent),
-            ]
-          else
-            ..._rowsFor(
-              context,
-              [
-                for (final group in groups) ...group.entries,
-              ],
-              indent,
-            ),
-        ],
+              QBirthdayStripChain(
+                children: [
+                  for (final entry in chapter.$2)
+                    _TimelineStrip(entry: entry),
+                ],
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  List<Widget> _rowsFor(
-    BuildContext context,
-    List<HomeEntry> entries,
-    double indent,
-  ) {
-    return [
-      for (var index = 0; index < entries.length; index++) ...[
-        _TimelinePersonRow(entry: entries[index]),
-        if (index < entries.length - 1) QHairline(indent: indent),
-      ],
-    ];
+  /// Consecutive month chapters while keeping global days-until order.
+  List<(String, List<HomeEntry>)> _monthChapters(List<HomeEntry> entries) {
+    if (entries.isEmpty) return const [];
+    final chapters = <(String, List<HomeEntry>)>[];
+    String? currentLabel;
+    var bucket = <HomeEntry>[];
+
+    for (final entry in entries) {
+      final label = _months[entry.nextBirthday.month - 1].toUpperCase();
+      if (currentLabel == null) {
+        currentLabel = label;
+        bucket = [entry];
+        continue;
+      }
+      if (label == currentLabel) {
+        bucket.add(entry);
+        continue;
+      }
+      chapters.add((currentLabel, bucket));
+      currentLabel = label;
+      bucket = [entry];
+    }
+    if (currentLabel != null && bucket.isNotEmpty) {
+      chapters.add((currentLabel, bucket));
+    }
+    return chapters;
   }
 }
 
-/// A section title that sits on the rows beneath it, not in an ocean of air.
-class _TimelineSectionTitle extends StatelessWidget {
-  const _TimelineSectionTitle(this.title, {required this.isFirst});
+class _MonthHeading extends StatelessWidget {
+  const _MonthHeading({required this.title, required this.isFirst});
 
   final String title;
   final bool isFirst;
@@ -115,22 +141,36 @@ class _TimelineSectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+    final rule = q.color.textTertiary.withValues(alpha: 0.45);
+
+    // No bottom gap — first strip chain hangs from this rule via geometry.
     return Padding(
       padding: EdgeInsets.only(
-        top: isFirst ? q.space.xs : q.space.xl,
-        bottom: q.space.sm,
+        top: isFirst ? q.space.sm : q.space.xl,
       ),
-      child: Text(
-        title,
-        textScaler: context.nameTextScaler,
-        style: q.text.sectionTitle.tinted(q.color.textPrimary),
+      child: Row(
+        children: [
+          Expanded(child: Container(height: 1, color: rule)),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: q.space.md),
+            child: Text(
+              title,
+              textScaler: context.structuralTextScaler,
+              style: q.inked(
+                q.text.decorativeLabel,
+                tone: QuietInkTone.secondary,
+              ),
+            ),
+          ),
+          Expanded(child: Container(height: 1, color: rule)),
+        ],
       ),
     );
   }
 }
 
-class _TimelinePersonRow extends ConsumerWidget {
-  const _TimelinePersonRow({required this.entry});
+class _TimelineStrip extends ConsumerWidget {
+  const _TimelineStrip({required this.entry});
 
   final HomeEntry entry;
 
@@ -138,12 +178,11 @@ class _TimelinePersonRow extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final photo = ref.watch(personPhotoProvider(entry.profile?.photoId));
 
-    return QPersonRow(
+    return QBirthdayStrip(
       displayName: entry.person.displayName,
       seed: entry.person.id,
       daysUntil: entry.daysUntil,
-      turningAge: entry.turningAge,
-      nextBirthdayLine: entry.nextBirthdayLine,
+      dateLabel: entry.birthdayDateLabel,
       countdownText: entry.countdownText,
       photo: photo.asData?.value,
       heroTag: 'person-${entry.person.id}',

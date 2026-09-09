@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:kin/domain/models/notification_plan.dart';
+import 'package:kin/notifications/android_schedule_mode.dart';
 import 'package:kin/notifications/android_system_settings.dart';
 import 'package:kin/notifications/channels.dart';
 import 'package:kin/notifications/notification_service.dart';
@@ -59,6 +60,7 @@ class FlutterLocalNotificationService implements NotificationService {
     if (androidPlugin != null) {
       await androidPlugin.createNotificationChannel(birthdayTodayChannel);
       await androidPlugin.createNotificationChannel(birthdayUpcomingChannel);
+      await androidPlugin.createNotificationChannel(personalReminderChannel);
     }
 
     _initialized = true;
@@ -80,9 +82,7 @@ class FlutterLocalNotificationService implements NotificationService {
     );
 
     final exactState = await exactAlarmState();
-    final scheduleMode = exactState == AndroidCapabilityState.denied
-        ? AndroidScheduleMode.inexactAllowWhileIdle
-        : AndroidScheduleMode.exactAllowWhileIdle;
+    final scheduleMode = androidScheduleModeFor(exactState);
 
     await _plugin.zonedSchedule(
       id: plan.stableId,
@@ -219,9 +219,11 @@ class FlutterLocalNotificationService implements NotificationService {
     }
     final decoded = decodeNotificationPayload(payload);
     return NotificationLaunchRequest(
+      source: decoded.source,
       personId: decoded.personId,
+      reminderId: decoded.reminderId,
       notificationId: response?.id,
-      ruleKind: decoded.ruleKind.storageValue,
+      ruleKind: decoded.ruleKind?.storageValue,
       occurrenceYear: decoded.occurrenceYear,
     );
   }

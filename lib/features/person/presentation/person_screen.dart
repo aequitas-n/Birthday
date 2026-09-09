@@ -54,8 +54,40 @@ class _PersonScreenState extends ConsumerState<PersonScreen> {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final summary = ref.watch(personSummaryProvider(widget.personId));
+    final personAsync = ref.watch(personStreamProvider(widget.personId));
 
+    if (personAsync.isLoading) {
+      return QScreen(
+        child: Center(
+          child: SizedBox.square(
+            dimension: 16,
+            child: QArc(color: q.color.textTertiary),
+          ),
+        ),
+      );
+    }
+
+    if (personAsync.hasError) {
+      return QScreen(
+        child: Center(
+          child: QButton.tertiary(
+            label: 'Go back',
+            onPressed: () => context.pop(),
+          ),
+        ),
+      );
+    }
+
+    final person = personAsync.value;
+    if (person == null) {
+      // Soft-deleted or missing — leave quietly instead of spinning forever.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted && context.canPop()) context.pop();
+      });
+      return const QScreen(child: SizedBox.shrink());
+    }
+
+    final summary = ref.watch(personSummaryProvider(widget.personId));
     if (summary == null) {
       return QScreen(
         child: Center(
@@ -372,10 +404,7 @@ class _MomentsPlate extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
 
-    return QSurface(
-      elevation: QuietElevationLevel.hairline,
-      radius: q.radius.xl,
-      padding: EdgeInsets.all(q.space.xl),
+    return _PersonParchmentPlate(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -384,7 +413,10 @@ class _MomentsPlate extends ConsumerWidget {
               Expanded(
                 child: Text(
                   'Moments',
-                  style: q.text.headline.tinted(q.color.textPrimary),
+                  style: q.inked(
+                    q.text.headline,
+                    surface: QuietSurfaceKind.paper,
+                  ),
                 ),
               ),
               QButton.tertiary(
@@ -404,7 +436,11 @@ class _MomentsPlate extends ConsumerWidget {
           if (photos.isEmpty)
             Text(
               'Save a photo of a moment you want to keep.',
-              style: q.text.body.tinted(q.color.textSecondary),
+              style: q.inked(
+                q.text.body,
+                surface: QuietSurfaceKind.paper,
+                tone: QuietInkTone.secondary,
+              ),
             )
           else
             Column(
@@ -414,30 +450,32 @@ class _MomentsPlate extends ConsumerWidget {
                   photos: photos,
                   displayName: displayName,
                 ),
-                SizedBox(height: q.space.md),
-                QPressable(
-                  onTap: () => showMomentsGallery(
-                    context: context,
-                    ref: ref,
-                    person: person,
-                    photos: photos,
-                    displayName: displayName,
-                    profile: profile,
-                  ),
-                  radius: q.radius.md,
-                  semanticLabel: 'Open all moments',
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: q.space.sm),
-                    child: Text(
-                      photos.length == 1
-                          ? 'Tap to open'
-                          : photos.length == 2
-                          ? '1 more behind — tap to see all'
-                          : '${photos.length - 1} more behind — tap to see all',
-                      style: q.text.metadata.tinted(q.color.accent),
+                if (photos.length > 1) ...[
+                  SizedBox(height: q.space.md),
+                  QPressable(
+                    onTap: () => showMomentsGallery(
+                      context: context,
+                      ref: ref,
+                      person: person,
+                      photos: photos,
+                      displayName: displayName,
+                      profile: profile,
+                    ),
+                    radius: q.radius.md,
+                    semanticLabel: 'View all moments',
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: q.space.sm),
+                      child: Text(
+                        'View all moments →',
+                        style: q.inked(
+                          q.text.metadata,
+                          surface: QuietSurfaceKind.paper,
+                          tone: QuietInkTone.secondary,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ],
             ),
         ],
@@ -518,7 +556,10 @@ class _MomentsStackState extends ConsumerState<_MomentsStack> {
           SizedBox(height: q.space.md),
           Text(
             _heldCaption!,
-            style: q.text.body.tinted(q.color.textPrimary),
+            style: q.inked(
+              q.text.journalWriting,
+              surface: QuietSurfaceKind.paper,
+            ),
           ),
         ],
       ],
@@ -637,10 +678,7 @@ class _NotesPlateState extends ConsumerState<_NotesPlate> {
       order: _order,
     );
 
-    return QSurface(
-      elevation: QuietElevationLevel.hairline,
-      radius: q.radius.xl,
-      padding: EdgeInsets.all(q.space.xl),
+    return _PersonParchmentPlate(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -649,7 +687,10 @@ class _NotesPlateState extends ConsumerState<_NotesPlate> {
               Expanded(
                 child: Text(
                   'Notes',
-                  style: q.text.headline.tinted(q.color.textPrimary),
+                  style: q.inked(
+                    q.text.headline,
+                    surface: QuietSurfaceKind.paper,
+                  ),
                 ),
               ),
               QButton.tertiary(
@@ -669,7 +710,11 @@ class _NotesPlateState extends ConsumerState<_NotesPlate> {
           if (widget.details.isEmpty)
             Text(
               'What they love, gift ideas, or a plan you want to make for them.',
-              style: q.text.body.tinted(q.color.textSecondary),
+              style: q.inked(
+                q.text.body,
+                surface: QuietSurfaceKind.paper,
+                tone: QuietInkTone.secondary,
+              ),
             )
           else
             for (var s = 0; s < grouped.length; s++) ...[
@@ -677,7 +722,11 @@ class _NotesPlateState extends ConsumerState<_NotesPlate> {
               Text(
                 grouped[s].$1.title.toUpperCase(),
                 textScaler: context.structuralTextScaler,
-                style: q.text.eyebrow.tinted(q.color.textTertiary),
+                style: q.inked(
+                  q.text.eyebrow,
+                  surface: QuietSurfaceKind.paper,
+                  tone: QuietInkTone.tertiary,
+                ),
               ),
               SizedBox(height: q.space.xs),
               for (final (header, note) in notesWithKindHeaders(
@@ -689,7 +738,11 @@ class _NotesPlateState extends ConsumerState<_NotesPlate> {
                   Text(
                     header,
                     textScaler: context.structuralTextScaler,
-                    style: q.text.metadata.tinted(q.color.textSecondary),
+                    style: q.inked(
+                      q.text.metadata,
+                      surface: QuietSurfaceKind.paper,
+                      tone: QuietInkTone.secondary,
+                    ),
                   ),
                   SizedBox(height: q.space.xs),
                 ] else if (note != grouped[s].$2.first)
@@ -761,13 +814,20 @@ class _DetailMemoryRow extends ConsumerWidget {
           children: [
             Text(
               note.value,
-              style: q.text.body.tinted(q.color.textPrimary),
+              style: q.inked(
+                q.text.journalWriting,
+                surface: QuietSurfaceKind.paper,
+              ),
             ),
             if (subtitle != null) ...[
               SizedBox(height: q.space.xs),
               Text(
                 subtitle,
-                style: q.text.metadata.tinted(q.color.textTertiary),
+                style: q.inked(
+                  q.text.metadata,
+                  surface: QuietSurfaceKind.paper,
+                  tone: QuietInkTone.tertiary,
+                ),
               ),
             ],
           ],
@@ -783,6 +843,37 @@ String _metric(PersonSummary summary) {
     1 => 'Tomorrow',
     final days => '$days days',
   };
+}
+
+/// Cream parchment plate for Moments / Notes — same desk contrast as toggles.
+class _PersonParchmentPlate extends StatelessWidget {
+  const _PersonParchmentPlate({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final i = q.interactive;
+
+    return QuietControlSurfaceScope(
+      surface: QuietControlSurface.parchment,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: i.sheet,
+          borderRadius: BorderRadius.circular(q.radius.xl),
+          border: Border.all(
+            color: i.sheetBorder,
+            width: context.hairlineWidth,
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(q.space.xl),
+          child: child,
+        ),
+      ),
+    );
+  }
 }
 
 String _support(PersonSummary summary) {
@@ -860,12 +951,8 @@ Future<void> _showPersonActions(
       );
     case 2:
       await ref.read(personRepositoryProvider).softDelete(person.id);
-      try {
-        await ref.read(notificationCoordinatorProvider).synchronize();
-      } on Object {
-        // Reminder sync is best-effort.
-      }
-      if (context.mounted) context.pop();
+      if (context.mounted && context.canPop()) context.pop();
+      scheduleNotificationSync(ref);
   }
 }
 
@@ -884,6 +971,7 @@ class _EditBirthdaySheetState extends ConsumerState<_EditBirthdaySheet> {
   late final TextEditingController _yearController;
   CityRecord? _location;
   int? _month;
+  bool _showErrors = false;
 
   @override
   void initState() {
@@ -917,6 +1005,13 @@ class _EditBirthdaySheetState extends ConsumerState<_EditBirthdaySheet> {
 
   @override
   Widget build(BuildContext context) {
+    final nameError = _showErrors && _nameController.text.trim().isEmpty
+        ? 'Add a name.'
+        : null;
+    final birthdayError = _showErrors
+        ? _birthdayValidationError()
+        : null;
+
     return QSheet(
       title: 'Edit birthday',
       bottom: QBottomActions(
@@ -936,6 +1031,10 @@ class _EditBirthdaySheetState extends ConsumerState<_EditBirthdaySheet> {
               controller: _nameController,
               label: 'Name',
               placeholder: 'Name',
+              error: nameError,
+              onChanged: (_) {
+                if (_showErrors) setState(() => _showErrors = false);
+              },
             ),
             QDateField(
               dayController: _dayController,
@@ -943,10 +1042,20 @@ class _EditBirthdaySheetState extends ConsumerState<_EditBirthdaySheet> {
               monthLabel: _month == null ? null : _monthNames[_month! - 1],
               onMonthPressed: () => _showMonthPicker(
                 context: context,
-                onSelected: (value) => setState(() => _month = value),
+                onSelected: (value) => setState(() {
+                  _month = value;
+                  if (_showErrors) _showErrors = false;
+                }),
                 selectedMonth: _month,
               ),
+              error: birthdayError,
               helper: 'The year is optional.',
+              onDayChanged: (_) {
+                if (_showErrors) setState(() => _showErrors = false);
+              },
+              onYearChanged: (_) {
+                if (_showErrors) setState(() => _showErrors = false);
+              },
             ),
             const QSectionTitle(
               'Where they live',
@@ -971,12 +1080,28 @@ class _EditBirthdaySheetState extends ConsumerState<_EditBirthdaySheet> {
     );
   }
 
+  String? _birthdayValidationError() {
+    final day = int.tryParse(_dayController.text.trim());
+    if (day == null || _month == null) return 'Pick a birthday.';
+    final maxDay = DateTime(2024, _month! + 1, 0).day;
+    if (day < 1 || day > maxDay) return 'Pick a real date.';
+    final yearText = _yearController.text.trim();
+    if (yearText.isNotEmpty && int.tryParse(yearText) == null) {
+      return 'Use 4 digits for the year.';
+    }
+    return null;
+  }
+
   Future<void> _save() async {
     final day = int.tryParse(_dayController.text.trim());
     final year = _yearController.text.trim().isEmpty
         ? null
         : int.tryParse(_yearController.text.trim());
-    if (_nameController.text.trim().isEmpty || day == null || _month == null) {
+    if (_nameController.text.trim().isEmpty ||
+        day == null ||
+        _month == null ||
+        _birthdayValidationError() != null) {
+      setState(() => _showErrors = true);
       return;
     }
     await ref

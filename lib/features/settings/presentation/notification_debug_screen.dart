@@ -127,7 +127,7 @@ class _Body extends StatelessWidget {
         else
           for (final plan in snapshot.desiredPlans.take(12)) ...[
             Text(
-              '${plan.personId} · ${plan.ruleId}',
+              '${plan.source.storageValue} · ${plan.personId ?? plan.reminderId} · ${plan.ruleId ?? ''}',
               style: q.text.label.tinted(q.color.textPrimary),
             ),
             SizedBox(height: q.space.hair),

@@ -4,7 +4,9 @@ import 'package:kin/core/clock.dart';
 import 'package:kin/core/id.dart';
 import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/repositories/person_repository_drift.dart';
+import 'package:kin/data/repositories/profile_repository_drift.dart';
 import 'package:kin/domain/models/person.dart';
+import 'package:kin/domain/models/profile.dart';
 
 void main() {
   group('DriftPersonRepository', () {
@@ -66,6 +68,58 @@ void main() {
       final results = await repository.search('iris');
 
       expect(results, isEmpty);
+    });
+
+    test('soft delete cascades to profile and notes', () async {
+      final person = await repository.save(
+        Person(
+          id: '',
+          displayName: 'Cascade Test',
+          birthday: const PartialDate(month: 5, day: 10),
+          sortKey: '',
+          createdAt: DateTime.utc(2026, 7, 28),
+          updatedAt: DateTime.utc(2026, 7, 28),
+        ),
+      );
+
+      final profileRepo = DriftProfileRepository(
+        database,
+        const _FixedIdGenerator('profile-001'),
+        const _FixedClock(),
+      );
+      final profile = await profileRepo.save(
+        RelationshipProfile(
+          id: '',
+          personId: person.id,
+          nickname: 'Cas',
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026),
+        ),
+      );
+
+      await database.into(database.notes).insert(
+        NotesCompanion.insert(
+          id: 'note-1',
+          profileId: profile.id,
+          kind: 'free',
+          value: 'A note',
+          position: 0,
+          createdAt: DateTime.utc(2026).millisecondsSinceEpoch,
+          updatedAt: DateTime.utc(2026).millisecondsSinceEpoch,
+        ),
+      );
+
+      await repository.softDelete(person.id);
+
+      final profileRow = await (database.select(database.profiles)
+            ..where((tbl) => tbl.id.equals(profile.id)))
+          .getSingle();
+      final noteRow = await (database.select(database.notes)
+            ..where((tbl) => tbl.id.equals('note-1')))
+          .getSingle();
+
+      expect(profileRow.deletedAt, isNotNull);
+      expect(noteRow.deletedAt, isNotNull);
     });
   });
 }

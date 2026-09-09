@@ -9,7 +9,7 @@ enum StoredThemeMode {
   static StoredThemeMode fromStorage(String value) {
     return values.firstWhere(
       (entry) => entry.name == value,
-      orElse: () => StoredThemeMode.system,
+      orElse: () => StoredThemeMode.light,
     );
   }
 }
@@ -17,12 +17,13 @@ enum StoredThemeMode {
 @immutable
 class AppSettings {
   const AppSettings({
-    this.themeMode = StoredThemeMode.system,
+    this.themeMode = StoredThemeMode.light,
     this.amoled = false,
     this.showDetailsOnLockScreen = true,
     this.notificationsEnabled = false,
     this.onboardingCompletedAt,
     this.deviceTimezoneCache,
+    this.reminderTimezone,
     this.lastReconciledAt,
   });
 
@@ -32,6 +33,9 @@ class AppSettings {
   final bool notificationsEnabled;
   final DateTime? onboardingCompletedAt;
   final String? deviceTimezoneCache;
+
+  /// IANA zone for personal reminder scheduling. Null → use device zone.
+  final String? reminderTimezone;
   final DateTime? lastReconciledAt;
 
   AppSettings copyWith({
@@ -41,6 +45,7 @@ class AppSettings {
     bool? notificationsEnabled,
     Object? onboardingCompletedAt = _sentinel,
     Object? deviceTimezoneCache = _sentinel,
+    Object? reminderTimezone = _sentinel,
     Object? lastReconciledAt = _sentinel,
   }) {
     return AppSettings(
@@ -55,6 +60,9 @@ class AppSettings {
       deviceTimezoneCache: deviceTimezoneCache == _sentinel
           ? this.deviceTimezoneCache
           : deviceTimezoneCache as String?,
+      reminderTimezone: reminderTimezone == _sentinel
+          ? this.reminderTimezone
+          : reminderTimezone as String?,
       lastReconciledAt: lastReconciledAt == _sentinel
           ? this.lastReconciledAt
           : lastReconciledAt as DateTime?,
@@ -70,6 +78,7 @@ class AppSettings {
         other.notificationsEnabled == notificationsEnabled &&
         other.onboardingCompletedAt == onboardingCompletedAt &&
         other.deviceTimezoneCache == deviceTimezoneCache &&
+        other.reminderTimezone == reminderTimezone &&
         other.lastReconciledAt == lastReconciledAt;
   }
 
@@ -81,6 +90,7 @@ class AppSettings {
     notificationsEnabled,
     onboardingCompletedAt,
     deviceTimezoneCache,
+    reminderTimezone,
     lastReconciledAt,
   );
 }

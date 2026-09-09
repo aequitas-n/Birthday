@@ -5,14 +5,21 @@ import 'package:kin/app/person_editor_launcher.dart';
 import 'package:kin/app/profile_creation_launcher.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/fields/q_people_search_strip.dart';
+import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
-import 'package:kin/design/components/text/q_voice.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 // ignore: always_use_package_imports -- ARCH-03 requires relative imports within a feature
 import 'birthday_timeline_page.dart';
 // ignore: always_use_package_imports -- ARCH-03
 import 'relationship_gallery_page.dart';
+
+/// Two ways of looking at the same people.
+enum HomeScreenMode {
+  birthdays,
+  people,
+}
 
 /// Two ways of looking at the same people.
 enum _HomeMode {
@@ -23,10 +30,17 @@ enum _HomeMode {
   const _HomeMode(this.label);
 
   final String label;
+
+  static _HomeMode from(HomeScreenMode mode) => switch (mode) {
+    HomeScreenMode.birthdays => _HomeMode.birthdays,
+    HomeScreenMode.people => _HomeMode.people,
+  };
 }
 
 class HomeScreen extends ConsumerStatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({this.initialMode = HomeScreenMode.birthdays, super.key});
+
+  final HomeScreenMode initialMode;
 
   @override
   ConsumerState<HomeScreen> createState() => _HomeScreenState();
@@ -34,24 +48,25 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late final PageController _pageController;
-  _HomeMode _mode = _HomeMode.birthdays;
+  late _HomeMode _mode;
+  final _peopleSearchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _mode = _HomeMode.from(widget.initialMode);
+    _pageController = PageController(initialPage: widget.initialMode.index);
   }
 
   @override
   void dispose() {
+    _peopleSearchController.dispose();
     _pageController.dispose();
     super.dispose();
   }
 
   void _goTo(_HomeMode mode) {
     if (mode == _mode) return;
-    // Title and tab chrome follow the tap immediately; the pager catches up.
-    // Waiting for [onPageChanged] left the masthead a beat behind and felt sticky.
     setState(() => _mode = mode);
     _pageController.animateToPage(
       mode.index,
@@ -69,38 +84,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                context.gutter,
-                q.space.base,
-                context.gutter,
-                0,
-              ),
-              child: _Masthead(
-                mode: _mode,
-                onSettings: () => context.push('/settings'),
-                onAdd: () {
-                  if (_mode == _HomeMode.people) {
-                    showProfileCreationChooser(context: context, ref: ref);
-                  } else {
-                    showAddPersonFlow(context, ref);
-                  }
-                },
-              ),
+            _Masthead(
+              mode: _mode,
+              onSettings: () => context.push('/settings'),
+              onAdd: () {
+                if (_mode == _HomeMode.people) {
+                  showProfileCreationChooser(context: context, ref: ref);
+                } else {
+                  showAddPersonFlow(context, ref);
+                }
+              },
             ),
-            SizedBox(height: q.space.md),
+            SizedBox(height: q.space.sm),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: context.gutter),
               child: _ModeSwitch(current: _mode, onSelected: _goTo),
             ),
+            if (_mode == _HomeMode.people) ...[
+              SizedBox(height: q.space.xs),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: context.gutter),
+                child: QPeopleSearchStrip(
+                  controller: _peopleSearchController,
+                  placeholder: 'Search people',
+                  onChanged: (_) => setState(() {}),
+                ),
+              ),
+              SizedBox(height: q.space.md),
+            ],
             Expanded(
               child: PageView(
                 controller: _pageController,
                 onPageChanged: (page) =>
                     setState(() => _mode = _HomeMode.values[page]),
-                children: const [
-                  _HomePane(child: BirthdayTimelinePage()),
-                  _HomePane(child: RelationshipGalleryPage()),
+                children: [
+                  const _HomePane(child: BirthdayTimelinePage()),
+                  _HomePane(
+                    compact: true,
+                    child: RelationshipGalleryPage(
+                      query: _peopleSearchController.text,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -111,38 +135,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
-/// One scrolling pane of the home pager.
+/// One pane of the home pager.
+///
+/// Birthdays owns its own [ListView]. People is a fixed viewport (carousel).
 class _HomePane extends StatelessWidget {
-  const _HomePane({required this.child});
+  const _HomePane({required this.child, this.compact = false});
 
   final Widget child;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    return CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: EdgeInsets.fromLTRB(
-            context.gutter,
-            q.space.sm,
-            context.gutter,
-            q.space.emptiness,
-          ),
-          sliver: SliverFillRemaining(
-            hasScrollBody: false,
-            child: child,
-          ),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        context.gutter,
+        q.space.sm,
+        context.gutter,
+        compact ? 0 : q.space.sm,
+      ),
+      child: child,
     );
   }
 }
 
-/// Compact Kin chrome: literary title, then the Birthdays / People place.
-///
-/// Matches Journal's voice hierarchy — one screen title, not a stacked brand
-/// eyebrow competing with the mode name.
+/// Compact Kin chrome — title always Kin; subtitle is a tab-contextual quote.
 class _Masthead extends StatelessWidget {
   const _Masthead({
     required this.mode,
@@ -154,33 +171,15 @@ class _Masthead extends StatelessWidget {
   final VoidCallback onSettings;
   final VoidCallback onAdd;
 
+  static const _birthdaysQuote = 'The days worth remembering.';
+  static const _peopleQuote = 'The people worth remembering.';
+
   @override
   Widget build(BuildContext context) {
-    final q = context.quiet;
-
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ExcludeSemantics(
-                child: QVoice(
-                  'Kin',
-                  style: q.text.voiceLg.tinted(q.color.textPrimary),
-                ),
-              ),
-              SizedBox(height: q.space.xs),
-              // No crossfade: AnimatedSwitcher stacked both labels and flashed
-              // "Birthdays" through "People". A plain swap matches the tap.
-              Text(
-                mode.label,
-                textScaler: context.structuralTextScaler,
-                style: q.text.archiveMeta.tinted(q.color.textSecondary),
-              ),
-            ],
-          ),
-        ),
+    return QDiaryTopBar(
+      title: 'Kin',
+      subtitle: mode == _HomeMode.people ? _peopleQuote : _birthdaysQuote,
+      actions: [
         QIconButton(
           glyph: QuietGlyph.plus,
           onPressed: onAdd,
@@ -232,8 +231,8 @@ class _ModeSwitch extends StatelessWidget {
                       mode.label,
                       textScaler: context.structuralTextScaler,
                       style: mode == current
-                          ? q.text.buttonLabel.tinted(q.color.textPrimary)
-                          : q.text.label.tinted(q.color.textTertiary),
+                          ? q.inked(q.text.buttonLabel)
+                          : q.inked(q.text.label, tone: QuietInkTone.secondary),
                     ),
                   ),
                   AnimatedOpacity(

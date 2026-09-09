@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:kin/design/tokens/color_tokens.dart';
 
-/// Journal mood colours — keyed by storage id, no domain import.
+/// Journal mood wash colours — keyed by storage id, no domain import.
+///
+/// Used for subtle calendar chips and legacy accents. Card personality comes
+/// from Vintage mood illustration assets, not these washes.
 abstract final class JournalMoodColors {
   static (Color fill, Color foreground) resolve(
     String moodId, {
@@ -16,16 +19,14 @@ abstract final class JournalMoodColors {
         dark ? ColorTokens.moodJoyfulDark : ColorTokens.moodJoyfulLight,
       'calm' => dark ? ColorTokens.moodCalmDark : ColorTokens.moodCalmLight,
       'sad' => dark ? ColorTokens.moodSadDark : ColorTokens.moodSadLight,
-      'reflective' =>
-        dark ? ColorTokens.moodReflectiveDark : ColorTokens.moodReflectiveLight,
-      'nostalgic' =>
+      'affection' =>
         dark ? ColorTokens.moodNostalgicDark : ColorTokens.moodNostalgicLight,
       'anxious' =>
         dark ? ColorTokens.moodAnxiousDark : ColorTokens.moodAnxiousLight,
-      'grateful' =>
-        dark ? ColorTokens.moodGratefulDark : ColorTokens.moodGratefulLight,
-      'excited' =>
+      'frustrated' =>
         dark ? ColorTokens.moodExcitedDark : ColorTokens.moodExcitedLight,
+      'surprised' =>
+        dark ? ColorTokens.moodGratefulDark : ColorTokens.moodGratefulLight,
       _ => dark ? ColorTokens.moodNeutralDark : ColorTokens.moodNeutralLight,
     };
     return (fill, foreground);

@@ -6,20 +6,31 @@ import 'package:kin/app/person_editor_launcher.dart';
 import 'package:kin/app/router.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
+import 'package:kin/design/components/feedback/q_arc.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/journal/q_mood_illustration.dart';
+import 'package:kin/design/components/journal/q_today_empty_journal_invite.dart';
+import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
 import 'package:kin/design/components/rows/q_person_row.dart';
 import 'package:kin/design/components/surfaces/q_hairline.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/theme/vintage_diary_background.dart';
+import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
+import 'package:kin/domain/models/personal_reminder.dart';
 import 'package:kin/features/home/application/home_providers.dart';
 import 'package:kin/features/journal/application/journal_providers.dart';
 import 'package:kin/features/person/application/person_detail_providers.dart';
+import 'package:kin/features/reminders/application/reminder_providers.dart';
 import 'package:kin/features/today/application/today_providers.dart';
 
-/// Universal front door — what matters today across Journal and Kin.
+/// Universal front door — what matters today across Journal, Reminders, and Kin.
+///
+/// One editorial daily page: compact identity, generous journal card, tight
+/// section rhythm so Coming up reaches the first viewport without feeling dense.
 class TodayScreen extends ConsumerWidget {
   const TodayScreen({super.key});
 
@@ -48,10 +59,16 @@ class TodayScreen extends ConsumerWidget {
     'Sunday',
   ];
 
+  /// Memories shown on Today — invitation, not the full day archive.
+  static const _journalPreviewLimit = 2;
+
+  /// Reminders shown before “View all”.
+  static const _reminderPreviewLimit = 3;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final q = context.quiet;
-    final j = q.journal;
+    final space = q.space;
     final today = ref.watch(journalTodayProvider);
     final dateKey = today.storageKey;
     final entries =
@@ -63,40 +80,43 @@ class TodayScreen extends ConsumerWidget {
         if (entry.daysUntil > 0) entry,
     ];
     final peopleLoading = ref.watch(peopleStreamProvider).isLoading;
+    final reminders = [
+      ...ref.watch(todayActiveRemindersProvider),
+    ]..sort((a, b) => a.localTime.compareTo(b.localTime));
 
     return QScreen(
-      canvasColor: j.desk,
       child: QMeasure(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                context.gutter,
-                q.space.base,
-                context.gutter,
-                0,
-              ),
-              child: _Masthead(
-                onSettings: () => context.push('/settings'),
-                onAddPerson: () => showAddPersonFlow(context, ref),
-              ),
+            QDiaryTopBar(
+              title: 'Today',
+              actions: [
+                QIconButton(
+                  glyph: QuietGlyph.plus,
+                  onPressed: () => showAddPersonFlow(context, ref),
+                  semanticLabel: 'Add someone',
+                ),
+                QIconButton(
+                  glyph: QuietGlyph.settings,
+                  onPressed: () => context.push('/settings'),
+                  semanticLabel: 'Settings',
+                ),
+              ],
             ),
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.fromLTRB(
                   context.gutter,
-                  q.space.xl,
+                  q.space.sectionLead,
                   context.gutter,
-                  q.space.emptiness,
+                  space.pageBottom,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _DateIdentity(today: today),
-                    SizedBox(height: q.space.xl),
-                    const QHairline(),
-                    SizedBox(height: q.space.xl),
+                    _DateStamp(today: today),
+                    SizedBox(height: space.sectionGap),
                     _TodayJournalSection(
                       today: today,
                       entries: entries,
@@ -114,15 +134,16 @@ class TodayScreen extends ConsumerWidget {
                         },
                       ),
                     ),
+                    SizedBox(height: space.cardToSection),
+                    _TodayRemindersSection(
+                      reminders: reminders,
+                      onOpen: () => context.push(AppRoute.reminders.path),
+                    ),
                     if (birthdaysToday.isNotEmpty) ...[
-                      SizedBox(height: q.space.xxl),
-                      const QHairline(),
-                      SizedBox(height: q.space.xl),
+                      SizedBox(height: space.sectionGap),
                       _BirthdayTodaySection(entries: birthdaysToday),
                     ],
-                    SizedBox(height: q.space.xxl),
-                    const QHairline(),
-                    SizedBox(height: q.space.xl),
+                    SizedBox(height: space.sectionGap),
                     _ComingUpSection(
                       entries: upcoming,
                       loading: peopleLoading,
@@ -161,55 +182,15 @@ class TodayScreen extends ConsumerWidget {
   }
 }
 
-class _Masthead extends StatelessWidget {
-  const _Masthead({
-    required this.onSettings,
-    required this.onAddPerson,
-  });
-
-  final VoidCallback onSettings;
-  final VoidCallback onAddPerson;
-
-  @override
-  Widget build(BuildContext context) {
-    final q = context.quiet;
-    final j = q.journal;
-
-    return Row(
-      children: [
-        Expanded(
-          child: ExcludeSemantics(
-            child: Text(
-              'Kin',
-              textScaler: context.nameTextScaler,
-              style: q.text.voiceLg.tinted(j.ink),
-            ),
-          ),
-        ),
-        QIconButton(
-          glyph: QuietGlyph.plus,
-          onPressed: onAddPerson,
-          semanticLabel: 'Add someone',
-        ),
-        QIconButton(
-          glyph: QuietGlyph.settings,
-          onPressed: onSettings,
-          semanticLabel: 'Settings',
-        ),
-      ],
-    );
-  }
-}
-
-class _DateIdentity extends StatelessWidget {
-  const _DateIdentity({required this.today});
+/// Date + weekday under the parchment top strip.
+class _DateStamp extends StatelessWidget {
+  const _DateStamp({required this.today});
 
   final LocalCalendarDate today;
 
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
     final weekday =
         TodayScreen._weekdays[DateTime(
               today.year,
@@ -222,19 +203,13 @@ class _DateIdentity extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Today',
-          textScaler: context.nameTextScaler,
-          style: q.text.sectionTitle.tinted(j.ink),
-        ),
-        SizedBox(height: q.space.xs),
-        Text(
           '${today.day} ${TodayScreen._months[today.month - 1]} ${today.year}',
-          style: q.text.archiveMeta.tinted(j.inkMuted),
+          style: q.inked(q.text.uiDate, tone: QuietInkTone.secondary),
         ),
         SizedBox(height: q.space.hair),
         Text(
           weekday,
-          style: q.text.archiveCaption.tinted(j.inkMuted),
+          style: q.inked(q.text.uiCaption, tone: QuietInkTone.tertiary),
         ),
       ],
     );
@@ -259,104 +234,115 @@ class _TodayJournalSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
-    final preview = entries.take(3).toList(growable: false);
+    final space = q.space;
+    final preview = entries
+        .take(TodayScreen._journalPreviewLimit)
+        .toList(growable: false);
     final hasEntries = preview.isNotEmpty;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.baseline,
-          textBaseline: TextBaseline.alphabetic,
-          children: [
-            Expanded(
-              child: Text(
-                "Today's journal",
-                textScaler: context.nameTextScaler,
-                style: q.text.sectionTitle.tinted(j.ink),
-              ),
-            ),
-            if (hasEntries)
-              QButton.tertiary(
-                label: 'View day',
-                onPressed: onOpenDay,
-              ),
-          ],
-        ),
-        SizedBox(height: q.space.md),
-        if (!hasEntries) ...[
-          Text(
-            '${today.day}',
+        QPressable(
+          onTap: onOpenDay,
+          radius: q.radius.sm,
+          semanticLabel: "Open today's journal",
+          child: Text(
+            "Today's journal",
             textScaler: context.nameTextScaler,
-            style: q.text.voiceXl.tinted(j.ink),
+            style: q.inked(q.text.sectionTitle),
           ),
-          Text(
-            TodayScreen._months[today.month - 1],
-            style: q.text.archiveMeta.tinted(j.inkMuted),
-          ),
-          SizedBox(height: q.space.lg),
-          Text(
-            'Nothing written yet.',
-            style: q.text.voiceMd.tinted(j.ink),
-          ),
-          SizedBox(height: q.space.sm),
-          Text(
-            'What do you want to remember?',
-            style: q.text.archiveBody.tinted(j.inkMuted),
-          ),
-          SizedBox(height: q.space.xl),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: QButton.primary(
-              label: 'Add memory',
-              onPressed: onAddMemory,
-            ),
-          ),
-        ] else ...[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
+        ),
+        SizedBox(height: space.sectionLead),
+        if (!hasEntries)
+          QTodayEmptyJournalInvite(
+            child: VintageDiaryJournalCard(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '${today.day}',
                     textScaler: context.nameTextScaler,
-                    style: q.text.voiceXl.tinted(j.ink),
+                    style: q.inked(
+                      q.text.editorialBody,
+                      surface: QuietSurfaceKind.paper,
+                    ),
                   ),
                   Text(
                     TodayScreen._months[today.month - 1],
-                    style: q.text.archiveMeta.tinted(j.inkMuted),
+                    style: q.inked(
+                      q.text.decorativeLabel,
+                      surface: QuietSurfaceKind.paper,
+                      tone: QuietInkTone.secondary,
+                    ),
+                  ),
+                  SizedBox(height: space.md),
+                  Text(
+                    'Nothing written yet.',
+                    style: q.inked(
+                      q.text.diaryNote,
+                      surface: QuietSurfaceKind.paper,
+                    ),
+                  ),
+                  SizedBox(height: space.xs),
+                  Text(
+                    'What do you want to remember?',
+                    style: q.inked(
+                      q.text.journalWriting,
+                      surface: QuietSurfaceKind.paper,
+                      tone: QuietInkTone.secondary,
+                    ),
+                  ),
+                  SizedBox(height: space.base),
+                  QButton.primary(
+                    label: 'Add memory',
+                    onPressed: onAddMemory,
                   ),
                 ],
               ),
-              SizedBox(width: q.space.xl),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final (index, entry) in preview.indexed) ...[
-                      if (index > 0) SizedBox(height: q.space.md),
-                      _MemoryPreviewLine(
-                        entry: entry,
-                        onTap: () => onOpenEntry(entry),
-                      ),
-                    ],
+            ),
+          )
+        else
+          QMoodDecoratedPaper(
+            moodId: preview.first.mood?.storageValue,
+            secondMoodId: preview.length > 1
+                ? preview[1].mood?.storageValue
+                : null,
+            placement: MoodCardPlacement.todayFirstOverlap,
+            child: VintageDiaryJournalCard(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${today.day} ${TodayScreen._months[today.month - 1]}',
+                    style: q.inked(
+                      q.text.decorativeLabel,
+                      surface: QuietSurfaceKind.paper,
+                      tone: QuietInkTone.secondary,
+                    ),
+                  ),
+                  SizedBox(height: space.sm),
+                  for (final (index, entry) in preview.indexed) ...[
+                    if (index > 0) SizedBox(height: space.listItem),
+                    _MemoryPreviewLine(
+                      entry: entry,
+                      onTap: () => onOpenEntry(entry),
+                    ),
                   ],
-                ),
+                  SizedBox(height: space.sm),
+                  QButton.tertiary(
+                    label: "Open today's journal",
+                    onPressed: onOpenDay,
+                  ),
+                  SizedBox(height: space.xs),
+                  QButton.primary(
+                    label: 'Add memory',
+                    onPressed: onAddMemory,
+                  ),
+                ],
               ),
-            ],
-          ),
-          SizedBox(height: q.space.xl),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: QButton.primary(
-              label: 'Add memory',
-              onPressed: onAddMemory,
             ),
           ),
-        ],
       ],
     );
   }
@@ -374,35 +360,148 @@ class _MemoryPreviewLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
+    final body = entry.body.trim();
 
     return QPressable(
       onTap: onTap,
       radius: q.radius.sm,
       semanticLabel: entry.title,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: q.space.xs),
+        padding: EdgeInsets.symmetric(vertical: q.space.hair),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               entry.title,
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: q.text.archiveTitle.tinted(j.ink),
+              style: q.inked(
+                q.text.memoryTitle,
+                surface: QuietSurfaceKind.paper,
+              ),
             ),
-            if (entry.body.trim().isNotEmpty) ...[
+            if (body.isNotEmpty) ...[
               SizedBox(height: q.space.hair),
               Text(
-                entry.body.trim(),
+                body,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: q.text.archiveBody.tinted(j.inkMuted),
+                style: q.inked(
+                  q.text.journalWriting,
+                  surface: QuietSurfaceKind.paper,
+                  tone: QuietInkTone.secondary,
+                ),
               ),
             ],
           ],
         ),
       ),
+    );
+  }
+}
+
+class _TodayRemindersSection extends StatelessWidget {
+  const _TodayRemindersSection({
+    required this.reminders,
+    required this.onOpen,
+  });
+
+  final List<PersonalReminder> reminders;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final space = q.space;
+    final preview = reminders
+        .take(TodayScreen._reminderPreviewLimit)
+        .toList(growable: false);
+    final hasMore = reminders.length > preview.length;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        QPressable(
+          onTap: onOpen,
+          radius: q.radius.sm,
+          semanticLabel: 'Reminders',
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  'Reminders',
+                  textScaler: context.nameTextScaler,
+                  style: q.inked(q.text.sectionTitle),
+                ),
+              ),
+              QGlyphIcon(
+                QuietGlyph.bell,
+                color: q.color.textTertiary,
+                size: context.structuralTextScaler.scale(18),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: space.sectionLead),
+        if (preview.isEmpty)
+          QPressable(
+            onTap: onOpen,
+            radius: q.radius.sm,
+            semanticLabel: 'View all reminders',
+            child: Text(
+              'Nothing planned yet.',
+              style: q.inked(
+                q.text.emptyStateBody,
+                tone: QuietInkTone.secondary,
+              ),
+            ),
+          )
+        else ...[
+          for (final (index, reminder) in preview.indexed) ...[
+            if (index > 0) SizedBox(height: space.listItem),
+            QPressable(
+              onTap: onOpen,
+              radius: q.radius.sm,
+              semanticLabel: reminder.text,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: space.hair),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: context.structuralTextScaler.scale(72),
+                      child: Text(
+                        reminder.localTime.displayLabel,
+                        style: q.inked(
+                          q.text.uiTimestamp,
+                          tone: QuietInkTone.tertiary,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: space.md),
+                    Expanded(
+                      child: Text(
+                        reminder.text,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: q.inked(q.text.uiBody),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+          SizedBox(height: space.sm),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: QButton.tertiary(
+              label: hasMore ? 'View all reminders' : 'Open reminders',
+              onPressed: onOpen,
+            ),
+          ),
+        ],
+      ],
     );
   }
 }
@@ -415,7 +514,7 @@ class _BirthdayTodaySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
+    final space = q.space;
     final indent = personRowHairlineIndent(context);
 
     return Column(
@@ -424,9 +523,9 @@ class _BirthdayTodaySection extends StatelessWidget {
         Text(
           'Birthday today',
           textScaler: context.nameTextScaler,
-          style: q.text.sectionTitle.tinted(j.ink),
+          style: q.inked(q.text.sectionTitle),
         ),
-        SizedBox(height: q.space.md),
+        SizedBox(height: space.sectionLead),
         for (var index = 0; index < entries.length; index++) ...[
           _TodayPersonRow(
             entry: entries[index],
@@ -455,37 +554,37 @@ class _ComingUpSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final j = q.journal;
+    final space = q.space;
     final indent = personRowHairlineIndent(context);
 
-    // When birthday-today already highlighted above, still show the same
-    // people in Coming up only if they are the only upcoming — preview stays
-    // honest about who is next without inventing a second list.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Coming up',
           textScaler: context.nameTextScaler,
-          style: q.text.sectionTitle.tinted(j.ink),
+          style: q.inked(q.text.sectionTitle),
         ),
-        SizedBox(height: q.space.md),
+        SizedBox(height: space.sectionLead),
         if (loading)
-          const SizedBox.shrink()
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: space.md),
+            child: Center(
+              child: SizedBox.square(
+                dimension: 16,
+                child: QArc(color: q.color.textTertiary),
+              ),
+            ),
+          )
         else if (entries.isEmpty) ...[
           Text(
-            'No birthdays coming up.',
-            style: q.text.voiceSm.tinted(j.ink),
+            'No birthdays coming up soon.',
+            style: q.inked(q.text.emptyStateBody, tone: QuietInkTone.secondary),
           ),
-          SizedBox(height: q.space.sm),
-          Text(
-            'Add someone you would hate to forget.',
-            style: q.text.archiveBody.tinted(j.inkMuted),
-          ),
-          SizedBox(height: q.space.xl),
+          SizedBox(height: space.sm),
           Align(
             alignment: Alignment.centerLeft,
-            child: QButton.primary(
+            child: QButton.tertiary(
               label: 'Add someone',
               onPressed: onAdd,
             ),
@@ -498,7 +597,7 @@ class _ComingUpSection extends StatelessWidget {
             ),
             if (index < entries.length - 1) QHairline(indent: indent),
           ],
-          SizedBox(height: q.space.xl),
+          SizedBox(height: space.sm),
           Align(
             alignment: Alignment.centerLeft,
             child: QButton.tertiary(

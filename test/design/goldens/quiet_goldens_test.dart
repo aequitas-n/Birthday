@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
-import 'package:kin/design/components/controls/q_collection_picker.dart';
 import 'package:kin/design/components/feedback/q_chip.dart';
 import 'package:kin/design/components/feedback/q_empty_state.dart';
 import 'package:kin/design/components/fields/q_field.dart';
@@ -18,9 +17,7 @@ import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/surfaces/q_card.dart';
 import 'package:kin/design/components/surfaces/q_hairline.dart';
 import 'package:kin/design/components/surfaces/q_surface.dart';
-import 'package:kin/design/components/text/q_voice.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
-import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 import '../../support/quiet_test_app.dart';
@@ -122,27 +119,18 @@ class _TypographySpecimen extends StatelessWidget {
     final ink = q.color.textPrimary;
     return _Frame(
       children: [
-        QVoice('Priya', style: q.text.voiceXxl.tinted(ink)),
-        QVoice('Priya Raman', style: q.text.voiceXl.tinted(ink)),
-        QVoice('Priya Raman', style: q.text.voiceLg.tinted(ink)),
-        Text('Peonies, the pale ones', style: q.text.voiceMd.tinted(ink)),
-        Text('Peonies, the pale ones', style: q.text.voiceSm.tinted(ink)),
-        Text('What you remember', style: q.text.sectionTitle.tinted(ink)),
-        Text('Add someone', style: q.text.title.tinted(ink)),
-        Text('Remember more than the date', style: q.text.headline.tinted(ink)),
-        Text('She loves peonies.', style: q.text.bodyLg.tinted(ink)),
-        Text('Sister · Chennai', style: q.text.body.tinted(ink)),
-        Text('Born 28 July 1997', style: q.text.dateLine.tinted(ink)),
-        Text('Oldest friend', style: q.text.relationship.tinted(ink)),
-        Text('Turn on reminders', style: q.text.label.tinted(ink)),
-        Text('Removed 4 days ago', style: q.text.caption.tinted(ink)),
-        Text('28 July · Chennai', style: q.text.metadata.tinted(ink)),
-        Text('FAVOURITE FLOWER', style: q.text.eyebrow.tinted(ink)),
-        Text('222', style: q.text.numeralXl.tinted(ink)),
-        Text('12', style: q.text.numeralHero.tinted(ink)),
-        Text('29', style: q.text.numeralLg.tinted(ink)),
-        Text('in 3', style: q.text.numeralMd.tinted(ink)),
-        Text('344 days', style: q.text.numeralSm.tinted(ink)),
+        Text('Today', style: q.text.pageTitle.tinted(ink)),
+        Text("Today's journal", style: q.text.sectionTitle.tinted(ink)),
+        Text('Priya Raman', style: q.text.personName.tinted(ink)),
+        Text('Nothing written yet.', style: q.text.diaryNote.tinted(ink)),
+        Text('Journal body on paper', style: q.text.journalWriting.tinted(ink)),
+        SizedBox(height: q.space.md),
+        Text('25 August 2026', style: q.text.uiDate.tinted(ink)),
+        Text('Tuesday · 7:30 PM', style: q.text.uiTimestamp.tinted(ink)),
+        Text('12 memories · 347 days', style: q.text.uiCount.tinted(ink)),
+        Text('Add memory', style: q.text.uiButton.tinted(ink)),
+        Text('Today · Kin · Journal', style: q.text.uiNavigation.tinted(ink)),
+        Text('Sister · Chennai', style: q.text.uiBody.tinted(ink)),
       ],
     );
   }
@@ -191,12 +179,12 @@ class _CollectionSpecimen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _Frame(
+    return const _Frame(
       children: [
-        const QSectionTitle('Collections', isFirst: true),
-        QCollectionPicker(
-          selected: QuietCollection.ocean,
-          onSelected: (_) {},
+        QSectionTitle(
+          'Vintage Diary',
+          support: 'The sole product theme.',
+          isFirst: true,
         ),
       ],
     );

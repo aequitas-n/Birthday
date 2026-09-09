@@ -37,3 +37,10 @@ flutter test --tags golden
 
 Golden baselines are platform-sensitive and are intended to be compared on the
 Ubuntu CI reference environment.
+
+there are few chnages i would like to proceed with:
+1st
+i dont feel like the primary 	
+Caveat font family suits the title, like in the home pagee, and in any page, the the header has this, make the primary as the Fraunces
+ and use the Caveat for the journal, like what i wanted, i want the jounrl motees to be old page which is done, and the note, like what people write on them to be hand written work, so chnage them 
+make the wetring on them to be the Caveat, and the primary is the Fraunces

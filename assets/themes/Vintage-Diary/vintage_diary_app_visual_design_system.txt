@@ -1,0 +1,315 @@
+VINTAGE DIARY APP — VISUAL DESIGN SYSTEM
+===============================================
+
+CORE THEME
+----------
+Vintage Diary / Old Personal Journal
+
+Overall feeling:
+- Old personal diary
+- Handwritten memories
+- Aged paper
+- Literary and nostalgic
+- Warm, intimate, slightly imperfect
+- Elegant rather than overly decorative
+
+
+COLOR SYSTEM
+------------
+
+1. PRIMARY TEXT / INK
+---------------------
+Name: Brown-Black Ink
+
+Purpose:
+- Main body text
+- Headings
+- Navigation labels
+- Journal entry text
+- Icons when a dark neutral is needed
+
+Recommended colors:
+- #332B27 — primary brown-black ink
+- #403631 — slightly softer ink
+- #594A43 — secondary text
+
+Avoid pure black (#000000), because it feels too modern and harsh.
+
+
+2. ACCENT COLOR
+---------------
+Name: Faded Burgundy / Terracotta Accents
+
+Purpose:
+- Primary buttons
+- Selected navigation
+- Important dates
+- Favorite/bookmark states
+- Emotional/highlight elements
+- Small illustrations
+- Vintage stamps
+- Decorative lines
+- Handwritten annotations
+
+Recommended colors:
+- #713D3A — deep faded burgundy
+- #8A5148 — muted burgundy
+- #A96755 — faded terracotta
+- #C99A87 — soft terracotta
+- #DCC1B3 — very pale terracotta
+
+Usage rule:
+Use burgundy/terracotta as an ACCENT, not as the dominant UI color.
+
+Suggested ratio:
+- 80% cream / aged paper
+- 15% brown-black / neutral ink
+- 5% burgundy / terracotta accent
+
+
+3. PAPER / BACKGROUND
+---------------------
+Name: Cream / Aged Paper
+
+Recommended colors:
+- #F4EEDF — warm cream
+- #EFE5D2 — aged parchment
+- #E7D8BE — darker paper variation
+- #FAF5EA — clean paper highlight
+
+The background should feel like real archival paper:
+subtle fibers, slight unevenness, very soft aging, and a gently darker edge.
+
+
+TYPOGRAPHY SYSTEM
+-----------------
+
+Use a combination of:
+1. Serif typography for the main editorial/journal feeling
+2. Typewriter typography for metadata and small labels
+3. Handwritten typography for annotations and decorative headings
+
+
+A. PRIMARY SERIF FONTS
+---------------------
+Recommended for:
+- Main headings
+- Journal titles
+- Entry titles
+- Long-form diary text
+- Quotes
+
+Recommended fonts:
+
+1. Cormorant Garamond
+   Feeling: Elegant, literary, antique, romantic
+   Best for: Large diary titles and elegant headers
+
+2. EB Garamond
+   Feeling: Classic book typography, historical, refined
+   Best for: Body text and literary journal content
+
+3. Libre Baskerville
+   Feeling: Traditional, readable, slightly editorial
+   Best for: Main diary/body text
+
+4. Lora
+   Feeling: Warm, contemporary-classic serif
+   Best for: Comfortable reading and journal entries
+
+5. Crimson Text
+   Feeling: Old book / literary / scholarly
+   Best for: Body text and quotations
+
+6. Playfair Display
+   Feeling: Dramatic vintage editorial
+   Best for: Large section titles and special headings
+
+
+B. TYPEWRITER FONTS
+-------------------
+Recommended for:
+- Dates
+- Entry metadata
+- Small labels
+- Category names
+- Location labels
+- Archive information
+- Vintage captions
+
+Recommended fonts:
+
+1. Special Elite
+   Feeling: Authentic old typewriter
+
+2. Courier Prime
+   Feeling: Classic typewriter, clean and readable
+
+3. Courier New
+   Feeling: Familiar traditional typewriter
+
+Use typewriter fonts sparingly so the interface does not feel like a developer tool.
+
+
+C. HANDWRITTEN / ANNOTATION FONTS
+---------------------------------
+Recommended for:
+- Handwritten notes
+- Little annotations
+- Marginal notes
+- Personal reminders
+- Decorative subtitles
+- Small emotional phrases
+- Diary-style labels
+
+Recommended fonts:
+
+1. Caveat
+   Feeling: Casual handwritten note
+   Best for: General annotations
+
+2. Homemade Apple
+   Feeling: Personal handwritten signature
+   Best for: Short decorative phrases
+
+3. La Belle Aurore
+   Feeling: Romantic handwritten journal
+   Best for: Diary-style annotations
+
+4. Dancing Script
+   Feeling: Elegant handwritten script
+   Best for: Decorative headings
+
+5. Patrick Hand
+   Feeling: Natural handwritten writing
+   Best for: Friendly annotations
+
+6. Shadows Into Light
+   Feeling: Light handwritten note
+   Best for: Small personal notes
+
+7. Sacramento
+   Feeling: Elegant vintage handwriting
+   Best for: Very short decorative headings
+
+
+D. RECOMMENDED HEADER COMBINATIONS
+----------------------------------
+
+Combination 1 — Classic Vintage
+- Header: Cormorant Garamond
+- Body: EB Garamond
+- Metadata: Special Elite
+- Annotation: Caveat
+
+Combination 2 — Romantic Diary
+- Header: Cormorant Garamond
+- Body: Lora
+- Metadata: Courier Prime
+- Annotation: La Belle Aurore
+
+Combination 3 — Old Book
+- Header: EB Garamond
+- Body: Crimson Text
+- Metadata: Special Elite
+- Annotation: Patrick Hand
+
+Combination 4 — Editorial Vintage
+- Header: Playfair Display
+- Body: Libre Baskerville
+- Metadata: Courier Prime
+- Annotation: Dancing Script
+
+
+RECOMMENDED DEFAULT FONT STACK
+------------------------------
+For the app, use:
+
+Primary Header:
+Cormorant Garamond
+
+Primary Body:
+EB Garamond
+
+Secondary / Metadata:
+Special Elite
+
+Handwritten Annotation:
+Caveat
+
+This combination gives the strongest Vintage Diary feeling while remaining readable.
+
+
+FLUTTER IMPLEMENTATION
+----------------------
+These fonts can be used in Flutter through the Google Fonts ecosystem/package,
+or bundled as local font assets in the Flutter project.
+
+Recommended Flutter font families:
+- Cormorant Garamond
+- EB Garamond
+- Libre Baskerville
+- Lora
+- Crimson Text
+- Playfair Display
+- Special Elite
+- Courier Prime
+- Caveat
+- Homemade Apple
+- La Belle Aurore
+- Dancing Script
+- Patrick Hand
+- Shadows Into Light
+- Sacramento
+
+Important:
+For a production app, bundle the selected font files locally if you need
+consistent rendering without relying on network font loading.
+
+
+UI STYLE RULES
+--------------
+- Keep backgrounds predominantly cream and paper-like.
+- Use brown-black instead of pure black.
+- Use burgundy/terracotta only for meaningful accents.
+- Use serif fonts as the dominant typography style.
+- Use handwritten fonts only for short annotations and decorative elements.
+- Use typewriter fonts for dates, metadata, labels, and archival details.
+- Do not use handwritten fonts for long paragraphs.
+- Avoid excessive decorative elements.
+- Keep the center of the interface clean and readable.
+- Let paper texture provide atmosphere rather than adding heavy UI decoration.
+
+
+VISUAL ELEMENTS
+---------------
+Recommended supporting elements:
+- Handwritten annotations
+- Vintage postage stamps
+- Old labels
+- Washi / aged paper tape
+- Pressed-paper edges
+- Vintage photo frames
+- Botanical ink illustrations
+- Small ink sketches
+- Faded date stamps
+- Paper clips
+- Subtle fold marks
+- Faint ink marks
+- Old archival borders
+
+
+DESIGN PRINCIPLE
+----------------
+The app should feel like:
+
+"A beautiful old diary brought into a modern digital interface."
+
+Not:
+- A red-themed modern app
+- A heavily distressed/grunge interface
+- A scrapbook overloaded with decorations
+- A fantasy medieval UI
+
+The vintage feeling should come primarily from:
+PAPER + TYPOGRAPHY + INK + SMALL DETAILS.

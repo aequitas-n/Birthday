@@ -52,6 +52,31 @@ final class QuietSpace {
 
   /// Above and below empty-state content.
   double get emptiness => 96;
+
+  // ── Editorial page rhythm (Today and peers) ─────────────────────────────
+  // Named roles over the grid so screens share intentional air — not random
+  // paddings, and not [chapter]/[scene] gaps that stretch a diary page.
+
+  /// Top inset under the safe area on an editorial page.
+  double get pageTop => base;
+
+  /// Bottom scroll clearance so last content sits above chrome / nav.
+  double get pageBottom => xxl;
+
+  /// Within an identity block (title → date → weekday).
+  double get identity => xs;
+
+  /// Section heading → first content line or card.
+  double get sectionLead => sm;
+
+  /// Between peer sections (journal → reminders → coming up).
+  double get sectionGap => xl;
+
+  /// After a physical card before the next section heading.
+  double get cardToSection => xl;
+
+  /// Compact list rows (reminders, stacked metadata).
+  double get listItem => xs;
 }
 
 /// Fixed layout measurements.
@@ -120,24 +145,29 @@ final class QuietLayout {
 
   // ── Portrait gallery ──────────────────────────────────────────────────
 
-  /// Fraction of the viewport width one gallery card occupies, leaving its
-  /// neighbours visible at the edges.
-  double get galleryViewportFraction => 0.78;
+  /// Profile card uses the full gallery viewport width. Screen gutter lives in
+  /// [_HomePane]; do not apply a second fractional width here.
+  double get galleryCardWidthFraction => 1.0;
 
-  /// Fraction of viewport height a gallery card occupies.
-  double get galleryCardHeightFraction => 0.62;
+  /// PageView page width fraction. Full width so neighbours stay off-screen
+  /// at rest; the card itself is sized by [galleryCardWidthFraction].
+  double get galleryViewportFraction => 1.0;
+
+  /// Fraction of viewport height a gallery card may occupy when height-bound.
+  double get galleryCardHeightFraction => 0.76;
 
   /// A gallery card never grows past this.
-  double get galleryCardMaxHeight => 560;
+  double get galleryCardMaxHeight => 540;
 
-  /// How much a neighbouring card shrinks, which is what reads as depth.
-  double get galleryNeighbourScale => 0.9;
+  // ── Journal of the Day ────────────────────────────────────────────────
 
-  /// How far a neighbouring card sinks, in points.
-  double get galleryNeighbourDrop => 18;
+  /// Target memory-card height as a fraction of the screen height.
+  /// Caps the deck so leftover vertical space is breathing room, not stretch.
+  double get journalDayCardHeightFraction => 0.52;
 
-  /// How far a neighbouring card fades.
-  double get galleryNeighbourFade => 0.32;
+  /// Absolute bounds for the day memory card (logical pixels).
+  double get journalDayCardMinHeight => 300;
+  double get journalDayCardMaxHeight => 560;
 
   /// Fraction of viewport height the empty state is lifted by, because true
   /// centre reads low.

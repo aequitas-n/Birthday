@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
-import 'package:kin/design/components/controls/q_collection_picker.dart';
 import 'package:kin/design/components/feedback/q_chip.dart';
 import 'package:kin/design/components/feedback/q_empty_state.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
@@ -15,7 +14,6 @@ import 'package:kin/design/components/sheets/q_choice_sheet.dart';
 import 'package:kin/design/components/surfaces/q_card.dart';
 import 'package:kin/design/components/text/q_voice.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
-import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 
 import '../support/quiet_test_app.dart';
@@ -284,7 +282,7 @@ void main() {
       expect(find.text('3'), findsOneWidget);
     });
 
-    testWidgets('is set in the Voice, so a section reads as a chapter', (
+    testWidgets('uses theme editorial sectionTitle (Fraunces in Vintage Diary)', (
       tester,
     ) async {
       await tester.pumpQuiet(const QSectionTitle('Their year'));
@@ -409,35 +407,12 @@ void main() {
     });
   });
 
-  group('QCollectionPicker', () {
-    testWidgets('paints every collection in its own paper', (tester) async {
-      QuietCollection? picked;
+  group('Vintage Diary theme label', () {
+    testWidgets('settings row shows Vintage Diary', (tester) async {
       await tester.pumpQuiet(
-        QCollectionPicker(
-          selected: QuietCollection.ember,
-          onSelected: (value) => picked = value,
-        ),
+        const Text('Vintage Diary'),
       );
-
-      // A name alone would tell the user nothing about what they are choosing.
-      expect(find.text('Autumn Ember'), findsOneWidget);
-      expect(find.text('Ocean Mist'), findsOneWidget);
-
-      await tester.tap(find.text('Ocean Mist'));
-      expect(picked, QuietCollection.ocean);
-    });
-
-    testWidgets('survives large text without clipping its names', (
-      tester,
-    ) async {
-      await tester.pumpQuiet(
-        QCollectionPicker(
-          selected: QuietCollection.ember,
-          onSelected: (_) {},
-        ),
-        textScale: 2,
-      );
-      expect(tester.takeException(), isNull);
+      expect(find.text('Vintage Diary'), findsOneWidget);
     });
   });
 }
