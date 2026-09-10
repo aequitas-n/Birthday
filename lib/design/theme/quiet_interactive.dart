@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_control_surface.dart';
 import 'package:kin/design/tokens/color_tokens.dart';
 
@@ -130,7 +131,42 @@ final class QuietInteractive {
       toggleThumbOn = ColorTokens.vdBurgundy,
       disabledSurface = ColorTokens.vdPaperParchment;
 
-  factory QuietInteractive.of({required bool dark, bool amoled = false}) {
+  /// Original Quiet Default — ember CTAs on warm paper.
+  const QuietInteractive.neutral()
+    : primaryAction = ColorTokens.ember500,
+      primaryActionPressed = ColorTokens.ember600,
+      primaryActionInk = ColorTokens.paperSurface,
+      secondaryAction = ColorTokens.paperSurface,
+      secondaryActionBorder = ColorTokens.paperHairlineStrong,
+      secondaryActionInk = ColorTokens.paperInkPrimary,
+      sheet = ColorTokens.paperSurface,
+      sheetElevated = ColorTokens.paperSurface,
+      sheetBorder = ColorTokens.paperHairline,
+      sheetGrabber = ColorTokens.paperInkTertiary,
+      ink = ColorTokens.paperInkPrimary,
+      inkSecondary = ColorTokens.paperInkSecondary,
+      inkMuted = ColorTokens.paperInkTertiary,
+      inkDisabled = ColorTokens.paperInkTertiary,
+      accent = ColorTokens.ember500,
+      selectedSurface = ColorTokens.ember50,
+      selectedInk = ColorTokens.ember700,
+      input = ColorTokens.paperSunken,
+      inputFocused = ColorTokens.paperSurface,
+      inputBorder = ColorTokens.paperHairlineStrong,
+      toggleTrackOff = ColorTokens.paperHairlineStrong,
+      toggleTrackOn = ColorTokens.ember500,
+      toggleThumbOff = ColorTokens.paperSurface,
+      toggleThumbOn = ColorTokens.paperSurface,
+      disabledSurface = ColorTokens.paperSunken;
+
+  factory QuietInteractive.of({
+    required QuietCollection collection,
+    required bool dark,
+    bool amoled = false,
+  }) {
+    if (collection == QuietCollection.quietDefault) {
+      return const QuietInteractive.neutral();
+    }
     if (amoled) return const QuietInteractive.amoled();
     if (dark) return const QuietInteractive.dark();
     return const QuietInteractive.light();

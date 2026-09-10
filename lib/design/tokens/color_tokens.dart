@@ -32,6 +32,10 @@ abstract final class ColorTokens {
   static const paperInkSecondary = Color(0xFF6B6560);
   static const paperInkTertiary = Color(0xFF948D85);
 
+  /// Supporting copy on cream journal paper — warmer/darker than [paperInkSecondary]
+  /// so secondary lines stay clear without matching primary ink.
+  static const paperInkOnPaperSecondary = Color(0xFF4A433C);
+
   // ── Dark: warm charcoal ───────────────────────────────────────────────
   // Deliberately not #121212. A neutral dark next to warm type reads blue.
   static const charcoalCanvas = Color(0xFF141311);

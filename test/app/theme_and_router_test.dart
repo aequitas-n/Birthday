@@ -9,6 +9,7 @@ import 'package:kin/app/kin_app.dart';
 import 'package:kin/app/theme_controller.dart';
 import 'package:kin/core/clock.dart';
 import 'package:kin/data/local/database/kin_database.dart';
+import 'package:kin/design/theme/product_theme_id.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/domain/models/person.dart';
 import 'package:kin/domain/models/personal_reminder.dart';
@@ -22,14 +23,23 @@ import 'package:kin/notifications/notification_service.dart';
 
 void main() {
   group('theme preference', () {
-    test('always resolves Vintage Diary regardless of platform brightness', () {
+    test('defaults to Default product theme', () {
       const preference = ThemePreference();
 
-      expect(preference.resolve(Brightness.dark).mode, QuietBrightness.light);
-      expect(preference.resolve().collection, QuietCollection.vintageDiary);
+      expect(preference.productThemeId.storageKey, 'default');
+      expect(preference.resolve().collection, QuietCollection.quietDefault);
+      expect(preference.definition.assets.backgrounds.app, isNull);
     });
 
-    test('ThemePreference is a singleton identity', () {
+    test('resolves Vintage when selected', () {
+      const preference = ThemePreference(
+        productThemeId: ProductThemeId.vintageDiary,
+      );
+      expect(preference.resolve().collection, QuietCollection.vintageDiary);
+      expect(preference.definition.assets.backgrounds.app, isNotNull);
+    });
+
+    test('ThemePreference tracks product theme id', () {
       final container = ProviderContainer(
         overrides: [
           initialThemePreferenceProvider.overrideWithValue(
@@ -40,12 +50,12 @@ void main() {
       addTearDown(container.dispose);
 
       expect(
-        container.read(themePreferenceProvider).resolve().collection,
-        QuietCollection.vintageDiary,
+        container.read(themePreferenceProvider).productThemeId,
+        ProductThemeId.quietDefault,
       );
       expect(
-        container.read(themePreferenceProvider).resolve().mode,
-        QuietBrightness.light,
+        container.read(themePreferenceProvider).resolve().collection,
+        QuietCollection.quietDefault,
       );
     });
   });

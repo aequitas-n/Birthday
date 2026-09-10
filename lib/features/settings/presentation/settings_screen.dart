@@ -4,15 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
 import 'package:kin/app/place_picker_sheet.dart';
+import 'package:kin/app/theme_controller.dart';
 import 'package:kin/data/timezone/city_dataset.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/controls/q_toggle.dart';
 import 'package:kin/design/components/rows/q_section_title.dart';
 import 'package:kin/design/components/rows/q_setting_row.dart';
+import 'package:kin/design/components/sheets/q_choice_sheet.dart';
 import 'package:kin/design/components/surfaces/q_hairline.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/components/text/q_voice.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
+import 'package:kin/design/theme/product_theme_id.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/domain/models/settings.dart';
 import 'package:kin/notifications/application/notification_coordinator.dart';
@@ -31,6 +35,10 @@ class SettingsScreen extends ConsumerWidget {
           orElse: () => ref.watch(initialAppSettingsProvider),
         );
     final notificationStatus = ref.watch(notificationStatusProvider);
+    final themes = ProductThemes.all;
+    final selectedThemeIndex = themes.indexWhere(
+      (theme) => theme.id == settings.productThemeId,
+    );
 
     return QScreen(
       child: QMeasure(
@@ -60,13 +68,18 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const QSectionTitle(
               'Appearance',
-              support:
-                  'Vintage Diary — an old personal journal brought into a modern interface.',
+              support: 'Choose how Kin looks across the whole app.',
               isFirst: true,
             ),
-            const QSettingRow(
+            QSettingRow(
               label: 'Theme',
-              subtitle: 'Vintage Diary',
+              subtitle: settings.productThemeId.label,
+              showChevron: true,
+              onTap: () => _pickProductTheme(
+                context,
+                ref,
+                selectedIndex: selectedThemeIndex < 0 ? 0 : selectedThemeIndex,
+              ),
             ),
             const QHairline(),
             const QSectionTitle('Privacy'),
@@ -151,6 +164,34 @@ class SettingsScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _pickProductTheme(
+    BuildContext context,
+    WidgetRef ref, {
+    required int selectedIndex,
+  }) async {
+    final themes = ProductThemes.all;
+    final index = await showQChoiceSheet(
+      context: context,
+      title: 'Theme',
+      selectedIndex: selectedIndex,
+      choices: [
+        for (final theme in themes)
+          QChoice(
+            theme.label,
+            support: switch (theme.id) {
+              ProductThemeId.quietDefault => 'Warm paper, black ink, no decoration.',
+              ProductThemeId.vintageDiary =>
+                'Aged parchment journal on a dark desk.',
+            },
+          ),
+      ],
+    );
+    if (index == null || !context.mounted) return;
+    await ref
+        .read(themePreferenceProvider.notifier)
+        .setProductTheme(themes[index].id);
   }
 
   String _reminderTimezoneLabel(AppSettings settings) {

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_diary_background.dart';
 
 /// Kin's replacement for `Scaffold`.
 ///
@@ -24,7 +24,7 @@ class QScreen extends StatelessWidget {
   /// never as a persistent app-wide bar.
   final Widget? bottom;
 
-  /// Optional page colour. When set, replaces the Vintage Diary texture with a
+  /// Optional page colour. When set, replaces the product-theme canvas with a
   /// flat fill — reserved for rare overrides (e.g. full-screen photo viewers).
   final Color? canvasColor;
 
@@ -34,7 +34,7 @@ class QScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final useTexture = canvasColor == null;
+    final useThemeCanvas = canvasColor == null;
 
     final content = DefaultTextStyle(
       style: q.inked(q.text.body),
@@ -52,11 +52,11 @@ class QScreen extends StatelessWidget {
       ),
     );
 
-    if (!useTexture) {
+    if (!useThemeCanvas) {
       return ColoredBox(color: canvasColor!, child: content);
     }
 
-    return VintageDiaryCanvas(child: content);
+    return QThemeCanvas(child: content);
   }
 }
 

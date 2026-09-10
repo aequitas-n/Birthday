@@ -43,11 +43,16 @@ void main() {
       );
       final restWidth = tester.getSize(find.byType(QButton)).width;
 
-      await tester.pumpQuiet(
-        const Center(
-          child: QButton.primary(label: 'Save', onPressed: null, loading: true),
+      // Loading uses a continuous indicator — pump once, do not settle.
+      await tester.binding.setSurfaceSize(const Size(390, 844));
+      await tester.pumpWidget(
+        const QuietTestApp(
+          child: Center(
+            child: QButton.primary(label: 'Save', onPressed: null, loading: true),
+          ),
         ),
       );
+      await tester.pump();
       expect(tester.getSize(find.byType(QButton)).width, restWidth);
     });
 
@@ -407,11 +412,11 @@ void main() {
     });
   });
 
-  group('Vintage Diary theme label', () {
-    testWidgets('settings row shows Vintage Diary', (tester) async {
-      await tester.pumpQuiet(
-        const Text('Vintage Diary'),
-      );
+  group('Product theme labels', () {
+    testWidgets('Default and Vintage Diary labels are available', (tester) async {
+      await tester.pumpQuiet(const Text('Default'));
+      expect(find.text('Default'), findsOneWidget);
+      await tester.pumpQuiet(const Text('Vintage Diary'));
       expect(find.text('Vintage Diary'), findsOneWidget);
     });
   });

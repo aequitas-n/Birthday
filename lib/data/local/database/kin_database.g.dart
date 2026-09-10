@@ -11,159 +11,99 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PeopleData> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _displayNameMeta = const VerificationMeta(
-    'displayName',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _displayNameMeta =
+      const VerificationMeta('displayName');
   @override
   late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
-    'display_name',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _birthMonthMeta = const VerificationMeta(
-    'birthMonth',
-  );
+      'display_name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _birthMonthMeta =
+      const VerificationMeta('birthMonth');
   @override
   late final GeneratedColumn<int> birthMonth = GeneratedColumn<int>(
-    'birth_month',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _birthDayMeta = const VerificationMeta(
-    'birthDay',
-  );
+      'birth_month', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _birthDayMeta =
+      const VerificationMeta('birthDay');
   @override
   late final GeneratedColumn<int> birthDay = GeneratedColumn<int>(
-    'birth_day',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _birthYearMeta = const VerificationMeta(
-    'birthYear',
-  );
+      'birth_day', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _birthYearMeta =
+      const VerificationMeta('birthYear');
   @override
   late final GeneratedColumn<int> birthYear = GeneratedColumn<int>(
-    'birth_year',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _placeLabelMeta = const VerificationMeta(
-    'placeLabel',
-  );
+      'birth_year', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _placeLabelMeta =
+      const VerificationMeta('placeLabel');
   @override
   late final GeneratedColumn<String> placeLabel = GeneratedColumn<String>(
-    'place_label',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _ianaTimezoneMeta = const VerificationMeta(
-    'ianaTimezone',
-  );
+      'place_label', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _ianaTimezoneMeta =
+      const VerificationMeta('ianaTimezone');
   @override
   late final GeneratedColumn<String> ianaTimezone = GeneratedColumn<String>(
-    'iana_timezone',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _sortKeyMeta = const VerificationMeta(
-    'sortKey',
-  );
+      'iana_timezone', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _sortKeyMeta =
+      const VerificationMeta('sortKey');
   @override
   late final GeneratedColumn<String> sortKey = GeneratedColumn<String>(
-    'sort_key',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'sort_key', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _syncRevMeta = const VerificationMeta(
-    'syncRev',
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _syncRevMeta =
+      const VerificationMeta('syncRev');
   @override
   late final GeneratedColumn<int> syncRev = GeneratedColumn<int>(
-    'sync_rev',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
+      'sync_rev', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    displayName,
-    birthMonth,
-    birthDay,
-    birthYear,
-    placeLabel,
-    ianaTimezone,
-    sortKey,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  ];
+        id,
+        displayName,
+        birthMonth,
+        birthDay,
+        birthYear,
+        placeLabel,
+        ianaTimezone,
+        sortKey,
+        createdAt,
+        updatedAt,
+        deletedAt,
+        syncRev
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'people';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<PeopleData> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<PeopleData> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -173,87 +113,67 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PeopleData> {
     }
     if (data.containsKey('display_name')) {
       context.handle(
-        _displayNameMeta,
-        displayName.isAcceptableOrUnknown(
-          data['display_name']!,
           _displayNameMeta,
-        ),
-      );
+          displayName.isAcceptableOrUnknown(
+              data['display_name']!, _displayNameMeta));
     } else if (isInserting) {
       context.missing(_displayNameMeta);
     }
     if (data.containsKey('birth_month')) {
       context.handle(
-        _birthMonthMeta,
-        birthMonth.isAcceptableOrUnknown(data['birth_month']!, _birthMonthMeta),
-      );
+          _birthMonthMeta,
+          birthMonth.isAcceptableOrUnknown(
+              data['birth_month']!, _birthMonthMeta));
     } else if (isInserting) {
       context.missing(_birthMonthMeta);
     }
     if (data.containsKey('birth_day')) {
-      context.handle(
-        _birthDayMeta,
-        birthDay.isAcceptableOrUnknown(data['birth_day']!, _birthDayMeta),
-      );
+      context.handle(_birthDayMeta,
+          birthDay.isAcceptableOrUnknown(data['birth_day']!, _birthDayMeta));
     } else if (isInserting) {
       context.missing(_birthDayMeta);
     }
     if (data.containsKey('birth_year')) {
-      context.handle(
-        _birthYearMeta,
-        birthYear.isAcceptableOrUnknown(data['birth_year']!, _birthYearMeta),
-      );
+      context.handle(_birthYearMeta,
+          birthYear.isAcceptableOrUnknown(data['birth_year']!, _birthYearMeta));
     }
     if (data.containsKey('place_label')) {
       context.handle(
-        _placeLabelMeta,
-        placeLabel.isAcceptableOrUnknown(data['place_label']!, _placeLabelMeta),
-      );
+          _placeLabelMeta,
+          placeLabel.isAcceptableOrUnknown(
+              data['place_label']!, _placeLabelMeta));
     }
     if (data.containsKey('iana_timezone')) {
       context.handle(
-        _ianaTimezoneMeta,
-        ianaTimezone.isAcceptableOrUnknown(
-          data['iana_timezone']!,
           _ianaTimezoneMeta,
-        ),
-      );
+          ianaTimezone.isAcceptableOrUnknown(
+              data['iana_timezone']!, _ianaTimezoneMeta));
     }
     if (data.containsKey('sort_key')) {
-      context.handle(
-        _sortKeyMeta,
-        sortKey.isAcceptableOrUnknown(data['sort_key']!, _sortKeyMeta),
-      );
+      context.handle(_sortKeyMeta,
+          sortKey.isAcceptableOrUnknown(data['sort_key']!, _sortKeyMeta));
     } else if (isInserting) {
       context.missing(_sortKeyMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     if (data.containsKey('sync_rev')) {
-      context.handle(
-        _syncRevMeta,
-        syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta),
-      );
+      context.handle(_syncRevMeta,
+          syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta));
     }
     return context;
   }
@@ -264,54 +184,30 @@ class $PeopleTable extends People with TableInfo<$PeopleTable, PeopleData> {
   PeopleData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return PeopleData(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      displayName: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}display_name'],
-      )!,
-      birthMonth: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}birth_month'],
-      )!,
-      birthDay: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}birth_day'],
-      )!,
-      birthYear: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}birth_year'],
-      ),
-      placeLabel: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}place_label'],
-      ),
-      ianaTimezone: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}iana_timezone'],
-      ),
-      sortKey: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}sort_key'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
-      syncRev: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sync_rev'],
-      )!,
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      displayName: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}display_name'])!,
+      birthMonth: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}birth_month'])!,
+      birthDay: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}birth_day'])!,
+      birthYear: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}birth_year']),
+      placeLabel: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}place_label']),
+      ianaTimezone: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}iana_timezone']),
+      sortKey: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}sort_key'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
+      syncRev: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sync_rev'])!,
     );
   }
 
@@ -334,20 +230,19 @@ class PeopleData extends DataClass implements Insertable<PeopleData> {
   final int updatedAt;
   final int? deletedAt;
   final int syncRev;
-  const PeopleData({
-    required this.id,
-    required this.displayName,
-    required this.birthMonth,
-    required this.birthDay,
-    this.birthYear,
-    this.placeLabel,
-    this.ianaTimezone,
-    required this.sortKey,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-    required this.syncRev,
-  });
+  const PeopleData(
+      {required this.id,
+      required this.displayName,
+      required this.birthMonth,
+      required this.birthDay,
+      this.birthYear,
+      this.placeLabel,
+      this.ianaTimezone,
+      required this.sortKey,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt,
+      required this.syncRev});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -399,10 +294,8 @@ class PeopleData extends DataClass implements Insertable<PeopleData> {
     );
   }
 
-  factory PeopleData.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory PeopleData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PeopleData(
       id: serializer.fromJson<String>(json['id']),
@@ -438,47 +331,45 @@ class PeopleData extends DataClass implements Insertable<PeopleData> {
     };
   }
 
-  PeopleData copyWith({
-    String? id,
-    String? displayName,
-    int? birthMonth,
-    int? birthDay,
-    Value<int?> birthYear = const Value.absent(),
-    Value<String?> placeLabel = const Value.absent(),
-    Value<String?> ianaTimezone = const Value.absent(),
-    String? sortKey,
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-    int? syncRev,
-  }) => PeopleData(
-    id: id ?? this.id,
-    displayName: displayName ?? this.displayName,
-    birthMonth: birthMonth ?? this.birthMonth,
-    birthDay: birthDay ?? this.birthDay,
-    birthYear: birthYear.present ? birthYear.value : this.birthYear,
-    placeLabel: placeLabel.present ? placeLabel.value : this.placeLabel,
-    ianaTimezone: ianaTimezone.present ? ianaTimezone.value : this.ianaTimezone,
-    sortKey: sortKey ?? this.sortKey,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-    syncRev: syncRev ?? this.syncRev,
-  );
+  PeopleData copyWith(
+          {String? id,
+          String? displayName,
+          int? birthMonth,
+          int? birthDay,
+          Value<int?> birthYear = const Value.absent(),
+          Value<String?> placeLabel = const Value.absent(),
+          Value<String?> ianaTimezone = const Value.absent(),
+          String? sortKey,
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent(),
+          int? syncRev}) =>
+      PeopleData(
+        id: id ?? this.id,
+        displayName: displayName ?? this.displayName,
+        birthMonth: birthMonth ?? this.birthMonth,
+        birthDay: birthDay ?? this.birthDay,
+        birthYear: birthYear.present ? birthYear.value : this.birthYear,
+        placeLabel: placeLabel.present ? placeLabel.value : this.placeLabel,
+        ianaTimezone:
+            ianaTimezone.present ? ianaTimezone.value : this.ianaTimezone,
+        sortKey: sortKey ?? this.sortKey,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+        syncRev: syncRev ?? this.syncRev,
+      );
   PeopleData copyWithCompanion(PeopleCompanion data) {
     return PeopleData(
       id: data.id.present ? data.id.value : this.id,
-      displayName: data.displayName.present
-          ? data.displayName.value
-          : this.displayName,
-      birthMonth: data.birthMonth.present
-          ? data.birthMonth.value
-          : this.birthMonth,
+      displayName:
+          data.displayName.present ? data.displayName.value : this.displayName,
+      birthMonth:
+          data.birthMonth.present ? data.birthMonth.value : this.birthMonth,
       birthDay: data.birthDay.present ? data.birthDay.value : this.birthDay,
       birthYear: data.birthYear.present ? data.birthYear.value : this.birthYear,
-      placeLabel: data.placeLabel.present
-          ? data.placeLabel.value
-          : this.placeLabel,
+      placeLabel:
+          data.placeLabel.present ? data.placeLabel.value : this.placeLabel,
       ianaTimezone: data.ianaTimezone.present
           ? data.ianaTimezone.value
           : this.ianaTimezone,
@@ -511,19 +402,18 @@ class PeopleData extends DataClass implements Insertable<PeopleData> {
 
   @override
   int get hashCode => Object.hash(
-    id,
-    displayName,
-    birthMonth,
-    birthDay,
-    birthYear,
-    placeLabel,
-    ianaTimezone,
-    sortKey,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  );
+      id,
+      displayName,
+      birthMonth,
+      birthDay,
+      birthYear,
+      placeLabel,
+      ianaTimezone,
+      sortKey,
+      createdAt,
+      updatedAt,
+      deletedAt,
+      syncRev);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -585,13 +475,13 @@ class PeopleCompanion extends UpdateCompanion<PeopleData> {
     this.deletedAt = const Value.absent(),
     this.syncRev = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       displayName = Value(displayName),
-       birthMonth = Value(birthMonth),
-       birthDay = Value(birthDay),
-       sortKey = Value(sortKey),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        displayName = Value(displayName),
+        birthMonth = Value(birthMonth),
+        birthDay = Value(birthDay),
+        sortKey = Value(sortKey),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<PeopleData> custom({
     Expression<String>? id,
     Expression<String>? displayName,
@@ -624,21 +514,20 @@ class PeopleCompanion extends UpdateCompanion<PeopleData> {
     });
   }
 
-  PeopleCompanion copyWith({
-    Value<String>? id,
-    Value<String>? displayName,
-    Value<int>? birthMonth,
-    Value<int>? birthDay,
-    Value<int?>? birthYear,
-    Value<String?>? placeLabel,
-    Value<String?>? ianaTimezone,
-    Value<String>? sortKey,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? syncRev,
-    Value<int>? rowid,
-  }) {
+  PeopleCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? displayName,
+      Value<int>? birthMonth,
+      Value<int>? birthDay,
+      Value<int?>? birthYear,
+      Value<String?>? placeLabel,
+      Value<String?>? ianaTimezone,
+      Value<String>? sortKey,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? syncRev,
+      Value<int>? rowid}) {
     return PeopleCompanion(
       id: id ?? this.id,
       displayName: displayName ?? this.displayName,
@@ -730,155 +619,99 @@ class $ProfilesTable extends Profiles with TableInfo<$ProfilesTable, Profile> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _personIdMeta = const VerificationMeta(
-    'personId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _personIdMeta =
+      const VerificationMeta('personId');
   @override
   late final GeneratedColumn<String> personId = GeneratedColumn<String>(
-    'person_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'UNIQUE REFERENCES people (id)',
-    ),
-  );
-  static const VerificationMeta _nicknameMeta = const VerificationMeta(
-    'nickname',
-  );
+      'person_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('UNIQUE REFERENCES people (id)'));
+  static const VerificationMeta _nicknameMeta =
+      const VerificationMeta('nickname');
   @override
   late final GeneratedColumn<String> nickname = GeneratedColumn<String>(
-    'nickname',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _relationshipMeta = const VerificationMeta(
-    'relationship',
-  );
+      'nickname', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _relationshipMeta =
+      const VerificationMeta('relationship');
   @override
   late final GeneratedColumn<String> relationship = GeneratedColumn<String>(
-    'relationship',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _relationshipLabelMeta = const VerificationMeta(
-    'relationshipLabel',
-  );
+      'relationship', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _relationshipLabelMeta =
+      const VerificationMeta('relationshipLabel');
   @override
   late final GeneratedColumn<String> relationshipLabel =
-      GeneratedColumn<String>(
-        'relationship_label',
-        aliasedName,
-        true,
-        type: DriftSqlType.string,
-        requiredDuringInsert: false,
-      );
-  static const VerificationMeta _photoIdMeta = const VerificationMeta(
-    'photoId',
-  );
+      GeneratedColumn<String>('relationship_label', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _photoIdMeta =
+      const VerificationMeta('photoId');
   @override
   late final GeneratedColumn<String> photoId = GeneratedColumn<String>(
-    'photo_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _isPinnedMeta = const VerificationMeta(
-    'isPinned',
-  );
+      'photo_id', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _isPinnedMeta =
+      const VerificationMeta('isPinned');
   @override
   late final GeneratedColumn<bool> isPinned = GeneratedColumn<bool>(
-    'is_pinned',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("is_pinned" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'is_pinned', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_pinned" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _syncRevMeta = const VerificationMeta(
-    'syncRev',
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _syncRevMeta =
+      const VerificationMeta('syncRev');
   @override
   late final GeneratedColumn<int> syncRev = GeneratedColumn<int>(
-    'sync_rev',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
+      'sync_rev', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    personId,
-    nickname,
-    relationship,
-    relationshipLabel,
-    photoId,
-    isPinned,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  ];
+        id,
+        personId,
+        nickname,
+        relationship,
+        relationshipLabel,
+        photoId,
+        isPinned,
+        createdAt,
+        updatedAt,
+        deletedAt,
+        syncRev
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'profiles';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<Profile> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<Profile> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -887,76 +720,54 @@ class $ProfilesTable extends Profiles with TableInfo<$ProfilesTable, Profile> {
       context.missing(_idMeta);
     }
     if (data.containsKey('person_id')) {
-      context.handle(
-        _personIdMeta,
-        personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta),
-      );
+      context.handle(_personIdMeta,
+          personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta));
     } else if (isInserting) {
       context.missing(_personIdMeta);
     }
     if (data.containsKey('nickname')) {
-      context.handle(
-        _nicknameMeta,
-        nickname.isAcceptableOrUnknown(data['nickname']!, _nicknameMeta),
-      );
+      context.handle(_nicknameMeta,
+          nickname.isAcceptableOrUnknown(data['nickname']!, _nicknameMeta));
     }
     if (data.containsKey('relationship')) {
       context.handle(
-        _relationshipMeta,
-        relationship.isAcceptableOrUnknown(
-          data['relationship']!,
           _relationshipMeta,
-        ),
-      );
+          relationship.isAcceptableOrUnknown(
+              data['relationship']!, _relationshipMeta));
     }
     if (data.containsKey('relationship_label')) {
       context.handle(
-        _relationshipLabelMeta,
-        relationshipLabel.isAcceptableOrUnknown(
-          data['relationship_label']!,
           _relationshipLabelMeta,
-        ),
-      );
+          relationshipLabel.isAcceptableOrUnknown(
+              data['relationship_label']!, _relationshipLabelMeta));
     }
     if (data.containsKey('photo_id')) {
-      context.handle(
-        _photoIdMeta,
-        photoId.isAcceptableOrUnknown(data['photo_id']!, _photoIdMeta),
-      );
+      context.handle(_photoIdMeta,
+          photoId.isAcceptableOrUnknown(data['photo_id']!, _photoIdMeta));
     }
     if (data.containsKey('is_pinned')) {
-      context.handle(
-        _isPinnedMeta,
-        isPinned.isAcceptableOrUnknown(data['is_pinned']!, _isPinnedMeta),
-      );
+      context.handle(_isPinnedMeta,
+          isPinned.isAcceptableOrUnknown(data['is_pinned']!, _isPinnedMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     if (data.containsKey('sync_rev')) {
-      context.handle(
-        _syncRevMeta,
-        syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta),
-      );
+      context.handle(_syncRevMeta,
+          syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta));
     }
     return context;
   }
@@ -967,50 +778,28 @@ class $ProfilesTable extends Profiles with TableInfo<$ProfilesTable, Profile> {
   Profile map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Profile(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      personId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}person_id'],
-      )!,
-      nickname: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}nickname'],
-      ),
-      relationship: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}relationship'],
-      ),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      personId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}person_id'])!,
+      nickname: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}nickname']),
+      relationship: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}relationship']),
       relationshipLabel: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}relationship_label'],
-      ),
-      photoId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}photo_id'],
-      ),
-      isPinned: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_pinned'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
-      syncRev: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sync_rev'],
-      )!,
+          DriftSqlType.string, data['${effectivePrefix}relationship_label']),
+      photoId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}photo_id']),
+      isPinned: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_pinned'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
+      syncRev: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sync_rev'])!,
     );
   }
 
@@ -1032,19 +821,18 @@ class Profile extends DataClass implements Insertable<Profile> {
   final int updatedAt;
   final int? deletedAt;
   final int syncRev;
-  const Profile({
-    required this.id,
-    required this.personId,
-    this.nickname,
-    this.relationship,
-    this.relationshipLabel,
-    this.photoId,
-    required this.isPinned,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-    required this.syncRev,
-  });
+  const Profile(
+      {required this.id,
+      required this.personId,
+      this.nickname,
+      this.relationship,
+      this.relationshipLabel,
+      this.photoId,
+      required this.isPinned,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt,
+      required this.syncRev});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1098,19 +886,16 @@ class Profile extends DataClass implements Insertable<Profile> {
     );
   }
 
-  factory Profile.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory Profile.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Profile(
       id: serializer.fromJson<String>(json['id']),
       personId: serializer.fromJson<String>(json['personId']),
       nickname: serializer.fromJson<String?>(json['nickname']),
       relationship: serializer.fromJson<String?>(json['relationship']),
-      relationshipLabel: serializer.fromJson<String?>(
-        json['relationshipLabel'],
-      ),
+      relationshipLabel:
+          serializer.fromJson<String?>(json['relationshipLabel']),
       photoId: serializer.fromJson<String?>(json['photoId']),
       isPinned: serializer.fromJson<bool>(json['isPinned']),
       createdAt: serializer.fromJson<int>(json['createdAt']),
@@ -1137,33 +922,34 @@ class Profile extends DataClass implements Insertable<Profile> {
     };
   }
 
-  Profile copyWith({
-    String? id,
-    String? personId,
-    Value<String?> nickname = const Value.absent(),
-    Value<String?> relationship = const Value.absent(),
-    Value<String?> relationshipLabel = const Value.absent(),
-    Value<String?> photoId = const Value.absent(),
-    bool? isPinned,
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-    int? syncRev,
-  }) => Profile(
-    id: id ?? this.id,
-    personId: personId ?? this.personId,
-    nickname: nickname.present ? nickname.value : this.nickname,
-    relationship: relationship.present ? relationship.value : this.relationship,
-    relationshipLabel: relationshipLabel.present
-        ? relationshipLabel.value
-        : this.relationshipLabel,
-    photoId: photoId.present ? photoId.value : this.photoId,
-    isPinned: isPinned ?? this.isPinned,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-    syncRev: syncRev ?? this.syncRev,
-  );
+  Profile copyWith(
+          {String? id,
+          String? personId,
+          Value<String?> nickname = const Value.absent(),
+          Value<String?> relationship = const Value.absent(),
+          Value<String?> relationshipLabel = const Value.absent(),
+          Value<String?> photoId = const Value.absent(),
+          bool? isPinned,
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent(),
+          int? syncRev}) =>
+      Profile(
+        id: id ?? this.id,
+        personId: personId ?? this.personId,
+        nickname: nickname.present ? nickname.value : this.nickname,
+        relationship:
+            relationship.present ? relationship.value : this.relationship,
+        relationshipLabel: relationshipLabel.present
+            ? relationshipLabel.value
+            : this.relationshipLabel,
+        photoId: photoId.present ? photoId.value : this.photoId,
+        isPinned: isPinned ?? this.isPinned,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+        syncRev: syncRev ?? this.syncRev,
+      );
   Profile copyWithCompanion(ProfilesCompanion data) {
     return Profile(
       id: data.id.present ? data.id.value : this.id,
@@ -1204,18 +990,17 @@ class Profile extends DataClass implements Insertable<Profile> {
 
   @override
   int get hashCode => Object.hash(
-    id,
-    personId,
-    nickname,
-    relationship,
-    relationshipLabel,
-    photoId,
-    isPinned,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  );
+      id,
+      personId,
+      nickname,
+      relationship,
+      relationshipLabel,
+      photoId,
+      isPinned,
+      createdAt,
+      updatedAt,
+      deletedAt,
+      syncRev);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1273,10 +1058,10 @@ class ProfilesCompanion extends UpdateCompanion<Profile> {
     this.deletedAt = const Value.absent(),
     this.syncRev = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       personId = Value(personId),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        personId = Value(personId),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<Profile> custom({
     Expression<String>? id,
     Expression<String>? personId,
@@ -1307,20 +1092,19 @@ class ProfilesCompanion extends UpdateCompanion<Profile> {
     });
   }
 
-  ProfilesCompanion copyWith({
-    Value<String>? id,
-    Value<String>? personId,
-    Value<String?>? nickname,
-    Value<String?>? relationship,
-    Value<String?>? relationshipLabel,
-    Value<String?>? photoId,
-    Value<bool>? isPinned,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? syncRev,
-    Value<int>? rowid,
-  }) {
+  ProfilesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? personId,
+      Value<String?>? nickname,
+      Value<String?>? relationship,
+      Value<String?>? relationshipLabel,
+      Value<String?>? photoId,
+      Value<bool>? isPinned,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? syncRev,
+      Value<int>? rowid}) {
     return ProfilesCompanion(
       id: id ?? this.id,
       personId: personId ?? this.personId,
@@ -1407,154 +1191,100 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _profileIdMeta = const VerificationMeta(
-    'profileId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _profileIdMeta =
+      const VerificationMeta('profileId');
   @override
   late final GeneratedColumn<String> profileId = GeneratedColumn<String>(
-    'profile_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES profiles (id)',
-    ),
-  );
+      'profile_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES profiles (id)'));
   static const VerificationMeta _kindMeta = const VerificationMeta('kind');
   @override
   late final GeneratedColumn<String> kind = GeneratedColumn<String>(
-    'kind',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _kindLabelMeta = const VerificationMeta(
-    'kindLabel',
-  );
+      'kind', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _kindLabelMeta =
+      const VerificationMeta('kindLabel');
   @override
   late final GeneratedColumn<String> kindLabel = GeneratedColumn<String>(
-    'kind_label',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
+      'kind_label', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _valueMeta = const VerificationMeta('value');
   @override
   late final GeneratedColumn<String> value = GeneratedColumn<String>(
-    'value',
-    aliasedName,
-    false,
-    additionalChecks: GeneratedColumn.checkTextLength(
-      minTextLength: 1,
-      maxTextLength: 280,
-    ),
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _isRetiredMeta = const VerificationMeta(
-    'isRetired',
-  );
+      'value', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 280),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _isRetiredMeta =
+      const VerificationMeta('isRetired');
   @override
   late final GeneratedColumn<bool> isRetired = GeneratedColumn<bool>(
-    'is_retired',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("is_retired" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
-  static const VerificationMeta _positionMeta = const VerificationMeta(
-    'position',
-  );
+      'is_retired', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("is_retired" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _positionMeta =
+      const VerificationMeta('position');
   @override
   late final GeneratedColumn<int> position = GeneratedColumn<int>(
-    'position',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'position', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _syncRevMeta = const VerificationMeta(
-    'syncRev',
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _syncRevMeta =
+      const VerificationMeta('syncRev');
   @override
   late final GeneratedColumn<int> syncRev = GeneratedColumn<int>(
-    'sync_rev',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
+      'sync_rev', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    profileId,
-    kind,
-    kindLabel,
-    value,
-    isRetired,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  ];
+        id,
+        profileId,
+        kind,
+        kindLabel,
+        value,
+        isRetired,
+        position,
+        createdAt,
+        updatedAt,
+        deletedAt,
+        syncRev
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'notes';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<Note> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<Note> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1563,76 +1293,56 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
       context.missing(_idMeta);
     }
     if (data.containsKey('profile_id')) {
-      context.handle(
-        _profileIdMeta,
-        profileId.isAcceptableOrUnknown(data['profile_id']!, _profileIdMeta),
-      );
+      context.handle(_profileIdMeta,
+          profileId.isAcceptableOrUnknown(data['profile_id']!, _profileIdMeta));
     } else if (isInserting) {
       context.missing(_profileIdMeta);
     }
     if (data.containsKey('kind')) {
       context.handle(
-        _kindMeta,
-        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
-      );
+          _kindMeta, kind.isAcceptableOrUnknown(data['kind']!, _kindMeta));
     } else if (isInserting) {
       context.missing(_kindMeta);
     }
     if (data.containsKey('kind_label')) {
-      context.handle(
-        _kindLabelMeta,
-        kindLabel.isAcceptableOrUnknown(data['kind_label']!, _kindLabelMeta),
-      );
+      context.handle(_kindLabelMeta,
+          kindLabel.isAcceptableOrUnknown(data['kind_label']!, _kindLabelMeta));
     }
     if (data.containsKey('value')) {
       context.handle(
-        _valueMeta,
-        value.isAcceptableOrUnknown(data['value']!, _valueMeta),
-      );
+          _valueMeta, value.isAcceptableOrUnknown(data['value']!, _valueMeta));
     } else if (isInserting) {
       context.missing(_valueMeta);
     }
     if (data.containsKey('is_retired')) {
-      context.handle(
-        _isRetiredMeta,
-        isRetired.isAcceptableOrUnknown(data['is_retired']!, _isRetiredMeta),
-      );
+      context.handle(_isRetiredMeta,
+          isRetired.isAcceptableOrUnknown(data['is_retired']!, _isRetiredMeta));
     }
     if (data.containsKey('position')) {
-      context.handle(
-        _positionMeta,
-        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
-      );
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     if (data.containsKey('sync_rev')) {
-      context.handle(
-        _syncRevMeta,
-        syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta),
-      );
+      context.handle(_syncRevMeta,
+          syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta));
     }
     return context;
   }
@@ -1643,50 +1353,28 @@ class $NotesTable extends Notes with TableInfo<$NotesTable, Note> {
   Note map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Note(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      profileId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}profile_id'],
-      )!,
-      kind: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}kind'],
-      )!,
-      kindLabel: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}kind_label'],
-      ),
-      value: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}value'],
-      )!,
-      isRetired: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_retired'],
-      )!,
-      position: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}position'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
-      syncRev: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sync_rev'],
-      )!,
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      profileId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}profile_id'])!,
+      kind: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
+      kindLabel: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}kind_label']),
+      value: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}value'])!,
+      isRetired: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}is_retired'])!,
+      position: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}position'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
+      syncRev: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sync_rev'])!,
     );
   }
 
@@ -1708,19 +1396,18 @@ class Note extends DataClass implements Insertable<Note> {
   final int updatedAt;
   final int? deletedAt;
   final int syncRev;
-  const Note({
-    required this.id,
-    required this.profileId,
-    required this.kind,
-    this.kindLabel,
-    required this.value,
-    required this.isRetired,
-    required this.position,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-    required this.syncRev,
-  });
+  const Note(
+      {required this.id,
+      required this.profileId,
+      required this.kind,
+      this.kindLabel,
+      required this.value,
+      required this.isRetired,
+      required this.position,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt,
+      required this.syncRev});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1762,10 +1449,8 @@ class Note extends DataClass implements Insertable<Note> {
     );
   }
 
-  factory Note.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory Note.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Note(
       id: serializer.fromJson<String>(json['id']),
@@ -1799,31 +1484,31 @@ class Note extends DataClass implements Insertable<Note> {
     };
   }
 
-  Note copyWith({
-    String? id,
-    String? profileId,
-    String? kind,
-    Value<String?> kindLabel = const Value.absent(),
-    String? value,
-    bool? isRetired,
-    int? position,
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-    int? syncRev,
-  }) => Note(
-    id: id ?? this.id,
-    profileId: profileId ?? this.profileId,
-    kind: kind ?? this.kind,
-    kindLabel: kindLabel.present ? kindLabel.value : this.kindLabel,
-    value: value ?? this.value,
-    isRetired: isRetired ?? this.isRetired,
-    position: position ?? this.position,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-    syncRev: syncRev ?? this.syncRev,
-  );
+  Note copyWith(
+          {String? id,
+          String? profileId,
+          String? kind,
+          Value<String?> kindLabel = const Value.absent(),
+          String? value,
+          bool? isRetired,
+          int? position,
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent(),
+          int? syncRev}) =>
+      Note(
+        id: id ?? this.id,
+        profileId: profileId ?? this.profileId,
+        kind: kind ?? this.kind,
+        kindLabel: kindLabel.present ? kindLabel.value : this.kindLabel,
+        value: value ?? this.value,
+        isRetired: isRetired ?? this.isRetired,
+        position: position ?? this.position,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+        syncRev: syncRev ?? this.syncRev,
+      );
   Note copyWithCompanion(NotesCompanion data) {
     return Note(
       id: data.id.present ? data.id.value : this.id,
@@ -1859,19 +1544,8 @@ class Note extends DataClass implements Insertable<Note> {
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    profileId,
-    kind,
-    kindLabel,
-    value,
-    isRetired,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  );
+  int get hashCode => Object.hash(id, profileId, kind, kindLabel, value,
+      isRetired, position, createdAt, updatedAt, deletedAt, syncRev);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1929,13 +1603,13 @@ class NotesCompanion extends UpdateCompanion<Note> {
     this.deletedAt = const Value.absent(),
     this.syncRev = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       profileId = Value(profileId),
-       kind = Value(kind),
-       value = Value(value),
-       position = Value(position),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        profileId = Value(profileId),
+        kind = Value(kind),
+        value = Value(value),
+        position = Value(position),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<Note> custom({
     Expression<String>? id,
     Expression<String>? profileId,
@@ -1966,20 +1640,19 @@ class NotesCompanion extends UpdateCompanion<Note> {
     });
   }
 
-  NotesCompanion copyWith({
-    Value<String>? id,
-    Value<String>? profileId,
-    Value<String>? kind,
-    Value<String?>? kindLabel,
-    Value<String>? value,
-    Value<bool>? isRetired,
-    Value<int>? position,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? syncRev,
-    Value<int>? rowid,
-  }) {
+  NotesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? profileId,
+      Value<String>? kind,
+      Value<String?>? kindLabel,
+      Value<String>? value,
+      Value<bool>? isRetired,
+      Value<int>? position,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? syncRev,
+      Value<int>? rowid}) {
     return NotesCompanion(
       id: id ?? this.id,
       profileId: profileId ?? this.profileId,
@@ -2066,119 +1739,76 @@ class $PhotosTable extends Photos with TableInfo<$PhotosTable, Photo> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _personIdMeta = const VerificationMeta(
-    'personId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _personIdMeta =
+      const VerificationMeta('personId');
   @override
   late final GeneratedColumn<String> personId = GeneratedColumn<String>(
-    'person_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES people (id)',
-    ),
-  );
-  static const VerificationMeta _relPathMeta = const VerificationMeta(
-    'relPath',
-  );
+      'person_id', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES people (id)'));
+  static const VerificationMeta _relPathMeta =
+      const VerificationMeta('relPath');
   @override
   late final GeneratedColumn<String> relPath = GeneratedColumn<String>(
-    'rel_path',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'rel_path', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _widthMeta = const VerificationMeta('width');
   @override
   late final GeneratedColumn<int> width = GeneratedColumn<int>(
-    'width',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
+      'width', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _heightMeta = const VerificationMeta('height');
   @override
   late final GeneratedColumn<int> height = GeneratedColumn<int>(
-    'height',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
+      'height', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   static const VerificationMeta _bytesMeta = const VerificationMeta('bytes');
   @override
   late final GeneratedColumn<int> bytes = GeneratedColumn<int>(
-    'bytes',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _remotePathMeta = const VerificationMeta(
-    'remotePath',
-  );
+      'bytes', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _remotePathMeta =
+      const VerificationMeta('remotePath');
   @override
   late final GeneratedColumn<String> remotePath = GeneratedColumn<String>(
-    'remote_path',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'remote_path', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    personId,
-    relPath,
-    width,
-    height,
-    bytes,
-    remotePath,
-    createdAt,
-    deletedAt,
-  ];
+        id,
+        personId,
+        relPath,
+        width,
+        height,
+        bytes,
+        remotePath,
+        createdAt,
+        deletedAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'photos';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<Photo> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<Photo> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2187,62 +1817,48 @@ class $PhotosTable extends Photos with TableInfo<$PhotosTable, Photo> {
       context.missing(_idMeta);
     }
     if (data.containsKey('person_id')) {
-      context.handle(
-        _personIdMeta,
-        personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta),
-      );
+      context.handle(_personIdMeta,
+          personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta));
     }
     if (data.containsKey('rel_path')) {
-      context.handle(
-        _relPathMeta,
-        relPath.isAcceptableOrUnknown(data['rel_path']!, _relPathMeta),
-      );
+      context.handle(_relPathMeta,
+          relPath.isAcceptableOrUnknown(data['rel_path']!, _relPathMeta));
     } else if (isInserting) {
       context.missing(_relPathMeta);
     }
     if (data.containsKey('width')) {
       context.handle(
-        _widthMeta,
-        width.isAcceptableOrUnknown(data['width']!, _widthMeta),
-      );
+          _widthMeta, width.isAcceptableOrUnknown(data['width']!, _widthMeta));
     } else if (isInserting) {
       context.missing(_widthMeta);
     }
     if (data.containsKey('height')) {
-      context.handle(
-        _heightMeta,
-        height.isAcceptableOrUnknown(data['height']!, _heightMeta),
-      );
+      context.handle(_heightMeta,
+          height.isAcceptableOrUnknown(data['height']!, _heightMeta));
     } else if (isInserting) {
       context.missing(_heightMeta);
     }
     if (data.containsKey('bytes')) {
       context.handle(
-        _bytesMeta,
-        bytes.isAcceptableOrUnknown(data['bytes']!, _bytesMeta),
-      );
+          _bytesMeta, bytes.isAcceptableOrUnknown(data['bytes']!, _bytesMeta));
     } else if (isInserting) {
       context.missing(_bytesMeta);
     }
     if (data.containsKey('remote_path')) {
       context.handle(
-        _remotePathMeta,
-        remotePath.isAcceptableOrUnknown(data['remote_path']!, _remotePathMeta),
-      );
+          _remotePathMeta,
+          remotePath.isAcceptableOrUnknown(
+              data['remote_path']!, _remotePathMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     return context;
   }
@@ -2253,42 +1869,24 @@ class $PhotosTable extends Photos with TableInfo<$PhotosTable, Photo> {
   Photo map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Photo(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      personId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}person_id'],
-      ),
-      relPath: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}rel_path'],
-      )!,
-      width: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}width'],
-      )!,
-      height: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}height'],
-      )!,
-      bytes: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}bytes'],
-      )!,
-      remotePath: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}remote_path'],
-      ),
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      personId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}person_id']),
+      relPath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}rel_path'])!,
+      width: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}width'])!,
+      height: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}height'])!,
+      bytes: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}bytes'])!,
+      remotePath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}remote_path']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
     );
   }
 
@@ -2308,17 +1906,16 @@ class Photo extends DataClass implements Insertable<Photo> {
   final String? remotePath;
   final int createdAt;
   final int? deletedAt;
-  const Photo({
-    required this.id,
-    this.personId,
-    required this.relPath,
-    required this.width,
-    required this.height,
-    required this.bytes,
-    this.remotePath,
-    required this.createdAt,
-    this.deletedAt,
-  });
+  const Photo(
+      {required this.id,
+      this.personId,
+      required this.relPath,
+      required this.width,
+      required this.height,
+      required this.bytes,
+      this.remotePath,
+      required this.createdAt,
+      this.deletedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2360,10 +1957,8 @@ class Photo extends DataClass implements Insertable<Photo> {
     );
   }
 
-  factory Photo.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory Photo.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Photo(
       id: serializer.fromJson<String>(json['id']),
@@ -2393,27 +1988,27 @@ class Photo extends DataClass implements Insertable<Photo> {
     };
   }
 
-  Photo copyWith({
-    String? id,
-    Value<String?> personId = const Value.absent(),
-    String? relPath,
-    int? width,
-    int? height,
-    int? bytes,
-    Value<String?> remotePath = const Value.absent(),
-    int? createdAt,
-    Value<int?> deletedAt = const Value.absent(),
-  }) => Photo(
-    id: id ?? this.id,
-    personId: personId.present ? personId.value : this.personId,
-    relPath: relPath ?? this.relPath,
-    width: width ?? this.width,
-    height: height ?? this.height,
-    bytes: bytes ?? this.bytes,
-    remotePath: remotePath.present ? remotePath.value : this.remotePath,
-    createdAt: createdAt ?? this.createdAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-  );
+  Photo copyWith(
+          {String? id,
+          Value<String?> personId = const Value.absent(),
+          String? relPath,
+          int? width,
+          int? height,
+          int? bytes,
+          Value<String?> remotePath = const Value.absent(),
+          int? createdAt,
+          Value<int?> deletedAt = const Value.absent()}) =>
+      Photo(
+        id: id ?? this.id,
+        personId: personId.present ? personId.value : this.personId,
+        relPath: relPath ?? this.relPath,
+        width: width ?? this.width,
+        height: height ?? this.height,
+        bytes: bytes ?? this.bytes,
+        remotePath: remotePath.present ? remotePath.value : this.remotePath,
+        createdAt: createdAt ?? this.createdAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+      );
   Photo copyWithCompanion(PhotosCompanion data) {
     return Photo(
       id: data.id.present ? data.id.value : this.id,
@@ -2422,9 +2017,8 @@ class Photo extends DataClass implements Insertable<Photo> {
       width: data.width.present ? data.width.value : this.width,
       height: data.height.present ? data.height.value : this.height,
       bytes: data.bytes.present ? data.bytes.value : this.bytes,
-      remotePath: data.remotePath.present
-          ? data.remotePath.value
-          : this.remotePath,
+      remotePath:
+          data.remotePath.present ? data.remotePath.value : this.remotePath,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
     );
@@ -2447,17 +2041,8 @@ class Photo extends DataClass implements Insertable<Photo> {
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    personId,
-    relPath,
-    width,
-    height,
-    bytes,
-    remotePath,
-    createdAt,
-    deletedAt,
-  );
+  int get hashCode => Object.hash(id, personId, relPath, width, height, bytes,
+      remotePath, createdAt, deletedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2507,12 +2092,12 @@ class PhotosCompanion extends UpdateCompanion<Photo> {
     required int createdAt,
     this.deletedAt = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       relPath = Value(relPath),
-       width = Value(width),
-       height = Value(height),
-       bytes = Value(bytes),
-       createdAt = Value(createdAt);
+  })  : id = Value(id),
+        relPath = Value(relPath),
+        width = Value(width),
+        height = Value(height),
+        bytes = Value(bytes),
+        createdAt = Value(createdAt);
   static Insertable<Photo> custom({
     Expression<String>? id,
     Expression<String>? personId,
@@ -2539,18 +2124,17 @@ class PhotosCompanion extends UpdateCompanion<Photo> {
     });
   }
 
-  PhotosCompanion copyWith({
-    Value<String>? id,
-    Value<String?>? personId,
-    Value<String>? relPath,
-    Value<int>? width,
-    Value<int>? height,
-    Value<int>? bytes,
-    Value<String?>? remotePath,
-    Value<int>? createdAt,
-    Value<int?>? deletedAt,
-    Value<int>? rowid,
-  }) {
+  PhotosCompanion copyWith(
+      {Value<String>? id,
+      Value<String?>? personId,
+      Value<String>? relPath,
+      Value<int>? width,
+      Value<int>? height,
+      Value<int>? bytes,
+      Value<String?>? remotePath,
+      Value<int>? createdAt,
+      Value<int?>? deletedAt,
+      Value<int>? rowid}) {
     return PhotosCompanion(
       id: id ?? this.id,
       personId: personId ?? this.personId,
@@ -2628,128 +2212,84 @@ class $ReminderRulesTable extends ReminderRules
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _personIdMeta = const VerificationMeta(
-    'personId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _personIdMeta =
+      const VerificationMeta('personId');
   @override
   late final GeneratedColumn<String> personId = GeneratedColumn<String>(
-    'person_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES people (id)',
-    ),
-  );
+      'person_id', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES people (id)'));
   static const VerificationMeta _kindMeta = const VerificationMeta('kind');
   @override
   late final GeneratedColumn<String> kind = GeneratedColumn<String>(
-    'kind',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _offsetDaysMeta = const VerificationMeta(
-    'offsetDays',
-  );
+      'kind', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _offsetDaysMeta =
+      const VerificationMeta('offsetDays');
   @override
   late final GeneratedColumn<int> offsetDays = GeneratedColumn<int>(
-    'offset_days',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _localTimeMeta = const VerificationMeta(
-    'localTime',
-  );
+      'offset_days', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _localTimeMeta =
+      const VerificationMeta('localTime');
   @override
   late final GeneratedColumn<String> localTime = GeneratedColumn<String>(
-    'local_time',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _enabledMeta = const VerificationMeta(
-    'enabled',
-  );
+      'local_time', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _enabledMeta =
+      const VerificationMeta('enabled');
   @override
   late final GeneratedColumn<bool> enabled = GeneratedColumn<bool>(
-    'enabled',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("enabled" IN (0, 1))',
-    ),
-    defaultValue: const Constant(true),
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'enabled', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("enabled" IN (0, 1))'),
+      defaultValue: const Constant(true));
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _syncRevMeta = const VerificationMeta(
-    'syncRev',
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _syncRevMeta =
+      const VerificationMeta('syncRev');
   @override
   late final GeneratedColumn<int> syncRev = GeneratedColumn<int>(
-    'sync_rev',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
+      'sync_rev', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    personId,
-    kind,
-    offsetDays,
-    localTime,
-    enabled,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  ];
+        id,
+        personId,
+        kind,
+        offsetDays,
+        localTime,
+        enabled,
+        updatedAt,
+        deletedAt,
+        syncRev
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'reminder_rules';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<ReminderRule> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<ReminderRule> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2758,56 +2298,42 @@ class $ReminderRulesTable extends ReminderRules
       context.missing(_idMeta);
     }
     if (data.containsKey('person_id')) {
-      context.handle(
-        _personIdMeta,
-        personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta),
-      );
+      context.handle(_personIdMeta,
+          personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta));
     }
     if (data.containsKey('kind')) {
       context.handle(
-        _kindMeta,
-        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
-      );
+          _kindMeta, kind.isAcceptableOrUnknown(data['kind']!, _kindMeta));
     } else if (isInserting) {
       context.missing(_kindMeta);
     }
     if (data.containsKey('offset_days')) {
       context.handle(
-        _offsetDaysMeta,
-        offsetDays.isAcceptableOrUnknown(data['offset_days']!, _offsetDaysMeta),
-      );
+          _offsetDaysMeta,
+          offsetDays.isAcceptableOrUnknown(
+              data['offset_days']!, _offsetDaysMeta));
     }
     if (data.containsKey('local_time')) {
-      context.handle(
-        _localTimeMeta,
-        localTime.isAcceptableOrUnknown(data['local_time']!, _localTimeMeta),
-      );
+      context.handle(_localTimeMeta,
+          localTime.isAcceptableOrUnknown(data['local_time']!, _localTimeMeta));
     }
     if (data.containsKey('enabled')) {
-      context.handle(
-        _enabledMeta,
-        enabled.isAcceptableOrUnknown(data['enabled']!, _enabledMeta),
-      );
+      context.handle(_enabledMeta,
+          enabled.isAcceptableOrUnknown(data['enabled']!, _enabledMeta));
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     if (data.containsKey('sync_rev')) {
-      context.handle(
-        _syncRevMeta,
-        syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta),
-      );
+      context.handle(_syncRevMeta,
+          syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta));
     }
     return context;
   }
@@ -2818,42 +2344,24 @@ class $ReminderRulesTable extends ReminderRules
   ReminderRule map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return ReminderRule(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      personId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}person_id'],
-      ),
-      kind: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}kind'],
-      )!,
-      offsetDays: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}offset_days'],
-      ),
-      localTime: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}local_time'],
-      ),
-      enabled: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}enabled'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
-      syncRev: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sync_rev'],
-      )!,
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      personId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}person_id']),
+      kind: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
+      offsetDays: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}offset_days']),
+      localTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}local_time']),
+      enabled: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}enabled'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
+      syncRev: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sync_rev'])!,
     );
   }
 
@@ -2873,17 +2381,16 @@ class ReminderRule extends DataClass implements Insertable<ReminderRule> {
   final int updatedAt;
   final int? deletedAt;
   final int syncRev;
-  const ReminderRule({
-    required this.id,
-    this.personId,
-    required this.kind,
-    this.offsetDays,
-    this.localTime,
-    required this.enabled,
-    required this.updatedAt,
-    this.deletedAt,
-    required this.syncRev,
-  });
+  const ReminderRule(
+      {required this.id,
+      this.personId,
+      required this.kind,
+      this.offsetDays,
+      this.localTime,
+      required this.enabled,
+      required this.updatedAt,
+      this.deletedAt,
+      required this.syncRev});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2929,10 +2436,8 @@ class ReminderRule extends DataClass implements Insertable<ReminderRule> {
     );
   }
 
-  factory ReminderRule.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory ReminderRule.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ReminderRule(
       id: serializer.fromJson<String>(json['id']),
@@ -2962,35 +2467,34 @@ class ReminderRule extends DataClass implements Insertable<ReminderRule> {
     };
   }
 
-  ReminderRule copyWith({
-    String? id,
-    Value<String?> personId = const Value.absent(),
-    String? kind,
-    Value<int?> offsetDays = const Value.absent(),
-    Value<String?> localTime = const Value.absent(),
-    bool? enabled,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-    int? syncRev,
-  }) => ReminderRule(
-    id: id ?? this.id,
-    personId: personId.present ? personId.value : this.personId,
-    kind: kind ?? this.kind,
-    offsetDays: offsetDays.present ? offsetDays.value : this.offsetDays,
-    localTime: localTime.present ? localTime.value : this.localTime,
-    enabled: enabled ?? this.enabled,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-    syncRev: syncRev ?? this.syncRev,
-  );
+  ReminderRule copyWith(
+          {String? id,
+          Value<String?> personId = const Value.absent(),
+          String? kind,
+          Value<int?> offsetDays = const Value.absent(),
+          Value<String?> localTime = const Value.absent(),
+          bool? enabled,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent(),
+          int? syncRev}) =>
+      ReminderRule(
+        id: id ?? this.id,
+        personId: personId.present ? personId.value : this.personId,
+        kind: kind ?? this.kind,
+        offsetDays: offsetDays.present ? offsetDays.value : this.offsetDays,
+        localTime: localTime.present ? localTime.value : this.localTime,
+        enabled: enabled ?? this.enabled,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+        syncRev: syncRev ?? this.syncRev,
+      );
   ReminderRule copyWithCompanion(ReminderRulesCompanion data) {
     return ReminderRule(
       id: data.id.present ? data.id.value : this.id,
       personId: data.personId.present ? data.personId.value : this.personId,
       kind: data.kind.present ? data.kind.value : this.kind,
-      offsetDays: data.offsetDays.present
-          ? data.offsetDays.value
-          : this.offsetDays,
+      offsetDays:
+          data.offsetDays.present ? data.offsetDays.value : this.offsetDays,
       localTime: data.localTime.present ? data.localTime.value : this.localTime,
       enabled: data.enabled.present ? data.enabled.value : this.enabled,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
@@ -3016,17 +2520,8 @@ class ReminderRule extends DataClass implements Insertable<ReminderRule> {
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    personId,
-    kind,
-    offsetDays,
-    localTime,
-    enabled,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  );
+  int get hashCode => Object.hash(id, personId, kind, offsetDays, localTime,
+      enabled, updatedAt, deletedAt, syncRev);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3076,9 +2571,9 @@ class ReminderRulesCompanion extends UpdateCompanion<ReminderRule> {
     this.deletedAt = const Value.absent(),
     this.syncRev = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       kind = Value(kind),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        kind = Value(kind),
+        updatedAt = Value(updatedAt);
   static Insertable<ReminderRule> custom({
     Expression<String>? id,
     Expression<String>? personId,
@@ -3105,18 +2600,17 @@ class ReminderRulesCompanion extends UpdateCompanion<ReminderRule> {
     });
   }
 
-  ReminderRulesCompanion copyWith({
-    Value<String>? id,
-    Value<String?>? personId,
-    Value<String>? kind,
-    Value<int?>? offsetDays,
-    Value<String?>? localTime,
-    Value<bool>? enabled,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? syncRev,
-    Value<int>? rowid,
-  }) {
+  ReminderRulesCompanion copyWith(
+      {Value<String>? id,
+      Value<String?>? personId,
+      Value<String>? kind,
+      Value<int?>? offsetDays,
+      Value<String?>? localTime,
+      Value<bool>? enabled,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? syncRev,
+      Value<int>? rowid}) {
     return ReminderRulesCompanion(
       id: id ?? this.id,
       personId: personId ?? this.personId,
@@ -3194,139 +2688,86 @@ class $PersonalRemindersTable extends PersonalReminders
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _localDateMeta = const VerificationMeta(
-    'localDate',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _localDateMeta =
+      const VerificationMeta('localDate');
   @override
   late final GeneratedColumn<String> localDate = GeneratedColumn<String>(
-    'local_date',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _localTimeMeta = const VerificationMeta(
-    'localTime',
-  );
+      'local_date', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _localTimeMeta =
+      const VerificationMeta('localTime');
   @override
   late final GeneratedColumn<String> localTime = GeneratedColumn<String>(
-    'local_time',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _dayPartMeta = const VerificationMeta(
-    'dayPart',
-  );
+      'local_time', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _dayPartMeta =
+      const VerificationMeta('dayPart');
   @override
   late final GeneratedColumn<String> dayPart = GeneratedColumn<String>(
-    'day_part',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'day_part', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _bodyMeta = const VerificationMeta('body');
   @override
   late final GeneratedColumn<String> body = GeneratedColumn<String>(
-    'body',
-    aliasedName,
-    false,
-    additionalChecks: GeneratedColumn.checkTextLength(
-      minTextLength: 1,
-      maxTextLength: 280,
-    ),
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _timezoneMeta = const VerificationMeta(
-    'timezone',
-  );
+      'body', aliasedName, false,
+      additionalChecks:
+          GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 280),
+      type: DriftSqlType.string,
+      requiredDuringInsert: true);
+  static const VerificationMeta _timezoneMeta =
+      const VerificationMeta('timezone');
   @override
   late final GeneratedColumn<String> timezone = GeneratedColumn<String>(
-    'timezone',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _positionMeta = const VerificationMeta(
-    'position',
-  );
+      'timezone', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _positionMeta =
+      const VerificationMeta('position');
   @override
   late final GeneratedColumn<int> position = GeneratedColumn<int>(
-    'position',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'position', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _syncRevMeta = const VerificationMeta(
-    'syncRev',
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _syncRevMeta =
+      const VerificationMeta('syncRev');
   @override
   late final GeneratedColumn<int> syncRev = GeneratedColumn<int>(
-    'sync_rev',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
+      'sync_rev', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    localDate,
-    localTime,
-    dayPart,
-    body,
-    timezone,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  ];
+        id,
+        localDate,
+        localTime,
+        dayPart,
+        body,
+        timezone,
+        position,
+        createdAt,
+        updatedAt,
+        deletedAt,
+        syncRev
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -3334,9 +2775,8 @@ class $PersonalRemindersTable extends PersonalReminders
   static const String $name = 'personal_reminders';
   @override
   VerificationContext validateIntegrity(
-    Insertable<PersonalReminderRow> instance, {
-    bool isInserting = false,
-  }) {
+      Insertable<PersonalReminderRow> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -3345,80 +2785,60 @@ class $PersonalRemindersTable extends PersonalReminders
       context.missing(_idMeta);
     }
     if (data.containsKey('local_date')) {
-      context.handle(
-        _localDateMeta,
-        localDate.isAcceptableOrUnknown(data['local_date']!, _localDateMeta),
-      );
+      context.handle(_localDateMeta,
+          localDate.isAcceptableOrUnknown(data['local_date']!, _localDateMeta));
     } else if (isInserting) {
       context.missing(_localDateMeta);
     }
     if (data.containsKey('local_time')) {
-      context.handle(
-        _localTimeMeta,
-        localTime.isAcceptableOrUnknown(data['local_time']!, _localTimeMeta),
-      );
+      context.handle(_localTimeMeta,
+          localTime.isAcceptableOrUnknown(data['local_time']!, _localTimeMeta));
     } else if (isInserting) {
       context.missing(_localTimeMeta);
     }
     if (data.containsKey('day_part')) {
-      context.handle(
-        _dayPartMeta,
-        dayPart.isAcceptableOrUnknown(data['day_part']!, _dayPartMeta),
-      );
+      context.handle(_dayPartMeta,
+          dayPart.isAcceptableOrUnknown(data['day_part']!, _dayPartMeta));
     } else if (isInserting) {
       context.missing(_dayPartMeta);
     }
     if (data.containsKey('body')) {
       context.handle(
-        _bodyMeta,
-        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
-      );
+          _bodyMeta, body.isAcceptableOrUnknown(data['body']!, _bodyMeta));
     } else if (isInserting) {
       context.missing(_bodyMeta);
     }
     if (data.containsKey('timezone')) {
-      context.handle(
-        _timezoneMeta,
-        timezone.isAcceptableOrUnknown(data['timezone']!, _timezoneMeta),
-      );
+      context.handle(_timezoneMeta,
+          timezone.isAcceptableOrUnknown(data['timezone']!, _timezoneMeta));
     } else if (isInserting) {
       context.missing(_timezoneMeta);
     }
     if (data.containsKey('position')) {
-      context.handle(
-        _positionMeta,
-        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
-      );
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     if (data.containsKey('sync_rev')) {
-      context.handle(
-        _syncRevMeta,
-        syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta),
-      );
+      context.handle(_syncRevMeta,
+          syncRev.isAcceptableOrUnknown(data['sync_rev']!, _syncRevMeta));
     }
     return context;
   }
@@ -3429,50 +2849,28 @@ class $PersonalRemindersTable extends PersonalReminders
   PersonalReminderRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return PersonalReminderRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      localDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}local_date'],
-      )!,
-      localTime: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}local_time'],
-      )!,
-      dayPart: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}day_part'],
-      )!,
-      body: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}body'],
-      )!,
-      timezone: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}timezone'],
-      )!,
-      position: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}position'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
-      syncRev: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sync_rev'],
-      )!,
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      localDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}local_date'])!,
+      localTime: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}local_time'])!,
+      dayPart: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}day_part'])!,
+      body: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}body'])!,
+      timezone: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}timezone'])!,
+      position: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}position'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
+      syncRev: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sync_rev'])!,
     );
   }
 
@@ -3495,19 +2893,18 @@ class PersonalReminderRow extends DataClass
   final int updatedAt;
   final int? deletedAt;
   final int syncRev;
-  const PersonalReminderRow({
-    required this.id,
-    required this.localDate,
-    required this.localTime,
-    required this.dayPart,
-    required this.body,
-    required this.timezone,
-    required this.position,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-    required this.syncRev,
-  });
+  const PersonalReminderRow(
+      {required this.id,
+      required this.localDate,
+      required this.localTime,
+      required this.dayPart,
+      required this.body,
+      required this.timezone,
+      required this.position,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt,
+      required this.syncRev});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3545,10 +2942,8 @@ class PersonalReminderRow extends DataClass
     );
   }
 
-  factory PersonalReminderRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory PersonalReminderRow.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PersonalReminderRow(
       id: serializer.fromJson<String>(json['id']),
@@ -3582,31 +2977,31 @@ class PersonalReminderRow extends DataClass
     };
   }
 
-  PersonalReminderRow copyWith({
-    String? id,
-    String? localDate,
-    String? localTime,
-    String? dayPart,
-    String? body,
-    String? timezone,
-    int? position,
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-    int? syncRev,
-  }) => PersonalReminderRow(
-    id: id ?? this.id,
-    localDate: localDate ?? this.localDate,
-    localTime: localTime ?? this.localTime,
-    dayPart: dayPart ?? this.dayPart,
-    body: body ?? this.body,
-    timezone: timezone ?? this.timezone,
-    position: position ?? this.position,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-    syncRev: syncRev ?? this.syncRev,
-  );
+  PersonalReminderRow copyWith(
+          {String? id,
+          String? localDate,
+          String? localTime,
+          String? dayPart,
+          String? body,
+          String? timezone,
+          int? position,
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent(),
+          int? syncRev}) =>
+      PersonalReminderRow(
+        id: id ?? this.id,
+        localDate: localDate ?? this.localDate,
+        localTime: localTime ?? this.localTime,
+        dayPart: dayPart ?? this.dayPart,
+        body: body ?? this.body,
+        timezone: timezone ?? this.timezone,
+        position: position ?? this.position,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+        syncRev: syncRev ?? this.syncRev,
+      );
   PersonalReminderRow copyWithCompanion(PersonalRemindersCompanion data) {
     return PersonalReminderRow(
       id: data.id.present ? data.id.value : this.id,
@@ -3642,19 +3037,8 @@ class PersonalReminderRow extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    localDate,
-    localTime,
-    dayPart,
-    body,
-    timezone,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-    syncRev,
-  );
+  int get hashCode => Object.hash(id, localDate, localTime, dayPart, body,
+      timezone, position, createdAt, updatedAt, deletedAt, syncRev);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3712,15 +3096,15 @@ class PersonalRemindersCompanion extends UpdateCompanion<PersonalReminderRow> {
     this.deletedAt = const Value.absent(),
     this.syncRev = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       localDate = Value(localDate),
-       localTime = Value(localTime),
-       dayPart = Value(dayPart),
-       body = Value(body),
-       timezone = Value(timezone),
-       position = Value(position),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        localDate = Value(localDate),
+        localTime = Value(localTime),
+        dayPart = Value(dayPart),
+        body = Value(body),
+        timezone = Value(timezone),
+        position = Value(position),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<PersonalReminderRow> custom({
     Expression<String>? id,
     Expression<String>? localDate,
@@ -3751,20 +3135,19 @@ class PersonalRemindersCompanion extends UpdateCompanion<PersonalReminderRow> {
     });
   }
 
-  PersonalRemindersCompanion copyWith({
-    Value<String>? id,
-    Value<String>? localDate,
-    Value<String>? localTime,
-    Value<String>? dayPart,
-    Value<String>? body,
-    Value<String>? timezone,
-    Value<int>? position,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? syncRev,
-    Value<int>? rowid,
-  }) {
+  PersonalRemindersCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? localDate,
+      Value<String>? localTime,
+      Value<String>? dayPart,
+      Value<String>? body,
+      Value<String>? timezone,
+      Value<int>? position,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? syncRev,
+      Value<int>? rowid}) {
     return PersonalRemindersCompanion(
       id: id ?? this.id,
       localDate: localDate ?? this.localDate,
@@ -3852,188 +3235,121 @@ class $ScheduledNotificationsTable extends ScheduledNotifications
   static const VerificationMeta _osIdMeta = const VerificationMeta('osId');
   @override
   late final GeneratedColumn<int> osId = GeneratedColumn<int>(
-    'os_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'os_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _sourceMeta = const VerificationMeta('source');
   @override
   late final GeneratedColumn<String> source = GeneratedColumn<String>(
-    'source',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('birthday'),
-  );
-  static const VerificationMeta _personIdMeta = const VerificationMeta(
-    'personId',
-  );
+      'source', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('birthday'));
+  static const VerificationMeta _personIdMeta =
+      const VerificationMeta('personId');
   @override
   late final GeneratedColumn<String> personId = GeneratedColumn<String>(
-    'person_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES people (id)',
-    ),
-  );
+      'person_id', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES people (id)'));
   static const VerificationMeta _ruleIdMeta = const VerificationMeta('ruleId');
   @override
   late final GeneratedColumn<String> ruleId = GeneratedColumn<String>(
-    'rule_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES reminder_rules (id)',
-    ),
-  );
-  static const VerificationMeta _reminderIdMeta = const VerificationMeta(
-    'reminderId',
-  );
+      'rule_id', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES reminder_rules (id)'));
+  static const VerificationMeta _reminderIdMeta =
+      const VerificationMeta('reminderId');
   @override
   late final GeneratedColumn<String> reminderId = GeneratedColumn<String>(
-    'reminder_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES personal_reminders (id)',
-    ),
-  );
-  static const VerificationMeta _occurrenceYearMeta = const VerificationMeta(
-    'occurrenceYear',
-  );
+      'reminder_id', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES personal_reminders (id)'));
+  static const VerificationMeta _occurrenceYearMeta =
+      const VerificationMeta('occurrenceYear');
   @override
   late final GeneratedColumn<int> occurrenceYear = GeneratedColumn<int>(
-    'occurrence_year',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _fireAtUtcMeta = const VerificationMeta(
-    'fireAtUtc',
-  );
+      'occurrence_year', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _fireAtUtcMeta =
+      const VerificationMeta('fireAtUtc');
   @override
   late final GeneratedColumn<int> fireAtUtc = GeneratedColumn<int>(
-    'fire_at_utc',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _fireAtDeviceLocalMeta = const VerificationMeta(
-    'fireAtDeviceLocal',
-  );
+      'fire_at_utc', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _fireAtDeviceLocalMeta =
+      const VerificationMeta('fireAtDeviceLocal');
   @override
   late final GeneratedColumn<int> fireAtDeviceLocal = GeneratedColumn<int>(
-    'fire_at_device_local',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deviceTzMeta = const VerificationMeta(
-    'deviceTz',
-  );
+      'fire_at_device_local', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deviceTzMeta =
+      const VerificationMeta('deviceTz');
   @override
   late final GeneratedColumn<String> deviceTz = GeneratedColumn<String>(
-    'device_tz',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'device_tz', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
-    'title',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _bodyMeta = const VerificationMeta('body');
   @override
   late final GeneratedColumn<String> body = GeneratedColumn<String>(
-    'body',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _noteIdUsedMeta = const VerificationMeta(
-    'noteIdUsed',
-  );
+      'body', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _noteIdUsedMeta =
+      const VerificationMeta('noteIdUsed');
   @override
   late final GeneratedColumn<String> noteIdUsed = GeneratedColumn<String>(
-    'note_id_used',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES notes (id)',
-    ),
-  );
+      'note_id_used', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES notes (id)'));
   static const VerificationMeta _stateMeta = const VerificationMeta('state');
   @override
   late final GeneratedColumn<String> state = GeneratedColumn<String>(
-    'state',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _snapshotJsonMeta = const VerificationMeta(
-    'snapshotJson',
-  );
+      'state', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _snapshotJsonMeta =
+      const VerificationMeta('snapshotJson');
   @override
   late final GeneratedColumn<String> snapshotJson = GeneratedColumn<String>(
-    'snapshot_json',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('{}'),
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'snapshot_json', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('{}'));
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [
-    osId,
-    source,
-    personId,
-    ruleId,
-    reminderId,
-    occurrenceYear,
-    fireAtUtc,
-    fireAtDeviceLocal,
-    deviceTz,
-    title,
-    body,
-    noteIdUsed,
-    state,
-    snapshotJson,
-    createdAt,
-  ];
+        osId,
+        source,
+        personId,
+        ruleId,
+        reminderId,
+        occurrenceYear,
+        fireAtUtc,
+        fireAtDeviceLocal,
+        deviceTz,
+        title,
+        body,
+        noteIdUsed,
+        state,
+        snapshotJson,
+        createdAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -4041,126 +3357,95 @@ class $ScheduledNotificationsTable extends ScheduledNotifications
   static const String $name = 'scheduled_notifications';
   @override
   VerificationContext validateIntegrity(
-    Insertable<ScheduledNotification> instance, {
-    bool isInserting = false,
-  }) {
+      Insertable<ScheduledNotification> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('os_id')) {
       context.handle(
-        _osIdMeta,
-        osId.isAcceptableOrUnknown(data['os_id']!, _osIdMeta),
-      );
+          _osIdMeta, osId.isAcceptableOrUnknown(data['os_id']!, _osIdMeta));
     }
     if (data.containsKey('source')) {
-      context.handle(
-        _sourceMeta,
-        source.isAcceptableOrUnknown(data['source']!, _sourceMeta),
-      );
+      context.handle(_sourceMeta,
+          source.isAcceptableOrUnknown(data['source']!, _sourceMeta));
     }
     if (data.containsKey('person_id')) {
-      context.handle(
-        _personIdMeta,
-        personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta),
-      );
+      context.handle(_personIdMeta,
+          personId.isAcceptableOrUnknown(data['person_id']!, _personIdMeta));
     }
     if (data.containsKey('rule_id')) {
-      context.handle(
-        _ruleIdMeta,
-        ruleId.isAcceptableOrUnknown(data['rule_id']!, _ruleIdMeta),
-      );
+      context.handle(_ruleIdMeta,
+          ruleId.isAcceptableOrUnknown(data['rule_id']!, _ruleIdMeta));
     }
     if (data.containsKey('reminder_id')) {
       context.handle(
-        _reminderIdMeta,
-        reminderId.isAcceptableOrUnknown(data['reminder_id']!, _reminderIdMeta),
-      );
+          _reminderIdMeta,
+          reminderId.isAcceptableOrUnknown(
+              data['reminder_id']!, _reminderIdMeta));
     }
     if (data.containsKey('occurrence_year')) {
       context.handle(
-        _occurrenceYearMeta,
-        occurrenceYear.isAcceptableOrUnknown(
-          data['occurrence_year']!,
           _occurrenceYearMeta,
-        ),
-      );
+          occurrenceYear.isAcceptableOrUnknown(
+              data['occurrence_year']!, _occurrenceYearMeta));
     } else if (isInserting) {
       context.missing(_occurrenceYearMeta);
     }
     if (data.containsKey('fire_at_utc')) {
       context.handle(
-        _fireAtUtcMeta,
-        fireAtUtc.isAcceptableOrUnknown(data['fire_at_utc']!, _fireAtUtcMeta),
-      );
+          _fireAtUtcMeta,
+          fireAtUtc.isAcceptableOrUnknown(
+              data['fire_at_utc']!, _fireAtUtcMeta));
     } else if (isInserting) {
       context.missing(_fireAtUtcMeta);
     }
     if (data.containsKey('fire_at_device_local')) {
       context.handle(
-        _fireAtDeviceLocalMeta,
-        fireAtDeviceLocal.isAcceptableOrUnknown(
-          data['fire_at_device_local']!,
           _fireAtDeviceLocalMeta,
-        ),
-      );
+          fireAtDeviceLocal.isAcceptableOrUnknown(
+              data['fire_at_device_local']!, _fireAtDeviceLocalMeta));
     } else if (isInserting) {
       context.missing(_fireAtDeviceLocalMeta);
     }
     if (data.containsKey('device_tz')) {
-      context.handle(
-        _deviceTzMeta,
-        deviceTz.isAcceptableOrUnknown(data['device_tz']!, _deviceTzMeta),
-      );
+      context.handle(_deviceTzMeta,
+          deviceTz.isAcceptableOrUnknown(data['device_tz']!, _deviceTzMeta));
     } else if (isInserting) {
       context.missing(_deviceTzMeta);
     }
     if (data.containsKey('title')) {
       context.handle(
-        _titleMeta,
-        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
-      );
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
     if (data.containsKey('body')) {
       context.handle(
-        _bodyMeta,
-        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
-      );
+          _bodyMeta, body.isAcceptableOrUnknown(data['body']!, _bodyMeta));
     } else if (isInserting) {
       context.missing(_bodyMeta);
     }
     if (data.containsKey('note_id_used')) {
       context.handle(
-        _noteIdUsedMeta,
-        noteIdUsed.isAcceptableOrUnknown(
-          data['note_id_used']!,
           _noteIdUsedMeta,
-        ),
-      );
+          noteIdUsed.isAcceptableOrUnknown(
+              data['note_id_used']!, _noteIdUsedMeta));
     }
     if (data.containsKey('state')) {
       context.handle(
-        _stateMeta,
-        state.isAcceptableOrUnknown(data['state']!, _stateMeta),
-      );
+          _stateMeta, state.isAcceptableOrUnknown(data['state']!, _stateMeta));
     } else if (isInserting) {
       context.missing(_stateMeta);
     }
     if (data.containsKey('snapshot_json')) {
       context.handle(
-        _snapshotJsonMeta,
-        snapshotJson.isAcceptableOrUnknown(
-          data['snapshot_json']!,
           _snapshotJsonMeta,
-        ),
-      );
+          snapshotJson.isAcceptableOrUnknown(
+              data['snapshot_json']!, _snapshotJsonMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
@@ -4173,66 +3458,36 @@ class $ScheduledNotificationsTable extends ScheduledNotifications
   ScheduledNotification map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return ScheduledNotification(
-      osId: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}os_id'],
-      )!,
-      source: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}source'],
-      )!,
-      personId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}person_id'],
-      ),
-      ruleId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}rule_id'],
-      ),
-      reminderId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}reminder_id'],
-      ),
-      occurrenceYear: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}occurrence_year'],
-      )!,
-      fireAtUtc: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}fire_at_utc'],
-      )!,
+      osId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}os_id'])!,
+      source: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}source'])!,
+      personId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}person_id']),
+      ruleId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}rule_id']),
+      reminderId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}reminder_id']),
+      occurrenceYear: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}occurrence_year'])!,
+      fireAtUtc: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}fire_at_utc'])!,
       fireAtDeviceLocal: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}fire_at_device_local'],
-      )!,
-      deviceTz: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}device_tz'],
-      )!,
-      title: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}title'],
-      )!,
-      body: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}body'],
-      )!,
-      noteIdUsed: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}note_id_used'],
-      ),
-      state: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}state'],
-      )!,
-      snapshotJson: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}snapshot_json'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
+          DriftSqlType.int, data['${effectivePrefix}fire_at_device_local'])!,
+      deviceTz: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}device_tz'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      body: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}body'])!,
+      noteIdUsed: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}note_id_used']),
+      state: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}state'])!,
+      snapshotJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}snapshot_json'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
     );
   }
 
@@ -4259,23 +3514,22 @@ class ScheduledNotification extends DataClass
   final String state;
   final String snapshotJson;
   final int createdAt;
-  const ScheduledNotification({
-    required this.osId,
-    required this.source,
-    this.personId,
-    this.ruleId,
-    this.reminderId,
-    required this.occurrenceYear,
-    required this.fireAtUtc,
-    required this.fireAtDeviceLocal,
-    required this.deviceTz,
-    required this.title,
-    required this.body,
-    this.noteIdUsed,
-    required this.state,
-    required this.snapshotJson,
-    required this.createdAt,
-  });
+  const ScheduledNotification(
+      {required this.osId,
+      required this.source,
+      this.personId,
+      this.ruleId,
+      this.reminderId,
+      required this.occurrenceYear,
+      required this.fireAtUtc,
+      required this.fireAtDeviceLocal,
+      required this.deviceTz,
+      required this.title,
+      required this.body,
+      this.noteIdUsed,
+      required this.state,
+      required this.snapshotJson,
+      required this.createdAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -4312,9 +3566,8 @@ class ScheduledNotification extends DataClass
       personId: personId == null && nullToAbsent
           ? const Value.absent()
           : Value(personId),
-      ruleId: ruleId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(ruleId),
+      ruleId:
+          ruleId == null && nullToAbsent ? const Value.absent() : Value(ruleId),
       reminderId: reminderId == null && nullToAbsent
           ? const Value.absent()
           : Value(reminderId),
@@ -4333,10 +3586,8 @@ class ScheduledNotification extends DataClass
     );
   }
 
-  factory ScheduledNotification.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory ScheduledNotification.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return ScheduledNotification(
       osId: serializer.fromJson<int>(json['osId']),
@@ -4378,50 +3629,48 @@ class ScheduledNotification extends DataClass
     };
   }
 
-  ScheduledNotification copyWith({
-    int? osId,
-    String? source,
-    Value<String?> personId = const Value.absent(),
-    Value<String?> ruleId = const Value.absent(),
-    Value<String?> reminderId = const Value.absent(),
-    int? occurrenceYear,
-    int? fireAtUtc,
-    int? fireAtDeviceLocal,
-    String? deviceTz,
-    String? title,
-    String? body,
-    Value<String?> noteIdUsed = const Value.absent(),
-    String? state,
-    String? snapshotJson,
-    int? createdAt,
-  }) => ScheduledNotification(
-    osId: osId ?? this.osId,
-    source: source ?? this.source,
-    personId: personId.present ? personId.value : this.personId,
-    ruleId: ruleId.present ? ruleId.value : this.ruleId,
-    reminderId: reminderId.present ? reminderId.value : this.reminderId,
-    occurrenceYear: occurrenceYear ?? this.occurrenceYear,
-    fireAtUtc: fireAtUtc ?? this.fireAtUtc,
-    fireAtDeviceLocal: fireAtDeviceLocal ?? this.fireAtDeviceLocal,
-    deviceTz: deviceTz ?? this.deviceTz,
-    title: title ?? this.title,
-    body: body ?? this.body,
-    noteIdUsed: noteIdUsed.present ? noteIdUsed.value : this.noteIdUsed,
-    state: state ?? this.state,
-    snapshotJson: snapshotJson ?? this.snapshotJson,
-    createdAt: createdAt ?? this.createdAt,
-  );
+  ScheduledNotification copyWith(
+          {int? osId,
+          String? source,
+          Value<String?> personId = const Value.absent(),
+          Value<String?> ruleId = const Value.absent(),
+          Value<String?> reminderId = const Value.absent(),
+          int? occurrenceYear,
+          int? fireAtUtc,
+          int? fireAtDeviceLocal,
+          String? deviceTz,
+          String? title,
+          String? body,
+          Value<String?> noteIdUsed = const Value.absent(),
+          String? state,
+          String? snapshotJson,
+          int? createdAt}) =>
+      ScheduledNotification(
+        osId: osId ?? this.osId,
+        source: source ?? this.source,
+        personId: personId.present ? personId.value : this.personId,
+        ruleId: ruleId.present ? ruleId.value : this.ruleId,
+        reminderId: reminderId.present ? reminderId.value : this.reminderId,
+        occurrenceYear: occurrenceYear ?? this.occurrenceYear,
+        fireAtUtc: fireAtUtc ?? this.fireAtUtc,
+        fireAtDeviceLocal: fireAtDeviceLocal ?? this.fireAtDeviceLocal,
+        deviceTz: deviceTz ?? this.deviceTz,
+        title: title ?? this.title,
+        body: body ?? this.body,
+        noteIdUsed: noteIdUsed.present ? noteIdUsed.value : this.noteIdUsed,
+        state: state ?? this.state,
+        snapshotJson: snapshotJson ?? this.snapshotJson,
+        createdAt: createdAt ?? this.createdAt,
+      );
   ScheduledNotification copyWithCompanion(
-    ScheduledNotificationsCompanion data,
-  ) {
+      ScheduledNotificationsCompanion data) {
     return ScheduledNotification(
       osId: data.osId.present ? data.osId.value : this.osId,
       source: data.source.present ? data.source.value : this.source,
       personId: data.personId.present ? data.personId.value : this.personId,
       ruleId: data.ruleId.present ? data.ruleId.value : this.ruleId,
-      reminderId: data.reminderId.present
-          ? data.reminderId.value
-          : this.reminderId,
+      reminderId:
+          data.reminderId.present ? data.reminderId.value : this.reminderId,
       occurrenceYear: data.occurrenceYear.present
           ? data.occurrenceYear.value
           : this.occurrenceYear,
@@ -4432,9 +3681,8 @@ class ScheduledNotification extends DataClass
       deviceTz: data.deviceTz.present ? data.deviceTz.value : this.deviceTz,
       title: data.title.present ? data.title.value : this.title,
       body: data.body.present ? data.body.value : this.body,
-      noteIdUsed: data.noteIdUsed.present
-          ? data.noteIdUsed.value
-          : this.noteIdUsed,
+      noteIdUsed:
+          data.noteIdUsed.present ? data.noteIdUsed.value : this.noteIdUsed,
       state: data.state.present ? data.state.value : this.state,
       snapshotJson: data.snapshotJson.present
           ? data.snapshotJson.value
@@ -4467,22 +3715,21 @@ class ScheduledNotification extends DataClass
 
   @override
   int get hashCode => Object.hash(
-    osId,
-    source,
-    personId,
-    ruleId,
-    reminderId,
-    occurrenceYear,
-    fireAtUtc,
-    fireAtDeviceLocal,
-    deviceTz,
-    title,
-    body,
-    noteIdUsed,
-    state,
-    snapshotJson,
-    createdAt,
-  );
+      osId,
+      source,
+      personId,
+      ruleId,
+      reminderId,
+      occurrenceYear,
+      fireAtUtc,
+      fireAtDeviceLocal,
+      deviceTz,
+      title,
+      body,
+      noteIdUsed,
+      state,
+      snapshotJson,
+      createdAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -4554,14 +3801,14 @@ class ScheduledNotificationsCompanion
     required String state,
     this.snapshotJson = const Value.absent(),
     required int createdAt,
-  }) : occurrenceYear = Value(occurrenceYear),
-       fireAtUtc = Value(fireAtUtc),
-       fireAtDeviceLocal = Value(fireAtDeviceLocal),
-       deviceTz = Value(deviceTz),
-       title = Value(title),
-       body = Value(body),
-       state = Value(state),
-       createdAt = Value(createdAt);
+  })  : occurrenceYear = Value(occurrenceYear),
+        fireAtUtc = Value(fireAtUtc),
+        fireAtDeviceLocal = Value(fireAtDeviceLocal),
+        deviceTz = Value(deviceTz),
+        title = Value(title),
+        body = Value(body),
+        state = Value(state),
+        createdAt = Value(createdAt);
   static Insertable<ScheduledNotification> custom({
     Expression<int>? osId,
     Expression<String>? source,
@@ -4598,23 +3845,22 @@ class ScheduledNotificationsCompanion
     });
   }
 
-  ScheduledNotificationsCompanion copyWith({
-    Value<int>? osId,
-    Value<String>? source,
-    Value<String?>? personId,
-    Value<String?>? ruleId,
-    Value<String?>? reminderId,
-    Value<int>? occurrenceYear,
-    Value<int>? fireAtUtc,
-    Value<int>? fireAtDeviceLocal,
-    Value<String>? deviceTz,
-    Value<String>? title,
-    Value<String>? body,
-    Value<String?>? noteIdUsed,
-    Value<String>? state,
-    Value<String>? snapshotJson,
-    Value<int>? createdAt,
-  }) {
+  ScheduledNotificationsCompanion copyWith(
+      {Value<int>? osId,
+      Value<String>? source,
+      Value<String?>? personId,
+      Value<String?>? ruleId,
+      Value<String?>? reminderId,
+      Value<int>? occurrenceYear,
+      Value<int>? fireAtUtc,
+      Value<int>? fireAtDeviceLocal,
+      Value<String>? deviceTz,
+      Value<String>? title,
+      Value<String>? body,
+      Value<String?>? noteIdUsed,
+      Value<String>? state,
+      Value<String>? snapshotJson,
+      Value<int>? createdAt}) {
     return ScheduledNotificationsCompanion(
       osId: osId ?? this.osId,
       source: source ?? this.source,
@@ -4716,202 +3962,155 @@ class $SettingsTable extends Settings with TableInfo<$SettingsTable, Setting> {
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
-  static const VerificationMeta _themeModeMeta = const VerificationMeta(
-    'themeMode',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _themeModeMeta =
+      const VerificationMeta('themeMode');
   @override
   late final GeneratedColumn<String> themeMode = GeneratedColumn<String>(
-    'theme_mode',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('system'),
-  );
+      'theme_mode', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('system'));
   static const VerificationMeta _amoledMeta = const VerificationMeta('amoled');
   @override
   late final GeneratedColumn<bool> amoled = GeneratedColumn<bool>(
-    'amoled',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("amoled" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
+      'amoled', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("amoled" IN (0, 1))'),
+      defaultValue: const Constant(false));
+  static const VerificationMeta _productThemeMeta =
+      const VerificationMeta('productTheme');
+  @override
+  late final GeneratedColumn<String> productTheme = GeneratedColumn<String>(
+      'product_theme', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('default'));
   static const VerificationMeta _showDetailsOnLockScreenMeta =
       const VerificationMeta('showDetailsOnLockScreen');
   @override
   late final GeneratedColumn<bool> showDetailsOnLockScreen =
-      GeneratedColumn<bool>(
-        'show_details_on_lock_screen',
-        aliasedName,
-        false,
-        type: DriftSqlType.bool,
-        requiredDuringInsert: false,
-        defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'CHECK ("show_details_on_lock_screen" IN (0, 1))',
-        ),
-        defaultValue: const Constant(true),
-      );
+      GeneratedColumn<bool>('show_details_on_lock_screen', aliasedName, false,
+          type: DriftSqlType.bool,
+          requiredDuringInsert: false,
+          defaultConstraints: GeneratedColumn.constraintIsAlways(
+              'CHECK ("show_details_on_lock_screen" IN (0, 1))'),
+          defaultValue: const Constant(true));
   static const VerificationMeta _notificationsEnabledMeta =
       const VerificationMeta('notificationsEnabled');
   @override
   late final GeneratedColumn<bool> notificationsEnabled = GeneratedColumn<bool>(
-    'notifications_enabled',
-    aliasedName,
-    false,
-    type: DriftSqlType.bool,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("notifications_enabled" IN (0, 1))',
-    ),
-    defaultValue: const Constant(false),
-  );
+      'notifications_enabled', aliasedName, false,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'CHECK ("notifications_enabled" IN (0, 1))'),
+      defaultValue: const Constant(false));
   static const VerificationMeta _onboardingCompletedAtMeta =
       const VerificationMeta('onboardingCompletedAt');
   @override
   late final GeneratedColumn<int> onboardingCompletedAt = GeneratedColumn<int>(
-    'onboarding_completed_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'onboarding_completed_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _deviceTimezoneCacheMeta =
       const VerificationMeta('deviceTimezoneCache');
   @override
   late final GeneratedColumn<String> deviceTimezoneCache =
-      GeneratedColumn<String>(
-        'device_timezone_cache',
-        aliasedName,
-        true,
-        type: DriftSqlType.string,
-        requiredDuringInsert: false,
-      );
-  static const VerificationMeta _reminderTimezoneMeta = const VerificationMeta(
-    'reminderTimezone',
-  );
+      GeneratedColumn<String>('device_timezone_cache', aliasedName, true,
+          type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _reminderTimezoneMeta =
+      const VerificationMeta('reminderTimezone');
   @override
   late final GeneratedColumn<String> reminderTimezone = GeneratedColumn<String>(
-    'reminder_timezone',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _lastReconciledAtMeta = const VerificationMeta(
-    'lastReconciledAt',
-  );
+      'reminder_timezone', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _lastReconciledAtMeta =
+      const VerificationMeta('lastReconciledAt');
   @override
   late final GeneratedColumn<int> lastReconciledAt = GeneratedColumn<int>(
-    'last_reconciled_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'last_reconciled_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    themeMode,
-    amoled,
-    showDetailsOnLockScreen,
-    notificationsEnabled,
-    onboardingCompletedAt,
-    deviceTimezoneCache,
-    reminderTimezone,
-    lastReconciledAt,
-  ];
+        id,
+        themeMode,
+        amoled,
+        productTheme,
+        showDetailsOnLockScreen,
+        notificationsEnabled,
+        onboardingCompletedAt,
+        deviceTimezoneCache,
+        reminderTimezone,
+        lastReconciledAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'settings';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<Setting> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<Setting> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('theme_mode')) {
-      context.handle(
-        _themeModeMeta,
-        themeMode.isAcceptableOrUnknown(data['theme_mode']!, _themeModeMeta),
-      );
+      context.handle(_themeModeMeta,
+          themeMode.isAcceptableOrUnknown(data['theme_mode']!, _themeModeMeta));
     }
     if (data.containsKey('amoled')) {
+      context.handle(_amoledMeta,
+          amoled.isAcceptableOrUnknown(data['amoled']!, _amoledMeta));
+    }
+    if (data.containsKey('product_theme')) {
       context.handle(
-        _amoledMeta,
-        amoled.isAcceptableOrUnknown(data['amoled']!, _amoledMeta),
-      );
+          _productThemeMeta,
+          productTheme.isAcceptableOrUnknown(
+              data['product_theme']!, _productThemeMeta));
     }
     if (data.containsKey('show_details_on_lock_screen')) {
       context.handle(
-        _showDetailsOnLockScreenMeta,
-        showDetailsOnLockScreen.isAcceptableOrUnknown(
-          data['show_details_on_lock_screen']!,
           _showDetailsOnLockScreenMeta,
-        ),
-      );
+          showDetailsOnLockScreen.isAcceptableOrUnknown(
+              data['show_details_on_lock_screen']!,
+              _showDetailsOnLockScreenMeta));
     }
     if (data.containsKey('notifications_enabled')) {
       context.handle(
-        _notificationsEnabledMeta,
-        notificationsEnabled.isAcceptableOrUnknown(
-          data['notifications_enabled']!,
           _notificationsEnabledMeta,
-        ),
-      );
+          notificationsEnabled.isAcceptableOrUnknown(
+              data['notifications_enabled']!, _notificationsEnabledMeta));
     }
     if (data.containsKey('onboarding_completed_at')) {
       context.handle(
-        _onboardingCompletedAtMeta,
-        onboardingCompletedAt.isAcceptableOrUnknown(
-          data['onboarding_completed_at']!,
           _onboardingCompletedAtMeta,
-        ),
-      );
+          onboardingCompletedAt.isAcceptableOrUnknown(
+              data['onboarding_completed_at']!, _onboardingCompletedAtMeta));
     }
     if (data.containsKey('device_timezone_cache')) {
       context.handle(
-        _deviceTimezoneCacheMeta,
-        deviceTimezoneCache.isAcceptableOrUnknown(
-          data['device_timezone_cache']!,
           _deviceTimezoneCacheMeta,
-        ),
-      );
+          deviceTimezoneCache.isAcceptableOrUnknown(
+              data['device_timezone_cache']!, _deviceTimezoneCacheMeta));
     }
     if (data.containsKey('reminder_timezone')) {
       context.handle(
-        _reminderTimezoneMeta,
-        reminderTimezone.isAcceptableOrUnknown(
-          data['reminder_timezone']!,
           _reminderTimezoneMeta,
-        ),
-      );
+          reminderTimezone.isAcceptableOrUnknown(
+              data['reminder_timezone']!, _reminderTimezoneMeta));
     }
     if (data.containsKey('last_reconciled_at')) {
       context.handle(
-        _lastReconciledAtMeta,
-        lastReconciledAt.isAcceptableOrUnknown(
-          data['last_reconciled_at']!,
           _lastReconciledAtMeta,
-        ),
-      );
+          lastReconciledAt.isAcceptableOrUnknown(
+              data['last_reconciled_at']!, _lastReconciledAtMeta));
     }
     return context;
   }
@@ -4922,42 +4121,27 @@ class $SettingsTable extends Settings with TableInfo<$SettingsTable, Setting> {
   Setting map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return Setting(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      themeMode: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}theme_mode'],
-      )!,
-      amoled: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}amoled'],
-      )!,
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      themeMode: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}theme_mode'])!,
+      amoled: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}amoled'])!,
+      productTheme: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}product_theme'])!,
       showDetailsOnLockScreen: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}show_details_on_lock_screen'],
-      )!,
+          DriftSqlType.bool,
+          data['${effectivePrefix}show_details_on_lock_screen'])!,
       notificationsEnabled: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}notifications_enabled'],
-      )!,
+          DriftSqlType.bool, data['${effectivePrefix}notifications_enabled'])!,
       onboardingCompletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}onboarding_completed_at'],
-      ),
+          DriftSqlType.int, data['${effectivePrefix}onboarding_completed_at']),
       deviceTimezoneCache: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}device_timezone_cache'],
-      ),
+          DriftSqlType.string, data['${effectivePrefix}device_timezone_cache']),
       reminderTimezone: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}reminder_timezone'],
-      ),
-      lastReconciledAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}last_reconciled_at'],
-      ),
+          DriftSqlType.string, data['${effectivePrefix}reminder_timezone']),
+      lastReconciledAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}last_reconciled_at']),
     );
   }
 
@@ -4971,32 +4155,38 @@ class Setting extends DataClass implements Insertable<Setting> {
   final int id;
   final String themeMode;
   final bool amoled;
+
+  /// Product theme id (`default` | `vintage_diary` | future keys).
+  ///
+  /// Fresh installs seed `default`. Schema v9 migration stamps existing rows
+  /// as `vintage_diary` so current Vintage users keep their experience.
+  final String productTheme;
   final bool showDetailsOnLockScreen;
   final bool notificationsEnabled;
   final int? onboardingCompletedAt;
   final String? deviceTimezoneCache;
   final String? reminderTimezone;
   final int? lastReconciledAt;
-  const Setting({
-    required this.id,
-    required this.themeMode,
-    required this.amoled,
-    required this.showDetailsOnLockScreen,
-    required this.notificationsEnabled,
-    this.onboardingCompletedAt,
-    this.deviceTimezoneCache,
-    this.reminderTimezone,
-    this.lastReconciledAt,
-  });
+  const Setting(
+      {required this.id,
+      required this.themeMode,
+      required this.amoled,
+      required this.productTheme,
+      required this.showDetailsOnLockScreen,
+      required this.notificationsEnabled,
+      this.onboardingCompletedAt,
+      this.deviceTimezoneCache,
+      this.reminderTimezone,
+      this.lastReconciledAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
     map['theme_mode'] = Variable<String>(themeMode);
     map['amoled'] = Variable<bool>(amoled);
-    map['show_details_on_lock_screen'] = Variable<bool>(
-      showDetailsOnLockScreen,
-    );
+    map['product_theme'] = Variable<String>(productTheme);
+    map['show_details_on_lock_screen'] =
+        Variable<bool>(showDetailsOnLockScreen);
     map['notifications_enabled'] = Variable<bool>(notificationsEnabled);
     if (!nullToAbsent || onboardingCompletedAt != null) {
       map['onboarding_completed_at'] = Variable<int>(onboardingCompletedAt);
@@ -5018,6 +4208,7 @@ class Setting extends DataClass implements Insertable<Setting> {
       id: Value(id),
       themeMode: Value(themeMode),
       amoled: Value(amoled),
+      productTheme: Value(productTheme),
       showDetailsOnLockScreen: Value(showDetailsOnLockScreen),
       notificationsEnabled: Value(notificationsEnabled),
       onboardingCompletedAt: onboardingCompletedAt == null && nullToAbsent
@@ -5035,27 +4226,22 @@ class Setting extends DataClass implements Insertable<Setting> {
     );
   }
 
-  factory Setting.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory Setting.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return Setting(
       id: serializer.fromJson<int>(json['id']),
       themeMode: serializer.fromJson<String>(json['themeMode']),
       amoled: serializer.fromJson<bool>(json['amoled']),
-      showDetailsOnLockScreen: serializer.fromJson<bool>(
-        json['showDetailsOnLockScreen'],
-      ),
-      notificationsEnabled: serializer.fromJson<bool>(
-        json['notificationsEnabled'],
-      ),
-      onboardingCompletedAt: serializer.fromJson<int?>(
-        json['onboardingCompletedAt'],
-      ),
-      deviceTimezoneCache: serializer.fromJson<String?>(
-        json['deviceTimezoneCache'],
-      ),
+      productTheme: serializer.fromJson<String>(json['productTheme']),
+      showDetailsOnLockScreen:
+          serializer.fromJson<bool>(json['showDetailsOnLockScreen']),
+      notificationsEnabled:
+          serializer.fromJson<bool>(json['notificationsEnabled']),
+      onboardingCompletedAt:
+          serializer.fromJson<int?>(json['onboardingCompletedAt']),
+      deviceTimezoneCache:
+          serializer.fromJson<String?>(json['deviceTimezoneCache']),
       reminderTimezone: serializer.fromJson<String?>(json['reminderTimezone']),
       lastReconciledAt: serializer.fromJson<int?>(json['lastReconciledAt']),
     );
@@ -5067,9 +4253,9 @@ class Setting extends DataClass implements Insertable<Setting> {
       'id': serializer.toJson<int>(id),
       'themeMode': serializer.toJson<String>(themeMode),
       'amoled': serializer.toJson<bool>(amoled),
-      'showDetailsOnLockScreen': serializer.toJson<bool>(
-        showDetailsOnLockScreen,
-      ),
+      'productTheme': serializer.toJson<String>(productTheme),
+      'showDetailsOnLockScreen':
+          serializer.toJson<bool>(showDetailsOnLockScreen),
       'notificationsEnabled': serializer.toJson<bool>(notificationsEnabled),
       'onboardingCompletedAt': serializer.toJson<int?>(onboardingCompletedAt),
       'deviceTimezoneCache': serializer.toJson<String?>(deviceTimezoneCache),
@@ -5078,41 +4264,46 @@ class Setting extends DataClass implements Insertable<Setting> {
     };
   }
 
-  Setting copyWith({
-    int? id,
-    String? themeMode,
-    bool? amoled,
-    bool? showDetailsOnLockScreen,
-    bool? notificationsEnabled,
-    Value<int?> onboardingCompletedAt = const Value.absent(),
-    Value<String?> deviceTimezoneCache = const Value.absent(),
-    Value<String?> reminderTimezone = const Value.absent(),
-    Value<int?> lastReconciledAt = const Value.absent(),
-  }) => Setting(
-    id: id ?? this.id,
-    themeMode: themeMode ?? this.themeMode,
-    amoled: amoled ?? this.amoled,
-    showDetailsOnLockScreen:
-        showDetailsOnLockScreen ?? this.showDetailsOnLockScreen,
-    notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
-    onboardingCompletedAt: onboardingCompletedAt.present
-        ? onboardingCompletedAt.value
-        : this.onboardingCompletedAt,
-    deviceTimezoneCache: deviceTimezoneCache.present
-        ? deviceTimezoneCache.value
-        : this.deviceTimezoneCache,
-    reminderTimezone: reminderTimezone.present
-        ? reminderTimezone.value
-        : this.reminderTimezone,
-    lastReconciledAt: lastReconciledAt.present
-        ? lastReconciledAt.value
-        : this.lastReconciledAt,
-  );
+  Setting copyWith(
+          {int? id,
+          String? themeMode,
+          bool? amoled,
+          String? productTheme,
+          bool? showDetailsOnLockScreen,
+          bool? notificationsEnabled,
+          Value<int?> onboardingCompletedAt = const Value.absent(),
+          Value<String?> deviceTimezoneCache = const Value.absent(),
+          Value<String?> reminderTimezone = const Value.absent(),
+          Value<int?> lastReconciledAt = const Value.absent()}) =>
+      Setting(
+        id: id ?? this.id,
+        themeMode: themeMode ?? this.themeMode,
+        amoled: amoled ?? this.amoled,
+        productTheme: productTheme ?? this.productTheme,
+        showDetailsOnLockScreen:
+            showDetailsOnLockScreen ?? this.showDetailsOnLockScreen,
+        notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
+        onboardingCompletedAt: onboardingCompletedAt.present
+            ? onboardingCompletedAt.value
+            : this.onboardingCompletedAt,
+        deviceTimezoneCache: deviceTimezoneCache.present
+            ? deviceTimezoneCache.value
+            : this.deviceTimezoneCache,
+        reminderTimezone: reminderTimezone.present
+            ? reminderTimezone.value
+            : this.reminderTimezone,
+        lastReconciledAt: lastReconciledAt.present
+            ? lastReconciledAt.value
+            : this.lastReconciledAt,
+      );
   Setting copyWithCompanion(SettingsCompanion data) {
     return Setting(
       id: data.id.present ? data.id.value : this.id,
       themeMode: data.themeMode.present ? data.themeMode.value : this.themeMode,
       amoled: data.amoled.present ? data.amoled.value : this.amoled,
+      productTheme: data.productTheme.present
+          ? data.productTheme.value
+          : this.productTheme,
       showDetailsOnLockScreen: data.showDetailsOnLockScreen.present
           ? data.showDetailsOnLockScreen.value
           : this.showDetailsOnLockScreen,
@@ -5140,6 +4331,7 @@ class Setting extends DataClass implements Insertable<Setting> {
           ..write('id: $id, ')
           ..write('themeMode: $themeMode, ')
           ..write('amoled: $amoled, ')
+          ..write('productTheme: $productTheme, ')
           ..write('showDetailsOnLockScreen: $showDetailsOnLockScreen, ')
           ..write('notificationsEnabled: $notificationsEnabled, ')
           ..write('onboardingCompletedAt: $onboardingCompletedAt, ')
@@ -5152,16 +4344,16 @@ class Setting extends DataClass implements Insertable<Setting> {
 
   @override
   int get hashCode => Object.hash(
-    id,
-    themeMode,
-    amoled,
-    showDetailsOnLockScreen,
-    notificationsEnabled,
-    onboardingCompletedAt,
-    deviceTimezoneCache,
-    reminderTimezone,
-    lastReconciledAt,
-  );
+      id,
+      themeMode,
+      amoled,
+      productTheme,
+      showDetailsOnLockScreen,
+      notificationsEnabled,
+      onboardingCompletedAt,
+      deviceTimezoneCache,
+      reminderTimezone,
+      lastReconciledAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -5169,6 +4361,7 @@ class Setting extends DataClass implements Insertable<Setting> {
           other.id == this.id &&
           other.themeMode == this.themeMode &&
           other.amoled == this.amoled &&
+          other.productTheme == this.productTheme &&
           other.showDetailsOnLockScreen == this.showDetailsOnLockScreen &&
           other.notificationsEnabled == this.notificationsEnabled &&
           other.onboardingCompletedAt == this.onboardingCompletedAt &&
@@ -5181,6 +4374,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
   final Value<int> id;
   final Value<String> themeMode;
   final Value<bool> amoled;
+  final Value<String> productTheme;
   final Value<bool> showDetailsOnLockScreen;
   final Value<bool> notificationsEnabled;
   final Value<int?> onboardingCompletedAt;
@@ -5191,6 +4385,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
     this.id = const Value.absent(),
     this.themeMode = const Value.absent(),
     this.amoled = const Value.absent(),
+    this.productTheme = const Value.absent(),
     this.showDetailsOnLockScreen = const Value.absent(),
     this.notificationsEnabled = const Value.absent(),
     this.onboardingCompletedAt = const Value.absent(),
@@ -5202,6 +4397,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
     this.id = const Value.absent(),
     this.themeMode = const Value.absent(),
     this.amoled = const Value.absent(),
+    this.productTheme = const Value.absent(),
     this.showDetailsOnLockScreen = const Value.absent(),
     this.notificationsEnabled = const Value.absent(),
     this.onboardingCompletedAt = const Value.absent(),
@@ -5213,6 +4409,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
     Expression<int>? id,
     Expression<String>? themeMode,
     Expression<bool>? amoled,
+    Expression<String>? productTheme,
     Expression<bool>? showDetailsOnLockScreen,
     Expression<bool>? notificationsEnabled,
     Expression<int>? onboardingCompletedAt,
@@ -5224,6 +4421,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
       if (id != null) 'id': id,
       if (themeMode != null) 'theme_mode': themeMode,
       if (amoled != null) 'amoled': amoled,
+      if (productTheme != null) 'product_theme': productTheme,
       if (showDetailsOnLockScreen != null)
         'show_details_on_lock_screen': showDetailsOnLockScreen,
       if (notificationsEnabled != null)
@@ -5237,21 +4435,22 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
     });
   }
 
-  SettingsCompanion copyWith({
-    Value<int>? id,
-    Value<String>? themeMode,
-    Value<bool>? amoled,
-    Value<bool>? showDetailsOnLockScreen,
-    Value<bool>? notificationsEnabled,
-    Value<int?>? onboardingCompletedAt,
-    Value<String?>? deviceTimezoneCache,
-    Value<String?>? reminderTimezone,
-    Value<int?>? lastReconciledAt,
-  }) {
+  SettingsCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? themeMode,
+      Value<bool>? amoled,
+      Value<String>? productTheme,
+      Value<bool>? showDetailsOnLockScreen,
+      Value<bool>? notificationsEnabled,
+      Value<int?>? onboardingCompletedAt,
+      Value<String?>? deviceTimezoneCache,
+      Value<String?>? reminderTimezone,
+      Value<int?>? lastReconciledAt}) {
     return SettingsCompanion(
       id: id ?? this.id,
       themeMode: themeMode ?? this.themeMode,
       amoled: amoled ?? this.amoled,
+      productTheme: productTheme ?? this.productTheme,
       showDetailsOnLockScreen:
           showDetailsOnLockScreen ?? this.showDetailsOnLockScreen,
       notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
@@ -5275,23 +4474,23 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
     if (amoled.present) {
       map['amoled'] = Variable<bool>(amoled.value);
     }
+    if (productTheme.present) {
+      map['product_theme'] = Variable<String>(productTheme.value);
+    }
     if (showDetailsOnLockScreen.present) {
-      map['show_details_on_lock_screen'] = Variable<bool>(
-        showDetailsOnLockScreen.value,
-      );
+      map['show_details_on_lock_screen'] =
+          Variable<bool>(showDetailsOnLockScreen.value);
     }
     if (notificationsEnabled.present) {
       map['notifications_enabled'] = Variable<bool>(notificationsEnabled.value);
     }
     if (onboardingCompletedAt.present) {
-      map['onboarding_completed_at'] = Variable<int>(
-        onboardingCompletedAt.value,
-      );
+      map['onboarding_completed_at'] =
+          Variable<int>(onboardingCompletedAt.value);
     }
     if (deviceTimezoneCache.present) {
-      map['device_timezone_cache'] = Variable<String>(
-        deviceTimezoneCache.value,
-      );
+      map['device_timezone_cache'] =
+          Variable<String>(deviceTimezoneCache.value);
     }
     if (reminderTimezone.present) {
       map['reminder_timezone'] = Variable<String>(reminderTimezone.value);
@@ -5308,6 +4507,7 @@ class SettingsCompanion extends UpdateCompanion<Setting> {
           ..write('id: $id, ')
           ..write('themeMode: $themeMode, ')
           ..write('amoled: $amoled, ')
+          ..write('productTheme: $productTheme, ')
           ..write('showDetailsOnLockScreen: $showDetailsOnLockScreen, ')
           ..write('notificationsEnabled: $notificationsEnabled, ')
           ..write('onboardingCompletedAt: $onboardingCompletedAt, ')
@@ -5328,129 +4528,81 @@ class $SyncStateTable extends SyncState
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-    defaultValue: const Constant(0),
-  );
-  static const VerificationMeta _deviceIdMeta = const VerificationMeta(
-    'deviceId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultValue: const Constant(0));
+  static const VerificationMeta _deviceIdMeta =
+      const VerificationMeta('deviceId');
   @override
   late final GeneratedColumn<String> deviceId = GeneratedColumn<String>(
-    'device_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _accountIdMeta = const VerificationMeta(
-    'accountId',
-  );
+      'device_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _accountIdMeta =
+      const VerificationMeta('accountId');
   @override
   late final GeneratedColumn<String> accountId = GeneratedColumn<String>(
-    'account_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _lastPulledAtMeta = const VerificationMeta(
-    'lastPulledAt',
-  );
+      'account_id', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _lastPulledAtMeta =
+      const VerificationMeta('lastPulledAt');
   @override
   late final GeneratedColumn<int> lastPulledAt = GeneratedColumn<int>(
-    'last_pulled_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _lastPushedAtMeta = const VerificationMeta(
-    'lastPushedAt',
-  );
+      'last_pulled_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _lastPushedAtMeta =
+      const VerificationMeta('lastPushedAt');
   @override
   late final GeneratedColumn<int> lastPushedAt = GeneratedColumn<int>(
-    'last_pushed_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _lastErrorMeta = const VerificationMeta(
-    'lastError',
-  );
+      'last_pushed_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _lastErrorMeta =
+      const VerificationMeta('lastError');
   @override
   late final GeneratedColumn<String> lastError = GeneratedColumn<String>(
-    'last_error',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
+      'last_error', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    deviceId,
-    accountId,
-    lastPulledAt,
-    lastPushedAt,
-    lastError,
-  ];
+  List<GeneratedColumn> get $columns =>
+      [id, deviceId, accountId, lastPulledAt, lastPushedAt, lastError];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'sync_state';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<SyncStateData> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<SyncStateData> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
     if (data.containsKey('device_id')) {
-      context.handle(
-        _deviceIdMeta,
-        deviceId.isAcceptableOrUnknown(data['device_id']!, _deviceIdMeta),
-      );
+      context.handle(_deviceIdMeta,
+          deviceId.isAcceptableOrUnknown(data['device_id']!, _deviceIdMeta));
     } else if (isInserting) {
       context.missing(_deviceIdMeta);
     }
     if (data.containsKey('account_id')) {
-      context.handle(
-        _accountIdMeta,
-        accountId.isAcceptableOrUnknown(data['account_id']!, _accountIdMeta),
-      );
+      context.handle(_accountIdMeta,
+          accountId.isAcceptableOrUnknown(data['account_id']!, _accountIdMeta));
     }
     if (data.containsKey('last_pulled_at')) {
       context.handle(
-        _lastPulledAtMeta,
-        lastPulledAt.isAcceptableOrUnknown(
-          data['last_pulled_at']!,
           _lastPulledAtMeta,
-        ),
-      );
+          lastPulledAt.isAcceptableOrUnknown(
+              data['last_pulled_at']!, _lastPulledAtMeta));
     }
     if (data.containsKey('last_pushed_at')) {
       context.handle(
-        _lastPushedAtMeta,
-        lastPushedAt.isAcceptableOrUnknown(
-          data['last_pushed_at']!,
           _lastPushedAtMeta,
-        ),
-      );
+          lastPushedAt.isAcceptableOrUnknown(
+              data['last_pushed_at']!, _lastPushedAtMeta));
     }
     if (data.containsKey('last_error')) {
-      context.handle(
-        _lastErrorMeta,
-        lastError.isAcceptableOrUnknown(data['last_error']!, _lastErrorMeta),
-      );
+      context.handle(_lastErrorMeta,
+          lastError.isAcceptableOrUnknown(data['last_error']!, _lastErrorMeta));
     }
     return context;
   }
@@ -5461,30 +4613,18 @@ class $SyncStateTable extends SyncState
   SyncStateData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return SyncStateData(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
-      deviceId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}device_id'],
-      )!,
-      accountId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}account_id'],
-      ),
-      lastPulledAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}last_pulled_at'],
-      ),
-      lastPushedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}last_pushed_at'],
-      ),
-      lastError: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}last_error'],
-      ),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      deviceId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}device_id'])!,
+      accountId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}account_id']),
+      lastPulledAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}last_pulled_at']),
+      lastPushedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}last_pushed_at']),
+      lastError: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}last_error']),
     );
   }
 
@@ -5501,14 +4641,13 @@ class SyncStateData extends DataClass implements Insertable<SyncStateData> {
   final int? lastPulledAt;
   final int? lastPushedAt;
   final String? lastError;
-  const SyncStateData({
-    required this.id,
-    required this.deviceId,
-    this.accountId,
-    this.lastPulledAt,
-    this.lastPushedAt,
-    this.lastError,
-  });
+  const SyncStateData(
+      {required this.id,
+      required this.deviceId,
+      this.accountId,
+      this.lastPulledAt,
+      this.lastPushedAt,
+      this.lastError});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -5548,10 +4687,8 @@ class SyncStateData extends DataClass implements Insertable<SyncStateData> {
     );
   }
 
-  factory SyncStateData.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory SyncStateData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return SyncStateData(
       id: serializer.fromJson<int>(json['id']),
@@ -5575,21 +4712,23 @@ class SyncStateData extends DataClass implements Insertable<SyncStateData> {
     };
   }
 
-  SyncStateData copyWith({
-    int? id,
-    String? deviceId,
-    Value<String?> accountId = const Value.absent(),
-    Value<int?> lastPulledAt = const Value.absent(),
-    Value<int?> lastPushedAt = const Value.absent(),
-    Value<String?> lastError = const Value.absent(),
-  }) => SyncStateData(
-    id: id ?? this.id,
-    deviceId: deviceId ?? this.deviceId,
-    accountId: accountId.present ? accountId.value : this.accountId,
-    lastPulledAt: lastPulledAt.present ? lastPulledAt.value : this.lastPulledAt,
-    lastPushedAt: lastPushedAt.present ? lastPushedAt.value : this.lastPushedAt,
-    lastError: lastError.present ? lastError.value : this.lastError,
-  );
+  SyncStateData copyWith(
+          {int? id,
+          String? deviceId,
+          Value<String?> accountId = const Value.absent(),
+          Value<int?> lastPulledAt = const Value.absent(),
+          Value<int?> lastPushedAt = const Value.absent(),
+          Value<String?> lastError = const Value.absent()}) =>
+      SyncStateData(
+        id: id ?? this.id,
+        deviceId: deviceId ?? this.deviceId,
+        accountId: accountId.present ? accountId.value : this.accountId,
+        lastPulledAt:
+            lastPulledAt.present ? lastPulledAt.value : this.lastPulledAt,
+        lastPushedAt:
+            lastPushedAt.present ? lastPushedAt.value : this.lastPushedAt,
+        lastError: lastError.present ? lastError.value : this.lastError,
+      );
   SyncStateData copyWithCompanion(SyncStateCompanion data) {
     return SyncStateData(
       id: data.id.present ? data.id.value : this.id,
@@ -5620,13 +4759,7 @@ class SyncStateData extends DataClass implements Insertable<SyncStateData> {
 
   @override
   int get hashCode => Object.hash(
-    id,
-    deviceId,
-    accountId,
-    lastPulledAt,
-    lastPushedAt,
-    lastError,
-  );
+      id, deviceId, accountId, lastPulledAt, lastPushedAt, lastError);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -5680,14 +4813,13 @@ class SyncStateCompanion extends UpdateCompanion<SyncStateData> {
     });
   }
 
-  SyncStateCompanion copyWith({
-    Value<int>? id,
-    Value<String>? deviceId,
-    Value<String?>? accountId,
-    Value<int?>? lastPulledAt,
-    Value<int?>? lastPushedAt,
-    Value<String?>? lastError,
-  }) {
+  SyncStateCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? deviceId,
+      Value<String?>? accountId,
+      Value<int?>? lastPulledAt,
+      Value<int?>? lastPushedAt,
+      Value<String?>? lastError}) {
     return SyncStateCompanion(
       id: id ?? this.id,
       deviceId: deviceId ?? this.deviceId,
@@ -5742,114 +4874,73 @@ class $JournalDaysTable extends JournalDays
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $JournalDaysTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _localDateMeta = const VerificationMeta(
-    'localDate',
-  );
+  static const VerificationMeta _localDateMeta =
+      const VerificationMeta('localDate');
   @override
   late final GeneratedColumn<String> localDate = GeneratedColumn<String>(
-    'local_date',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'local_date', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _moodMeta = const VerificationMeta('mood');
   @override
   late final GeneratedColumn<String> mood = GeneratedColumn<String>(
-    'mood',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'mood', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns => [
-    localDate,
-    mood,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  ];
+  List<GeneratedColumn> get $columns =>
+      [localDate, mood, createdAt, updatedAt, deletedAt];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'journal_days';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<JournalDayRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<JournalDayRow> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('local_date')) {
-      context.handle(
-        _localDateMeta,
-        localDate.isAcceptableOrUnknown(data['local_date']!, _localDateMeta),
-      );
+      context.handle(_localDateMeta,
+          localDate.isAcceptableOrUnknown(data['local_date']!, _localDateMeta));
     } else if (isInserting) {
       context.missing(_localDateMeta);
     }
     if (data.containsKey('mood')) {
       context.handle(
-        _moodMeta,
-        mood.isAcceptableOrUnknown(data['mood']!, _moodMeta),
-      );
+          _moodMeta, mood.isAcceptableOrUnknown(data['mood']!, _moodMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     return context;
   }
@@ -5860,26 +4951,16 @@ class $JournalDaysTable extends JournalDays
   JournalDayRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return JournalDayRow(
-      localDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}local_date'],
-      )!,
-      mood: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}mood'],
-      ),
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
+      localDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}local_date'])!,
+      mood: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}mood']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
     );
   }
 
@@ -5895,13 +4976,12 @@ class JournalDayRow extends DataClass implements Insertable<JournalDayRow> {
   final int createdAt;
   final int updatedAt;
   final int? deletedAt;
-  const JournalDayRow({
-    required this.localDate,
-    this.mood,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-  });
+  const JournalDayRow(
+      {required this.localDate,
+      this.mood,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -5929,10 +5009,8 @@ class JournalDayRow extends DataClass implements Insertable<JournalDayRow> {
     );
   }
 
-  factory JournalDayRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory JournalDayRow.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return JournalDayRow(
       localDate: serializer.fromJson<String>(json['localDate']),
@@ -5954,19 +5032,19 @@ class JournalDayRow extends DataClass implements Insertable<JournalDayRow> {
     };
   }
 
-  JournalDayRow copyWith({
-    String? localDate,
-    Value<String?> mood = const Value.absent(),
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-  }) => JournalDayRow(
-    localDate: localDate ?? this.localDate,
-    mood: mood.present ? mood.value : this.mood,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-  );
+  JournalDayRow copyWith(
+          {String? localDate,
+          Value<String?> mood = const Value.absent(),
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent()}) =>
+      JournalDayRow(
+        localDate: localDate ?? this.localDate,
+        mood: mood.present ? mood.value : this.mood,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+      );
   JournalDayRow copyWithCompanion(JournalDaysCompanion data) {
     return JournalDayRow(
       localDate: data.localDate.present ? data.localDate.value : this.localDate,
@@ -6025,9 +5103,9 @@ class JournalDaysCompanion extends UpdateCompanion<JournalDayRow> {
     required int updatedAt,
     this.deletedAt = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : localDate = Value(localDate),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : localDate = Value(localDate),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<JournalDayRow> custom({
     Expression<String>? localDate,
     Expression<String>? mood,
@@ -6046,14 +5124,13 @@ class JournalDaysCompanion extends UpdateCompanion<JournalDayRow> {
     });
   }
 
-  JournalDaysCompanion copyWith({
-    Value<String>? localDate,
-    Value<String?>? mood,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? rowid,
-  }) {
+  JournalDaysCompanion copyWith(
+      {Value<String>? localDate,
+      Value<String?>? mood,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? rowid}) {
     return JournalDaysCompanion(
       localDate: localDate ?? this.localDate,
       mood: mood ?? this.mood,
@@ -6111,119 +5188,76 @@ class $JournalEntriesTable extends JournalEntries
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _localDateMeta = const VerificationMeta(
-    'localDate',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _localDateMeta =
+      const VerificationMeta('localDate');
   @override
   late final GeneratedColumn<String> localDate = GeneratedColumn<String>(
-    'local_date',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES journal_days (local_date)',
-    ),
-  );
+      'local_date', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES journal_days (local_date)'));
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
-    'title',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'title', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _bodyMeta = const VerificationMeta('body');
   @override
   late final GeneratedColumn<String> body = GeneratedColumn<String>(
-    'body',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+      'body', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   static const VerificationMeta _moodMeta = const VerificationMeta('mood');
   @override
   late final GeneratedColumn<String> mood = GeneratedColumn<String>(
-    'mood',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _positionMeta = const VerificationMeta(
-    'position',
-  );
+      'mood', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _positionMeta =
+      const VerificationMeta('position');
   @override
   late final GeneratedColumn<int> position = GeneratedColumn<int>(
-    'position',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'position', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    localDate,
-    title,
-    body,
-    mood,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  ];
+        id,
+        localDate,
+        title,
+        body,
+        mood,
+        position,
+        createdAt,
+        updatedAt,
+        deletedAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'journal_entries';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<JournalEntryRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<JournalEntryRow> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -6232,64 +5266,48 @@ class $JournalEntriesTable extends JournalEntries
       context.missing(_idMeta);
     }
     if (data.containsKey('local_date')) {
-      context.handle(
-        _localDateMeta,
-        localDate.isAcceptableOrUnknown(data['local_date']!, _localDateMeta),
-      );
+      context.handle(_localDateMeta,
+          localDate.isAcceptableOrUnknown(data['local_date']!, _localDateMeta));
     } else if (isInserting) {
       context.missing(_localDateMeta);
     }
     if (data.containsKey('title')) {
       context.handle(
-        _titleMeta,
-        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
-      );
+          _titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
     if (data.containsKey('body')) {
       context.handle(
-        _bodyMeta,
-        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
-      );
+          _bodyMeta, body.isAcceptableOrUnknown(data['body']!, _bodyMeta));
     } else if (isInserting) {
       context.missing(_bodyMeta);
     }
     if (data.containsKey('mood')) {
       context.handle(
-        _moodMeta,
-        mood.isAcceptableOrUnknown(data['mood']!, _moodMeta),
-      );
+          _moodMeta, mood.isAcceptableOrUnknown(data['mood']!, _moodMeta));
     }
     if (data.containsKey('position')) {
-      context.handle(
-        _positionMeta,
-        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
-      );
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     return context;
   }
@@ -6300,42 +5318,24 @@ class $JournalEntriesTable extends JournalEntries
   JournalEntryRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return JournalEntryRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      localDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}local_date'],
-      )!,
-      title: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}title'],
-      )!,
-      body: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}body'],
-      )!,
-      mood: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}mood'],
-      ),
-      position: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}position'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      localDate: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}local_date'])!,
+      title: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
+      body: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}body'])!,
+      mood: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}mood']),
+      position: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}position'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
     );
   }
 
@@ -6355,17 +5355,16 @@ class JournalEntryRow extends DataClass implements Insertable<JournalEntryRow> {
   final int createdAt;
   final int updatedAt;
   final int? deletedAt;
-  const JournalEntryRow({
-    required this.id,
-    required this.localDate,
-    required this.title,
-    required this.body,
-    this.mood,
-    required this.position,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-  });
+  const JournalEntryRow(
+      {required this.id,
+      required this.localDate,
+      required this.title,
+      required this.body,
+      this.mood,
+      required this.position,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -6401,10 +5400,8 @@ class JournalEntryRow extends DataClass implements Insertable<JournalEntryRow> {
     );
   }
 
-  factory JournalEntryRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory JournalEntryRow.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return JournalEntryRow(
       id: serializer.fromJson<String>(json['id']),
@@ -6434,27 +5431,27 @@ class JournalEntryRow extends DataClass implements Insertable<JournalEntryRow> {
     };
   }
 
-  JournalEntryRow copyWith({
-    String? id,
-    String? localDate,
-    String? title,
-    String? body,
-    Value<String?> mood = const Value.absent(),
-    int? position,
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-  }) => JournalEntryRow(
-    id: id ?? this.id,
-    localDate: localDate ?? this.localDate,
-    title: title ?? this.title,
-    body: body ?? this.body,
-    mood: mood.present ? mood.value : this.mood,
-    position: position ?? this.position,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-  );
+  JournalEntryRow copyWith(
+          {String? id,
+          String? localDate,
+          String? title,
+          String? body,
+          Value<String?> mood = const Value.absent(),
+          int? position,
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent()}) =>
+      JournalEntryRow(
+        id: id ?? this.id,
+        localDate: localDate ?? this.localDate,
+        title: title ?? this.title,
+        body: body ?? this.body,
+        mood: mood.present ? mood.value : this.mood,
+        position: position ?? this.position,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+      );
   JournalEntryRow copyWithCompanion(JournalEntriesCompanion data) {
     return JournalEntryRow(
       id: data.id.present ? data.id.value : this.id,
@@ -6486,17 +5483,8 @@ class JournalEntryRow extends DataClass implements Insertable<JournalEntryRow> {
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    localDate,
-    title,
-    body,
-    mood,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  );
+  int get hashCode => Object.hash(id, localDate, title, body, mood, position,
+      createdAt, updatedAt, deletedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -6546,13 +5534,13 @@ class JournalEntriesCompanion extends UpdateCompanion<JournalEntryRow> {
     required int updatedAt,
     this.deletedAt = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       localDate = Value(localDate),
-       title = Value(title),
-       body = Value(body),
-       position = Value(position),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        localDate = Value(localDate),
+        title = Value(title),
+        body = Value(body),
+        position = Value(position),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<JournalEntryRow> custom({
     Expression<String>? id,
     Expression<String>? localDate,
@@ -6579,18 +5567,17 @@ class JournalEntriesCompanion extends UpdateCompanion<JournalEntryRow> {
     });
   }
 
-  JournalEntriesCompanion copyWith({
-    Value<String>? id,
-    Value<String>? localDate,
-    Value<String>? title,
-    Value<String>? body,
-    Value<String?>? mood,
-    Value<int>? position,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? rowid,
-  }) {
+  JournalEntriesCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? localDate,
+      Value<String>? title,
+      Value<String>? body,
+      Value<String?>? mood,
+      Value<int>? position,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? rowid}) {
     return JournalEntriesCompanion(
       id: id ?? this.id,
       localDate: localDate ?? this.localDate,
@@ -6668,106 +5655,67 @@ class $JournalEntryPhotosTable extends JournalEntryPhotos
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _entryIdMeta = const VerificationMeta(
-    'entryId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _entryIdMeta =
+      const VerificationMeta('entryId');
   @override
   late final GeneratedColumn<String> entryId = GeneratedColumn<String>(
-    'entry_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES journal_entries (id)',
-    ),
-  );
-  static const VerificationMeta _photoIdMeta = const VerificationMeta(
-    'photoId',
-  );
+      'entry_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES journal_entries (id)'));
+  static const VerificationMeta _photoIdMeta =
+      const VerificationMeta('photoId');
   @override
   late final GeneratedColumn<String> photoId = GeneratedColumn<String>(
-    'photo_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES photos (id)',
-    ),
-  );
-  static const VerificationMeta _captionMeta = const VerificationMeta(
-    'caption',
-  );
+      'photo_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES photos (id)'));
+  static const VerificationMeta _captionMeta =
+      const VerificationMeta('caption');
   @override
   late final GeneratedColumn<String> caption = GeneratedColumn<String>(
-    'caption',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _positionMeta = const VerificationMeta(
-    'position',
-  );
+      'caption', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _positionMeta =
+      const VerificationMeta('position');
   @override
   late final GeneratedColumn<int> position = GeneratedColumn<int>(
-    'position',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'position', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    entryId,
-    photoId,
-    caption,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  ];
+        id,
+        entryId,
+        photoId,
+        caption,
+        position,
+        createdAt,
+        updatedAt,
+        deletedAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -6775,9 +5723,8 @@ class $JournalEntryPhotosTable extends JournalEntryPhotos
   static const String $name = 'journal_entry_photos';
   @override
   VerificationContext validateIntegrity(
-    Insertable<JournalEntryPhotoRow> instance, {
-    bool isInserting = false,
-  }) {
+      Insertable<JournalEntryPhotoRow> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -6786,56 +5733,42 @@ class $JournalEntryPhotosTable extends JournalEntryPhotos
       context.missing(_idMeta);
     }
     if (data.containsKey('entry_id')) {
-      context.handle(
-        _entryIdMeta,
-        entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta),
-      );
+      context.handle(_entryIdMeta,
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
     if (data.containsKey('photo_id')) {
-      context.handle(
-        _photoIdMeta,
-        photoId.isAcceptableOrUnknown(data['photo_id']!, _photoIdMeta),
-      );
+      context.handle(_photoIdMeta,
+          photoId.isAcceptableOrUnknown(data['photo_id']!, _photoIdMeta));
     } else if (isInserting) {
       context.missing(_photoIdMeta);
     }
     if (data.containsKey('caption')) {
-      context.handle(
-        _captionMeta,
-        caption.isAcceptableOrUnknown(data['caption']!, _captionMeta),
-      );
+      context.handle(_captionMeta,
+          caption.isAcceptableOrUnknown(data['caption']!, _captionMeta));
     }
     if (data.containsKey('position')) {
-      context.handle(
-        _positionMeta,
-        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
-      );
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     return context;
   }
@@ -6846,38 +5779,22 @@ class $JournalEntryPhotosTable extends JournalEntryPhotos
   JournalEntryPhotoRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return JournalEntryPhotoRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      entryId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}entry_id'],
-      )!,
-      photoId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}photo_id'],
-      )!,
-      caption: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}caption'],
-      ),
-      position: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}position'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      entryId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}entry_id'])!,
+      photoId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}photo_id'])!,
+      caption: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}caption']),
+      position: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}position'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
     );
   }
 
@@ -6897,16 +5814,15 @@ class JournalEntryPhotoRow extends DataClass
   final int createdAt;
   final int updatedAt;
   final int? deletedAt;
-  const JournalEntryPhotoRow({
-    required this.id,
-    required this.entryId,
-    required this.photoId,
-    this.caption,
-    required this.position,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-  });
+  const JournalEntryPhotoRow(
+      {required this.id,
+      required this.entryId,
+      required this.photoId,
+      this.caption,
+      required this.position,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -6942,10 +5858,8 @@ class JournalEntryPhotoRow extends DataClass
     );
   }
 
-  factory JournalEntryPhotoRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory JournalEntryPhotoRow.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return JournalEntryPhotoRow(
       id: serializer.fromJson<String>(json['id']),
@@ -6973,25 +5887,25 @@ class JournalEntryPhotoRow extends DataClass
     };
   }
 
-  JournalEntryPhotoRow copyWith({
-    String? id,
-    String? entryId,
-    String? photoId,
-    Value<String?> caption = const Value.absent(),
-    int? position,
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-  }) => JournalEntryPhotoRow(
-    id: id ?? this.id,
-    entryId: entryId ?? this.entryId,
-    photoId: photoId ?? this.photoId,
-    caption: caption.present ? caption.value : this.caption,
-    position: position ?? this.position,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-  );
+  JournalEntryPhotoRow copyWith(
+          {String? id,
+          String? entryId,
+          String? photoId,
+          Value<String?> caption = const Value.absent(),
+          int? position,
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent()}) =>
+      JournalEntryPhotoRow(
+        id: id ?? this.id,
+        entryId: entryId ?? this.entryId,
+        photoId: photoId ?? this.photoId,
+        caption: caption.present ? caption.value : this.caption,
+        position: position ?? this.position,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+      );
   JournalEntryPhotoRow copyWithCompanion(JournalEntryPhotosCompanion data) {
     return JournalEntryPhotoRow(
       id: data.id.present ? data.id.value : this.id,
@@ -7022,15 +5936,7 @@ class JournalEntryPhotoRow extends DataClass
 
   @override
   int get hashCode => Object.hash(
-    id,
-    entryId,
-    photoId,
-    caption,
-    position,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  );
+      id, entryId, photoId, caption, position, createdAt, updatedAt, deletedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -7077,12 +5983,12 @@ class JournalEntryPhotosCompanion
     required int updatedAt,
     this.deletedAt = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       entryId = Value(entryId),
-       photoId = Value(photoId),
-       position = Value(position),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        entryId = Value(entryId),
+        photoId = Value(photoId),
+        position = Value(position),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<JournalEntryPhotoRow> custom({
     Expression<String>? id,
     Expression<String>? entryId,
@@ -7107,17 +6013,16 @@ class JournalEntryPhotosCompanion
     });
   }
 
-  JournalEntryPhotosCompanion copyWith({
-    Value<String>? id,
-    Value<String>? entryId,
-    Value<String>? photoId,
-    Value<String?>? caption,
-    Value<int>? position,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? rowid,
-  }) {
+  JournalEntryPhotosCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? entryId,
+      Value<String>? photoId,
+      Value<String?>? caption,
+      Value<int>? position,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? rowid}) {
     return JournalEntryPhotosCompanion(
       id: id ?? this.id,
       entryId: entryId ?? this.entryId,
@@ -7190,152 +6095,94 @@ class $JournalEntryFragmentsTable extends JournalEntryFragments
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-    'id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _entryIdMeta = const VerificationMeta(
-    'entryId',
-  );
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _entryIdMeta =
+      const VerificationMeta('entryId');
   @override
   late final GeneratedColumn<String> entryId = GeneratedColumn<String>(
-    'entry_id',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES journal_entries (id)',
-    ),
-  );
+      'entry_id', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways(
+          'REFERENCES journal_entries (id)'));
   static const VerificationMeta _kindMeta = const VerificationMeta('kind');
   @override
   late final GeneratedColumn<String> kind = GeneratedColumn<String>(
-    'kind',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _positionMeta = const VerificationMeta(
-    'position',
-  );
+      'kind', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _positionMeta =
+      const VerificationMeta('position');
   @override
   late final GeneratedColumn<int> position = GeneratedColumn<int>(
-    'position',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _textBodyMeta = const VerificationMeta(
-    'textBody',
-  );
+      'position', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _textBodyMeta =
+      const VerificationMeta('textBody');
   @override
   late final GeneratedColumn<String> textBody = GeneratedColumn<String>(
-    'text_body',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _photoIdMeta = const VerificationMeta(
-    'photoId',
-  );
+      'text_body', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _photoIdMeta =
+      const VerificationMeta('photoId');
   @override
   late final GeneratedColumn<String> photoId = GeneratedColumn<String>(
-    'photo_id',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES photos (id)',
-    ),
-  );
-  static const VerificationMeta _captionMeta = const VerificationMeta(
-    'caption',
-  );
+      'photo_id', aliasedName, true,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES photos (id)'));
+  static const VerificationMeta _captionMeta =
+      const VerificationMeta('caption');
   @override
   late final GeneratedColumn<String> caption = GeneratedColumn<String>(
-    'caption',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _audioRelPathMeta = const VerificationMeta(
-    'audioRelPath',
-  );
+      'caption', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _audioRelPathMeta =
+      const VerificationMeta('audioRelPath');
   @override
   late final GeneratedColumn<String> audioRelPath = GeneratedColumn<String>(
-    'audio_rel_path',
-    aliasedName,
-    true,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _audioDurationMsMeta = const VerificationMeta(
-    'audioDurationMs',
-  );
+      'audio_rel_path', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _audioDurationMsMeta =
+      const VerificationMeta('audioDurationMs');
   @override
   late final GeneratedColumn<int> audioDurationMs = GeneratedColumn<int>(
-    'audio_duration_ms',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+      'audio_duration_ms', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<int> createdAt = GeneratedColumn<int>(
-    'created_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+      'created_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _updatedAtMeta =
+      const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<int> updatedAt = GeneratedColumn<int>(
-    'updated_at',
-    aliasedName,
-    false,
-    type: DriftSqlType.int,
-    requiredDuringInsert: true,
-  );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+      'updated_at', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _deletedAtMeta =
+      const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<int> deletedAt = GeneratedColumn<int>(
-    'deleted_at',
-    aliasedName,
-    true,
-    type: DriftSqlType.int,
-    requiredDuringInsert: false,
-  );
+      'deleted_at', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
   @override
   List<GeneratedColumn> get $columns => [
-    id,
-    entryId,
-    kind,
-    position,
-    textBody,
-    photoId,
-    caption,
-    audioRelPath,
-    audioDurationMs,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  ];
+        id,
+        entryId,
+        kind,
+        position,
+        textBody,
+        photoId,
+        caption,
+        audioRelPath,
+        audioDurationMs,
+        createdAt,
+        updatedAt,
+        deletedAt
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -7343,9 +6190,8 @@ class $JournalEntryFragmentsTable extends JournalEntryFragments
   static const String $name = 'journal_entry_fragments';
   @override
   VerificationContext validateIntegrity(
-    Insertable<JournalEntryFragmentRow> instance, {
-    bool isInserting = false,
-  }) {
+      Insertable<JournalEntryFragmentRow> instance,
+      {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -7354,86 +6200,62 @@ class $JournalEntryFragmentsTable extends JournalEntryFragments
       context.missing(_idMeta);
     }
     if (data.containsKey('entry_id')) {
-      context.handle(
-        _entryIdMeta,
-        entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta),
-      );
+      context.handle(_entryIdMeta,
+          entryId.isAcceptableOrUnknown(data['entry_id']!, _entryIdMeta));
     } else if (isInserting) {
       context.missing(_entryIdMeta);
     }
     if (data.containsKey('kind')) {
       context.handle(
-        _kindMeta,
-        kind.isAcceptableOrUnknown(data['kind']!, _kindMeta),
-      );
+          _kindMeta, kind.isAcceptableOrUnknown(data['kind']!, _kindMeta));
     } else if (isInserting) {
       context.missing(_kindMeta);
     }
     if (data.containsKey('position')) {
-      context.handle(
-        _positionMeta,
-        position.isAcceptableOrUnknown(data['position']!, _positionMeta),
-      );
+      context.handle(_positionMeta,
+          position.isAcceptableOrUnknown(data['position']!, _positionMeta));
     } else if (isInserting) {
       context.missing(_positionMeta);
     }
     if (data.containsKey('text_body')) {
-      context.handle(
-        _textBodyMeta,
-        textBody.isAcceptableOrUnknown(data['text_body']!, _textBodyMeta),
-      );
+      context.handle(_textBodyMeta,
+          textBody.isAcceptableOrUnknown(data['text_body']!, _textBodyMeta));
     }
     if (data.containsKey('photo_id')) {
-      context.handle(
-        _photoIdMeta,
-        photoId.isAcceptableOrUnknown(data['photo_id']!, _photoIdMeta),
-      );
+      context.handle(_photoIdMeta,
+          photoId.isAcceptableOrUnknown(data['photo_id']!, _photoIdMeta));
     }
     if (data.containsKey('caption')) {
-      context.handle(
-        _captionMeta,
-        caption.isAcceptableOrUnknown(data['caption']!, _captionMeta),
-      );
+      context.handle(_captionMeta,
+          caption.isAcceptableOrUnknown(data['caption']!, _captionMeta));
     }
     if (data.containsKey('audio_rel_path')) {
       context.handle(
-        _audioRelPathMeta,
-        audioRelPath.isAcceptableOrUnknown(
-          data['audio_rel_path']!,
           _audioRelPathMeta,
-        ),
-      );
+          audioRelPath.isAcceptableOrUnknown(
+              data['audio_rel_path']!, _audioRelPathMeta));
     }
     if (data.containsKey('audio_duration_ms')) {
       context.handle(
-        _audioDurationMsMeta,
-        audioDurationMs.isAcceptableOrUnknown(
-          data['audio_duration_ms']!,
           _audioDurationMsMeta,
-        ),
-      );
+          audioDurationMs.isAcceptableOrUnknown(
+              data['audio_duration_ms']!, _audioDurationMsMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta,
+          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta,
+          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     return context;
   }
@@ -7441,60 +6263,34 @@ class $JournalEntryFragmentsTable extends JournalEntryFragments
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  JournalEntryFragmentRow map(
-    Map<String, dynamic> data, {
-    String? tablePrefix,
-  }) {
+  JournalEntryFragmentRow map(Map<String, dynamic> data,
+      {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return JournalEntryFragmentRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      entryId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}entry_id'],
-      )!,
-      kind: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}kind'],
-      )!,
-      position: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}position'],
-      )!,
-      textBody: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}text_body'],
-      ),
-      photoId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}photo_id'],
-      ),
-      caption: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}caption'],
-      ),
-      audioRelPath: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}audio_rel_path'],
-      ),
-      audioDurationMs: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}audio_duration_ms'],
-      ),
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}updated_at'],
-      )!,
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}deleted_at'],
-      ),
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      entryId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}entry_id'])!,
+      kind: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
+      position: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}position'])!,
+      textBody: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}text_body']),
+      photoId: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}photo_id']),
+      caption: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}caption']),
+      audioRelPath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}audio_rel_path']),
+      audioDurationMs: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}audio_duration_ms']),
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}updated_at'])!,
+      deletedAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}deleted_at']),
     );
   }
 
@@ -7518,20 +6314,19 @@ class JournalEntryFragmentRow extends DataClass
   final int createdAt;
   final int updatedAt;
   final int? deletedAt;
-  const JournalEntryFragmentRow({
-    required this.id,
-    required this.entryId,
-    required this.kind,
-    required this.position,
-    this.textBody,
-    this.photoId,
-    this.caption,
-    this.audioRelPath,
-    this.audioDurationMs,
-    required this.createdAt,
-    required this.updatedAt,
-    this.deletedAt,
-  });
+  const JournalEntryFragmentRow(
+      {required this.id,
+      required this.entryId,
+      required this.kind,
+      required this.position,
+      this.textBody,
+      this.photoId,
+      this.caption,
+      this.audioRelPath,
+      this.audioDurationMs,
+      required this.createdAt,
+      required this.updatedAt,
+      this.deletedAt});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -7591,10 +6386,8 @@ class JournalEntryFragmentRow extends DataClass
     );
   }
 
-  factory JournalEntryFragmentRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory JournalEntryFragmentRow.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return JournalEntryFragmentRow(
       id: serializer.fromJson<String>(json['id']),
@@ -7630,38 +6423,38 @@ class JournalEntryFragmentRow extends DataClass
     };
   }
 
-  JournalEntryFragmentRow copyWith({
-    String? id,
-    String? entryId,
-    String? kind,
-    int? position,
-    Value<String?> textBody = const Value.absent(),
-    Value<String?> photoId = const Value.absent(),
-    Value<String?> caption = const Value.absent(),
-    Value<String?> audioRelPath = const Value.absent(),
-    Value<int?> audioDurationMs = const Value.absent(),
-    int? createdAt,
-    int? updatedAt,
-    Value<int?> deletedAt = const Value.absent(),
-  }) => JournalEntryFragmentRow(
-    id: id ?? this.id,
-    entryId: entryId ?? this.entryId,
-    kind: kind ?? this.kind,
-    position: position ?? this.position,
-    textBody: textBody.present ? textBody.value : this.textBody,
-    photoId: photoId.present ? photoId.value : this.photoId,
-    caption: caption.present ? caption.value : this.caption,
-    audioRelPath: audioRelPath.present ? audioRelPath.value : this.audioRelPath,
-    audioDurationMs: audioDurationMs.present
-        ? audioDurationMs.value
-        : this.audioDurationMs,
-    createdAt: createdAt ?? this.createdAt,
-    updatedAt: updatedAt ?? this.updatedAt,
-    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
-  );
+  JournalEntryFragmentRow copyWith(
+          {String? id,
+          String? entryId,
+          String? kind,
+          int? position,
+          Value<String?> textBody = const Value.absent(),
+          Value<String?> photoId = const Value.absent(),
+          Value<String?> caption = const Value.absent(),
+          Value<String?> audioRelPath = const Value.absent(),
+          Value<int?> audioDurationMs = const Value.absent(),
+          int? createdAt,
+          int? updatedAt,
+          Value<int?> deletedAt = const Value.absent()}) =>
+      JournalEntryFragmentRow(
+        id: id ?? this.id,
+        entryId: entryId ?? this.entryId,
+        kind: kind ?? this.kind,
+        position: position ?? this.position,
+        textBody: textBody.present ? textBody.value : this.textBody,
+        photoId: photoId.present ? photoId.value : this.photoId,
+        caption: caption.present ? caption.value : this.caption,
+        audioRelPath:
+            audioRelPath.present ? audioRelPath.value : this.audioRelPath,
+        audioDurationMs: audioDurationMs.present
+            ? audioDurationMs.value
+            : this.audioDurationMs,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+      );
   JournalEntryFragmentRow copyWithCompanion(
-    JournalEntryFragmentsCompanion data,
-  ) {
+      JournalEntryFragmentsCompanion data) {
     return JournalEntryFragmentRow(
       id: data.id.present ? data.id.value : this.id,
       entryId: data.entryId.present ? data.entryId.value : this.entryId,
@@ -7703,19 +6496,18 @@ class JournalEntryFragmentRow extends DataClass
 
   @override
   int get hashCode => Object.hash(
-    id,
-    entryId,
-    kind,
-    position,
-    textBody,
-    photoId,
-    caption,
-    audioRelPath,
-    audioDurationMs,
-    createdAt,
-    updatedAt,
-    deletedAt,
-  );
+      id,
+      entryId,
+      kind,
+      position,
+      textBody,
+      photoId,
+      caption,
+      audioRelPath,
+      audioDurationMs,
+      createdAt,
+      updatedAt,
+      deletedAt);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -7778,12 +6570,12 @@ class JournalEntryFragmentsCompanion
     required int updatedAt,
     this.deletedAt = const Value.absent(),
     this.rowid = const Value.absent(),
-  }) : id = Value(id),
-       entryId = Value(entryId),
-       kind = Value(kind),
-       position = Value(position),
-       createdAt = Value(createdAt),
-       updatedAt = Value(updatedAt);
+  })  : id = Value(id),
+        entryId = Value(entryId),
+        kind = Value(kind),
+        position = Value(position),
+        createdAt = Value(createdAt),
+        updatedAt = Value(updatedAt);
   static Insertable<JournalEntryFragmentRow> custom({
     Expression<String>? id,
     Expression<String>? entryId,
@@ -7816,21 +6608,20 @@ class JournalEntryFragmentsCompanion
     });
   }
 
-  JournalEntryFragmentsCompanion copyWith({
-    Value<String>? id,
-    Value<String>? entryId,
-    Value<String>? kind,
-    Value<int>? position,
-    Value<String?>? textBody,
-    Value<String?>? photoId,
-    Value<String?>? caption,
-    Value<String?>? audioRelPath,
-    Value<int?>? audioDurationMs,
-    Value<int>? createdAt,
-    Value<int>? updatedAt,
-    Value<int?>? deletedAt,
-    Value<int>? rowid,
-  }) {
+  JournalEntryFragmentsCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? entryId,
+      Value<String>? kind,
+      Value<int>? position,
+      Value<String?>? textBody,
+      Value<String?>? photoId,
+      Value<String?>? caption,
+      Value<String?>? audioRelPath,
+      Value<int?>? audioDurationMs,
+      Value<int>? createdAt,
+      Value<int>? updatedAt,
+      Value<int?>? deletedAt,
+      Value<int>? rowid}) {
     return JournalEntryFragmentsCompanion(
       id: id ?? this.id,
       entryId: entryId ?? this.entryId,
@@ -7939,141 +6730,117 @@ abstract class _$KinDatabase extends GeneratedDatabase {
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
-    people,
-    profiles,
-    notes,
-    photos,
-    reminderRules,
-    personalReminders,
-    scheduledNotifications,
-    settings,
-    syncState,
-    journalDays,
-    journalEntries,
-    journalEntryPhotos,
-    journalEntryFragments,
-  ];
+        people,
+        profiles,
+        notes,
+        photos,
+        reminderRules,
+        personalReminders,
+        scheduledNotifications,
+        settings,
+        syncState,
+        journalDays,
+        journalEntries,
+        journalEntryPhotos,
+        journalEntryFragments
+      ];
 }
 
-typedef $$PeopleTableCreateCompanionBuilder =
-    PeopleCompanion Function({
-      required String id,
-      required String displayName,
-      required int birthMonth,
-      required int birthDay,
-      Value<int?> birthYear,
-      Value<String?> placeLabel,
-      Value<String?> ianaTimezone,
-      required String sortKey,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
-typedef $$PeopleTableUpdateCompanionBuilder =
-    PeopleCompanion Function({
-      Value<String> id,
-      Value<String> displayName,
-      Value<int> birthMonth,
-      Value<int> birthDay,
-      Value<int?> birthYear,
-      Value<String?> placeLabel,
-      Value<String?> ianaTimezone,
-      Value<String> sortKey,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
+typedef $$PeopleTableCreateCompanionBuilder = PeopleCompanion Function({
+  required String id,
+  required String displayName,
+  required int birthMonth,
+  required int birthDay,
+  Value<int?> birthYear,
+  Value<String?> placeLabel,
+  Value<String?> ianaTimezone,
+  required String sortKey,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
+typedef $$PeopleTableUpdateCompanionBuilder = PeopleCompanion Function({
+  Value<String> id,
+  Value<String> displayName,
+  Value<int> birthMonth,
+  Value<int> birthDay,
+  Value<int?> birthYear,
+  Value<String?> placeLabel,
+  Value<String?> ianaTimezone,
+  Value<String> sortKey,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
 
 final class $$PeopleTableReferences
     extends BaseReferences<_$KinDatabase, $PeopleTable, PeopleData> {
   $$PeopleTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$ProfilesTable, List<Profile>> _profilesRefsTable(
-    _$KinDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.profiles,
-    aliasName: $_aliasNameGenerator(db.people.id, db.profiles.personId),
-  );
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.profiles,
+          aliasName: $_aliasNameGenerator(db.people.id, db.profiles.personId));
 
   $$ProfilesTableProcessedTableManager get profilesRefs {
-    final manager = $$ProfilesTableTableManager(
-      $_db,
-      $_db.profiles,
-    ).filter((f) => f.personId.id($_item.id));
+    final manager = $$ProfilesTableTableManager($_db, $_db.profiles)
+        .filter((f) => f.personId.id($_item.id));
 
     final cache = $_typedResult.readTableOrNull(_profilesRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 
   static MultiTypedResultKey<$PhotosTable, List<Photo>> _photosRefsTable(
-    _$KinDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.photos,
-    aliasName: $_aliasNameGenerator(db.people.id, db.photos.personId),
-  );
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.photos,
+          aliasName: $_aliasNameGenerator(db.people.id, db.photos.personId));
 
   $$PhotosTableProcessedTableManager get photosRefs {
-    final manager = $$PhotosTableTableManager(
-      $_db,
-      $_db.photos,
-    ).filter((f) => f.personId.id($_item.id));
+    final manager = $$PhotosTableTableManager($_db, $_db.photos)
+        .filter((f) => f.personId.id($_item.id));
 
     final cache = $_typedResult.readTableOrNull(_photosRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 
   static MultiTypedResultKey<$ReminderRulesTable, List<ReminderRule>>
-  _reminderRulesRefsTable(_$KinDatabase db) => MultiTypedResultKey.fromTable(
-    db.reminderRules,
-    aliasName: $_aliasNameGenerator(db.people.id, db.reminderRules.personId),
-  );
+      _reminderRulesRefsTable(_$KinDatabase db) =>
+          MultiTypedResultKey.fromTable(db.reminderRules,
+              aliasName: $_aliasNameGenerator(
+                  db.people.id, db.reminderRules.personId));
 
   $$ReminderRulesTableProcessedTableManager get reminderRulesRefs {
-    final manager = $$ReminderRulesTableTableManager(
-      $_db,
-      $_db.reminderRules,
-    ).filter((f) => f.personId.id($_item.id));
+    final manager = $$ReminderRulesTableTableManager($_db, $_db.reminderRules)
+        .filter((f) => f.personId.id($_item.id));
 
     final cache = $_typedResult.readTableOrNull(_reminderRulesRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 
-  static MultiTypedResultKey<
-    $ScheduledNotificationsTable,
-    List<ScheduledNotification>
-  >
-  _scheduledNotificationsRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.scheduledNotifications,
-        aliasName: $_aliasNameGenerator(
-          db.people.id,
-          db.scheduledNotifications.personId,
-        ),
-      );
+  static MultiTypedResultKey<$ScheduledNotificationsTable,
+      List<ScheduledNotification>> _scheduledNotificationsRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.scheduledNotifications,
+          aliasName: $_aliasNameGenerator(
+              db.people.id, db.scheduledNotifications.personId));
 
   $$ScheduledNotificationsTableProcessedTableManager
-  get scheduledNotificationsRefs {
+      get scheduledNotificationsRefs {
     final manager = $$ScheduledNotificationsTableTableManager(
-      $_db,
-      $_db.scheduledNotifications,
-    ).filter((f) => f.personId.id($_item.id));
+            $_db, $_db.scheduledNotifications)
+        .filter((f) => f.personId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _scheduledNotificationsRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_scheduledNotificationsRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -8087,163 +6854,124 @@ class $$PeopleTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get displayName => $composableBuilder(
-    column: $table.displayName,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.displayName, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get birthMonth => $composableBuilder(
-    column: $table.birthMonth,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.birthMonth, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get birthDay => $composableBuilder(
-    column: $table.birthDay,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.birthDay, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get birthYear => $composableBuilder(
-    column: $table.birthYear,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.birthYear, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get placeLabel => $composableBuilder(
-    column: $table.placeLabel,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.placeLabel, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get ianaTimezone => $composableBuilder(
-    column: $table.ianaTimezone,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.ianaTimezone, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get sortKey => $composableBuilder(
-    column: $table.sortKey,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.sortKey, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnFilters(column));
 
   Expression<bool> profilesRefs(
-    Expression<bool> Function($$ProfilesTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$ProfilesTableFilterComposer f) f) {
     final $$ProfilesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.profiles,
-      getReferencedColumn: (t) => t.personId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ProfilesTableFilterComposer(
-            $db: $db,
-            $table: $db.profiles,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.profiles,
+        getReferencedColumn: (t) => t.personId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProfilesTableFilterComposer(
+              $db: $db,
+              $table: $db.profiles,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<bool> photosRefs(
-    Expression<bool> Function($$PhotosTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$PhotosTableFilterComposer f) f) {
     final $$PhotosTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.personId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableFilterComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.personId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableFilterComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<bool> reminderRulesRefs(
-    Expression<bool> Function($$ReminderRulesTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$ReminderRulesTableFilterComposer f) f) {
     final $$ReminderRulesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.reminderRules,
-      getReferencedColumn: (t) => t.personId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ReminderRulesTableFilterComposer(
-            $db: $db,
-            $table: $db.reminderRules,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.reminderRules,
+        getReferencedColumn: (t) => t.personId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderRulesTableFilterComposer(
+              $db: $db,
+              $table: $db.reminderRules,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<bool> scheduledNotificationsRefs(
-    Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f)
+          f) {
     final $$ScheduledNotificationsTableFilterComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.personId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableFilterComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.personId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableFilterComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
@@ -8258,64 +6986,41 @@ class $$PeopleTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get displayName => $composableBuilder(
-    column: $table.displayName,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.displayName, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get birthMonth => $composableBuilder(
-    column: $table.birthMonth,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.birthMonth, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get birthDay => $composableBuilder(
-    column: $table.birthDay,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.birthDay, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get birthYear => $composableBuilder(
-    column: $table.birthYear,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.birthYear, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get placeLabel => $composableBuilder(
-    column: $table.placeLabel,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.placeLabel, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get ianaTimezone => $composableBuilder(
-    column: $table.ianaTimezone,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.ianaTimezone,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get sortKey => $composableBuilder(
-    column: $table.sortKey,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.sortKey, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnOrderings(column));
 }
 
 class $$PeopleTableAnnotationComposer
@@ -8331,14 +7036,10 @@ class $$PeopleTableAnnotationComposer
       $composableBuilder(column: $table.id, builder: (column) => column);
 
   GeneratedColumn<String> get displayName => $composableBuilder(
-    column: $table.displayName,
-    builder: (column) => column,
-  );
+      column: $table.displayName, builder: (column) => column);
 
   GeneratedColumn<int> get birthMonth => $composableBuilder(
-    column: $table.birthMonth,
-    builder: (column) => column,
-  );
+      column: $table.birthMonth, builder: (column) => column);
 
   GeneratedColumn<int> get birthDay =>
       $composableBuilder(column: $table.birthDay, builder: (column) => column);
@@ -8347,14 +7048,10 @@ class $$PeopleTableAnnotationComposer
       $composableBuilder(column: $table.birthYear, builder: (column) => column);
 
   GeneratedColumn<String> get placeLabel => $composableBuilder(
-    column: $table.placeLabel,
-    builder: (column) => column,
-  );
+      column: $table.placeLabel, builder: (column) => column);
 
   GeneratedColumn<String> get ianaTimezone => $composableBuilder(
-    column: $table.ianaTimezone,
-    builder: (column) => column,
-  );
+      column: $table.ianaTimezone, builder: (column) => column);
 
   GeneratedColumn<String> get sortKey =>
       $composableBuilder(column: $table.sortKey, builder: (column) => column);
@@ -8372,130 +7069,110 @@ class $$PeopleTableAnnotationComposer
       $composableBuilder(column: $table.syncRev, builder: (column) => column);
 
   Expression<T> profilesRefs<T extends Object>(
-    Expression<T> Function($$ProfilesTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$ProfilesTableAnnotationComposer a) f) {
     final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.profiles,
-      getReferencedColumn: (t) => t.personId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ProfilesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.profiles,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.profiles,
+        getReferencedColumn: (t) => t.personId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProfilesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.profiles,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<T> photosRefs<T extends Object>(
-    Expression<T> Function($$PhotosTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$PhotosTableAnnotationComposer a) f) {
     final $$PhotosTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.personId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableAnnotationComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.personId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableAnnotationComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<T> reminderRulesRefs<T extends Object>(
-    Expression<T> Function($$ReminderRulesTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$ReminderRulesTableAnnotationComposer a) f) {
     final $$ReminderRulesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.reminderRules,
-      getReferencedColumn: (t) => t.personId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ReminderRulesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.reminderRules,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.reminderRules,
+        getReferencedColumn: (t) => t.personId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderRulesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.reminderRules,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<T> scheduledNotificationsRefs<T extends Object>(
-    Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a)
+          f) {
     final $$ScheduledNotificationsTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.personId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableAnnotationComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.personId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
 
-class $$PeopleTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $PeopleTable,
-          PeopleData,
-          $$PeopleTableFilterComposer,
-          $$PeopleTableOrderingComposer,
-          $$PeopleTableAnnotationComposer,
-          $$PeopleTableCreateCompanionBuilder,
-          $$PeopleTableUpdateCompanionBuilder,
-          (PeopleData, $$PeopleTableReferences),
-          PeopleData,
-          PrefetchHooks Function({
-            bool profilesRefs,
-            bool photosRefs,
-            bool reminderRulesRefs,
-            bool scheduledNotificationsRefs,
-          })
-        > {
+class $$PeopleTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $PeopleTable,
+    PeopleData,
+    $$PeopleTableFilterComposer,
+    $$PeopleTableOrderingComposer,
+    $$PeopleTableAnnotationComposer,
+    $$PeopleTableCreateCompanionBuilder,
+    $$PeopleTableUpdateCompanionBuilder,
+    (PeopleData, $$PeopleTableReferences),
+    PeopleData,
+    PrefetchHooks Function(
+        {bool profilesRefs,
+        bool photosRefs,
+        bool reminderRulesRefs,
+        bool scheduledNotificationsRefs})> {
   $$PeopleTableTableManager(_$KinDatabase db, $PeopleTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -8504,250 +7181,213 @@ class $$PeopleTableTableManager
               $$PeopleTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$PeopleTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> displayName = const Value.absent(),
-                Value<int> birthMonth = const Value.absent(),
-                Value<int> birthDay = const Value.absent(),
-                Value<int?> birthYear = const Value.absent(),
-                Value<String?> placeLabel = const Value.absent(),
-                Value<String?> ianaTimezone = const Value.absent(),
-                Value<String> sortKey = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => PeopleCompanion(
-                id: id,
-                displayName: displayName,
-                birthMonth: birthMonth,
-                birthDay: birthDay,
-                birthYear: birthYear,
-                placeLabel: placeLabel,
-                ianaTimezone: ianaTimezone,
-                sortKey: sortKey,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String displayName,
-                required int birthMonth,
-                required int birthDay,
-                Value<int?> birthYear = const Value.absent(),
-                Value<String?> placeLabel = const Value.absent(),
-                Value<String?> ianaTimezone = const Value.absent(),
-                required String sortKey,
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => PeopleCompanion.insert(
-                id: id,
-                displayName: displayName,
-                birthMonth: birthMonth,
-                birthDay: birthDay,
-                birthYear: birthYear,
-                placeLabel: placeLabel,
-                ianaTimezone: ianaTimezone,
-                sortKey: sortKey,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> displayName = const Value.absent(),
+            Value<int> birthMonth = const Value.absent(),
+            Value<int> birthDay = const Value.absent(),
+            Value<int?> birthYear = const Value.absent(),
+            Value<String?> placeLabel = const Value.absent(),
+            Value<String?> ianaTimezone = const Value.absent(),
+            Value<String> sortKey = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PeopleCompanion(
+            id: id,
+            displayName: displayName,
+            birthMonth: birthMonth,
+            birthDay: birthDay,
+            birthYear: birthYear,
+            placeLabel: placeLabel,
+            ianaTimezone: ianaTimezone,
+            sortKey: sortKey,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String displayName,
+            required int birthMonth,
+            required int birthDay,
+            Value<int?> birthYear = const Value.absent(),
+            Value<String?> placeLabel = const Value.absent(),
+            Value<String?> ianaTimezone = const Value.absent(),
+            required String sortKey,
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PeopleCompanion.insert(
+            id: id,
+            displayName: displayName,
+            birthMonth: birthMonth,
+            birthDay: birthDay,
+            birthYear: birthYear,
+            placeLabel: placeLabel,
+            ianaTimezone: ianaTimezone,
+            sortKey: sortKey,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) =>
-                    (e.readTable(table), $$PeopleTableReferences(db, table, e)),
-              )
+              .map((e) =>
+                  (e.readTable(table), $$PeopleTableReferences(db, table, e)))
               .toList(),
-          prefetchHooksCallback:
-              ({
-                profilesRefs = false,
-                photosRefs = false,
-                reminderRulesRefs = false,
-                scheduledNotificationsRefs = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (profilesRefs) db.profiles,
-                    if (photosRefs) db.photos,
-                    if (reminderRulesRefs) db.reminderRules,
-                    if (scheduledNotificationsRefs) db.scheduledNotifications,
-                  ],
-                  addJoins: null,
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (profilesRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$PeopleTableReferences
-                              ._profilesRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$PeopleTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).profilesRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.personId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                      if (photosRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$PeopleTableReferences
-                              ._photosRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$PeopleTableReferences(db, table, p0).photosRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.personId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                      if (reminderRulesRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$PeopleTableReferences
-                              ._reminderRulesRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$PeopleTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).reminderRulesRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.personId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                      if (scheduledNotificationsRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$PeopleTableReferences
-                              ._scheduledNotificationsRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$PeopleTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).scheduledNotificationsRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.personId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
+          prefetchHooksCallback: (
+              {profilesRefs = false,
+              photosRefs = false,
+              reminderRulesRefs = false,
+              scheduledNotificationsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (profilesRefs) db.profiles,
+                if (photosRefs) db.photos,
+                if (reminderRulesRefs) db.reminderRules,
+                if (scheduledNotificationsRefs) db.scheduledNotifications
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (profilesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$PeopleTableReferences._profilesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PeopleTableReferences(db, table, p0).profilesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.personId == item.id),
+                        typedResults: items),
+                  if (photosRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$PeopleTableReferences._photosRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PeopleTableReferences(db, table, p0).photosRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.personId == item.id),
+                        typedResults: items),
+                  if (reminderRulesRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable:
+                            $$PeopleTableReferences._reminderRulesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PeopleTableReferences(db, table, p0)
+                                .reminderRulesRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.personId == item.id),
+                        typedResults: items),
+                  if (scheduledNotificationsRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$PeopleTableReferences
+                            ._scheduledNotificationsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PeopleTableReferences(db, table, p0)
+                                .scheduledNotificationsRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.personId == item.id),
+                        typedResults: items)
+                ];
               },
-        ),
-      );
+            );
+          },
+        ));
 }
 
-typedef $$PeopleTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $PeopleTable,
-      PeopleData,
-      $$PeopleTableFilterComposer,
-      $$PeopleTableOrderingComposer,
-      $$PeopleTableAnnotationComposer,
-      $$PeopleTableCreateCompanionBuilder,
-      $$PeopleTableUpdateCompanionBuilder,
-      (PeopleData, $$PeopleTableReferences),
-      PeopleData,
-      PrefetchHooks Function({
-        bool profilesRefs,
+typedef $$PeopleTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $PeopleTable,
+    PeopleData,
+    $$PeopleTableFilterComposer,
+    $$PeopleTableOrderingComposer,
+    $$PeopleTableAnnotationComposer,
+    $$PeopleTableCreateCompanionBuilder,
+    $$PeopleTableUpdateCompanionBuilder,
+    (PeopleData, $$PeopleTableReferences),
+    PeopleData,
+    PrefetchHooks Function(
+        {bool profilesRefs,
         bool photosRefs,
         bool reminderRulesRefs,
-        bool scheduledNotificationsRefs,
-      })
-    >;
-typedef $$ProfilesTableCreateCompanionBuilder =
-    ProfilesCompanion Function({
-      required String id,
-      required String personId,
-      Value<String?> nickname,
-      Value<String?> relationship,
-      Value<String?> relationshipLabel,
-      Value<String?> photoId,
-      Value<bool> isPinned,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
-typedef $$ProfilesTableUpdateCompanionBuilder =
-    ProfilesCompanion Function({
-      Value<String> id,
-      Value<String> personId,
-      Value<String?> nickname,
-      Value<String?> relationship,
-      Value<String?> relationshipLabel,
-      Value<String?> photoId,
-      Value<bool> isPinned,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
+        bool scheduledNotificationsRefs})>;
+typedef $$ProfilesTableCreateCompanionBuilder = ProfilesCompanion Function({
+  required String id,
+  required String personId,
+  Value<String?> nickname,
+  Value<String?> relationship,
+  Value<String?> relationshipLabel,
+  Value<String?> photoId,
+  Value<bool> isPinned,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
+typedef $$ProfilesTableUpdateCompanionBuilder = ProfilesCompanion Function({
+  Value<String> id,
+  Value<String> personId,
+  Value<String?> nickname,
+  Value<String?> relationship,
+  Value<String?> relationshipLabel,
+  Value<String?> photoId,
+  Value<bool> isPinned,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
 
 final class $$ProfilesTableReferences
     extends BaseReferences<_$KinDatabase, $ProfilesTable, Profile> {
   $$ProfilesTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static $PeopleTable _personIdTable(_$KinDatabase db) => db.people.createAlias(
-    $_aliasNameGenerator(db.profiles.personId, db.people.id),
-  );
+  static $PeopleTable _personIdTable(_$KinDatabase db) => db.people
+      .createAlias($_aliasNameGenerator(db.profiles.personId, db.people.id));
 
   $$PeopleTableProcessedTableManager? get personId {
     if ($_item.personId == null) return null;
-    final manager = $$PeopleTableTableManager(
-      $_db,
-      $_db.people,
-    ).filter((f) => f.id($_item.personId!));
+    final manager = $$PeopleTableTableManager($_db, $_db.people)
+        .filter((f) => f.id($_item.personId!));
     final item = $_typedResult.readTableOrNull(_personIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static MultiTypedResultKey<$NotesTable, List<Note>> _notesRefsTable(
-    _$KinDatabase db,
-  ) => MultiTypedResultKey.fromTable(
-    db.notes,
-    aliasName: $_aliasNameGenerator(db.profiles.id, db.notes.profileId),
-  );
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.notes,
+          aliasName: $_aliasNameGenerator(db.profiles.id, db.notes.profileId));
 
   $$NotesTableProcessedTableManager get notesRefs {
-    final manager = $$NotesTableTableManager(
-      $_db,
-      $_db.notes,
-    ).filter((f) => f.profileId.id($_item.id));
+    final manager = $$NotesTableTableManager($_db, $_db.notes)
+        .filter((f) => f.profileId.id($_item.id));
 
     final cache = $_typedResult.readTableOrNull(_notesRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -8761,100 +7401,74 @@ class $$ProfilesTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get nickname => $composableBuilder(
-    column: $table.nickname,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.nickname, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get relationship => $composableBuilder(
-    column: $table.relationship,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.relationship, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get relationshipLabel => $composableBuilder(
-    column: $table.relationshipLabel,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.relationshipLabel,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get photoId => $composableBuilder(
-    column: $table.photoId,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.photoId, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get isPinned => $composableBuilder(
-    column: $table.isPinned,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.isPinned, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnFilters(column));
 
   $$PeopleTableFilterComposer get personId {
     final $$PeopleTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableFilterComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableFilterComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<bool> notesRefs(
-    Expression<bool> Function($$NotesTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$NotesTableFilterComposer f) f) {
     final $$NotesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.notes,
-      getReferencedColumn: (t) => t.profileId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$NotesTableFilterComposer(
-            $db: $db,
-            $table: $db.notes,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.notes,
+        getReferencedColumn: (t) => t.profileId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$NotesTableFilterComposer(
+              $db: $db,
+              $table: $db.notes,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
@@ -8869,75 +7483,54 @@ class $$ProfilesTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get nickname => $composableBuilder(
-    column: $table.nickname,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.nickname, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get relationship => $composableBuilder(
-    column: $table.relationship,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.relationship,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get relationshipLabel => $composableBuilder(
-    column: $table.relationshipLabel,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.relationshipLabel,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get photoId => $composableBuilder(
-    column: $table.photoId,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.photoId, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<bool> get isPinned => $composableBuilder(
-    column: $table.isPinned,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.isPinned, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnOrderings(column));
 
   $$PeopleTableOrderingComposer get personId {
     final $$PeopleTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableOrderingComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableOrderingComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -8958,14 +7551,10 @@ class $$ProfilesTableAnnotationComposer
       $composableBuilder(column: $table.nickname, builder: (column) => column);
 
   GeneratedColumn<String> get relationship => $composableBuilder(
-    column: $table.relationship,
-    builder: (column) => column,
-  );
+      column: $table.relationship, builder: (column) => column);
 
   GeneratedColumn<String> get relationshipLabel => $composableBuilder(
-    column: $table.relationshipLabel,
-    builder: (column) => column,
-  );
+      column: $table.relationshipLabel, builder: (column) => column);
 
   GeneratedColumn<String> get photoId =>
       $composableBuilder(column: $table.photoId, builder: (column) => column);
@@ -8987,71 +7576,60 @@ class $$ProfilesTableAnnotationComposer
 
   $$PeopleTableAnnotationComposer get personId {
     final $$PeopleTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableAnnotationComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableAnnotationComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<T> notesRefs<T extends Object>(
-    Expression<T> Function($$NotesTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$NotesTableAnnotationComposer a) f) {
     final $$NotesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.notes,
-      getReferencedColumn: (t) => t.profileId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$NotesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.notes,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.notes,
+        getReferencedColumn: (t) => t.profileId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$NotesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.notes,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
 
-class $$ProfilesTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $ProfilesTable,
-          Profile,
-          $$ProfilesTableFilterComposer,
-          $$ProfilesTableOrderingComposer,
-          $$ProfilesTableAnnotationComposer,
-          $$ProfilesTableCreateCompanionBuilder,
-          $$ProfilesTableUpdateCompanionBuilder,
-          (Profile, $$ProfilesTableReferences),
-          Profile,
-          PrefetchHooks Function({bool personId, bool notesRefs})
-        > {
+class $$ProfilesTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $ProfilesTable,
+    Profile,
+    $$ProfilesTableFilterComposer,
+    $$ProfilesTableOrderingComposer,
+    $$ProfilesTableAnnotationComposer,
+    $$ProfilesTableCreateCompanionBuilder,
+    $$ProfilesTableUpdateCompanionBuilder,
+    (Profile, $$ProfilesTableReferences),
+    Profile,
+    PrefetchHooks Function({bool personId, bool notesRefs})> {
   $$ProfilesTableTableManager(_$KinDatabase db, $ProfilesTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -9060,77 +7638,72 @@ class $$ProfilesTableTableManager
               $$ProfilesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$ProfilesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> personId = const Value.absent(),
-                Value<String?> nickname = const Value.absent(),
-                Value<String?> relationship = const Value.absent(),
-                Value<String?> relationshipLabel = const Value.absent(),
-                Value<String?> photoId = const Value.absent(),
-                Value<bool> isPinned = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => ProfilesCompanion(
-                id: id,
-                personId: personId,
-                nickname: nickname,
-                relationship: relationship,
-                relationshipLabel: relationshipLabel,
-                photoId: photoId,
-                isPinned: isPinned,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String personId,
-                Value<String?> nickname = const Value.absent(),
-                Value<String?> relationship = const Value.absent(),
-                Value<String?> relationshipLabel = const Value.absent(),
-                Value<String?> photoId = const Value.absent(),
-                Value<bool> isPinned = const Value.absent(),
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => ProfilesCompanion.insert(
-                id: id,
-                personId: personId,
-                nickname: nickname,
-                relationship: relationship,
-                relationshipLabel: relationshipLabel,
-                photoId: photoId,
-                isPinned: isPinned,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> personId = const Value.absent(),
+            Value<String?> nickname = const Value.absent(),
+            Value<String?> relationship = const Value.absent(),
+            Value<String?> relationshipLabel = const Value.absent(),
+            Value<String?> photoId = const Value.absent(),
+            Value<bool> isPinned = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ProfilesCompanion(
+            id: id,
+            personId: personId,
+            nickname: nickname,
+            relationship: relationship,
+            relationshipLabel: relationshipLabel,
+            photoId: photoId,
+            isPinned: isPinned,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String personId,
+            Value<String?> nickname = const Value.absent(),
+            Value<String?> relationship = const Value.absent(),
+            Value<String?> relationshipLabel = const Value.absent(),
+            Value<String?> photoId = const Value.absent(),
+            Value<bool> isPinned = const Value.absent(),
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ProfilesCompanion.insert(
+            id: id,
+            personId: personId,
+            nickname: nickname,
+            relationship: relationship,
+            relationshipLabel: relationshipLabel,
+            photoId: photoId,
+            isPinned: isPinned,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$ProfilesTableReferences(db, table, e),
-                ),
-              )
+              .map((e) =>
+                  (e.readTable(table), $$ProfilesTableReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: ({personId = false, notesRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [if (notesRefs) db.notes],
-              addJoins:
-                  <
-                    T extends TableManagerState<
+              addJoins: <
+                  T extends TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -9141,90 +7714,80 @@ class $$ProfilesTableTableManager
                       dynamic,
                       dynamic,
                       dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (personId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.personId,
-                                referencedTable: $$ProfilesTableReferences
-                                    ._personIdTable(db),
-                                referencedColumn: $$ProfilesTableReferences
-                                    ._personIdTable(db)
-                                    .id,
-                              )
-                              as T;
-                    }
+                      dynamic>>(state) {
+                if (personId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.personId,
+                    referencedTable:
+                        $$ProfilesTableReferences._personIdTable(db),
+                    referencedColumn:
+                        $$ProfilesTableReferences._personIdTable(db).id,
+                  ) as T;
+                }
 
-                    return state;
-                  },
+                return state;
+              },
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (notesRefs)
                     await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$ProfilesTableReferences
-                          ._notesRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$ProfilesTableReferences(db, table, p0).notesRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.profileId == item.id),
-                      typedResults: items,
-                    ),
+                        currentTable: table,
+                        referencedTable:
+                            $$ProfilesTableReferences._notesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ProfilesTableReferences(db, table, p0).notesRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.profileId == item.id),
+                        typedResults: items)
                 ];
               },
             );
           },
-        ),
-      );
+        ));
 }
 
-typedef $$ProfilesTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $ProfilesTable,
-      Profile,
-      $$ProfilesTableFilterComposer,
-      $$ProfilesTableOrderingComposer,
-      $$ProfilesTableAnnotationComposer,
-      $$ProfilesTableCreateCompanionBuilder,
-      $$ProfilesTableUpdateCompanionBuilder,
-      (Profile, $$ProfilesTableReferences),
-      Profile,
-      PrefetchHooks Function({bool personId, bool notesRefs})
-    >;
-typedef $$NotesTableCreateCompanionBuilder =
-    NotesCompanion Function({
-      required String id,
-      required String profileId,
-      required String kind,
-      Value<String?> kindLabel,
-      required String value,
-      Value<bool> isRetired,
-      required int position,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
-typedef $$NotesTableUpdateCompanionBuilder =
-    NotesCompanion Function({
-      Value<String> id,
-      Value<String> profileId,
-      Value<String> kind,
-      Value<String?> kindLabel,
-      Value<String> value,
-      Value<bool> isRetired,
-      Value<int> position,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
+typedef $$ProfilesTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $ProfilesTable,
+    Profile,
+    $$ProfilesTableFilterComposer,
+    $$ProfilesTableOrderingComposer,
+    $$ProfilesTableAnnotationComposer,
+    $$ProfilesTableCreateCompanionBuilder,
+    $$ProfilesTableUpdateCompanionBuilder,
+    (Profile, $$ProfilesTableReferences),
+    Profile,
+    PrefetchHooks Function({bool personId, bool notesRefs})>;
+typedef $$NotesTableCreateCompanionBuilder = NotesCompanion Function({
+  required String id,
+  required String profileId,
+  required String kind,
+  Value<String?> kindLabel,
+  required String value,
+  Value<bool> isRetired,
+  required int position,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
+typedef $$NotesTableUpdateCompanionBuilder = NotesCompanion Function({
+  Value<String> id,
+  Value<String> profileId,
+  Value<String> kind,
+  Value<String?> kindLabel,
+  Value<String> value,
+  Value<bool> isRetired,
+  Value<int> position,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
 
 final class $$NotesTableReferences
     extends BaseReferences<_$KinDatabase, $NotesTable, Note> {
@@ -9235,43 +7798,31 @@ final class $$NotesTableReferences
 
   $$ProfilesTableProcessedTableManager? get profileId {
     if ($_item.profileId == null) return null;
-    final manager = $$ProfilesTableTableManager(
-      $_db,
-      $_db.profiles,
-    ).filter((f) => f.id($_item.profileId!));
+    final manager = $$ProfilesTableTableManager($_db, $_db.profiles)
+        .filter((f) => f.id($_item.profileId!));
     final item = $_typedResult.readTableOrNull(_profileIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
-  static MultiTypedResultKey<
-    $ScheduledNotificationsTable,
-    List<ScheduledNotification>
-  >
-  _scheduledNotificationsRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.scheduledNotifications,
-        aliasName: $_aliasNameGenerator(
-          db.notes.id,
-          db.scheduledNotifications.noteIdUsed,
-        ),
-      );
+  static MultiTypedResultKey<$ScheduledNotificationsTable,
+      List<ScheduledNotification>> _scheduledNotificationsRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.scheduledNotifications,
+          aliasName: $_aliasNameGenerator(
+              db.notes.id, db.scheduledNotifications.noteIdUsed));
 
   $$ScheduledNotificationsTableProcessedTableManager
-  get scheduledNotificationsRefs {
+      get scheduledNotificationsRefs {
     final manager = $$ScheduledNotificationsTableTableManager(
-      $_db,
-      $_db.scheduledNotifications,
-    ).filter((f) => f.noteIdUsed.id($_item.id));
+            $_db, $_db.scheduledNotifications)
+        .filter((f) => f.noteIdUsed.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _scheduledNotificationsRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_scheduledNotificationsRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -9284,101 +7835,75 @@ class $$NotesTableFilterComposer extends Composer<_$KinDatabase, $NotesTable> {
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get kind => $composableBuilder(
-    column: $table.kind,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.kind, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get kindLabel => $composableBuilder(
-    column: $table.kindLabel,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.kindLabel, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get value => $composableBuilder(
-    column: $table.value,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.value, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get isRetired => $composableBuilder(
-    column: $table.isRetired,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.isRetired, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.position, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnFilters(column));
 
   $$ProfilesTableFilterComposer get profileId {
     final $$ProfilesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.profileId,
-      referencedTable: $db.profiles,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ProfilesTableFilterComposer(
-            $db: $db,
-            $table: $db.profiles,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.profileId,
+        referencedTable: $db.profiles,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProfilesTableFilterComposer(
+              $db: $db,
+              $table: $db.profiles,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<bool> scheduledNotificationsRefs(
-    Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f)
+          f) {
     final $$ScheduledNotificationsTableFilterComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.noteIdUsed,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableFilterComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.noteIdUsed,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableFilterComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
@@ -9393,75 +7918,52 @@ class $$NotesTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get kind => $composableBuilder(
-    column: $table.kind,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.kind, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get kindLabel => $composableBuilder(
-    column: $table.kindLabel,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.kindLabel, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get value => $composableBuilder(
-    column: $table.value,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.value, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<bool> get isRetired => $composableBuilder(
-    column: $table.isRetired,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.isRetired, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.position, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnOrderings(column));
 
   $$ProfilesTableOrderingComposer get profileId {
     final $$ProfilesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.profileId,
-      referencedTable: $db.profiles,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ProfilesTableOrderingComposer(
-            $db: $db,
-            $table: $db.profiles,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.profileId,
+        referencedTable: $db.profiles,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProfilesTableOrderingComposer(
+              $db: $db,
+              $table: $db.profiles,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -9507,75 +8009,62 @@ class $$NotesTableAnnotationComposer
 
   $$ProfilesTableAnnotationComposer get profileId {
     final $$ProfilesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.profileId,
-      referencedTable: $db.profiles,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ProfilesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.profiles,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.profileId,
+        referencedTable: $db.profiles,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ProfilesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.profiles,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<T> scheduledNotificationsRefs<T extends Object>(
-    Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a)
+          f) {
     final $$ScheduledNotificationsTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.noteIdUsed,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableAnnotationComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.noteIdUsed,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
 
-class $$NotesTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $NotesTable,
-          Note,
-          $$NotesTableFilterComposer,
-          $$NotesTableOrderingComposer,
-          $$NotesTableAnnotationComposer,
-          $$NotesTableCreateCompanionBuilder,
-          $$NotesTableUpdateCompanionBuilder,
-          (Note, $$NotesTableReferences),
-          Note,
-          PrefetchHooks Function({
-            bool profileId,
-            bool scheduledNotificationsRefs,
-          })
-        > {
+class $$NotesTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $NotesTable,
+    Note,
+    $$NotesTableFilterComposer,
+    $$NotesTableOrderingComposer,
+    $$NotesTableAnnotationComposer,
+    $$NotesTableCreateCompanionBuilder,
+    $$NotesTableUpdateCompanionBuilder,
+    (Note, $$NotesTableReferences),
+    Note,
+    PrefetchHooks Function({bool profileId, bool scheduledNotificationsRefs})> {
   $$NotesTableTableManager(_$KinDatabase db, $NotesTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -9584,249 +8073,208 @@ class $$NotesTableTableManager
               $$NotesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$NotesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> profileId = const Value.absent(),
-                Value<String> kind = const Value.absent(),
-                Value<String?> kindLabel = const Value.absent(),
-                Value<String> value = const Value.absent(),
-                Value<bool> isRetired = const Value.absent(),
-                Value<int> position = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => NotesCompanion(
-                id: id,
-                profileId: profileId,
-                kind: kind,
-                kindLabel: kindLabel,
-                value: value,
-                isRetired: isRetired,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String profileId,
-                required String kind,
-                Value<String?> kindLabel = const Value.absent(),
-                required String value,
-                Value<bool> isRetired = const Value.absent(),
-                required int position,
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => NotesCompanion.insert(
-                id: id,
-                profileId: profileId,
-                kind: kind,
-                kindLabel: kindLabel,
-                value: value,
-                isRetired: isRetired,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> profileId = const Value.absent(),
+            Value<String> kind = const Value.absent(),
+            Value<String?> kindLabel = const Value.absent(),
+            Value<String> value = const Value.absent(),
+            Value<bool> isRetired = const Value.absent(),
+            Value<int> position = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              NotesCompanion(
+            id: id,
+            profileId: profileId,
+            kind: kind,
+            kindLabel: kindLabel,
+            value: value,
+            isRetired: isRetired,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String profileId,
+            required String kind,
+            Value<String?> kindLabel = const Value.absent(),
+            required String value,
+            Value<bool> isRetired = const Value.absent(),
+            required int position,
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              NotesCompanion.insert(
+            id: id,
+            profileId: profileId,
+            kind: kind,
+            kindLabel: kindLabel,
+            value: value,
+            isRetired: isRetired,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) =>
-                    (e.readTable(table), $$NotesTableReferences(db, table, e)),
-              )
+              .map((e) =>
+                  (e.readTable(table), $$NotesTableReferences(db, table, e)))
               .toList(),
-          prefetchHooksCallback:
-              ({profileId = false, scheduledNotificationsRefs = false}) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (scheduledNotificationsRefs) db.scheduledNotifications,
-                  ],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (profileId) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.profileId,
-                                    referencedTable: $$NotesTableReferences
-                                        ._profileIdTable(db),
-                                    referencedColumn: $$NotesTableReferences
-                                        ._profileIdTable(db)
-                                        .id,
-                                  )
-                                  as T;
-                        }
+          prefetchHooksCallback: (
+              {profileId = false, scheduledNotificationsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (scheduledNotificationsRefs) db.scheduledNotifications
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (profileId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.profileId,
+                    referencedTable: $$NotesTableReferences._profileIdTable(db),
+                    referencedColumn:
+                        $$NotesTableReferences._profileIdTable(db).id,
+                  ) as T;
+                }
 
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (scheduledNotificationsRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$NotesTableReferences
-                              ._scheduledNotificationsRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$NotesTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).scheduledNotificationsRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.noteIdUsed == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
+                return state;
               },
-        ),
-      );
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (scheduledNotificationsRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$NotesTableReferences
+                            ._scheduledNotificationsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$NotesTableReferences(db, table, p0)
+                                .scheduledNotificationsRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.noteIdUsed == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
 }
 
-typedef $$NotesTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $NotesTable,
-      Note,
-      $$NotesTableFilterComposer,
-      $$NotesTableOrderingComposer,
-      $$NotesTableAnnotationComposer,
-      $$NotesTableCreateCompanionBuilder,
-      $$NotesTableUpdateCompanionBuilder,
-      (Note, $$NotesTableReferences),
-      Note,
-      PrefetchHooks Function({bool profileId, bool scheduledNotificationsRefs})
-    >;
-typedef $$PhotosTableCreateCompanionBuilder =
-    PhotosCompanion Function({
-      required String id,
-      Value<String?> personId,
-      required String relPath,
-      required int width,
-      required int height,
-      required int bytes,
-      Value<String?> remotePath,
-      required int createdAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
-typedef $$PhotosTableUpdateCompanionBuilder =
-    PhotosCompanion Function({
-      Value<String> id,
-      Value<String?> personId,
-      Value<String> relPath,
-      Value<int> width,
-      Value<int> height,
-      Value<int> bytes,
-      Value<String?> remotePath,
-      Value<int> createdAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
+typedef $$NotesTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $NotesTable,
+    Note,
+    $$NotesTableFilterComposer,
+    $$NotesTableOrderingComposer,
+    $$NotesTableAnnotationComposer,
+    $$NotesTableCreateCompanionBuilder,
+    $$NotesTableUpdateCompanionBuilder,
+    (Note, $$NotesTableReferences),
+    Note,
+    PrefetchHooks Function({bool profileId, bool scheduledNotificationsRefs})>;
+typedef $$PhotosTableCreateCompanionBuilder = PhotosCompanion Function({
+  required String id,
+  Value<String?> personId,
+  required String relPath,
+  required int width,
+  required int height,
+  required int bytes,
+  Value<String?> remotePath,
+  required int createdAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
+typedef $$PhotosTableUpdateCompanionBuilder = PhotosCompanion Function({
+  Value<String> id,
+  Value<String?> personId,
+  Value<String> relPath,
+  Value<int> width,
+  Value<int> height,
+  Value<int> bytes,
+  Value<String?> remotePath,
+  Value<int> createdAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
 
 final class $$PhotosTableReferences
     extends BaseReferences<_$KinDatabase, $PhotosTable, Photo> {
   $$PhotosTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static $PeopleTable _personIdTable(_$KinDatabase db) => db.people.createAlias(
-    $_aliasNameGenerator(db.photos.personId, db.people.id),
-  );
+  static $PeopleTable _personIdTable(_$KinDatabase db) => db.people
+      .createAlias($_aliasNameGenerator(db.photos.personId, db.people.id));
 
   $$PeopleTableProcessedTableManager? get personId {
     if ($_item.personId == null) return null;
-    final manager = $$PeopleTableTableManager(
-      $_db,
-      $_db.people,
-    ).filter((f) => f.id($_item.personId!));
+    final manager = $$PeopleTableTableManager($_db, $_db.people)
+        .filter((f) => f.id($_item.personId!));
     final item = $_typedResult.readTableOrNull(_personIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
-  static MultiTypedResultKey<
-    $JournalEntryPhotosTable,
-    List<JournalEntryPhotoRow>
-  >
-  _journalEntryPhotosRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.journalEntryPhotos,
-        aliasName: $_aliasNameGenerator(
-          db.photos.id,
-          db.journalEntryPhotos.photoId,
-        ),
-      );
+  static MultiTypedResultKey<$JournalEntryPhotosTable,
+      List<JournalEntryPhotoRow>> _journalEntryPhotosRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.journalEntryPhotos,
+          aliasName: $_aliasNameGenerator(
+              db.photos.id, db.journalEntryPhotos.photoId));
 
   $$JournalEntryPhotosTableProcessedTableManager get journalEntryPhotosRefs {
-    final manager = $$JournalEntryPhotosTableTableManager(
-      $_db,
-      $_db.journalEntryPhotos,
-    ).filter((f) => f.photoId.id($_item.id));
+    final manager =
+        $$JournalEntryPhotosTableTableManager($_db, $_db.journalEntryPhotos)
+            .filter((f) => f.photoId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _journalEntryPhotosRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_journalEntryPhotosRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 
-  static MultiTypedResultKey<
-    $JournalEntryFragmentsTable,
-    List<JournalEntryFragmentRow>
-  >
-  _journalEntryFragmentsRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.journalEntryFragments,
-        aliasName: $_aliasNameGenerator(
-          db.photos.id,
-          db.journalEntryFragments.photoId,
-        ),
-      );
+  static MultiTypedResultKey<$JournalEntryFragmentsTable,
+      List<JournalEntryFragmentRow>> _journalEntryFragmentsRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.journalEntryFragments,
+          aliasName: $_aliasNameGenerator(
+              db.photos.id, db.journalEntryFragments.photoId));
 
   $$JournalEntryFragmentsTableProcessedTableManager
-  get journalEntryFragmentsRefs {
+      get journalEntryFragmentsRefs {
     final manager = $$JournalEntryFragmentsTableTableManager(
-      $_db,
-      $_db.journalEntryFragments,
-    ).filter((f) => f.photoId.id($_item.id));
+            $_db, $_db.journalEntryFragments)
+        .filter((f) => f.photoId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _journalEntryFragmentsRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_journalEntryFragmentsRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -9840,116 +8288,90 @@ class $$PhotosTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get relPath => $composableBuilder(
-    column: $table.relPath,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.relPath, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get width => $composableBuilder(
-    column: $table.width,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.width, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get height => $composableBuilder(
-    column: $table.height,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.height, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get bytes => $composableBuilder(
-    column: $table.bytes,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.bytes, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get remotePath => $composableBuilder(
-    column: $table.remotePath,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.remotePath, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   $$PeopleTableFilterComposer get personId {
     final $$PeopleTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableFilterComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableFilterComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<bool> journalEntryPhotosRefs(
-    Expression<bool> Function($$JournalEntryPhotosTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$JournalEntryPhotosTableFilterComposer f) f) {
     final $$JournalEntryPhotosTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.journalEntryPhotos,
-      getReferencedColumn: (t) => t.photoId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntryPhotosTableFilterComposer(
-            $db: $db,
-            $table: $db.journalEntryPhotos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.journalEntryPhotos,
+        getReferencedColumn: (t) => t.photoId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntryPhotosTableFilterComposer(
+              $db: $db,
+              $table: $db.journalEntryPhotos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<bool> journalEntryFragmentsRefs(
-    Expression<bool> Function($$JournalEntryFragmentsTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$JournalEntryFragmentsTableFilterComposer f)
+          f) {
     final $$JournalEntryFragmentsTableFilterComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.journalEntryFragments,
-          getReferencedColumn: (t) => t.photoId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$JournalEntryFragmentsTableFilterComposer(
-                $db: $db,
-                $table: $db.journalEntryFragments,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.journalEntryFragments,
+            getReferencedColumn: (t) => t.photoId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$JournalEntryFragmentsTableFilterComposer(
+                  $db: $db,
+                  $table: $db.journalEntryFragments,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
@@ -9964,65 +8386,46 @@ class $$PhotosTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get relPath => $composableBuilder(
-    column: $table.relPath,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.relPath, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get width => $composableBuilder(
-    column: $table.width,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.width, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get height => $composableBuilder(
-    column: $table.height,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.height, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get bytes => $composableBuilder(
-    column: $table.bytes,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.bytes, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get remotePath => $composableBuilder(
-    column: $table.remotePath,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.remotePath, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   $$PeopleTableOrderingComposer get personId {
     final $$PeopleTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableOrderingComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableOrderingComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -10052,9 +8455,7 @@ class $$PhotosTableAnnotationComposer
       $composableBuilder(column: $table.bytes, builder: (column) => column);
 
   GeneratedColumn<String> get remotePath => $composableBuilder(
-    column: $table.remotePath,
-    builder: (column) => column,
-  );
+      column: $table.remotePath, builder: (column) => column);
 
   GeneratedColumn<int> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -10064,102 +8465,87 @@ class $$PhotosTableAnnotationComposer
 
   $$PeopleTableAnnotationComposer get personId {
     final $$PeopleTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableAnnotationComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableAnnotationComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<T> journalEntryPhotosRefs<T extends Object>(
-    Expression<T> Function($$JournalEntryPhotosTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$JournalEntryPhotosTableAnnotationComposer a) f) {
     final $$JournalEntryPhotosTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.journalEntryPhotos,
-          getReferencedColumn: (t) => t.photoId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$JournalEntryPhotosTableAnnotationComposer(
-                $db: $db,
-                $table: $db.journalEntryPhotos,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.journalEntryPhotos,
+            getReferencedColumn: (t) => t.photoId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$JournalEntryPhotosTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.journalEntryPhotos,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 
   Expression<T> journalEntryFragmentsRefs<T extends Object>(
-    Expression<T> Function($$JournalEntryFragmentsTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$JournalEntryFragmentsTableAnnotationComposer a)
+          f) {
     final $$JournalEntryFragmentsTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.journalEntryFragments,
-          getReferencedColumn: (t) => t.photoId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$JournalEntryFragmentsTableAnnotationComposer(
-                $db: $db,
-                $table: $db.journalEntryFragments,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.journalEntryFragments,
+            getReferencedColumn: (t) => t.photoId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$JournalEntryFragmentsTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.journalEntryFragments,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
 
-class $$PhotosTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $PhotosTable,
-          Photo,
-          $$PhotosTableFilterComposer,
-          $$PhotosTableOrderingComposer,
-          $$PhotosTableAnnotationComposer,
-          $$PhotosTableCreateCompanionBuilder,
-          $$PhotosTableUpdateCompanionBuilder,
-          (Photo, $$PhotosTableReferences),
-          Photo,
-          PrefetchHooks Function({
-            bool personId,
-            bool journalEntryPhotosRefs,
-            bool journalEntryFragmentsRefs,
-          })
-        > {
+class $$PhotosTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $PhotosTable,
+    Photo,
+    $$PhotosTableFilterComposer,
+    $$PhotosTableOrderingComposer,
+    $$PhotosTableAnnotationComposer,
+    $$PhotosTableCreateCompanionBuilder,
+    $$PhotosTableUpdateCompanionBuilder,
+    (Photo, $$PhotosTableReferences),
+    Photo,
+    PrefetchHooks Function(
+        {bool personId,
+        bool journalEntryPhotosRefs,
+        bool journalEntryFragmentsRefs})> {
   $$PhotosTableTableManager(_$KinDatabase db, $PhotosTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -10168,244 +8554,203 @@ class $$PhotosTableTableManager
               $$PhotosTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$PhotosTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String?> personId = const Value.absent(),
-                Value<String> relPath = const Value.absent(),
-                Value<int> width = const Value.absent(),
-                Value<int> height = const Value.absent(),
-                Value<int> bytes = const Value.absent(),
-                Value<String?> remotePath = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => PhotosCompanion(
-                id: id,
-                personId: personId,
-                relPath: relPath,
-                width: width,
-                height: height,
-                bytes: bytes,
-                remotePath: remotePath,
-                createdAt: createdAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                Value<String?> personId = const Value.absent(),
-                required String relPath,
-                required int width,
-                required int height,
-                required int bytes,
-                Value<String?> remotePath = const Value.absent(),
-                required int createdAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => PhotosCompanion.insert(
-                id: id,
-                personId: personId,
-                relPath: relPath,
-                width: width,
-                height: height,
-                bytes: bytes,
-                remotePath: remotePath,
-                createdAt: createdAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String?> personId = const Value.absent(),
+            Value<String> relPath = const Value.absent(),
+            Value<int> width = const Value.absent(),
+            Value<int> height = const Value.absent(),
+            Value<int> bytes = const Value.absent(),
+            Value<String?> remotePath = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PhotosCompanion(
+            id: id,
+            personId: personId,
+            relPath: relPath,
+            width: width,
+            height: height,
+            bytes: bytes,
+            remotePath: remotePath,
+            createdAt: createdAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            Value<String?> personId = const Value.absent(),
+            required String relPath,
+            required int width,
+            required int height,
+            required int bytes,
+            Value<String?> remotePath = const Value.absent(),
+            required int createdAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PhotosCompanion.insert(
+            id: id,
+            personId: personId,
+            relPath: relPath,
+            width: width,
+            height: height,
+            bytes: bytes,
+            remotePath: remotePath,
+            createdAt: createdAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) =>
-                    (e.readTable(table), $$PhotosTableReferences(db, table, e)),
-              )
+              .map((e) =>
+                  (e.readTable(table), $$PhotosTableReferences(db, table, e)))
               .toList(),
-          prefetchHooksCallback:
-              ({
-                personId = false,
-                journalEntryPhotosRefs = false,
-                journalEntryFragmentsRefs = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (journalEntryPhotosRefs) db.journalEntryPhotos,
-                    if (journalEntryFragmentsRefs) db.journalEntryFragments,
-                  ],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (personId) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.personId,
-                                    referencedTable: $$PhotosTableReferences
-                                        ._personIdTable(db),
-                                    referencedColumn: $$PhotosTableReferences
-                                        ._personIdTable(db)
-                                        .id,
-                                  )
-                                  as T;
-                        }
+          prefetchHooksCallback: (
+              {personId = false,
+              journalEntryPhotosRefs = false,
+              journalEntryFragmentsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (journalEntryPhotosRefs) db.journalEntryPhotos,
+                if (journalEntryFragmentsRefs) db.journalEntryFragments
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (personId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.personId,
+                    referencedTable: $$PhotosTableReferences._personIdTable(db),
+                    referencedColumn:
+                        $$PhotosTableReferences._personIdTable(db).id,
+                  ) as T;
+                }
 
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (journalEntryPhotosRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$PhotosTableReferences
-                              ._journalEntryPhotosRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$PhotosTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).journalEntryPhotosRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.photoId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                      if (journalEntryFragmentsRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$PhotosTableReferences
-                              ._journalEntryFragmentsRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$PhotosTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).journalEntryFragmentsRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.photoId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
+                return state;
               },
-        ),
-      );
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (journalEntryPhotosRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$PhotosTableReferences
+                            ._journalEntryPhotosRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PhotosTableReferences(db, table, p0)
+                                .journalEntryPhotosRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.photoId == item.id),
+                        typedResults: items),
+                  if (journalEntryFragmentsRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$PhotosTableReferences
+                            ._journalEntryFragmentsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PhotosTableReferences(db, table, p0)
+                                .journalEntryFragmentsRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.photoId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
 }
 
-typedef $$PhotosTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $PhotosTable,
-      Photo,
-      $$PhotosTableFilterComposer,
-      $$PhotosTableOrderingComposer,
-      $$PhotosTableAnnotationComposer,
-      $$PhotosTableCreateCompanionBuilder,
-      $$PhotosTableUpdateCompanionBuilder,
-      (Photo, $$PhotosTableReferences),
-      Photo,
-      PrefetchHooks Function({
-        bool personId,
+typedef $$PhotosTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $PhotosTable,
+    Photo,
+    $$PhotosTableFilterComposer,
+    $$PhotosTableOrderingComposer,
+    $$PhotosTableAnnotationComposer,
+    $$PhotosTableCreateCompanionBuilder,
+    $$PhotosTableUpdateCompanionBuilder,
+    (Photo, $$PhotosTableReferences),
+    Photo,
+    PrefetchHooks Function(
+        {bool personId,
         bool journalEntryPhotosRefs,
-        bool journalEntryFragmentsRefs,
-      })
-    >;
-typedef $$ReminderRulesTableCreateCompanionBuilder =
-    ReminderRulesCompanion Function({
-      required String id,
-      Value<String?> personId,
-      required String kind,
-      Value<int?> offsetDays,
-      Value<String?> localTime,
-      Value<bool> enabled,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
-typedef $$ReminderRulesTableUpdateCompanionBuilder =
-    ReminderRulesCompanion Function({
-      Value<String> id,
-      Value<String?> personId,
-      Value<String> kind,
-      Value<int?> offsetDays,
-      Value<String?> localTime,
-      Value<bool> enabled,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
+        bool journalEntryFragmentsRefs})>;
+typedef $$ReminderRulesTableCreateCompanionBuilder = ReminderRulesCompanion
+    Function({
+  required String id,
+  Value<String?> personId,
+  required String kind,
+  Value<int?> offsetDays,
+  Value<String?> localTime,
+  Value<bool> enabled,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
+typedef $$ReminderRulesTableUpdateCompanionBuilder = ReminderRulesCompanion
+    Function({
+  Value<String> id,
+  Value<String?> personId,
+  Value<String> kind,
+  Value<int?> offsetDays,
+  Value<String?> localTime,
+  Value<bool> enabled,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
 
 final class $$ReminderRulesTableReferences
     extends BaseReferences<_$KinDatabase, $ReminderRulesTable, ReminderRule> {
   $$ReminderRulesTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
+      super.$_db, super.$_table, super.$_typedResult);
 
   static $PeopleTable _personIdTable(_$KinDatabase db) => db.people.createAlias(
-    $_aliasNameGenerator(db.reminderRules.personId, db.people.id),
-  );
+      $_aliasNameGenerator(db.reminderRules.personId, db.people.id));
 
   $$PeopleTableProcessedTableManager? get personId {
     if ($_item.personId == null) return null;
-    final manager = $$PeopleTableTableManager(
-      $_db,
-      $_db.people,
-    ).filter((f) => f.id($_item.personId!));
+    final manager = $$PeopleTableTableManager($_db, $_db.people)
+        .filter((f) => f.id($_item.personId!));
     final item = $_typedResult.readTableOrNull(_personIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
-  static MultiTypedResultKey<
-    $ScheduledNotificationsTable,
-    List<ScheduledNotification>
-  >
-  _scheduledNotificationsRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.scheduledNotifications,
-        aliasName: $_aliasNameGenerator(
-          db.reminderRules.id,
-          db.scheduledNotifications.ruleId,
-        ),
-      );
+  static MultiTypedResultKey<$ScheduledNotificationsTable,
+      List<ScheduledNotification>> _scheduledNotificationsRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.scheduledNotifications,
+          aliasName: $_aliasNameGenerator(
+              db.reminderRules.id, db.scheduledNotifications.ruleId));
 
   $$ScheduledNotificationsTableProcessedTableManager
-  get scheduledNotificationsRefs {
+      get scheduledNotificationsRefs {
     final manager = $$ScheduledNotificationsTableTableManager(
-      $_db,
-      $_db.scheduledNotifications,
-    ).filter((f) => f.ruleId.id($_item.id));
+            $_db, $_db.scheduledNotifications)
+        .filter((f) => f.ruleId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _scheduledNotificationsRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_scheduledNotificationsRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -10419,91 +8764,69 @@ class $$ReminderRulesTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get kind => $composableBuilder(
-    column: $table.kind,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.kind, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get offsetDays => $composableBuilder(
-    column: $table.offsetDays,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.offsetDays, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get localTime => $composableBuilder(
-    column: $table.localTime,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.localTime, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get enabled => $composableBuilder(
-    column: $table.enabled,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.enabled, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnFilters(column));
 
   $$PeopleTableFilterComposer get personId {
     final $$PeopleTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableFilterComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableFilterComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<bool> scheduledNotificationsRefs(
-    Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f)
+          f) {
     final $$ScheduledNotificationsTableFilterComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.ruleId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableFilterComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.ruleId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableFilterComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
@@ -10518,65 +8841,46 @@ class $$ReminderRulesTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get kind => $composableBuilder(
-    column: $table.kind,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.kind, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get offsetDays => $composableBuilder(
-    column: $table.offsetDays,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.offsetDays, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get localTime => $composableBuilder(
-    column: $table.localTime,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.localTime, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<bool> get enabled => $composableBuilder(
-    column: $table.enabled,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.enabled, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnOrderings(column));
 
   $$PeopleTableOrderingComposer get personId {
     final $$PeopleTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableOrderingComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableOrderingComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -10597,9 +8901,7 @@ class $$ReminderRulesTableAnnotationComposer
       $composableBuilder(column: $table.kind, builder: (column) => column);
 
   GeneratedColumn<int> get offsetDays => $composableBuilder(
-    column: $table.offsetDays,
-    builder: (column) => column,
-  );
+      column: $table.offsetDays, builder: (column) => column);
 
   GeneratedColumn<String> get localTime =>
       $composableBuilder(column: $table.localTime, builder: (column) => column);
@@ -10618,75 +8920,62 @@ class $$ReminderRulesTableAnnotationComposer
 
   $$PeopleTableAnnotationComposer get personId {
     final $$PeopleTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableAnnotationComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableAnnotationComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<T> scheduledNotificationsRefs<T extends Object>(
-    Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a)
+          f) {
     final $$ScheduledNotificationsTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.ruleId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableAnnotationComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.ruleId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
 
-class $$ReminderRulesTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $ReminderRulesTable,
-          ReminderRule,
-          $$ReminderRulesTableFilterComposer,
-          $$ReminderRulesTableOrderingComposer,
-          $$ReminderRulesTableAnnotationComposer,
-          $$ReminderRulesTableCreateCompanionBuilder,
-          $$ReminderRulesTableUpdateCompanionBuilder,
-          (ReminderRule, $$ReminderRulesTableReferences),
-          ReminderRule,
-          PrefetchHooks Function({
-            bool personId,
-            bool scheduledNotificationsRefs,
-          })
-        > {
+class $$ReminderRulesTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $ReminderRulesTable,
+    ReminderRule,
+    $$ReminderRulesTableFilterComposer,
+    $$ReminderRulesTableOrderingComposer,
+    $$ReminderRulesTableAnnotationComposer,
+    $$ReminderRulesTableCreateCompanionBuilder,
+    $$ReminderRulesTableUpdateCompanionBuilder,
+    (ReminderRule, $$ReminderRulesTableReferences),
+    ReminderRule,
+    PrefetchHooks Function({bool personId, bool scheduledNotificationsRefs})> {
   $$ReminderRulesTableTableManager(_$KinDatabase db, $ReminderRulesTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -10695,214 +8984,179 @@ class $$ReminderRulesTableTableManager
               $$ReminderRulesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$ReminderRulesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String?> personId = const Value.absent(),
-                Value<String> kind = const Value.absent(),
-                Value<int?> offsetDays = const Value.absent(),
-                Value<String?> localTime = const Value.absent(),
-                Value<bool> enabled = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => ReminderRulesCompanion(
-                id: id,
-                personId: personId,
-                kind: kind,
-                offsetDays: offsetDays,
-                localTime: localTime,
-                enabled: enabled,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                Value<String?> personId = const Value.absent(),
-                required String kind,
-                Value<int?> offsetDays = const Value.absent(),
-                Value<String?> localTime = const Value.absent(),
-                Value<bool> enabled = const Value.absent(),
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => ReminderRulesCompanion.insert(
-                id: id,
-                personId: personId,
-                kind: kind,
-                offsetDays: offsetDays,
-                localTime: localTime,
-                enabled: enabled,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String?> personId = const Value.absent(),
+            Value<String> kind = const Value.absent(),
+            Value<int?> offsetDays = const Value.absent(),
+            Value<String?> localTime = const Value.absent(),
+            Value<bool> enabled = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ReminderRulesCompanion(
+            id: id,
+            personId: personId,
+            kind: kind,
+            offsetDays: offsetDays,
+            localTime: localTime,
+            enabled: enabled,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            Value<String?> personId = const Value.absent(),
+            required String kind,
+            Value<int?> offsetDays = const Value.absent(),
+            Value<String?> localTime = const Value.absent(),
+            Value<bool> enabled = const Value.absent(),
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              ReminderRulesCompanion.insert(
+            id: id,
+            personId: personId,
+            kind: kind,
+            offsetDays: offsetDays,
+            localTime: localTime,
+            enabled: enabled,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$ReminderRulesTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$ReminderRulesTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback:
-              ({personId = false, scheduledNotificationsRefs = false}) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (scheduledNotificationsRefs) db.scheduledNotifications,
-                  ],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (personId) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.personId,
-                                    referencedTable:
-                                        $$ReminderRulesTableReferences
-                                            ._personIdTable(db),
-                                    referencedColumn:
-                                        $$ReminderRulesTableReferences
-                                            ._personIdTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
+          prefetchHooksCallback: (
+              {personId = false, scheduledNotificationsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (scheduledNotificationsRefs) db.scheduledNotifications
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (personId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.personId,
+                    referencedTable:
+                        $$ReminderRulesTableReferences._personIdTable(db),
+                    referencedColumn:
+                        $$ReminderRulesTableReferences._personIdTable(db).id,
+                  ) as T;
+                }
 
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (scheduledNotificationsRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$ReminderRulesTableReferences
-                              ._scheduledNotificationsRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$ReminderRulesTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).scheduledNotificationsRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.ruleId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
+                return state;
               },
-        ),
-      );
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (scheduledNotificationsRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$ReminderRulesTableReferences
+                            ._scheduledNotificationsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$ReminderRulesTableReferences(db, table, p0)
+                                .scheduledNotificationsRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.ruleId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
 }
 
-typedef $$ReminderRulesTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $ReminderRulesTable,
-      ReminderRule,
-      $$ReminderRulesTableFilterComposer,
-      $$ReminderRulesTableOrderingComposer,
-      $$ReminderRulesTableAnnotationComposer,
-      $$ReminderRulesTableCreateCompanionBuilder,
-      $$ReminderRulesTableUpdateCompanionBuilder,
-      (ReminderRule, $$ReminderRulesTableReferences),
-      ReminderRule,
-      PrefetchHooks Function({bool personId, bool scheduledNotificationsRefs})
-    >;
-typedef $$PersonalRemindersTableCreateCompanionBuilder =
-    PersonalRemindersCompanion Function({
-      required String id,
-      required String localDate,
-      required String localTime,
-      required String dayPart,
-      required String body,
-      required String timezone,
-      required int position,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
-typedef $$PersonalRemindersTableUpdateCompanionBuilder =
-    PersonalRemindersCompanion Function({
-      Value<String> id,
-      Value<String> localDate,
-      Value<String> localTime,
-      Value<String> dayPart,
-      Value<String> body,
-      Value<String> timezone,
-      Value<int> position,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> syncRev,
-      Value<int> rowid,
-    });
+typedef $$ReminderRulesTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $ReminderRulesTable,
+    ReminderRule,
+    $$ReminderRulesTableFilterComposer,
+    $$ReminderRulesTableOrderingComposer,
+    $$ReminderRulesTableAnnotationComposer,
+    $$ReminderRulesTableCreateCompanionBuilder,
+    $$ReminderRulesTableUpdateCompanionBuilder,
+    (ReminderRule, $$ReminderRulesTableReferences),
+    ReminderRule,
+    PrefetchHooks Function({bool personId, bool scheduledNotificationsRefs})>;
+typedef $$PersonalRemindersTableCreateCompanionBuilder
+    = PersonalRemindersCompanion Function({
+  required String id,
+  required String localDate,
+  required String localTime,
+  required String dayPart,
+  required String body,
+  required String timezone,
+  required int position,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
+typedef $$PersonalRemindersTableUpdateCompanionBuilder
+    = PersonalRemindersCompanion Function({
+  Value<String> id,
+  Value<String> localDate,
+  Value<String> localTime,
+  Value<String> dayPart,
+  Value<String> body,
+  Value<String> timezone,
+  Value<int> position,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> syncRev,
+  Value<int> rowid,
+});
 
-final class $$PersonalRemindersTableReferences
-    extends
-        BaseReferences<
-          _$KinDatabase,
-          $PersonalRemindersTable,
-          PersonalReminderRow
-        > {
+final class $$PersonalRemindersTableReferences extends BaseReferences<
+    _$KinDatabase, $PersonalRemindersTable, PersonalReminderRow> {
   $$PersonalRemindersTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
+      super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<
-    $ScheduledNotificationsTable,
-    List<ScheduledNotification>
-  >
-  _scheduledNotificationsRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.scheduledNotifications,
-        aliasName: $_aliasNameGenerator(
-          db.personalReminders.id,
-          db.scheduledNotifications.reminderId,
-        ),
-      );
+  static MultiTypedResultKey<$ScheduledNotificationsTable,
+      List<ScheduledNotification>> _scheduledNotificationsRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.scheduledNotifications,
+          aliasName: $_aliasNameGenerator(
+              db.personalReminders.id, db.scheduledNotifications.reminderId));
 
   $$ScheduledNotificationsTableProcessedTableManager
-  get scheduledNotificationsRefs {
+      get scheduledNotificationsRefs {
     final manager = $$ScheduledNotificationsTableTableManager(
-      $_db,
-      $_db.scheduledNotifications,
-    ).filter((f) => f.reminderId.id($_item.id));
+            $_db, $_db.scheduledNotifications)
+        .filter((f) => f.reminderId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _scheduledNotificationsRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_scheduledNotificationsRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -10916,83 +9170,58 @@ class $$PersonalRemindersTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get localDate => $composableBuilder(
-    column: $table.localDate,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.localDate, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get localTime => $composableBuilder(
-    column: $table.localTime,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.localTime, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get dayPart => $composableBuilder(
-    column: $table.dayPart,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.dayPart, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.body, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get timezone => $composableBuilder(
-    column: $table.timezone,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.timezone, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.position, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnFilters(column));
 
   Expression<bool> scheduledNotificationsRefs(
-    Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$ScheduledNotificationsTableFilterComposer f)
+          f) {
     final $$ScheduledNotificationsTableFilterComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.reminderId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableFilterComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.reminderId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableFilterComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
@@ -11007,59 +9236,37 @@ class $$PersonalRemindersTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get localDate => $composableBuilder(
-    column: $table.localDate,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.localDate, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get localTime => $composableBuilder(
-    column: $table.localTime,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.localTime, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get dayPart => $composableBuilder(
-    column: $table.dayPart,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.dayPart, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.body, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get timezone => $composableBuilder(
-    column: $table.timezone,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.timezone, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.position, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get syncRev => $composableBuilder(
-    column: $table.syncRev,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.syncRev, builder: (column) => ColumnOrderings(column));
 }
 
 class $$PersonalRemindersTableAnnotationComposer
@@ -11105,52 +9312,44 @@ class $$PersonalRemindersTableAnnotationComposer
       $composableBuilder(column: $table.syncRev, builder: (column) => column);
 
   Expression<T> scheduledNotificationsRefs<T extends Object>(
-    Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$ScheduledNotificationsTableAnnotationComposer a)
+          f) {
     final $$ScheduledNotificationsTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.scheduledNotifications,
-          getReferencedColumn: (t) => t.reminderId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$ScheduledNotificationsTableAnnotationComposer(
-                $db: $db,
-                $table: $db.scheduledNotifications,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.scheduledNotifications,
+            getReferencedColumn: (t) => t.reminderId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$ScheduledNotificationsTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.scheduledNotifications,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
 
-class $$PersonalRemindersTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $PersonalRemindersTable,
-          PersonalReminderRow,
-          $$PersonalRemindersTableFilterComposer,
-          $$PersonalRemindersTableOrderingComposer,
-          $$PersonalRemindersTableAnnotationComposer,
-          $$PersonalRemindersTableCreateCompanionBuilder,
-          $$PersonalRemindersTableUpdateCompanionBuilder,
-          (PersonalReminderRow, $$PersonalRemindersTableReferences),
-          PersonalReminderRow,
-          PrefetchHooks Function({bool scheduledNotificationsRefs})
-        > {
+class $$PersonalRemindersTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $PersonalRemindersTable,
+    PersonalReminderRow,
+    $$PersonalRemindersTableFilterComposer,
+    $$PersonalRemindersTableOrderingComposer,
+    $$PersonalRemindersTableAnnotationComposer,
+    $$PersonalRemindersTableCreateCompanionBuilder,
+    $$PersonalRemindersTableUpdateCompanionBuilder,
+    (PersonalReminderRow, $$PersonalRemindersTableReferences),
+    PersonalReminderRow,
+    PrefetchHooks Function({bool scheduledNotificationsRefs})> {
   $$PersonalRemindersTableTableManager(
-    _$KinDatabase db,
-    $PersonalRemindersTable table,
-  ) : super(
-        TableManagerState(
+      _$KinDatabase db, $PersonalRemindersTable table)
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -11159,243 +9358,204 @@ class $$PersonalRemindersTableTableManager
               $$PersonalRemindersTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$PersonalRemindersTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> localDate = const Value.absent(),
-                Value<String> localTime = const Value.absent(),
-                Value<String> dayPart = const Value.absent(),
-                Value<String> body = const Value.absent(),
-                Value<String> timezone = const Value.absent(),
-                Value<int> position = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => PersonalRemindersCompanion(
-                id: id,
-                localDate: localDate,
-                localTime: localTime,
-                dayPart: dayPart,
-                body: body,
-                timezone: timezone,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String localDate,
-                required String localTime,
-                required String dayPart,
-                required String body,
-                required String timezone,
-                required int position,
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> syncRev = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => PersonalRemindersCompanion.insert(
-                id: id,
-                localDate: localDate,
-                localTime: localTime,
-                dayPart: dayPart,
-                body: body,
-                timezone: timezone,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                syncRev: syncRev,
-                rowid: rowid,
-              ),
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> localDate = const Value.absent(),
+            Value<String> localTime = const Value.absent(),
+            Value<String> dayPart = const Value.absent(),
+            Value<String> body = const Value.absent(),
+            Value<String> timezone = const Value.absent(),
+            Value<int> position = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PersonalRemindersCompanion(
+            id: id,
+            localDate: localDate,
+            localTime: localTime,
+            dayPart: dayPart,
+            body: body,
+            timezone: timezone,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String localDate,
+            required String localTime,
+            required String dayPart,
+            required String body,
+            required String timezone,
+            required int position,
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> syncRev = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              PersonalRemindersCompanion.insert(
+            id: id,
+            localDate: localDate,
+            localTime: localTime,
+            dayPart: dayPart,
+            body: body,
+            timezone: timezone,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            syncRev: syncRev,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$PersonalRemindersTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$PersonalRemindersTableReferences(db, table, e)
+                  ))
               .toList(),
           prefetchHooksCallback: ({scheduledNotificationsRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
-                if (scheduledNotificationsRefs) db.scheduledNotifications,
+                if (scheduledNotificationsRefs) db.scheduledNotifications
               ],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (scheduledNotificationsRefs)
                     await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$PersonalRemindersTableReferences
-                          ._scheduledNotificationsRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$PersonalRemindersTableReferences(
-                            db,
-                            table,
-                            p0,
-                          ).scheduledNotificationsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.reminderId == item.id),
-                      typedResults: items,
-                    ),
+                        currentTable: table,
+                        referencedTable: $$PersonalRemindersTableReferences
+                            ._scheduledNotificationsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$PersonalRemindersTableReferences(db, table, p0)
+                                .scheduledNotificationsRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.reminderId == item.id),
+                        typedResults: items)
                 ];
               },
             );
           },
-        ),
-      );
+        ));
 }
 
-typedef $$PersonalRemindersTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $PersonalRemindersTable,
-      PersonalReminderRow,
-      $$PersonalRemindersTableFilterComposer,
-      $$PersonalRemindersTableOrderingComposer,
-      $$PersonalRemindersTableAnnotationComposer,
-      $$PersonalRemindersTableCreateCompanionBuilder,
-      $$PersonalRemindersTableUpdateCompanionBuilder,
-      (PersonalReminderRow, $$PersonalRemindersTableReferences),
-      PersonalReminderRow,
-      PrefetchHooks Function({bool scheduledNotificationsRefs})
-    >;
-typedef $$ScheduledNotificationsTableCreateCompanionBuilder =
-    ScheduledNotificationsCompanion Function({
-      Value<int> osId,
-      Value<String> source,
-      Value<String?> personId,
-      Value<String?> ruleId,
-      Value<String?> reminderId,
-      required int occurrenceYear,
-      required int fireAtUtc,
-      required int fireAtDeviceLocal,
-      required String deviceTz,
-      required String title,
-      required String body,
-      Value<String?> noteIdUsed,
-      required String state,
-      Value<String> snapshotJson,
-      required int createdAt,
-    });
-typedef $$ScheduledNotificationsTableUpdateCompanionBuilder =
-    ScheduledNotificationsCompanion Function({
-      Value<int> osId,
-      Value<String> source,
-      Value<String?> personId,
-      Value<String?> ruleId,
-      Value<String?> reminderId,
-      Value<int> occurrenceYear,
-      Value<int> fireAtUtc,
-      Value<int> fireAtDeviceLocal,
-      Value<String> deviceTz,
-      Value<String> title,
-      Value<String> body,
-      Value<String?> noteIdUsed,
-      Value<String> state,
-      Value<String> snapshotJson,
-      Value<int> createdAt,
-    });
+typedef $$PersonalRemindersTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $PersonalRemindersTable,
+    PersonalReminderRow,
+    $$PersonalRemindersTableFilterComposer,
+    $$PersonalRemindersTableOrderingComposer,
+    $$PersonalRemindersTableAnnotationComposer,
+    $$PersonalRemindersTableCreateCompanionBuilder,
+    $$PersonalRemindersTableUpdateCompanionBuilder,
+    (PersonalReminderRow, $$PersonalRemindersTableReferences),
+    PersonalReminderRow,
+    PrefetchHooks Function({bool scheduledNotificationsRefs})>;
+typedef $$ScheduledNotificationsTableCreateCompanionBuilder
+    = ScheduledNotificationsCompanion Function({
+  Value<int> osId,
+  Value<String> source,
+  Value<String?> personId,
+  Value<String?> ruleId,
+  Value<String?> reminderId,
+  required int occurrenceYear,
+  required int fireAtUtc,
+  required int fireAtDeviceLocal,
+  required String deviceTz,
+  required String title,
+  required String body,
+  Value<String?> noteIdUsed,
+  required String state,
+  Value<String> snapshotJson,
+  required int createdAt,
+});
+typedef $$ScheduledNotificationsTableUpdateCompanionBuilder
+    = ScheduledNotificationsCompanion Function({
+  Value<int> osId,
+  Value<String> source,
+  Value<String?> personId,
+  Value<String?> ruleId,
+  Value<String?> reminderId,
+  Value<int> occurrenceYear,
+  Value<int> fireAtUtc,
+  Value<int> fireAtDeviceLocal,
+  Value<String> deviceTz,
+  Value<String> title,
+  Value<String> body,
+  Value<String?> noteIdUsed,
+  Value<String> state,
+  Value<String> snapshotJson,
+  Value<int> createdAt,
+});
 
-final class $$ScheduledNotificationsTableReferences
-    extends
-        BaseReferences<
-          _$KinDatabase,
-          $ScheduledNotificationsTable,
-          ScheduledNotification
-        > {
+final class $$ScheduledNotificationsTableReferences extends BaseReferences<
+    _$KinDatabase, $ScheduledNotificationsTable, ScheduledNotification> {
   $$ScheduledNotificationsTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
+      super.$_db, super.$_table, super.$_typedResult);
 
   static $PeopleTable _personIdTable(_$KinDatabase db) => db.people.createAlias(
-    $_aliasNameGenerator(db.scheduledNotifications.personId, db.people.id),
-  );
+      $_aliasNameGenerator(db.scheduledNotifications.personId, db.people.id));
 
   $$PeopleTableProcessedTableManager? get personId {
     if ($_item.personId == null) return null;
-    final manager = $$PeopleTableTableManager(
-      $_db,
-      $_db.people,
-    ).filter((f) => f.id($_item.personId!));
+    final manager = $$PeopleTableTableManager($_db, $_db.people)
+        .filter((f) => f.id($_item.personId!));
     final item = $_typedResult.readTableOrNull(_personIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static $ReminderRulesTable _ruleIdTable(_$KinDatabase db) =>
-      db.reminderRules.createAlias(
-        $_aliasNameGenerator(
-          db.scheduledNotifications.ruleId,
-          db.reminderRules.id,
-        ),
-      );
+      db.reminderRules.createAlias($_aliasNameGenerator(
+          db.scheduledNotifications.ruleId, db.reminderRules.id));
 
   $$ReminderRulesTableProcessedTableManager? get ruleId {
     if ($_item.ruleId == null) return null;
-    final manager = $$ReminderRulesTableTableManager(
-      $_db,
-      $_db.reminderRules,
-    ).filter((f) => f.id($_item.ruleId!));
+    final manager = $$ReminderRulesTableTableManager($_db, $_db.reminderRules)
+        .filter((f) => f.id($_item.ruleId!));
     final item = $_typedResult.readTableOrNull(_ruleIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static $PersonalRemindersTable _reminderIdTable(_$KinDatabase db) =>
-      db.personalReminders.createAlias(
-        $_aliasNameGenerator(
-          db.scheduledNotifications.reminderId,
-          db.personalReminders.id,
-        ),
-      );
+      db.personalReminders.createAlias($_aliasNameGenerator(
+          db.scheduledNotifications.reminderId, db.personalReminders.id));
 
   $$PersonalRemindersTableProcessedTableManager? get reminderId {
     if ($_item.reminderId == null) return null;
-    final manager = $$PersonalRemindersTableTableManager(
-      $_db,
-      $_db.personalReminders,
-    ).filter((f) => f.id($_item.reminderId!));
+    final manager =
+        $$PersonalRemindersTableTableManager($_db, $_db.personalReminders)
+            .filter((f) => f.id($_item.reminderId!));
     final item = $_typedResult.readTableOrNull(_reminderIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static $NotesTable _noteIdUsedTable(_$KinDatabase db) => db.notes.createAlias(
-    $_aliasNameGenerator(db.scheduledNotifications.noteIdUsed, db.notes.id),
-  );
+      $_aliasNameGenerator(db.scheduledNotifications.noteIdUsed, db.notes.id));
 
   $$NotesTableProcessedTableManager? get noteIdUsed {
     if ($_item.noteIdUsed == null) return null;
-    final manager = $$NotesTableTableManager(
-      $_db,
-      $_db.notes,
-    ).filter((f) => f.id($_item.noteIdUsed!));
+    final manager = $$NotesTableTableManager($_db, $_db.notes)
+        .filter((f) => f.id($_item.noteIdUsed!));
     final item = $_typedResult.readTableOrNull(_noteIdUsedTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 }
 
@@ -11409,149 +9569,117 @@ class $$ScheduledNotificationsTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get osId => $composableBuilder(
-    column: $table.osId,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.osId, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get source => $composableBuilder(
-    column: $table.source,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.source, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get occurrenceYear => $composableBuilder(
-    column: $table.occurrenceYear,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.occurrenceYear,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get fireAtUtc => $composableBuilder(
-    column: $table.fireAtUtc,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.fireAtUtc, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get fireAtDeviceLocal => $composableBuilder(
-    column: $table.fireAtDeviceLocal,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.fireAtDeviceLocal,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get deviceTz => $composableBuilder(
-    column: $table.deviceTz,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deviceTz, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get title => $composableBuilder(
-    column: $table.title,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.title, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.body, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get state => $composableBuilder(
-    column: $table.state,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.state, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get snapshotJson => $composableBuilder(
-    column: $table.snapshotJson,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.snapshotJson, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   $$PeopleTableFilterComposer get personId {
     final $$PeopleTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableFilterComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableFilterComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$ReminderRulesTableFilterComposer get ruleId {
     final $$ReminderRulesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.ruleId,
-      referencedTable: $db.reminderRules,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ReminderRulesTableFilterComposer(
-            $db: $db,
-            $table: $db.reminderRules,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.ruleId,
+        referencedTable: $db.reminderRules,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderRulesTableFilterComposer(
+              $db: $db,
+              $table: $db.reminderRules,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PersonalRemindersTableFilterComposer get reminderId {
     final $$PersonalRemindersTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.reminderId,
-      referencedTable: $db.personalReminders,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PersonalRemindersTableFilterComposer(
-            $db: $db,
-            $table: $db.personalReminders,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.reminderId,
+        referencedTable: $db.personalReminders,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PersonalRemindersTableFilterComposer(
+              $db: $db,
+              $table: $db.personalReminders,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$NotesTableFilterComposer get noteIdUsed {
     final $$NotesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.noteIdUsed,
-      referencedTable: $db.notes,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$NotesTableFilterComposer(
-            $db: $db,
-            $table: $db.notes,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.noteIdUsed,
+        referencedTable: $db.notes,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$NotesTableFilterComposer(
+              $db: $db,
+              $table: $db.notes,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -11566,149 +9694,118 @@ class $$ScheduledNotificationsTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get osId => $composableBuilder(
-    column: $table.osId,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.osId, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get source => $composableBuilder(
-    column: $table.source,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.source, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get occurrenceYear => $composableBuilder(
-    column: $table.occurrenceYear,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.occurrenceYear,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get fireAtUtc => $composableBuilder(
-    column: $table.fireAtUtc,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.fireAtUtc, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get fireAtDeviceLocal => $composableBuilder(
-    column: $table.fireAtDeviceLocal,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.fireAtDeviceLocal,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get deviceTz => $composableBuilder(
-    column: $table.deviceTz,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deviceTz, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get title => $composableBuilder(
-    column: $table.title,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.title, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.body, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get state => $composableBuilder(
-    column: $table.state,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.state, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get snapshotJson => $composableBuilder(
-    column: $table.snapshotJson,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.snapshotJson,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   $$PeopleTableOrderingComposer get personId {
     final $$PeopleTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableOrderingComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableOrderingComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$ReminderRulesTableOrderingComposer get ruleId {
     final $$ReminderRulesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.ruleId,
-      referencedTable: $db.reminderRules,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ReminderRulesTableOrderingComposer(
-            $db: $db,
-            $table: $db.reminderRules,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.ruleId,
+        referencedTable: $db.reminderRules,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderRulesTableOrderingComposer(
+              $db: $db,
+              $table: $db.reminderRules,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PersonalRemindersTableOrderingComposer get reminderId {
     final $$PersonalRemindersTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.reminderId,
-      referencedTable: $db.personalReminders,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PersonalRemindersTableOrderingComposer(
-            $db: $db,
-            $table: $db.personalReminders,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.reminderId,
+        referencedTable: $db.personalReminders,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PersonalRemindersTableOrderingComposer(
+              $db: $db,
+              $table: $db.personalReminders,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$NotesTableOrderingComposer get noteIdUsed {
     final $$NotesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.noteIdUsed,
-      referencedTable: $db.notes,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$NotesTableOrderingComposer(
-            $db: $db,
-            $table: $db.notes,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.noteIdUsed,
+        referencedTable: $db.notes,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$NotesTableOrderingComposer(
+              $db: $db,
+              $table: $db.notes,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -11729,17 +9826,13 @@ class $$ScheduledNotificationsTableAnnotationComposer
       $composableBuilder(column: $table.source, builder: (column) => column);
 
   GeneratedColumn<int> get occurrenceYear => $composableBuilder(
-    column: $table.occurrenceYear,
-    builder: (column) => column,
-  );
+      column: $table.occurrenceYear, builder: (column) => column);
 
   GeneratedColumn<int> get fireAtUtc =>
       $composableBuilder(column: $table.fireAtUtc, builder: (column) => column);
 
   GeneratedColumn<int> get fireAtDeviceLocal => $composableBuilder(
-    column: $table.fireAtDeviceLocal,
-    builder: (column) => column,
-  );
+      column: $table.fireAtDeviceLocal, builder: (column) => column);
 
   GeneratedColumn<String> get deviceTz =>
       $composableBuilder(column: $table.deviceTz, builder: (column) => column);
@@ -11754,366 +9847,308 @@ class $$ScheduledNotificationsTableAnnotationComposer
       $composableBuilder(column: $table.state, builder: (column) => column);
 
   GeneratedColumn<String> get snapshotJson => $composableBuilder(
-    column: $table.snapshotJson,
-    builder: (column) => column,
-  );
+      column: $table.snapshotJson, builder: (column) => column);
 
   GeneratedColumn<int> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
   $$PeopleTableAnnotationComposer get personId {
     final $$PeopleTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.personId,
-      referencedTable: $db.people,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PeopleTableAnnotationComposer(
-            $db: $db,
-            $table: $db.people,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.personId,
+        referencedTable: $db.people,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PeopleTableAnnotationComposer(
+              $db: $db,
+              $table: $db.people,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$ReminderRulesTableAnnotationComposer get ruleId {
     final $$ReminderRulesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.ruleId,
-      referencedTable: $db.reminderRules,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$ReminderRulesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.reminderRules,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.ruleId,
+        referencedTable: $db.reminderRules,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ReminderRulesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.reminderRules,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PersonalRemindersTableAnnotationComposer get reminderId {
     final $$PersonalRemindersTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.reminderId,
-          referencedTable: $db.personalReminders,
-          getReferencedColumn: (t) => t.id,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$PersonalRemindersTableAnnotationComposer(
-                $db: $db,
-                $table: $db.personalReminders,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.reminderId,
+            referencedTable: $db.personalReminders,
+            getReferencedColumn: (t) => t.id,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$PersonalRemindersTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.personalReminders,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return composer;
   }
 
   $$NotesTableAnnotationComposer get noteIdUsed {
     final $$NotesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.noteIdUsed,
-      referencedTable: $db.notes,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$NotesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.notes,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.noteIdUsed,
+        referencedTable: $db.notes,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$NotesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.notes,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
 
-class $$ScheduledNotificationsTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $ScheduledNotificationsTable,
-          ScheduledNotification,
-          $$ScheduledNotificationsTableFilterComposer,
-          $$ScheduledNotificationsTableOrderingComposer,
-          $$ScheduledNotificationsTableAnnotationComposer,
-          $$ScheduledNotificationsTableCreateCompanionBuilder,
-          $$ScheduledNotificationsTableUpdateCompanionBuilder,
-          (ScheduledNotification, $$ScheduledNotificationsTableReferences),
-          ScheduledNotification,
-          PrefetchHooks Function({
-            bool personId,
-            bool ruleId,
-            bool reminderId,
-            bool noteIdUsed,
-          })
-        > {
+class $$ScheduledNotificationsTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $ScheduledNotificationsTable,
+    ScheduledNotification,
+    $$ScheduledNotificationsTableFilterComposer,
+    $$ScheduledNotificationsTableOrderingComposer,
+    $$ScheduledNotificationsTableAnnotationComposer,
+    $$ScheduledNotificationsTableCreateCompanionBuilder,
+    $$ScheduledNotificationsTableUpdateCompanionBuilder,
+    (ScheduledNotification, $$ScheduledNotificationsTableReferences),
+    ScheduledNotification,
+    PrefetchHooks Function(
+        {bool personId, bool ruleId, bool reminderId, bool noteIdUsed})> {
   $$ScheduledNotificationsTableTableManager(
-    _$KinDatabase db,
-    $ScheduledNotificationsTable table,
-  ) : super(
-        TableManagerState(
+      _$KinDatabase db, $ScheduledNotificationsTable table)
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$ScheduledNotificationsTableFilterComposer(
-                $db: db,
-                $table: table,
-              ),
+                  $db: db, $table: table),
           createOrderingComposer: () =>
               $$ScheduledNotificationsTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
+                  $db: db, $table: table),
           createComputedFieldComposer: () =>
               $$ScheduledNotificationsTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<int> osId = const Value.absent(),
-                Value<String> source = const Value.absent(),
-                Value<String?> personId = const Value.absent(),
-                Value<String?> ruleId = const Value.absent(),
-                Value<String?> reminderId = const Value.absent(),
-                Value<int> occurrenceYear = const Value.absent(),
-                Value<int> fireAtUtc = const Value.absent(),
-                Value<int> fireAtDeviceLocal = const Value.absent(),
-                Value<String> deviceTz = const Value.absent(),
-                Value<String> title = const Value.absent(),
-                Value<String> body = const Value.absent(),
-                Value<String?> noteIdUsed = const Value.absent(),
-                Value<String> state = const Value.absent(),
-                Value<String> snapshotJson = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-              }) => ScheduledNotificationsCompanion(
-                osId: osId,
-                source: source,
-                personId: personId,
-                ruleId: ruleId,
-                reminderId: reminderId,
-                occurrenceYear: occurrenceYear,
-                fireAtUtc: fireAtUtc,
-                fireAtDeviceLocal: fireAtDeviceLocal,
-                deviceTz: deviceTz,
-                title: title,
-                body: body,
-                noteIdUsed: noteIdUsed,
-                state: state,
-                snapshotJson: snapshotJson,
-                createdAt: createdAt,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> osId = const Value.absent(),
-                Value<String> source = const Value.absent(),
-                Value<String?> personId = const Value.absent(),
-                Value<String?> ruleId = const Value.absent(),
-                Value<String?> reminderId = const Value.absent(),
-                required int occurrenceYear,
-                required int fireAtUtc,
-                required int fireAtDeviceLocal,
-                required String deviceTz,
-                required String title,
-                required String body,
-                Value<String?> noteIdUsed = const Value.absent(),
-                required String state,
-                Value<String> snapshotJson = const Value.absent(),
-                required int createdAt,
-              }) => ScheduledNotificationsCompanion.insert(
-                osId: osId,
-                source: source,
-                personId: personId,
-                ruleId: ruleId,
-                reminderId: reminderId,
-                occurrenceYear: occurrenceYear,
-                fireAtUtc: fireAtUtc,
-                fireAtDeviceLocal: fireAtDeviceLocal,
-                deviceTz: deviceTz,
-                title: title,
-                body: body,
-                noteIdUsed: noteIdUsed,
-                state: state,
-                snapshotJson: snapshotJson,
-                createdAt: createdAt,
-              ),
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> osId = const Value.absent(),
+            Value<String> source = const Value.absent(),
+            Value<String?> personId = const Value.absent(),
+            Value<String?> ruleId = const Value.absent(),
+            Value<String?> reminderId = const Value.absent(),
+            Value<int> occurrenceYear = const Value.absent(),
+            Value<int> fireAtUtc = const Value.absent(),
+            Value<int> fireAtDeviceLocal = const Value.absent(),
+            Value<String> deviceTz = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> body = const Value.absent(),
+            Value<String?> noteIdUsed = const Value.absent(),
+            Value<String> state = const Value.absent(),
+            Value<String> snapshotJson = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+          }) =>
+              ScheduledNotificationsCompanion(
+            osId: osId,
+            source: source,
+            personId: personId,
+            ruleId: ruleId,
+            reminderId: reminderId,
+            occurrenceYear: occurrenceYear,
+            fireAtUtc: fireAtUtc,
+            fireAtDeviceLocal: fireAtDeviceLocal,
+            deviceTz: deviceTz,
+            title: title,
+            body: body,
+            noteIdUsed: noteIdUsed,
+            state: state,
+            snapshotJson: snapshotJson,
+            createdAt: createdAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> osId = const Value.absent(),
+            Value<String> source = const Value.absent(),
+            Value<String?> personId = const Value.absent(),
+            Value<String?> ruleId = const Value.absent(),
+            Value<String?> reminderId = const Value.absent(),
+            required int occurrenceYear,
+            required int fireAtUtc,
+            required int fireAtDeviceLocal,
+            required String deviceTz,
+            required String title,
+            required String body,
+            Value<String?> noteIdUsed = const Value.absent(),
+            required String state,
+            Value<String> snapshotJson = const Value.absent(),
+            required int createdAt,
+          }) =>
+              ScheduledNotificationsCompanion.insert(
+            osId: osId,
+            source: source,
+            personId: personId,
+            ruleId: ruleId,
+            reminderId: reminderId,
+            occurrenceYear: occurrenceYear,
+            fireAtUtc: fireAtUtc,
+            fireAtDeviceLocal: fireAtDeviceLocal,
+            deviceTz: deviceTz,
+            title: title,
+            body: body,
+            noteIdUsed: noteIdUsed,
+            state: state,
+            snapshotJson: snapshotJson,
+            createdAt: createdAt,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$ScheduledNotificationsTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$ScheduledNotificationsTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback:
-              ({
-                personId = false,
-                ruleId = false,
-                reminderId = false,
-                noteIdUsed = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (personId) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.personId,
-                                    referencedTable:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._personIdTable(db),
-                                    referencedColumn:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._personIdTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (ruleId) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.ruleId,
-                                    referencedTable:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._ruleIdTable(db),
-                                    referencedColumn:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._ruleIdTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (reminderId) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.reminderId,
-                                    referencedTable:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._reminderIdTable(db),
-                                    referencedColumn:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._reminderIdTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
-                        if (noteIdUsed) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.noteIdUsed,
-                                    referencedTable:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._noteIdUsedTable(db),
-                                    referencedColumn:
-                                        $$ScheduledNotificationsTableReferences
-                                            ._noteIdUsedTable(db)
-                                            .id,
-                                  )
-                                  as T;
-                        }
+          prefetchHooksCallback: (
+              {personId = false,
+              ruleId = false,
+              reminderId = false,
+              noteIdUsed = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (personId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.personId,
+                    referencedTable: $$ScheduledNotificationsTableReferences
+                        ._personIdTable(db),
+                    referencedColumn: $$ScheduledNotificationsTableReferences
+                        ._personIdTable(db)
+                        .id,
+                  ) as T;
+                }
+                if (ruleId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.ruleId,
+                    referencedTable: $$ScheduledNotificationsTableReferences
+                        ._ruleIdTable(db),
+                    referencedColumn: $$ScheduledNotificationsTableReferences
+                        ._ruleIdTable(db)
+                        .id,
+                  ) as T;
+                }
+                if (reminderId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.reminderId,
+                    referencedTable: $$ScheduledNotificationsTableReferences
+                        ._reminderIdTable(db),
+                    referencedColumn: $$ScheduledNotificationsTableReferences
+                        ._reminderIdTable(db)
+                        .id,
+                  ) as T;
+                }
+                if (noteIdUsed) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.noteIdUsed,
+                    referencedTable: $$ScheduledNotificationsTableReferences
+                        ._noteIdUsedTable(db),
+                    referencedColumn: $$ScheduledNotificationsTableReferences
+                        ._noteIdUsedTable(db)
+                        .id,
+                  ) as T;
+                }
 
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [];
-                  },
-                );
+                return state;
               },
-        ),
-      );
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
 }
 
-typedef $$ScheduledNotificationsTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $ScheduledNotificationsTable,
-      ScheduledNotification,
-      $$ScheduledNotificationsTableFilterComposer,
-      $$ScheduledNotificationsTableOrderingComposer,
-      $$ScheduledNotificationsTableAnnotationComposer,
-      $$ScheduledNotificationsTableCreateCompanionBuilder,
-      $$ScheduledNotificationsTableUpdateCompanionBuilder,
-      (ScheduledNotification, $$ScheduledNotificationsTableReferences),
-      ScheduledNotification,
-      PrefetchHooks Function({
-        bool personId,
-        bool ruleId,
-        bool reminderId,
-        bool noteIdUsed,
-      })
-    >;
-typedef $$SettingsTableCreateCompanionBuilder =
-    SettingsCompanion Function({
-      Value<int> id,
-      Value<String> themeMode,
-      Value<bool> amoled,
-      Value<bool> showDetailsOnLockScreen,
-      Value<bool> notificationsEnabled,
-      Value<int?> onboardingCompletedAt,
-      Value<String?> deviceTimezoneCache,
-      Value<String?> reminderTimezone,
-      Value<int?> lastReconciledAt,
-    });
-typedef $$SettingsTableUpdateCompanionBuilder =
-    SettingsCompanion Function({
-      Value<int> id,
-      Value<String> themeMode,
-      Value<bool> amoled,
-      Value<bool> showDetailsOnLockScreen,
-      Value<bool> notificationsEnabled,
-      Value<int?> onboardingCompletedAt,
-      Value<String?> deviceTimezoneCache,
-      Value<String?> reminderTimezone,
-      Value<int?> lastReconciledAt,
-    });
+typedef $$ScheduledNotificationsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$KinDatabase,
+        $ScheduledNotificationsTable,
+        ScheduledNotification,
+        $$ScheduledNotificationsTableFilterComposer,
+        $$ScheduledNotificationsTableOrderingComposer,
+        $$ScheduledNotificationsTableAnnotationComposer,
+        $$ScheduledNotificationsTableCreateCompanionBuilder,
+        $$ScheduledNotificationsTableUpdateCompanionBuilder,
+        (ScheduledNotification, $$ScheduledNotificationsTableReferences),
+        ScheduledNotification,
+        PrefetchHooks Function(
+            {bool personId, bool ruleId, bool reminderId, bool noteIdUsed})>;
+typedef $$SettingsTableCreateCompanionBuilder = SettingsCompanion Function({
+  Value<int> id,
+  Value<String> themeMode,
+  Value<bool> amoled,
+  Value<String> productTheme,
+  Value<bool> showDetailsOnLockScreen,
+  Value<bool> notificationsEnabled,
+  Value<int?> onboardingCompletedAt,
+  Value<String?> deviceTimezoneCache,
+  Value<String?> reminderTimezone,
+  Value<int?> lastReconciledAt,
+});
+typedef $$SettingsTableUpdateCompanionBuilder = SettingsCompanion Function({
+  Value<int> id,
+  Value<String> themeMode,
+  Value<bool> amoled,
+  Value<String> productTheme,
+  Value<bool> showDetailsOnLockScreen,
+  Value<bool> notificationsEnabled,
+  Value<int?> onboardingCompletedAt,
+  Value<String?> deviceTimezoneCache,
+  Value<String?> reminderTimezone,
+  Value<int?> lastReconciledAt,
+});
 
 class $$SettingsTableFilterComposer
     extends Composer<_$KinDatabase, $SettingsTable> {
@@ -12125,49 +10160,40 @@ class $$SettingsTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get themeMode => $composableBuilder(
-    column: $table.themeMode,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.themeMode, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get amoled => $composableBuilder(
-    column: $table.amoled,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.amoled, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get productTheme => $composableBuilder(
+      column: $table.productTheme, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get showDetailsOnLockScreen => $composableBuilder(
-    column: $table.showDetailsOnLockScreen,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.showDetailsOnLockScreen,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<bool> get notificationsEnabled => $composableBuilder(
-    column: $table.notificationsEnabled,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.notificationsEnabled,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get onboardingCompletedAt => $composableBuilder(
-    column: $table.onboardingCompletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.onboardingCompletedAt,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get deviceTimezoneCache => $composableBuilder(
-    column: $table.deviceTimezoneCache,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deviceTimezoneCache,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get reminderTimezone => $composableBuilder(
-    column: $table.reminderTimezone,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.reminderTimezone,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get lastReconciledAt => $composableBuilder(
-    column: $table.lastReconciledAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.lastReconciledAt,
+      builder: (column) => ColumnFilters(column));
 }
 
 class $$SettingsTableOrderingComposer
@@ -12180,49 +10206,41 @@ class $$SettingsTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get themeMode => $composableBuilder(
-    column: $table.themeMode,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.themeMode, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<bool> get amoled => $composableBuilder(
-    column: $table.amoled,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.amoled, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get productTheme => $composableBuilder(
+      column: $table.productTheme,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<bool> get showDetailsOnLockScreen => $composableBuilder(
-    column: $table.showDetailsOnLockScreen,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.showDetailsOnLockScreen,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<bool> get notificationsEnabled => $composableBuilder(
-    column: $table.notificationsEnabled,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.notificationsEnabled,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get onboardingCompletedAt => $composableBuilder(
-    column: $table.onboardingCompletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.onboardingCompletedAt,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get deviceTimezoneCache => $composableBuilder(
-    column: $table.deviceTimezoneCache,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deviceTimezoneCache,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get reminderTimezone => $composableBuilder(
-    column: $table.reminderTimezone,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.reminderTimezone,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get lastReconciledAt => $composableBuilder(
-    column: $table.lastReconciledAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.lastReconciledAt,
+      builder: (column) => ColumnOrderings(column));
 }
 
 class $$SettingsTableAnnotationComposer
@@ -12243,55 +10261,42 @@ class $$SettingsTableAnnotationComposer
   GeneratedColumn<bool> get amoled =>
       $composableBuilder(column: $table.amoled, builder: (column) => column);
 
+  GeneratedColumn<String> get productTheme => $composableBuilder(
+      column: $table.productTheme, builder: (column) => column);
+
   GeneratedColumn<bool> get showDetailsOnLockScreen => $composableBuilder(
-    column: $table.showDetailsOnLockScreen,
-    builder: (column) => column,
-  );
+      column: $table.showDetailsOnLockScreen, builder: (column) => column);
 
   GeneratedColumn<bool> get notificationsEnabled => $composableBuilder(
-    column: $table.notificationsEnabled,
-    builder: (column) => column,
-  );
+      column: $table.notificationsEnabled, builder: (column) => column);
 
   GeneratedColumn<int> get onboardingCompletedAt => $composableBuilder(
-    column: $table.onboardingCompletedAt,
-    builder: (column) => column,
-  );
+      column: $table.onboardingCompletedAt, builder: (column) => column);
 
   GeneratedColumn<String> get deviceTimezoneCache => $composableBuilder(
-    column: $table.deviceTimezoneCache,
-    builder: (column) => column,
-  );
+      column: $table.deviceTimezoneCache, builder: (column) => column);
 
   GeneratedColumn<String> get reminderTimezone => $composableBuilder(
-    column: $table.reminderTimezone,
-    builder: (column) => column,
-  );
+      column: $table.reminderTimezone, builder: (column) => column);
 
   GeneratedColumn<int> get lastReconciledAt => $composableBuilder(
-    column: $table.lastReconciledAt,
-    builder: (column) => column,
-  );
+      column: $table.lastReconciledAt, builder: (column) => column);
 }
 
-class $$SettingsTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $SettingsTable,
-          Setting,
-          $$SettingsTableFilterComposer,
-          $$SettingsTableOrderingComposer,
-          $$SettingsTableAnnotationComposer,
-          $$SettingsTableCreateCompanionBuilder,
-          $$SettingsTableUpdateCompanionBuilder,
-          (Setting, BaseReferences<_$KinDatabase, $SettingsTable, Setting>),
-          Setting,
-          PrefetchHooks Function()
-        > {
+class $$SettingsTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $SettingsTable,
+    Setting,
+    $$SettingsTableFilterComposer,
+    $$SettingsTableOrderingComposer,
+    $$SettingsTableAnnotationComposer,
+    $$SettingsTableCreateCompanionBuilder,
+    $$SettingsTableUpdateCompanionBuilder,
+    (Setting, BaseReferences<_$KinDatabase, $SettingsTable, Setting>),
+    Setting,
+    PrefetchHooks Function()> {
   $$SettingsTableTableManager(_$KinDatabase db, $SettingsTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -12300,90 +10305,89 @@ class $$SettingsTableTableManager
               $$SettingsTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$SettingsTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> themeMode = const Value.absent(),
-                Value<bool> amoled = const Value.absent(),
-                Value<bool> showDetailsOnLockScreen = const Value.absent(),
-                Value<bool> notificationsEnabled = const Value.absent(),
-                Value<int?> onboardingCompletedAt = const Value.absent(),
-                Value<String?> deviceTimezoneCache = const Value.absent(),
-                Value<String?> reminderTimezone = const Value.absent(),
-                Value<int?> lastReconciledAt = const Value.absent(),
-              }) => SettingsCompanion(
-                id: id,
-                themeMode: themeMode,
-                amoled: amoled,
-                showDetailsOnLockScreen: showDetailsOnLockScreen,
-                notificationsEnabled: notificationsEnabled,
-                onboardingCompletedAt: onboardingCompletedAt,
-                deviceTimezoneCache: deviceTimezoneCache,
-                reminderTimezone: reminderTimezone,
-                lastReconciledAt: lastReconciledAt,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> themeMode = const Value.absent(),
-                Value<bool> amoled = const Value.absent(),
-                Value<bool> showDetailsOnLockScreen = const Value.absent(),
-                Value<bool> notificationsEnabled = const Value.absent(),
-                Value<int?> onboardingCompletedAt = const Value.absent(),
-                Value<String?> deviceTimezoneCache = const Value.absent(),
-                Value<String?> reminderTimezone = const Value.absent(),
-                Value<int?> lastReconciledAt = const Value.absent(),
-              }) => SettingsCompanion.insert(
-                id: id,
-                themeMode: themeMode,
-                amoled: amoled,
-                showDetailsOnLockScreen: showDetailsOnLockScreen,
-                notificationsEnabled: notificationsEnabled,
-                onboardingCompletedAt: onboardingCompletedAt,
-                deviceTimezoneCache: deviceTimezoneCache,
-                reminderTimezone: reminderTimezone,
-                lastReconciledAt: lastReconciledAt,
-              ),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> themeMode = const Value.absent(),
+            Value<bool> amoled = const Value.absent(),
+            Value<String> productTheme = const Value.absent(),
+            Value<bool> showDetailsOnLockScreen = const Value.absent(),
+            Value<bool> notificationsEnabled = const Value.absent(),
+            Value<int?> onboardingCompletedAt = const Value.absent(),
+            Value<String?> deviceTimezoneCache = const Value.absent(),
+            Value<String?> reminderTimezone = const Value.absent(),
+            Value<int?> lastReconciledAt = const Value.absent(),
+          }) =>
+              SettingsCompanion(
+            id: id,
+            themeMode: themeMode,
+            amoled: amoled,
+            productTheme: productTheme,
+            showDetailsOnLockScreen: showDetailsOnLockScreen,
+            notificationsEnabled: notificationsEnabled,
+            onboardingCompletedAt: onboardingCompletedAt,
+            deviceTimezoneCache: deviceTimezoneCache,
+            reminderTimezone: reminderTimezone,
+            lastReconciledAt: lastReconciledAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> themeMode = const Value.absent(),
+            Value<bool> amoled = const Value.absent(),
+            Value<String> productTheme = const Value.absent(),
+            Value<bool> showDetailsOnLockScreen = const Value.absent(),
+            Value<bool> notificationsEnabled = const Value.absent(),
+            Value<int?> onboardingCompletedAt = const Value.absent(),
+            Value<String?> deviceTimezoneCache = const Value.absent(),
+            Value<String?> reminderTimezone = const Value.absent(),
+            Value<int?> lastReconciledAt = const Value.absent(),
+          }) =>
+              SettingsCompanion.insert(
+            id: id,
+            themeMode: themeMode,
+            amoled: amoled,
+            productTheme: productTheme,
+            showDetailsOnLockScreen: showDetailsOnLockScreen,
+            notificationsEnabled: notificationsEnabled,
+            onboardingCompletedAt: onboardingCompletedAt,
+            deviceTimezoneCache: deviceTimezoneCache,
+            reminderTimezone: reminderTimezone,
+            lastReconciledAt: lastReconciledAt,
+          ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ),
-      );
+        ));
 }
 
-typedef $$SettingsTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $SettingsTable,
-      Setting,
-      $$SettingsTableFilterComposer,
-      $$SettingsTableOrderingComposer,
-      $$SettingsTableAnnotationComposer,
-      $$SettingsTableCreateCompanionBuilder,
-      $$SettingsTableUpdateCompanionBuilder,
-      (Setting, BaseReferences<_$KinDatabase, $SettingsTable, Setting>),
-      Setting,
-      PrefetchHooks Function()
-    >;
-typedef $$SyncStateTableCreateCompanionBuilder =
-    SyncStateCompanion Function({
-      Value<int> id,
-      required String deviceId,
-      Value<String?> accountId,
-      Value<int?> lastPulledAt,
-      Value<int?> lastPushedAt,
-      Value<String?> lastError,
-    });
-typedef $$SyncStateTableUpdateCompanionBuilder =
-    SyncStateCompanion Function({
-      Value<int> id,
-      Value<String> deviceId,
-      Value<String?> accountId,
-      Value<int?> lastPulledAt,
-      Value<int?> lastPushedAt,
-      Value<String?> lastError,
-    });
+typedef $$SettingsTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $SettingsTable,
+    Setting,
+    $$SettingsTableFilterComposer,
+    $$SettingsTableOrderingComposer,
+    $$SettingsTableAnnotationComposer,
+    $$SettingsTableCreateCompanionBuilder,
+    $$SettingsTableUpdateCompanionBuilder,
+    (Setting, BaseReferences<_$KinDatabase, $SettingsTable, Setting>),
+    Setting,
+    PrefetchHooks Function()>;
+typedef $$SyncStateTableCreateCompanionBuilder = SyncStateCompanion Function({
+  Value<int> id,
+  required String deviceId,
+  Value<String?> accountId,
+  Value<int?> lastPulledAt,
+  Value<int?> lastPushedAt,
+  Value<String?> lastError,
+});
+typedef $$SyncStateTableUpdateCompanionBuilder = SyncStateCompanion Function({
+  Value<int> id,
+  Value<String> deviceId,
+  Value<String?> accountId,
+  Value<int?> lastPulledAt,
+  Value<int?> lastPushedAt,
+  Value<String?> lastError,
+});
 
 class $$SyncStateTableFilterComposer
     extends Composer<_$KinDatabase, $SyncStateTable> {
@@ -12395,34 +10399,22 @@ class $$SyncStateTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get deviceId => $composableBuilder(
-    column: $table.deviceId,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deviceId, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get accountId => $composableBuilder(
-    column: $table.accountId,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.accountId, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get lastPulledAt => $composableBuilder(
-    column: $table.lastPulledAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.lastPulledAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get lastPushedAt => $composableBuilder(
-    column: $table.lastPushedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.lastPushedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get lastError => $composableBuilder(
-    column: $table.lastError,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.lastError, builder: (column) => ColumnFilters(column));
 }
 
 class $$SyncStateTableOrderingComposer
@@ -12435,34 +10427,24 @@ class $$SyncStateTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<int> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get deviceId => $composableBuilder(
-    column: $table.deviceId,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deviceId, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get accountId => $composableBuilder(
-    column: $table.accountId,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.accountId, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get lastPulledAt => $composableBuilder(
-    column: $table.lastPulledAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.lastPulledAt,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get lastPushedAt => $composableBuilder(
-    column: $table.lastPushedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.lastPushedAt,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get lastError => $composableBuilder(
-    column: $table.lastError,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.lastError, builder: (column) => ColumnOrderings(column));
 }
 
 class $$SyncStateTableAnnotationComposer
@@ -12484,40 +10466,32 @@ class $$SyncStateTableAnnotationComposer
       $composableBuilder(column: $table.accountId, builder: (column) => column);
 
   GeneratedColumn<int> get lastPulledAt => $composableBuilder(
-    column: $table.lastPulledAt,
-    builder: (column) => column,
-  );
+      column: $table.lastPulledAt, builder: (column) => column);
 
   GeneratedColumn<int> get lastPushedAt => $composableBuilder(
-    column: $table.lastPushedAt,
-    builder: (column) => column,
-  );
+      column: $table.lastPushedAt, builder: (column) => column);
 
   GeneratedColumn<String> get lastError =>
       $composableBuilder(column: $table.lastError, builder: (column) => column);
 }
 
-class $$SyncStateTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $SyncStateTable,
-          SyncStateData,
-          $$SyncStateTableFilterComposer,
-          $$SyncStateTableOrderingComposer,
-          $$SyncStateTableAnnotationComposer,
-          $$SyncStateTableCreateCompanionBuilder,
-          $$SyncStateTableUpdateCompanionBuilder,
-          (
-            SyncStateData,
-            BaseReferences<_$KinDatabase, $SyncStateTable, SyncStateData>,
-          ),
-          SyncStateData,
-          PrefetchHooks Function()
-        > {
+class $$SyncStateTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $SyncStateTable,
+    SyncStateData,
+    $$SyncStateTableFilterComposer,
+    $$SyncStateTableOrderingComposer,
+    $$SyncStateTableAnnotationComposer,
+    $$SyncStateTableCreateCompanionBuilder,
+    $$SyncStateTableUpdateCompanionBuilder,
+    (
+      SyncStateData,
+      BaseReferences<_$KinDatabase, $SyncStateTable, SyncStateData>
+    ),
+    SyncStateData,
+    PrefetchHooks Function()> {
   $$SyncStateTableTableManager(_$KinDatabase db, $SyncStateTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -12526,105 +10500,96 @@ class $$SyncStateTableTableManager
               $$SyncStateTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$SyncStateTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                Value<String> deviceId = const Value.absent(),
-                Value<String?> accountId = const Value.absent(),
-                Value<int?> lastPulledAt = const Value.absent(),
-                Value<int?> lastPushedAt = const Value.absent(),
-                Value<String?> lastError = const Value.absent(),
-              }) => SyncStateCompanion(
-                id: id,
-                deviceId: deviceId,
-                accountId: accountId,
-                lastPulledAt: lastPulledAt,
-                lastPushedAt: lastPushedAt,
-                lastError: lastError,
-              ),
-          createCompanionCallback:
-              ({
-                Value<int> id = const Value.absent(),
-                required String deviceId,
-                Value<String?> accountId = const Value.absent(),
-                Value<int?> lastPulledAt = const Value.absent(),
-                Value<int?> lastPushedAt = const Value.absent(),
-                Value<String?> lastError = const Value.absent(),
-              }) => SyncStateCompanion.insert(
-                id: id,
-                deviceId: deviceId,
-                accountId: accountId,
-                lastPulledAt: lastPulledAt,
-                lastPushedAt: lastPushedAt,
-                lastError: lastError,
-              ),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<String> deviceId = const Value.absent(),
+            Value<String?> accountId = const Value.absent(),
+            Value<int?> lastPulledAt = const Value.absent(),
+            Value<int?> lastPushedAt = const Value.absent(),
+            Value<String?> lastError = const Value.absent(),
+          }) =>
+              SyncStateCompanion(
+            id: id,
+            deviceId: deviceId,
+            accountId: accountId,
+            lastPulledAt: lastPulledAt,
+            lastPushedAt: lastPushedAt,
+            lastError: lastError,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required String deviceId,
+            Value<String?> accountId = const Value.absent(),
+            Value<int?> lastPulledAt = const Value.absent(),
+            Value<int?> lastPushedAt = const Value.absent(),
+            Value<String?> lastError = const Value.absent(),
+          }) =>
+              SyncStateCompanion.insert(
+            id: id,
+            deviceId: deviceId,
+            accountId: accountId,
+            lastPulledAt: lastPulledAt,
+            lastPushedAt: lastPushedAt,
+            lastError: lastError,
+          ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ),
-      );
+        ));
 }
 
-typedef $$SyncStateTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $SyncStateTable,
+typedef $$SyncStateTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $SyncStateTable,
+    SyncStateData,
+    $$SyncStateTableFilterComposer,
+    $$SyncStateTableOrderingComposer,
+    $$SyncStateTableAnnotationComposer,
+    $$SyncStateTableCreateCompanionBuilder,
+    $$SyncStateTableUpdateCompanionBuilder,
+    (
       SyncStateData,
-      $$SyncStateTableFilterComposer,
-      $$SyncStateTableOrderingComposer,
-      $$SyncStateTableAnnotationComposer,
-      $$SyncStateTableCreateCompanionBuilder,
-      $$SyncStateTableUpdateCompanionBuilder,
-      (
-        SyncStateData,
-        BaseReferences<_$KinDatabase, $SyncStateTable, SyncStateData>,
-      ),
-      SyncStateData,
-      PrefetchHooks Function()
-    >;
-typedef $$JournalDaysTableCreateCompanionBuilder =
-    JournalDaysCompanion Function({
-      required String localDate,
-      Value<String?> mood,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
-typedef $$JournalDaysTableUpdateCompanionBuilder =
-    JournalDaysCompanion Function({
-      Value<String> localDate,
-      Value<String?> mood,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
+      BaseReferences<_$KinDatabase, $SyncStateTable, SyncStateData>
+    ),
+    SyncStateData,
+    PrefetchHooks Function()>;
+typedef $$JournalDaysTableCreateCompanionBuilder = JournalDaysCompanion
+    Function({
+  required String localDate,
+  Value<String?> mood,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
+typedef $$JournalDaysTableUpdateCompanionBuilder = JournalDaysCompanion
+    Function({
+  Value<String> localDate,
+  Value<String?> mood,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
 
 final class $$JournalDaysTableReferences
     extends BaseReferences<_$KinDatabase, $JournalDaysTable, JournalDayRow> {
   $$JournalDaysTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
   static MultiTypedResultKey<$JournalEntriesTable, List<JournalEntryRow>>
-  _journalEntriesRefsTable(_$KinDatabase db) => MultiTypedResultKey.fromTable(
-    db.journalEntries,
-    aliasName: $_aliasNameGenerator(
-      db.journalDays.localDate,
-      db.journalEntries.localDate,
-    ),
-  );
+      _journalEntriesRefsTable(_$KinDatabase db) =>
+          MultiTypedResultKey.fromTable(db.journalEntries,
+              aliasName: $_aliasNameGenerator(
+                  db.journalDays.localDate, db.journalEntries.localDate));
 
   $$JournalEntriesTableProcessedTableManager get journalEntriesRefs {
-    final manager = $$JournalEntriesTableTableManager(
-      $_db,
-      $_db.journalEntries,
-    ).filter((f) => f.localDate.localDate($_item.localDate));
+    final manager = $$JournalEntriesTableTableManager($_db, $_db.journalEntries)
+        .filter((f) => f.localDate.localDate($_item.localDate));
 
     final cache = $_typedResult.readTableOrNull(_journalEntriesRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -12638,52 +10603,38 @@ class $$JournalDaysTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get localDate => $composableBuilder(
-    column: $table.localDate,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.localDate, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get mood => $composableBuilder(
-    column: $table.mood,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.mood, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   Expression<bool> journalEntriesRefs(
-    Expression<bool> Function($$JournalEntriesTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$JournalEntriesTableFilterComposer f) f) {
     final $$JournalEntriesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.localDate,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.localDate,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableFilterComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.localDate,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.localDate,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableFilterComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
@@ -12698,29 +10649,19 @@ class $$JournalDaysTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get localDate => $composableBuilder(
-    column: $table.localDate,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.localDate, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get mood => $composableBuilder(
-    column: $table.mood,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.mood, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 }
 
 class $$JournalDaysTableAnnotationComposer
@@ -12748,49 +10689,41 @@ class $$JournalDaysTableAnnotationComposer
       $composableBuilder(column: $table.deletedAt, builder: (column) => column);
 
   Expression<T> journalEntriesRefs<T extends Object>(
-    Expression<T> Function($$JournalEntriesTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$JournalEntriesTableAnnotationComposer a) f) {
     final $$JournalEntriesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.localDate,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.localDate,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.localDate,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.localDate,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 }
 
-class $$JournalDaysTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $JournalDaysTable,
-          JournalDayRow,
-          $$JournalDaysTableFilterComposer,
-          $$JournalDaysTableOrderingComposer,
-          $$JournalDaysTableAnnotationComposer,
-          $$JournalDaysTableCreateCompanionBuilder,
-          $$JournalDaysTableUpdateCompanionBuilder,
-          (JournalDayRow, $$JournalDaysTableReferences),
-          JournalDayRow,
-          PrefetchHooks Function({bool journalEntriesRefs})
-        > {
+class $$JournalDaysTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $JournalDaysTable,
+    JournalDayRow,
+    $$JournalDaysTableFilterComposer,
+    $$JournalDaysTableOrderingComposer,
+    $$JournalDaysTableAnnotationComposer,
+    $$JournalDaysTableCreateCompanionBuilder,
+    $$JournalDaysTableUpdateCompanionBuilder,
+    (JournalDayRow, $$JournalDaysTableReferences),
+    JournalDayRow,
+    PrefetchHooks Function({bool journalEntriesRefs})> {
   $$JournalDaysTableTableManager(_$KinDatabase db, $JournalDaysTable table)
-    : super(
-        TableManagerState(
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -12799,204 +10732,165 @@ class $$JournalDaysTableTableManager
               $$JournalDaysTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$JournalDaysTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> localDate = const Value.absent(),
-                Value<String?> mood = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalDaysCompanion(
-                localDate: localDate,
-                mood: mood,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String localDate,
-                Value<String?> mood = const Value.absent(),
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalDaysCompanion.insert(
-                localDate: localDate,
-                mood: mood,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> localDate = const Value.absent(),
+            Value<String?> mood = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalDaysCompanion(
+            localDate: localDate,
+            mood: mood,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String localDate,
+            Value<String?> mood = const Value.absent(),
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalDaysCompanion.insert(
+            localDate: localDate,
+            mood: mood,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$JournalDaysTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$JournalDaysTableReferences(db, table, e)
+                  ))
               .toList(),
           prefetchHooksCallback: ({journalEntriesRefs = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [
-                if (journalEntriesRefs) db.journalEntries,
+                if (journalEntriesRefs) db.journalEntries
               ],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (journalEntriesRefs)
                     await $_getPrefetchedData(
-                      currentTable: table,
-                      referencedTable: $$JournalDaysTableReferences
-                          ._journalEntriesRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$JournalDaysTableReferences(
-                            db,
-                            table,
-                            p0,
-                          ).journalEntriesRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where(
-                            (e) => e.localDate == item.localDate,
-                          ),
-                      typedResults: items,
-                    ),
+                        currentTable: table,
+                        referencedTable: $$JournalDaysTableReferences
+                            ._journalEntriesRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$JournalDaysTableReferences(db, table, p0)
+                                .journalEntriesRefs,
+                        referencedItemsForCurrentItem:
+                            (item, referencedItems) => referencedItems
+                                .where((e) => e.localDate == item.localDate),
+                        typedResults: items)
                 ];
               },
             );
           },
-        ),
-      );
+        ));
 }
 
-typedef $$JournalDaysTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $JournalDaysTable,
-      JournalDayRow,
-      $$JournalDaysTableFilterComposer,
-      $$JournalDaysTableOrderingComposer,
-      $$JournalDaysTableAnnotationComposer,
-      $$JournalDaysTableCreateCompanionBuilder,
-      $$JournalDaysTableUpdateCompanionBuilder,
-      (JournalDayRow, $$JournalDaysTableReferences),
-      JournalDayRow,
-      PrefetchHooks Function({bool journalEntriesRefs})
-    >;
-typedef $$JournalEntriesTableCreateCompanionBuilder =
-    JournalEntriesCompanion Function({
-      required String id,
-      required String localDate,
-      required String title,
-      required String body,
-      Value<String?> mood,
-      required int position,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
-typedef $$JournalEntriesTableUpdateCompanionBuilder =
-    JournalEntriesCompanion Function({
-      Value<String> id,
-      Value<String> localDate,
-      Value<String> title,
-      Value<String> body,
-      Value<String?> mood,
-      Value<int> position,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
+typedef $$JournalDaysTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $JournalDaysTable,
+    JournalDayRow,
+    $$JournalDaysTableFilterComposer,
+    $$JournalDaysTableOrderingComposer,
+    $$JournalDaysTableAnnotationComposer,
+    $$JournalDaysTableCreateCompanionBuilder,
+    $$JournalDaysTableUpdateCompanionBuilder,
+    (JournalDayRow, $$JournalDaysTableReferences),
+    JournalDayRow,
+    PrefetchHooks Function({bool journalEntriesRefs})>;
+typedef $$JournalEntriesTableCreateCompanionBuilder = JournalEntriesCompanion
+    Function({
+  required String id,
+  required String localDate,
+  required String title,
+  required String body,
+  Value<String?> mood,
+  required int position,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
+typedef $$JournalEntriesTableUpdateCompanionBuilder = JournalEntriesCompanion
+    Function({
+  Value<String> id,
+  Value<String> localDate,
+  Value<String> title,
+  Value<String> body,
+  Value<String?> mood,
+  Value<int> position,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
 
-final class $$JournalEntriesTableReferences
-    extends
-        BaseReferences<_$KinDatabase, $JournalEntriesTable, JournalEntryRow> {
+final class $$JournalEntriesTableReferences extends BaseReferences<
+    _$KinDatabase, $JournalEntriesTable, JournalEntryRow> {
   $$JournalEntriesTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
+      super.$_db, super.$_table, super.$_typedResult);
 
   static $JournalDaysTable _localDateTable(_$KinDatabase db) =>
-      db.journalDays.createAlias(
-        $_aliasNameGenerator(
-          db.journalEntries.localDate,
-          db.journalDays.localDate,
-        ),
-      );
+      db.journalDays.createAlias($_aliasNameGenerator(
+          db.journalEntries.localDate, db.journalDays.localDate));
 
   $$JournalDaysTableProcessedTableManager? get localDate {
     if ($_item.localDate == null) return null;
-    final manager = $$JournalDaysTableTableManager(
-      $_db,
-      $_db.journalDays,
-    ).filter((f) => f.localDate($_item.localDate!));
+    final manager = $$JournalDaysTableTableManager($_db, $_db.journalDays)
+        .filter((f) => f.localDate($_item.localDate!));
     final item = $_typedResult.readTableOrNull(_localDateTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
-  static MultiTypedResultKey<
-    $JournalEntryPhotosTable,
-    List<JournalEntryPhotoRow>
-  >
-  _journalEntryPhotosRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.journalEntryPhotos,
-        aliasName: $_aliasNameGenerator(
-          db.journalEntries.id,
-          db.journalEntryPhotos.entryId,
-        ),
-      );
+  static MultiTypedResultKey<$JournalEntryPhotosTable,
+      List<JournalEntryPhotoRow>> _journalEntryPhotosRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.journalEntryPhotos,
+          aliasName: $_aliasNameGenerator(
+              db.journalEntries.id, db.journalEntryPhotos.entryId));
 
   $$JournalEntryPhotosTableProcessedTableManager get journalEntryPhotosRefs {
-    final manager = $$JournalEntryPhotosTableTableManager(
-      $_db,
-      $_db.journalEntryPhotos,
-    ).filter((f) => f.entryId.id($_item.id));
+    final manager =
+        $$JournalEntryPhotosTableTableManager($_db, $_db.journalEntryPhotos)
+            .filter((f) => f.entryId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _journalEntryPhotosRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_journalEntryPhotosRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 
-  static MultiTypedResultKey<
-    $JournalEntryFragmentsTable,
-    List<JournalEntryFragmentRow>
-  >
-  _journalEntryFragmentsRefsTable(_$KinDatabase db) =>
-      MultiTypedResultKey.fromTable(
-        db.journalEntryFragments,
-        aliasName: $_aliasNameGenerator(
-          db.journalEntries.id,
-          db.journalEntryFragments.entryId,
-        ),
-      );
+  static MultiTypedResultKey<$JournalEntryFragmentsTable,
+      List<JournalEntryFragmentRow>> _journalEntryFragmentsRefsTable(
+          _$KinDatabase db) =>
+      MultiTypedResultKey.fromTable(db.journalEntryFragments,
+          aliasName: $_aliasNameGenerator(
+              db.journalEntries.id, db.journalEntryFragments.entryId));
 
   $$JournalEntryFragmentsTableProcessedTableManager
-  get journalEntryFragmentsRefs {
+      get journalEntryFragmentsRefs {
     final manager = $$JournalEntryFragmentsTableTableManager(
-      $_db,
-      $_db.journalEntryFragments,
-    ).filter((f) => f.entryId.id($_item.id));
+            $_db, $_db.journalEntryFragments)
+        .filter((f) => f.entryId.id($_item.id));
 
-    final cache = $_typedResult.readTableOrNull(
-      _journalEntryFragmentsRefsTable($_db),
-    );
+    final cache =
+        $_typedResult.readTableOrNull(_journalEntryFragmentsRefsTable($_db));
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: cache),
-    );
+        manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
@@ -13010,116 +10904,90 @@ class $$JournalEntriesTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get title => $composableBuilder(
-    column: $table.title,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.title, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.body, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get mood => $composableBuilder(
-    column: $table.mood,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.mood, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.position, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   $$JournalDaysTableFilterComposer get localDate {
     final $$JournalDaysTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.localDate,
-      referencedTable: $db.journalDays,
-      getReferencedColumn: (t) => t.localDate,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalDaysTableFilterComposer(
-            $db: $db,
-            $table: $db.journalDays,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.localDate,
+        referencedTable: $db.journalDays,
+        getReferencedColumn: (t) => t.localDate,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalDaysTableFilterComposer(
+              $db: $db,
+              $table: $db.journalDays,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<bool> journalEntryPhotosRefs(
-    Expression<bool> Function($$JournalEntryPhotosTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$JournalEntryPhotosTableFilterComposer f) f) {
     final $$JournalEntryPhotosTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.id,
-      referencedTable: $db.journalEntryPhotos,
-      getReferencedColumn: (t) => t.entryId,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntryPhotosTableFilterComposer(
-            $db: $db,
-            $table: $db.journalEntryPhotos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.journalEntryPhotos,
+        getReferencedColumn: (t) => t.entryId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntryPhotosTableFilterComposer(
+              $db: $db,
+              $table: $db.journalEntryPhotos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
   Expression<bool> journalEntryFragmentsRefs(
-    Expression<bool> Function($$JournalEntryFragmentsTableFilterComposer f) f,
-  ) {
+      Expression<bool> Function($$JournalEntryFragmentsTableFilterComposer f)
+          f) {
     final $$JournalEntryFragmentsTableFilterComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.journalEntryFragments,
-          getReferencedColumn: (t) => t.entryId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$JournalEntryFragmentsTableFilterComposer(
-                $db: $db,
-                $table: $db.journalEntryFragments,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.journalEntryFragments,
+            getReferencedColumn: (t) => t.entryId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$JournalEntryFragmentsTableFilterComposer(
+                  $db: $db,
+                  $table: $db.journalEntryFragments,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
@@ -13134,65 +11002,46 @@ class $$JournalEntriesTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get title => $composableBuilder(
-    column: $table.title,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.title, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get body => $composableBuilder(
-    column: $table.body,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.body, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get mood => $composableBuilder(
-    column: $table.mood,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.mood, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.position, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   $$JournalDaysTableOrderingComposer get localDate {
     final $$JournalDaysTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.localDate,
-      referencedTable: $db.journalDays,
-      getReferencedColumn: (t) => t.localDate,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalDaysTableOrderingComposer(
-            $db: $db,
-            $table: $db.journalDays,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.localDate,
+        referencedTable: $db.journalDays,
+        getReferencedColumn: (t) => t.localDate,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalDaysTableOrderingComposer(
+              $db: $db,
+              $table: $db.journalDays,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -13232,104 +11081,88 @@ class $$JournalEntriesTableAnnotationComposer
 
   $$JournalDaysTableAnnotationComposer get localDate {
     final $$JournalDaysTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.localDate,
-      referencedTable: $db.journalDays,
-      getReferencedColumn: (t) => t.localDate,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalDaysTableAnnotationComposer(
-            $db: $db,
-            $table: $db.journalDays,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.localDate,
+        referencedTable: $db.journalDays,
+        getReferencedColumn: (t) => t.localDate,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalDaysTableAnnotationComposer(
+              $db: $db,
+              $table: $db.journalDays,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   Expression<T> journalEntryPhotosRefs<T extends Object>(
-    Expression<T> Function($$JournalEntryPhotosTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$JournalEntryPhotosTableAnnotationComposer a) f) {
     final $$JournalEntryPhotosTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.journalEntryPhotos,
-          getReferencedColumn: (t) => t.entryId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$JournalEntryPhotosTableAnnotationComposer(
-                $db: $db,
-                $table: $db.journalEntryPhotos,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.journalEntryPhotos,
+            getReferencedColumn: (t) => t.entryId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$JournalEntryPhotosTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.journalEntryPhotos,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 
   Expression<T> journalEntryFragmentsRefs<T extends Object>(
-    Expression<T> Function($$JournalEntryFragmentsTableAnnotationComposer a) f,
-  ) {
+      Expression<T> Function($$JournalEntryFragmentsTableAnnotationComposer a)
+          f) {
     final $$JournalEntryFragmentsTableAnnotationComposer composer =
         $composerBuilder(
-          composer: this,
-          getCurrentColumn: (t) => t.id,
-          referencedTable: $db.journalEntryFragments,
-          getReferencedColumn: (t) => t.entryId,
-          builder:
-              (
-                joinBuilder, {
-                $addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer,
-              }) => $$JournalEntryFragmentsTableAnnotationComposer(
-                $db: $db,
-                $table: $db.journalEntryFragments,
-                $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                joinBuilder: joinBuilder,
-                $removeJoinBuilderFromRootComposer:
-                    $removeJoinBuilderFromRootComposer,
-              ),
-        );
+            composer: this,
+            getCurrentColumn: (t) => t.id,
+            referencedTable: $db.journalEntryFragments,
+            getReferencedColumn: (t) => t.entryId,
+            builder: (joinBuilder,
+                    {$addJoinBuilderToRootComposer,
+                    $removeJoinBuilderFromRootComposer}) =>
+                $$JournalEntryFragmentsTableAnnotationComposer(
+                  $db: $db,
+                  $table: $db.journalEntryFragments,
+                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+                  joinBuilder: joinBuilder,
+                  $removeJoinBuilderFromRootComposer:
+                      $removeJoinBuilderFromRootComposer,
+                ));
     return f(composer);
   }
 }
 
-class $$JournalEntriesTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $JournalEntriesTable,
-          JournalEntryRow,
-          $$JournalEntriesTableFilterComposer,
-          $$JournalEntriesTableOrderingComposer,
-          $$JournalEntriesTableAnnotationComposer,
-          $$JournalEntriesTableCreateCompanionBuilder,
-          $$JournalEntriesTableUpdateCompanionBuilder,
-          (JournalEntryRow, $$JournalEntriesTableReferences),
-          JournalEntryRow,
-          PrefetchHooks Function({
-            bool localDate,
-            bool journalEntryPhotosRefs,
-            bool journalEntryFragmentsRefs,
-          })
-        > {
+class $$JournalEntriesTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $JournalEntriesTable,
+    JournalEntryRow,
+    $$JournalEntriesTableFilterComposer,
+    $$JournalEntriesTableOrderingComposer,
+    $$JournalEntriesTableAnnotationComposer,
+    $$JournalEntriesTableCreateCompanionBuilder,
+    $$JournalEntriesTableUpdateCompanionBuilder,
+    (JournalEntryRow, $$JournalEntriesTableReferences),
+    JournalEntryRow,
+    PrefetchHooks Function(
+        {bool localDate,
+        bool journalEntryPhotosRefs,
+        bool journalEntryFragmentsRefs})> {
   $$JournalEntriesTableTableManager(
-    _$KinDatabase db,
-    $JournalEntriesTable table,
-  ) : super(
-        TableManagerState(
+      _$KinDatabase db, $JournalEntriesTable table)
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -13338,244 +11171,200 @@ class $$JournalEntriesTableTableManager
               $$JournalEntriesTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$JournalEntriesTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> localDate = const Value.absent(),
-                Value<String> title = const Value.absent(),
-                Value<String> body = const Value.absent(),
-                Value<String?> mood = const Value.absent(),
-                Value<int> position = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalEntriesCompanion(
-                id: id,
-                localDate: localDate,
-                title: title,
-                body: body,
-                mood: mood,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String localDate,
-                required String title,
-                required String body,
-                Value<String?> mood = const Value.absent(),
-                required int position,
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalEntriesCompanion.insert(
-                id: id,
-                localDate: localDate,
-                title: title,
-                body: body,
-                mood: mood,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> localDate = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> body = const Value.absent(),
+            Value<String?> mood = const Value.absent(),
+            Value<int> position = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalEntriesCompanion(
+            id: id,
+            localDate: localDate,
+            title: title,
+            body: body,
+            mood: mood,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String localDate,
+            required String title,
+            required String body,
+            Value<String?> mood = const Value.absent(),
+            required int position,
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalEntriesCompanion.insert(
+            id: id,
+            localDate: localDate,
+            title: title,
+            body: body,
+            mood: mood,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$JournalEntriesTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$JournalEntriesTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback:
-              ({
-                localDate = false,
-                journalEntryPhotosRefs = false,
-                journalEntryFragmentsRefs = false,
-              }) {
-                return PrefetchHooks(
-                  db: db,
-                  explicitlyWatchedTables: [
-                    if (journalEntryPhotosRefs) db.journalEntryPhotos,
-                    if (journalEntryFragmentsRefs) db.journalEntryFragments,
-                  ],
-                  addJoins:
-                      <
-                        T extends TableManagerState<
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic,
-                          dynamic
-                        >
-                      >(state) {
-                        if (localDate) {
-                          state =
-                              state.withJoin(
-                                    currentTable: table,
-                                    currentColumn: table.localDate,
-                                    referencedTable:
-                                        $$JournalEntriesTableReferences
-                                            ._localDateTable(db),
-                                    referencedColumn:
-                                        $$JournalEntriesTableReferences
-                                            ._localDateTable(db)
-                                            .localDate,
-                                  )
-                                  as T;
-                        }
+          prefetchHooksCallback: (
+              {localDate = false,
+              journalEntryPhotosRefs = false,
+              journalEntryFragmentsRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (journalEntryPhotosRefs) db.journalEntryPhotos,
+                if (journalEntryFragmentsRefs) db.journalEntryFragments
+              ],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (localDate) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.localDate,
+                    referencedTable:
+                        $$JournalEntriesTableReferences._localDateTable(db),
+                    referencedColumn: $$JournalEntriesTableReferences
+                        ._localDateTable(db)
+                        .localDate,
+                  ) as T;
+                }
 
-                        return state;
-                      },
-                  getPrefetchedDataCallback: (items) async {
-                    return [
-                      if (journalEntryPhotosRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$JournalEntriesTableReferences
-                              ._journalEntryPhotosRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$JournalEntriesTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).journalEntryPhotosRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.entryId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                      if (journalEntryFragmentsRefs)
-                        await $_getPrefetchedData(
-                          currentTable: table,
-                          referencedTable: $$JournalEntriesTableReferences
-                              ._journalEntryFragmentsRefsTable(db),
-                          managerFromTypedResult: (p0) =>
-                              $$JournalEntriesTableReferences(
-                                db,
-                                table,
-                                p0,
-                              ).journalEntryFragmentsRefs,
-                          referencedItemsForCurrentItem:
-                              (item, referencedItems) => referencedItems.where(
-                                (e) => e.entryId == item.id,
-                              ),
-                          typedResults: items,
-                        ),
-                    ];
-                  },
-                );
+                return state;
               },
-        ),
-      );
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (journalEntryPhotosRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$JournalEntriesTableReferences
+                            ._journalEntryPhotosRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$JournalEntriesTableReferences(db, table, p0)
+                                .journalEntryPhotosRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.entryId == item.id),
+                        typedResults: items),
+                  if (journalEntryFragmentsRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$JournalEntriesTableReferences
+                            ._journalEntryFragmentsRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$JournalEntriesTableReferences(db, table, p0)
+                                .journalEntryFragmentsRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.entryId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
+        ));
 }
 
-typedef $$JournalEntriesTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $JournalEntriesTable,
-      JournalEntryRow,
-      $$JournalEntriesTableFilterComposer,
-      $$JournalEntriesTableOrderingComposer,
-      $$JournalEntriesTableAnnotationComposer,
-      $$JournalEntriesTableCreateCompanionBuilder,
-      $$JournalEntriesTableUpdateCompanionBuilder,
-      (JournalEntryRow, $$JournalEntriesTableReferences),
-      JournalEntryRow,
-      PrefetchHooks Function({
-        bool localDate,
+typedef $$JournalEntriesTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $JournalEntriesTable,
+    JournalEntryRow,
+    $$JournalEntriesTableFilterComposer,
+    $$JournalEntriesTableOrderingComposer,
+    $$JournalEntriesTableAnnotationComposer,
+    $$JournalEntriesTableCreateCompanionBuilder,
+    $$JournalEntriesTableUpdateCompanionBuilder,
+    (JournalEntryRow, $$JournalEntriesTableReferences),
+    JournalEntryRow,
+    PrefetchHooks Function(
+        {bool localDate,
         bool journalEntryPhotosRefs,
-        bool journalEntryFragmentsRefs,
-      })
-    >;
-typedef $$JournalEntryPhotosTableCreateCompanionBuilder =
-    JournalEntryPhotosCompanion Function({
-      required String id,
-      required String entryId,
-      required String photoId,
-      Value<String?> caption,
-      required int position,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
-typedef $$JournalEntryPhotosTableUpdateCompanionBuilder =
-    JournalEntryPhotosCompanion Function({
-      Value<String> id,
-      Value<String> entryId,
-      Value<String> photoId,
-      Value<String?> caption,
-      Value<int> position,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
+        bool journalEntryFragmentsRefs})>;
+typedef $$JournalEntryPhotosTableCreateCompanionBuilder
+    = JournalEntryPhotosCompanion Function({
+  required String id,
+  required String entryId,
+  required String photoId,
+  Value<String?> caption,
+  required int position,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
+typedef $$JournalEntryPhotosTableUpdateCompanionBuilder
+    = JournalEntryPhotosCompanion Function({
+  Value<String> id,
+  Value<String> entryId,
+  Value<String> photoId,
+  Value<String?> caption,
+  Value<int> position,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
 
-final class $$JournalEntryPhotosTableReferences
-    extends
-        BaseReferences<
-          _$KinDatabase,
-          $JournalEntryPhotosTable,
-          JournalEntryPhotoRow
-        > {
+final class $$JournalEntryPhotosTableReferences extends BaseReferences<
+    _$KinDatabase, $JournalEntryPhotosTable, JournalEntryPhotoRow> {
   $$JournalEntryPhotosTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
+      super.$_db, super.$_table, super.$_typedResult);
 
   static $JournalEntriesTable _entryIdTable(_$KinDatabase db) =>
-      db.journalEntries.createAlias(
-        $_aliasNameGenerator(
-          db.journalEntryPhotos.entryId,
-          db.journalEntries.id,
-        ),
-      );
+      db.journalEntries.createAlias($_aliasNameGenerator(
+          db.journalEntryPhotos.entryId, db.journalEntries.id));
 
   $$JournalEntriesTableProcessedTableManager? get entryId {
     if ($_item.entryId == null) return null;
-    final manager = $$JournalEntriesTableTableManager(
-      $_db,
-      $_db.journalEntries,
-    ).filter((f) => f.id($_item.entryId!));
+    final manager = $$JournalEntriesTableTableManager($_db, $_db.journalEntries)
+        .filter((f) => f.id($_item.entryId!));
     final item = $_typedResult.readTableOrNull(_entryIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static $PhotosTable _photoIdTable(_$KinDatabase db) => db.photos.createAlias(
-    $_aliasNameGenerator(db.journalEntryPhotos.photoId, db.photos.id),
-  );
+      $_aliasNameGenerator(db.journalEntryPhotos.photoId, db.photos.id));
 
   $$PhotosTableProcessedTableManager? get photoId {
     if ($_item.photoId == null) return null;
-    final manager = $$PhotosTableTableManager(
-      $_db,
-      $_db.photos,
-    ).filter((f) => f.id($_item.photoId!));
+    final manager = $$PhotosTableTableManager($_db, $_db.photos)
+        .filter((f) => f.id($_item.photoId!));
     final item = $_typedResult.readTableOrNull(_photoIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 }
 
@@ -13589,78 +11378,60 @@ class $$JournalEntryPhotosTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get caption => $composableBuilder(
-    column: $table.caption,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.caption, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.position, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   $$JournalEntriesTableFilterComposer get entryId {
     final $$JournalEntriesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.entryId,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableFilterComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.entryId,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableFilterComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PhotosTableFilterComposer get photoId {
     final $$PhotosTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.photoId,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableFilterComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.photoId,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableFilterComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -13675,78 +11446,60 @@ class $$JournalEntryPhotosTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get caption => $composableBuilder(
-    column: $table.caption,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.caption, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.position, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   $$JournalEntriesTableOrderingComposer get entryId {
     final $$JournalEntriesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.entryId,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableOrderingComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.entryId,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableOrderingComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PhotosTableOrderingComposer get photoId {
     final $$PhotosTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.photoId,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableOrderingComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.photoId,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableOrderingComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -13780,71 +11533,60 @@ class $$JournalEntryPhotosTableAnnotationComposer
 
   $$JournalEntriesTableAnnotationComposer get entryId {
     final $$JournalEntriesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.entryId,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.entryId,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PhotosTableAnnotationComposer get photoId {
     final $$PhotosTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.photoId,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableAnnotationComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.photoId,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableAnnotationComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
 
-class $$JournalEntryPhotosTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $JournalEntryPhotosTable,
-          JournalEntryPhotoRow,
-          $$JournalEntryPhotosTableFilterComposer,
-          $$JournalEntryPhotosTableOrderingComposer,
-          $$JournalEntryPhotosTableAnnotationComposer,
-          $$JournalEntryPhotosTableCreateCompanionBuilder,
-          $$JournalEntryPhotosTableUpdateCompanionBuilder,
-          (JournalEntryPhotoRow, $$JournalEntryPhotosTableReferences),
-          JournalEntryPhotoRow,
-          PrefetchHooks Function({bool entryId, bool photoId})
-        > {
+class $$JournalEntryPhotosTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $JournalEntryPhotosTable,
+    JournalEntryPhotoRow,
+    $$JournalEntryPhotosTableFilterComposer,
+    $$JournalEntryPhotosTableOrderingComposer,
+    $$JournalEntryPhotosTableAnnotationComposer,
+    $$JournalEntryPhotosTableCreateCompanionBuilder,
+    $$JournalEntryPhotosTableUpdateCompanionBuilder,
+    (JournalEntryPhotoRow, $$JournalEntryPhotosTableReferences),
+    JournalEntryPhotoRow,
+    PrefetchHooks Function({bool entryId, bool photoId})> {
   $$JournalEntryPhotosTableTableManager(
-    _$KinDatabase db,
-    $JournalEntryPhotosTable table,
-  ) : super(
-        TableManagerState(
+      _$KinDatabase db, $JournalEntryPhotosTable table)
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -13853,68 +11595,63 @@ class $$JournalEntryPhotosTableTableManager
               $$JournalEntryPhotosTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$JournalEntryPhotosTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> entryId = const Value.absent(),
-                Value<String> photoId = const Value.absent(),
-                Value<String?> caption = const Value.absent(),
-                Value<int> position = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalEntryPhotosCompanion(
-                id: id,
-                entryId: entryId,
-                photoId: photoId,
-                caption: caption,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String entryId,
-                required String photoId,
-                Value<String?> caption = const Value.absent(),
-                required int position,
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalEntryPhotosCompanion.insert(
-                id: id,
-                entryId: entryId,
-                photoId: photoId,
-                caption: caption,
-                position: position,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> entryId = const Value.absent(),
+            Value<String> photoId = const Value.absent(),
+            Value<String?> caption = const Value.absent(),
+            Value<int> position = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalEntryPhotosCompanion(
+            id: id,
+            entryId: entryId,
+            photoId: photoId,
+            caption: caption,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String entryId,
+            required String photoId,
+            Value<String?> caption = const Value.absent(),
+            required int position,
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalEntryPhotosCompanion.insert(
+            id: id,
+            entryId: entryId,
+            photoId: photoId,
+            caption: caption,
+            position: position,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$JournalEntryPhotosTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$JournalEntryPhotosTableReferences(db, table, e)
+                  ))
               .toList(),
           prefetchHooksCallback: ({entryId = false, photoId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
+              addJoins: <
+                  T extends TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -13925,147 +11662,115 @@ class $$JournalEntryPhotosTableTableManager
                       dynamic,
                       dynamic,
                       dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (entryId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.entryId,
-                                referencedTable:
-                                    $$JournalEntryPhotosTableReferences
-                                        ._entryIdTable(db),
-                                referencedColumn:
-                                    $$JournalEntryPhotosTableReferences
-                                        ._entryIdTable(db)
-                                        .id,
-                              )
-                              as T;
-                    }
-                    if (photoId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.photoId,
-                                referencedTable:
-                                    $$JournalEntryPhotosTableReferences
-                                        ._photoIdTable(db),
-                                referencedColumn:
-                                    $$JournalEntryPhotosTableReferences
-                                        ._photoIdTable(db)
-                                        .id,
-                              )
-                              as T;
-                    }
+                      dynamic>>(state) {
+                if (entryId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.entryId,
+                    referencedTable:
+                        $$JournalEntryPhotosTableReferences._entryIdTable(db),
+                    referencedColumn: $$JournalEntryPhotosTableReferences
+                        ._entryIdTable(db)
+                        .id,
+                  ) as T;
+                }
+                if (photoId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.photoId,
+                    referencedTable:
+                        $$JournalEntryPhotosTableReferences._photoIdTable(db),
+                    referencedColumn: $$JournalEntryPhotosTableReferences
+                        ._photoIdTable(db)
+                        .id,
+                  ) as T;
+                }
 
-                    return state;
-                  },
+                return state;
+              },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
             );
           },
-        ),
-      );
+        ));
 }
 
-typedef $$JournalEntryPhotosTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $JournalEntryPhotosTable,
-      JournalEntryPhotoRow,
-      $$JournalEntryPhotosTableFilterComposer,
-      $$JournalEntryPhotosTableOrderingComposer,
-      $$JournalEntryPhotosTableAnnotationComposer,
-      $$JournalEntryPhotosTableCreateCompanionBuilder,
-      $$JournalEntryPhotosTableUpdateCompanionBuilder,
-      (JournalEntryPhotoRow, $$JournalEntryPhotosTableReferences),
-      JournalEntryPhotoRow,
-      PrefetchHooks Function({bool entryId, bool photoId})
-    >;
-typedef $$JournalEntryFragmentsTableCreateCompanionBuilder =
-    JournalEntryFragmentsCompanion Function({
-      required String id,
-      required String entryId,
-      required String kind,
-      required int position,
-      Value<String?> textBody,
-      Value<String?> photoId,
-      Value<String?> caption,
-      Value<String?> audioRelPath,
-      Value<int?> audioDurationMs,
-      required int createdAt,
-      required int updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
-typedef $$JournalEntryFragmentsTableUpdateCompanionBuilder =
-    JournalEntryFragmentsCompanion Function({
-      Value<String> id,
-      Value<String> entryId,
-      Value<String> kind,
-      Value<int> position,
-      Value<String?> textBody,
-      Value<String?> photoId,
-      Value<String?> caption,
-      Value<String?> audioRelPath,
-      Value<int?> audioDurationMs,
-      Value<int> createdAt,
-      Value<int> updatedAt,
-      Value<int?> deletedAt,
-      Value<int> rowid,
-    });
+typedef $$JournalEntryPhotosTableProcessedTableManager = ProcessedTableManager<
+    _$KinDatabase,
+    $JournalEntryPhotosTable,
+    JournalEntryPhotoRow,
+    $$JournalEntryPhotosTableFilterComposer,
+    $$JournalEntryPhotosTableOrderingComposer,
+    $$JournalEntryPhotosTableAnnotationComposer,
+    $$JournalEntryPhotosTableCreateCompanionBuilder,
+    $$JournalEntryPhotosTableUpdateCompanionBuilder,
+    (JournalEntryPhotoRow, $$JournalEntryPhotosTableReferences),
+    JournalEntryPhotoRow,
+    PrefetchHooks Function({bool entryId, bool photoId})>;
+typedef $$JournalEntryFragmentsTableCreateCompanionBuilder
+    = JournalEntryFragmentsCompanion Function({
+  required String id,
+  required String entryId,
+  required String kind,
+  required int position,
+  Value<String?> textBody,
+  Value<String?> photoId,
+  Value<String?> caption,
+  Value<String?> audioRelPath,
+  Value<int?> audioDurationMs,
+  required int createdAt,
+  required int updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
+typedef $$JournalEntryFragmentsTableUpdateCompanionBuilder
+    = JournalEntryFragmentsCompanion Function({
+  Value<String> id,
+  Value<String> entryId,
+  Value<String> kind,
+  Value<int> position,
+  Value<String?> textBody,
+  Value<String?> photoId,
+  Value<String?> caption,
+  Value<String?> audioRelPath,
+  Value<int?> audioDurationMs,
+  Value<int> createdAt,
+  Value<int> updatedAt,
+  Value<int?> deletedAt,
+  Value<int> rowid,
+});
 
-final class $$JournalEntryFragmentsTableReferences
-    extends
-        BaseReferences<
-          _$KinDatabase,
-          $JournalEntryFragmentsTable,
-          JournalEntryFragmentRow
-        > {
+final class $$JournalEntryFragmentsTableReferences extends BaseReferences<
+    _$KinDatabase, $JournalEntryFragmentsTable, JournalEntryFragmentRow> {
   $$JournalEntryFragmentsTableReferences(
-    super.$_db,
-    super.$_table,
-    super.$_typedResult,
-  );
+      super.$_db, super.$_table, super.$_typedResult);
 
   static $JournalEntriesTable _entryIdTable(_$KinDatabase db) =>
-      db.journalEntries.createAlias(
-        $_aliasNameGenerator(
-          db.journalEntryFragments.entryId,
-          db.journalEntries.id,
-        ),
-      );
+      db.journalEntries.createAlias($_aliasNameGenerator(
+          db.journalEntryFragments.entryId, db.journalEntries.id));
 
   $$JournalEntriesTableProcessedTableManager? get entryId {
     if ($_item.entryId == null) return null;
-    final manager = $$JournalEntriesTableTableManager(
-      $_db,
-      $_db.journalEntries,
-    ).filter((f) => f.id($_item.entryId!));
+    final manager = $$JournalEntriesTableTableManager($_db, $_db.journalEntries)
+        .filter((f) => f.id($_item.entryId!));
     final item = $_typedResult.readTableOrNull(_entryIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static $PhotosTable _photoIdTable(_$KinDatabase db) => db.photos.createAlias(
-    $_aliasNameGenerator(db.journalEntryFragments.photoId, db.photos.id),
-  );
+      $_aliasNameGenerator(db.journalEntryFragments.photoId, db.photos.id));
 
   $$PhotosTableProcessedTableManager? get photoId {
     if ($_item.photoId == null) return null;
-    final manager = $$PhotosTableTableManager(
-      $_db,
-      $_db.photos,
-    ).filter((f) => f.id($_item.photoId!));
+    final manager = $$PhotosTableTableManager($_db, $_db.photos)
+        .filter((f) => f.id($_item.photoId!));
     final item = $_typedResult.readTableOrNull(_photoIdTable($_db));
     if (item == null) return manager;
     return ProcessedTableManager(
-      manager.$state.copyWith(prefetchedData: [item]),
-    );
+        manager.$state.copyWith(prefetchedData: [item]));
   }
 }
 
@@ -14079,98 +11784,73 @@ class $$JournalEntryFragmentsTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.id, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get kind => $composableBuilder(
-    column: $table.kind,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.kind, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.position, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get textBody => $composableBuilder(
-    column: $table.textBody,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.textBody, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get caption => $composableBuilder(
-    column: $table.caption,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.caption, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<String> get audioRelPath => $composableBuilder(
-    column: $table.audioRelPath,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.audioRelPath, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get audioDurationMs => $composableBuilder(
-    column: $table.audioDurationMs,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.audioDurationMs,
+      builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
 
   ColumnFilters<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnFilters(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
 
   $$JournalEntriesTableFilterComposer get entryId {
     final $$JournalEntriesTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.entryId,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableFilterComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.entryId,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableFilterComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PhotosTableFilterComposer get photoId {
     final $$PhotosTableFilterComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.photoId,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableFilterComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.photoId,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableFilterComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -14185,98 +11865,74 @@ class $$JournalEntryFragmentsTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-    column: $table.id,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.id, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get kind => $composableBuilder(
-    column: $table.kind,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.kind, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get position => $composableBuilder(
-    column: $table.position,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.position, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get textBody => $composableBuilder(
-    column: $table.textBody,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.textBody, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get caption => $composableBuilder(
-    column: $table.caption,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.caption, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<String> get audioRelPath => $composableBuilder(
-    column: $table.audioRelPath,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.audioRelPath,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get audioDurationMs => $composableBuilder(
-    column: $table.audioDurationMs,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.audioDurationMs,
+      builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get createdAt => $composableBuilder(
-    column: $table.createdAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get updatedAt => $composableBuilder(
-    column: $table.updatedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
 
   ColumnOrderings<int> get deletedAt => $composableBuilder(
-    column: $table.deletedAt,
-    builder: (column) => ColumnOrderings(column),
-  );
+      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
 
   $$JournalEntriesTableOrderingComposer get entryId {
     final $$JournalEntriesTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.entryId,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableOrderingComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.entryId,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableOrderingComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PhotosTableOrderingComposer get photoId {
     final $$PhotosTableOrderingComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.photoId,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableOrderingComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.photoId,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableOrderingComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -14306,14 +11962,10 @@ class $$JournalEntryFragmentsTableAnnotationComposer
       $composableBuilder(column: $table.caption, builder: (column) => column);
 
   GeneratedColumn<String> get audioRelPath => $composableBuilder(
-    column: $table.audioRelPath,
-    builder: (column) => column,
-  );
+      column: $table.audioRelPath, builder: (column) => column);
 
   GeneratedColumn<int> get audioDurationMs => $composableBuilder(
-    column: $table.audioDurationMs,
-    builder: (column) => column,
-  );
+      column: $table.audioDurationMs, builder: (column) => column);
 
   GeneratedColumn<int> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -14326,163 +11978,143 @@ class $$JournalEntryFragmentsTableAnnotationComposer
 
   $$JournalEntriesTableAnnotationComposer get entryId {
     final $$JournalEntriesTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.entryId,
-      referencedTable: $db.journalEntries,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$JournalEntriesTableAnnotationComposer(
-            $db: $db,
-            $table: $db.journalEntries,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.entryId,
+        referencedTable: $db.journalEntries,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$JournalEntriesTableAnnotationComposer(
+              $db: $db,
+              $table: $db.journalEntries,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 
   $$PhotosTableAnnotationComposer get photoId {
     final $$PhotosTableAnnotationComposer composer = $composerBuilder(
-      composer: this,
-      getCurrentColumn: (t) => t.photoId,
-      referencedTable: $db.photos,
-      getReferencedColumn: (t) => t.id,
-      builder:
-          (
-            joinBuilder, {
-            $addJoinBuilderToRootComposer,
-            $removeJoinBuilderFromRootComposer,
-          }) => $$PhotosTableAnnotationComposer(
-            $db: $db,
-            $table: $db.photos,
-            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-            joinBuilder: joinBuilder,
-            $removeJoinBuilderFromRootComposer:
-                $removeJoinBuilderFromRootComposer,
-          ),
-    );
+        composer: this,
+        getCurrentColumn: (t) => t.photoId,
+        referencedTable: $db.photos,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$PhotosTableAnnotationComposer(
+              $db: $db,
+              $table: $db.photos,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
 
-class $$JournalEntryFragmentsTableTableManager
-    extends
-        RootTableManager<
-          _$KinDatabase,
-          $JournalEntryFragmentsTable,
-          JournalEntryFragmentRow,
-          $$JournalEntryFragmentsTableFilterComposer,
-          $$JournalEntryFragmentsTableOrderingComposer,
-          $$JournalEntryFragmentsTableAnnotationComposer,
-          $$JournalEntryFragmentsTableCreateCompanionBuilder,
-          $$JournalEntryFragmentsTableUpdateCompanionBuilder,
-          (JournalEntryFragmentRow, $$JournalEntryFragmentsTableReferences),
-          JournalEntryFragmentRow,
-          PrefetchHooks Function({bool entryId, bool photoId})
-        > {
+class $$JournalEntryFragmentsTableTableManager extends RootTableManager<
+    _$KinDatabase,
+    $JournalEntryFragmentsTable,
+    JournalEntryFragmentRow,
+    $$JournalEntryFragmentsTableFilterComposer,
+    $$JournalEntryFragmentsTableOrderingComposer,
+    $$JournalEntryFragmentsTableAnnotationComposer,
+    $$JournalEntryFragmentsTableCreateCompanionBuilder,
+    $$JournalEntryFragmentsTableUpdateCompanionBuilder,
+    (JournalEntryFragmentRow, $$JournalEntryFragmentsTableReferences),
+    JournalEntryFragmentRow,
+    PrefetchHooks Function({bool entryId, bool photoId})> {
   $$JournalEntryFragmentsTableTableManager(
-    _$KinDatabase db,
-    $JournalEntryFragmentsTable table,
-  ) : super(
-        TableManagerState(
+      _$KinDatabase db, $JournalEntryFragmentsTable table)
+      : super(TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$JournalEntryFragmentsTableFilterComposer(
-                $db: db,
-                $table: table,
-              ),
+                  $db: db, $table: table),
           createOrderingComposer: () =>
               $$JournalEntryFragmentsTableOrderingComposer(
-                $db: db,
-                $table: table,
-              ),
+                  $db: db, $table: table),
           createComputedFieldComposer: () =>
               $$JournalEntryFragmentsTableAnnotationComposer(
-                $db: db,
-                $table: table,
-              ),
-          updateCompanionCallback:
-              ({
-                Value<String> id = const Value.absent(),
-                Value<String> entryId = const Value.absent(),
-                Value<String> kind = const Value.absent(),
-                Value<int> position = const Value.absent(),
-                Value<String?> textBody = const Value.absent(),
-                Value<String?> photoId = const Value.absent(),
-                Value<String?> caption = const Value.absent(),
-                Value<String?> audioRelPath = const Value.absent(),
-                Value<int?> audioDurationMs = const Value.absent(),
-                Value<int> createdAt = const Value.absent(),
-                Value<int> updatedAt = const Value.absent(),
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalEntryFragmentsCompanion(
-                id: id,
-                entryId: entryId,
-                kind: kind,
-                position: position,
-                textBody: textBody,
-                photoId: photoId,
-                caption: caption,
-                audioRelPath: audioRelPath,
-                audioDurationMs: audioDurationMs,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
-          createCompanionCallback:
-              ({
-                required String id,
-                required String entryId,
-                required String kind,
-                required int position,
-                Value<String?> textBody = const Value.absent(),
-                Value<String?> photoId = const Value.absent(),
-                Value<String?> caption = const Value.absent(),
-                Value<String?> audioRelPath = const Value.absent(),
-                Value<int?> audioDurationMs = const Value.absent(),
-                required int createdAt,
-                required int updatedAt,
-                Value<int?> deletedAt = const Value.absent(),
-                Value<int> rowid = const Value.absent(),
-              }) => JournalEntryFragmentsCompanion.insert(
-                id: id,
-                entryId: entryId,
-                kind: kind,
-                position: position,
-                textBody: textBody,
-                photoId: photoId,
-                caption: caption,
-                audioRelPath: audioRelPath,
-                audioDurationMs: audioDurationMs,
-                createdAt: createdAt,
-                updatedAt: updatedAt,
-                deletedAt: deletedAt,
-                rowid: rowid,
-              ),
+                  $db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> entryId = const Value.absent(),
+            Value<String> kind = const Value.absent(),
+            Value<int> position = const Value.absent(),
+            Value<String?> textBody = const Value.absent(),
+            Value<String?> photoId = const Value.absent(),
+            Value<String?> caption = const Value.absent(),
+            Value<String?> audioRelPath = const Value.absent(),
+            Value<int?> audioDurationMs = const Value.absent(),
+            Value<int> createdAt = const Value.absent(),
+            Value<int> updatedAt = const Value.absent(),
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalEntryFragmentsCompanion(
+            id: id,
+            entryId: entryId,
+            kind: kind,
+            position: position,
+            textBody: textBody,
+            photoId: photoId,
+            caption: caption,
+            audioRelPath: audioRelPath,
+            audioDurationMs: audioDurationMs,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String entryId,
+            required String kind,
+            required int position,
+            Value<String?> textBody = const Value.absent(),
+            Value<String?> photoId = const Value.absent(),
+            Value<String?> caption = const Value.absent(),
+            Value<String?> audioRelPath = const Value.absent(),
+            Value<int?> audioDurationMs = const Value.absent(),
+            required int createdAt,
+            required int updatedAt,
+            Value<int?> deletedAt = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              JournalEntryFragmentsCompanion.insert(
+            id: id,
+            entryId: entryId,
+            kind: kind,
+            position: position,
+            textBody: textBody,
+            photoId: photoId,
+            caption: caption,
+            audioRelPath: audioRelPath,
+            audioDurationMs: audioDurationMs,
+            createdAt: createdAt,
+            updatedAt: updatedAt,
+            deletedAt: deletedAt,
+            rowid: rowid,
+          ),
           withReferenceMapper: (p0) => p0
-              .map(
-                (e) => (
-                  e.readTable(table),
-                  $$JournalEntryFragmentsTableReferences(db, table, e),
-                ),
-              )
+              .map((e) => (
+                    e.readTable(table),
+                    $$JournalEntryFragmentsTableReferences(db, table, e)
+                  ))
               .toList(),
           prefetchHooksCallback: ({entryId = false, photoId = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
+              addJoins: <
+                  T extends TableManagerState<
                       dynamic,
                       dynamic,
                       dynamic,
@@ -14493,65 +12125,53 @@ class $$JournalEntryFragmentsTableTableManager
                       dynamic,
                       dynamic,
                       dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (entryId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.entryId,
-                                referencedTable:
-                                    $$JournalEntryFragmentsTableReferences
-                                        ._entryIdTable(db),
-                                referencedColumn:
-                                    $$JournalEntryFragmentsTableReferences
-                                        ._entryIdTable(db)
-                                        .id,
-                              )
-                              as T;
-                    }
-                    if (photoId) {
-                      state =
-                          state.withJoin(
-                                currentTable: table,
-                                currentColumn: table.photoId,
-                                referencedTable:
-                                    $$JournalEntryFragmentsTableReferences
-                                        ._photoIdTable(db),
-                                referencedColumn:
-                                    $$JournalEntryFragmentsTableReferences
-                                        ._photoIdTable(db)
-                                        .id,
-                              )
-                              as T;
-                    }
+                      dynamic>>(state) {
+                if (entryId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.entryId,
+                    referencedTable: $$JournalEntryFragmentsTableReferences
+                        ._entryIdTable(db),
+                    referencedColumn: $$JournalEntryFragmentsTableReferences
+                        ._entryIdTable(db)
+                        .id,
+                  ) as T;
+                }
+                if (photoId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.photoId,
+                    referencedTable: $$JournalEntryFragmentsTableReferences
+                        ._photoIdTable(db),
+                    referencedColumn: $$JournalEntryFragmentsTableReferences
+                        ._photoIdTable(db)
+                        .id,
+                  ) as T;
+                }
 
-                    return state;
-                  },
+                return state;
+              },
               getPrefetchedDataCallback: (items) async {
                 return [];
               },
             );
           },
-        ),
-      );
+        ));
 }
 
-typedef $$JournalEntryFragmentsTableProcessedTableManager =
-    ProcessedTableManager<
-      _$KinDatabase,
-      $JournalEntryFragmentsTable,
-      JournalEntryFragmentRow,
-      $$JournalEntryFragmentsTableFilterComposer,
-      $$JournalEntryFragmentsTableOrderingComposer,
-      $$JournalEntryFragmentsTableAnnotationComposer,
-      $$JournalEntryFragmentsTableCreateCompanionBuilder,
-      $$JournalEntryFragmentsTableUpdateCompanionBuilder,
-      (JournalEntryFragmentRow, $$JournalEntryFragmentsTableReferences),
-      JournalEntryFragmentRow,
-      PrefetchHooks Function({bool entryId, bool photoId})
-    >;
+typedef $$JournalEntryFragmentsTableProcessedTableManager
+    = ProcessedTableManager<
+        _$KinDatabase,
+        $JournalEntryFragmentsTable,
+        JournalEntryFragmentRow,
+        $$JournalEntryFragmentsTableFilterComposer,
+        $$JournalEntryFragmentsTableOrderingComposer,
+        $$JournalEntryFragmentsTableAnnotationComposer,
+        $$JournalEntryFragmentsTableCreateCompanionBuilder,
+        $$JournalEntryFragmentsTableUpdateCompanionBuilder,
+        (JournalEntryFragmentRow, $$JournalEntryFragmentsTableReferences),
+        JournalEntryFragmentRow,
+        PrefetchHooks Function({bool entryId, bool photoId})>;
 
 class $KinDatabaseManager {
   final _$KinDatabase _db;
@@ -14570,9 +12190,7 @@ class $KinDatabaseManager {
       $$PersonalRemindersTableTableManager(_db, _db.personalReminders);
   $$ScheduledNotificationsTableTableManager get scheduledNotifications =>
       $$ScheduledNotificationsTableTableManager(
-        _db,
-        _db.scheduledNotifications,
-      );
+          _db, _db.scheduledNotifications);
   $$SettingsTableTableManager get settings =>
       $$SettingsTableTableManager(_db, _db.settings);
   $$SyncStateTableTableManager get syncState =>

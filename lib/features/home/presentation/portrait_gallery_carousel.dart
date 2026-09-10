@@ -164,7 +164,7 @@ class _PortraitGalleryCarouselState
 
                   return SizedBox(
                     width: constraints.maxWidth,
-                    child: child,
+                    child: Center(child: child),
                   );
                 },
               ),
@@ -196,7 +196,7 @@ class _PortraitGalleryCarouselState
     // Keep a usable minimum on tiny heights without inventing a new ratio.
     if (size.height < 260 && maxWidth > 0) {
       final minH = math.min(260.0, cappedH);
-      return Size(maxWidth, minH);
+      return Size(size.width, minH);
     }
     return size;
   }

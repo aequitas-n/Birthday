@@ -8,12 +8,9 @@ import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/design/tokens/search_strip_geometry.dart';
-import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 
-/// People search field printed onto [VintageDiaryAssets.search].
-///
-/// Flat parchment strip under the Birthdays/People tabs — not the hanging
-/// [VintageDiaryAssets.userStrip] tag.
+/// People search field — textured when the theme provides
+/// [AppThemeChrome.searchStrip], otherwise a solid paper bar.
 class QPeopleSearchStrip extends StatefulWidget {
   const QPeopleSearchStrip({
     this.controller,
@@ -114,15 +111,29 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
             final fieldHeight =
                 h * (1 - SearchStripGeometry.contentPadY * 2);
 
+            final searchAsset = context.appTheme.assets.chrome.searchStrip;
+
             return Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  VintageDiaryAssets.search,
-                  fit: BoxFit.fill,
-                  gaplessPlayback: true,
-                  filterQuality: FilterQuality.high,
-                ),
+                if (searchAsset != null)
+                  Image.asset(
+                    searchAsset,
+                    fit: BoxFit.fill,
+                    gaplessPlayback: true,
+                    filterQuality: FilterQuality.high,
+                  )
+                else
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: q.journal.paper,
+                      borderRadius: BorderRadius.circular(q.radius.md),
+                      border: Border.all(
+                        color: q.journal.edge,
+                        width: context.hairlineWidth,
+                      ),
+                    ),
+                  ),
                 Positioned(
                   left: fieldLeft,
                   right: fieldRight,

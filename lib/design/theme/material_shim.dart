@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kin/design/theme/app_theme_definition.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/tokens/color_tokens.dart';
 import 'package:kin/design/tokens/type_tokens.dart';
@@ -9,12 +11,13 @@ import 'package:kin/design/tokens/type_tokens.dart';
 /// internals that require a Material ancestor — text selection handles,
 /// overlays, the default text style behind stray [Text] widgets — do not look
 /// wrong. Nothing here should ever be read by a Kin widget.
-///
-/// Notably absent: `ColorScheme.fromSeed`, which generates the Material tonal
-/// palette and is exactly the look the product avoids.
-ThemeData buildMaterialShim(QuietTheme quiet) {
+ThemeData buildMaterialShim(
+  QuietTheme quiet, {
+  AppThemeDefinition? appTheme,
+}) {
   final c = quiet.color;
   final t = quiet.text;
+  final product = appTheme ?? ProductThemes.matchingQuiet(quiet);
 
   return ThemeData(
     useMaterial3: true,
@@ -67,6 +70,6 @@ ThemeData buildMaterialShim(QuietTheme quiet) {
       labelSmall: t.eyebrow,
     ).apply(bodyColor: c.textPrimary, displayColor: c.textPrimary),
 
-    extensions: <ThemeExtension<dynamic>>[quiet],
+    extensions: <ThemeExtension<dynamic>>[quiet, product],
   );
 }

@@ -68,11 +68,32 @@ final class QuietJournal {
       shadow = ColorTokens.vdJournalShadowAmoled,
       washStrength = 0.4;
 
-  /// Resolves journal atmosphere — always Vintage Diary parchment.
+  /// Original Quiet Default — warm paper archive, no parchment texture.
+  ///
+  /// Secondary ink is a warm brown-grey (not cool taupe) so supporting copy
+  /// on [journalPaperLight] stays legible without competing with primary ink.
+  const QuietJournal.neutral()
+    : desk = ColorTokens.paperCanvas,
+      paper = ColorTokens.journalPaperLight,
+      paperSunken = ColorTokens.paperSunken,
+      ink = ColorTokens.paperInkPrimary,
+      inkMuted = ColorTokens.paperInkOnPaperSecondary,
+      edge = ColorTokens.journalPaperEdgeLight,
+      rule = ColorTokens.paperHairlineStrong,
+      tape = ColorTokens.journalTapeLight,
+      clip = ColorTokens.paperInkSecondary,
+      photoMat = ColorTokens.journalPhotoMatLight,
+      shadow = ColorTokens.journalShadowLight,
+      washStrength = 0.42;
+
+  /// Resolves journal atmosphere for the active collection.
   factory QuietJournal.of(
-    QuietCollection _, {
+    QuietCollection collection, {
     required QuietBrightness mode,
   }) {
+    if (collection == QuietCollection.quietDefault) {
+      return const QuietJournal.neutral();
+    }
     return switch (mode) {
       QuietBrightness.amoled => const QuietJournal.amoled(),
       QuietBrightness.dark => const QuietJournal.dark(),

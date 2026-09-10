@@ -46,7 +46,8 @@ abstract final class VintagePortraitLayout {
 
   /// Fit a profile card into [maxWidth] × [maxHeight].
   ///
-  /// Width is the full [maxWidth] from the parent — no nested fractional cap.
+  /// [widthFraction] insets the plate inside the gallery content width so the
+  /// card sits narrower than the search strip (Default and Vintage).
   static Size fitIn({
     required double maxWidth,
     required double maxHeight,

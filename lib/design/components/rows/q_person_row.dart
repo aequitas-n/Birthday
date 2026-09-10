@@ -5,9 +5,9 @@ import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// The most important component in the app.
 ///
-/// The home timeline is typography, not a card deck. There is no chrome here on
-/// purpose: the name is the anchor, the date supports it, and the countdown is
-/// a quiet badge that never competes with either.
+/// Vintage Diary keeps this chrome-free: typography on the desk. Default wraps
+/// the same hierarchy in a full-width paper strip so Coming up / birthdays
+/// match the journal card weight (~90% of the screen after gutters).
 ///
 /// Hierarchy: name → date/place → countdown badge.
 class QPersonRow extends StatelessWidget {
@@ -64,22 +64,26 @@ class QPersonRow extends StatelessWidget {
         _ => '$daysUntil days',
       };
 
+  /// Default theme: no hanging-tag asset → paper strip chrome.
+  bool _usesPaperStrip(BuildContext context) =>
+      context.appTheme.assets.chrome.birthdayStrip == null;
+
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final c = q.color;
+    final paperStrip = _usesPaperStrip(context);
     final restacked = context.restacksRows;
+    final paper = q.on(QuietSurfaceKind.paper);
 
+    final nameStyle = (_isToday ? q.text.voiceSmEmphasis : q.text.personName);
     final name = Text(
       displayName,
       maxLines: restacked ? 2 : 1,
       overflow: TextOverflow.ellipsis,
       textScaler: context.nameTextScaler,
-      // A shade heavier on the day itself. The only weight change in the
-      // timeline, and it is what makes the eye land on today's row first.
-      style: (_isToday ? q.text.voiceSmEmphasis : q.text.personName).tinted(
-        c.textPrimary,
-      ),
+      style: paperStrip
+          ? paper.inked(nameStyle)
+          : nameStyle.tinted(q.color.textPrimary),
     );
 
     final dateLine = _dateLine.isEmpty
@@ -89,13 +93,19 @@ class QPersonRow extends StatelessWidget {
             maxLines: restacked ? 2 : 1,
             overflow: TextOverflow.ellipsis,
             textScaler: context.structuralTextScaler,
-            style: q.text.uiMetadata.tinted(c.textSecondary),
+            style: paperStrip
+                ? paper.inked(
+                    q.text.uiMetadata,
+                    tone: QuietInkTone.secondary,
+                  )
+                : q.text.uiMetadata.tinted(q.color.textSecondary),
           );
 
     final countdown = _CountdownBadge(
       label: _countdown,
       emphasized: _isToday,
       alignStart: restacked,
+      onPaper: paperStrip,
     );
 
     final text = Column(
@@ -105,7 +115,7 @@ class QPersonRow extends StatelessWidget {
       children: [
         name,
         if (dateLine != null) ...[
-          SizedBox(height: q.space.hair),
+          SizedBox(height: paperStrip ? q.space.xs : q.space.hair),
           dateLine,
         ],
         if (restacked) ...[
@@ -128,33 +138,56 @@ class QPersonRow extends StatelessWidget {
           : CrossAxisAlignment.center,
       children: [
         avatar,
-        SizedBox(width: q.space.md),
+        SizedBox(width: paperStrip ? q.space.base : q.space.md),
         Expanded(child: text),
         if (!restacked) ...[SizedBox(width: q.space.sm), countdown],
       ],
     );
+
+    final padded = Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: paperStrip ? q.space.base : q.space.xs,
+        vertical: paperStrip ? q.space.md : q.space.sm,
+      ),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: restacked
+              ? q.layout.personRowHeightStacked
+              : paperStrip
+                  ? q.layout.personRowHeight + q.space.sm
+                  : q.layout.personRowHeight,
+        ),
+        child: body,
+      ),
+    );
+
+    final child = paperStrip
+        ? DecoratedBox(
+            decoration: BoxDecoration(
+              color: q.journal.paper,
+              borderRadius: BorderRadius.circular(q.radius.md),
+              border: Border.all(
+                color: q.journal.edge,
+                width: context.hairlineWidth,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: q.journal.shadow,
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: padded,
+          )
+        : padded;
 
     return QPressable(
       onTap: onTap,
       onLongPress: onLongPress,
       radius: q.radius.md,
       semanticLabel: _semanticLabel(),
-      child: Padding(
-        // Dense vertical rhythm: the timeline should hold five or six people
-        // before the fold, and still leave each row feelable under a finger.
-        padding: EdgeInsets.symmetric(
-          horizontal: q.space.xs,
-          vertical: q.space.sm,
-        ),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: restacked
-                ? q.layout.personRowHeightStacked
-                : q.layout.personRowHeight,
-          ),
-          child: body,
-        ),
-      ),
+      child: child,
     );
   }
 
@@ -173,29 +206,46 @@ class _CountdownBadge extends StatelessWidget {
     required this.label,
     required this.emphasized,
     required this.alignStart,
+    required this.onPaper,
   });
 
   final String label;
   final bool emphasized;
   final bool alignStart;
+  final bool onPaper;
 
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final ink = emphasized ? q.color.accent : q.color.textSecondary;
-    final fill = emphasized ? q.color.accentWash : q.color.sunken;
+    final Color ink;
+    final Color fill;
+    if (onPaper) {
+      ink = emphasized
+          ? q.color.accent
+          : q.journal.inkMuted;
+      fill = emphasized
+          ? q.color.accentWash
+          : q.journal.paperSunken;
+    } else {
+      ink = emphasized ? q.color.accent : q.color.textSecondary;
+      fill = emphasized ? q.color.accentWash : q.color.sunken;
+    }
 
     return Align(
       alignment: alignStart ? Alignment.centerLeft : Alignment.centerRight,
       child: DecoratedBox(
         decoration: ShapeDecoration(
           color: fill,
-          shape: const StadiumBorder(),
+          shape: onPaper
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(q.radius.sm),
+                )
+              : const StadiumBorder(),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: q.space.sm,
-            vertical: q.space.xs,
+            horizontal: onPaper ? q.space.md : q.space.sm,
+            vertical: onPaper ? q.space.xs + 1 : q.space.xs,
           ),
           child: Text(
             label,
@@ -215,3 +265,9 @@ double personRowHairlineIndent(BuildContext context) {
   final q = context.quiet;
   return q.space.xs + QAvatarSize.md.diameter + q.space.md;
 }
+
+/// Whether person rows should use gap separation instead of hairlines.
+///
+/// True for Default (paper strips); false for Vintage (typography timeline).
+bool personRowUsesPaperStrip(BuildContext context) =>
+    context.appTheme.assets.chrome.birthdayStrip == null;

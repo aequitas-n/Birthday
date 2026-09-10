@@ -25,6 +25,7 @@ void main() {
       expect(settings.id, 0);
       expect(settings.themeMode, 'system');
       expect(settings.amoled, isFalse);
+      expect(settings.productTheme, 'default');
       expect(
         rules.map((row) => row.id),
         containsAll(const [
@@ -35,8 +36,8 @@ void main() {
       );
     });
 
-    test('schema v8 includes personal reminders', () async {
-      expect(database.schemaVersion, 8);
+    test('schema v9 includes product theme', () async {
+      expect(database.schemaVersion, 9);
       expect(database.journalDays, isNotNull);
       expect(database.journalEntries, isNotNull);
       expect(database.journalEntryPhotos, isNotNull);

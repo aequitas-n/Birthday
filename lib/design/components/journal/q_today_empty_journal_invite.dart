@@ -1,14 +1,13 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_diary_empty_invite.dart';
 
-/// Peeks [VintageDiaryEmptyInvite] over the Today empty Journal Card corner.
+/// Peeks the theme empty-invite character over the Today empty Journal Card.
 ///
-/// Absolute overlay only — zero layout height impact. Sized as a fraction of
-/// the card width; ~50% hangs above the paper; slight right bias clamped so
-/// the character never leaves the phone viewport.
+/// When [AppThemeMoodAssets.emptyInvite] is null, only [child] is shown.
+/// Absolute overlay only — zero layout height impact.
 class QTodayEmptyJournalInvite extends StatelessWidget {
   const QTodayEmptyJournalInvite({
     required this.child,
@@ -24,13 +23,16 @@ class QTodayEmptyJournalInvite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final inviteAsset = context.appTheme.assets.mood.emptyInvite;
+    if (inviteAsset == null) return child;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final cardWidth = constraints.maxWidth.isFinite
             ? constraints.maxWidth
             : MediaQuery.sizeOf(context).width;
         final width = cardWidth * _widthOfCard;
-        final height = width / VintageDiaryEmptyInvite.aspectRatio;
+        final height = width / MoodIllustrationMetrics.aspectRatio;
         final rightOverflow = math.min(
           width * _rightOfArt,
           context.gutter,
@@ -46,7 +48,7 @@ class QTodayEmptyJournalInvite extends StatelessWidget {
               child: IgnorePointer(
                 child: ExcludeSemantics(
                   child: Image.asset(
-                    VintageDiaryEmptyInvite.asset,
+                    inviteAsset,
                     width: width,
                     height: height,
                     fit: BoxFit.contain,

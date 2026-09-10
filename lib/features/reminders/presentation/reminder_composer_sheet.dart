@@ -190,7 +190,7 @@ class _TimeSteppers extends StatelessWidget {
           time.displayLabel,
           textAlign: TextAlign.center,
           textScaler: context.nameTextScaler,
-          style: q.text.voiceLg.tinted(i.ink),
+          style: q.text.pageTitle.tinted(i.ink),
         ),
         SizedBox(height: q.space.lg),
         Row(
@@ -207,7 +207,7 @@ class _TimeSteppers extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: q.space.sm),
               child: Text(
                 ':',
-                style: q.text.voiceLg.tinted(i.inkSecondary),
+                style: q.text.pageTitle.tinted(i.inkSecondary),
               ),
             ),
             _StepperColumn(

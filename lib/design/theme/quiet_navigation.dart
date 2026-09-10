@@ -1,12 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/tokens/color_tokens.dart';
 
-/// App-level bottom navigation — cream parchment strip on the dark desk.
-///
-/// Same contrast language as toggles and desk CTAs: warm paper against
-/// vintage-bg, with brown ink labels and a burgundy selection mark.
+/// App-level bottom navigation strip roles.
 @immutable
 final class QuietNavigation {
   const QuietNavigation({
@@ -38,7 +36,22 @@ final class QuietNavigation {
       inkInactive = ColorTokens.vdInkSecondary,
       indicator = ColorTokens.vdBurgundy;
 
-  factory QuietNavigation.of({required bool dark, bool amoled = false}) {
+  /// Original Quiet Default — solid paper bar, ember indicator.
+  const QuietNavigation.neutral()
+    : surface = ColorTokens.paperSurface,
+      border = ColorTokens.paperHairline,
+      inkActive = ColorTokens.paperInkPrimary,
+      inkInactive = ColorTokens.paperInkSecondary,
+      indicator = ColorTokens.ember500;
+
+  factory QuietNavigation.of({
+    required QuietCollection collection,
+    required bool dark,
+    bool amoled = false,
+  }) {
+    if (collection == QuietCollection.quietDefault) {
+      return const QuietNavigation.neutral();
+    }
     if (amoled) return const QuietNavigation.amoled();
     if (dark) return const QuietNavigation.dark();
     return const QuietNavigation.light();
@@ -55,7 +68,7 @@ final class QuietNavigation {
     );
   }
 
-  /// Cream parchment fallback under [VintageDiaryAssets.chromeStrip].
+  /// Solid fill under an optional chrome strip image (or alone when null).
   final Color surface;
   final Color border;
 

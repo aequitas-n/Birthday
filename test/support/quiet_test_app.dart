@@ -5,7 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kin/design/theme/app_theme_definition.dart';
 import 'package:kin/design/theme/material_shim.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -41,11 +43,12 @@ Future<void> loadQuietFonts() async {
 }
 
 /// Wraps a widget in everything it needs: a provider scope, the Material shim
-/// carrying [QuietTheme], and a fixed text scale.
+/// carrying [QuietTheme] + [AppThemeDefinition], and a fixed text scale.
 class QuietTestApp extends StatelessWidget {
   const QuietTestApp({
     required this.child,
     this.theme = const QuietTheme.light(),
+    this.appTheme,
     this.textScale = 1.0,
     this.devicePixelRatio = 1.0,
     super.key,
@@ -53,15 +56,17 @@ class QuietTestApp extends StatelessWidget {
 
   final Widget child;
   final QuietTheme theme;
+  final AppThemeDefinition? appTheme;
   final double textScale;
   final double devicePixelRatio;
 
   @override
   Widget build(BuildContext context) {
+    final product = appTheme ?? ProductThemes.matchingQuiet(theme);
     return ProviderScope(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: buildMaterialShim(theme),
+        theme: buildMaterialShim(theme, appTheme: product),
         home: Builder(
           builder: (context) => MediaQuery(
             data: MediaQuery.of(context).copyWith(
@@ -87,8 +92,10 @@ extension QuietPump on WidgetTester {
   Future<void> pumpQuiet(
     Widget child, {
     QuietTheme theme = const QuietTheme.light(),
+    AppThemeDefinition? appTheme,
     double textScale = 1.0,
     Size surfaceSize = const Size(390, 844),
+    bool settle = true,
   }) async {
     await binding.setSurfaceSize(surfaceSize);
     view
@@ -101,8 +108,43 @@ extension QuietPump on WidgetTester {
     });
 
     await pumpWidget(
-      QuietTestApp(theme: theme, textScale: textScale, child: child),
+      QuietTestApp(
+        theme: theme,
+        appTheme: appTheme,
+        textScale: textScale,
+        child: child,
+      ),
     );
-    await pumpAndSettle();
+    if (settle) {
+      await pumpAndSettle();
+    } else {
+      await pump();
+    }
   }
 }
+
+/// Collects asset paths from [Image] / [DecoratedBox] decoration images.
+Set<String> collectAssetImagePaths(WidgetTester tester) {
+  final paths = <String>{};
+  for (final image in tester.widgetList<Image>(find.byType(Image))) {
+    final provider = image.image;
+    if (provider is AssetImage) {
+      paths.add(provider.assetName);
+    }
+  }
+  for (final box in tester.widgetList<DecoratedBox>(find.byType(DecoratedBox))) {
+    final decoration = box.decoration;
+    if (decoration is BoxDecoration) {
+      final image = decoration.image?.image;
+      if (image is AssetImage) {
+        paths.add(image.assetName);
+      }
+    }
+  }
+  return paths;
+}
+
+bool hasVintageDiaryAsset(Iterable<String> paths) {
+  return paths.any((path) => path.contains('assets/themes/Vintage-Diary/'));
+}
+

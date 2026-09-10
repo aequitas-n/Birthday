@@ -6,8 +6,6 @@ import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/media/q_photo.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/color_tokens.dart';
-import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 import 'package:kin/design/tokens/vintage_portrait_geometry.dart';
 import 'package:kin/features/home/application/gallery_memory.dart';
 import 'package:kin/features/home/application/gallery_providers.dart';
@@ -22,8 +20,9 @@ enum ProfilePortraitDepth {
   neighbour,
 }
 
-/// Vintage diary portrait — `profile_card.webp` is the surface; photo and text
-/// are layered directly on top with no nested card or parchment plate.
+/// Profile portrait card — theme [AppThemeChrome.profileCard] when present,
+/// otherwise a solid paper plate. Photo and text layer on top with no nested
+/// card chrome beyond the plate itself.
 class ProfilePortraitCard extends ConsumerWidget {
   const ProfilePortraitCard({
     required this.entry,
@@ -69,14 +68,9 @@ class ProfilePortraitCard extends ConsumerWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(q.radius.sm),
-            child: Image.asset(
-              VintageDiaryAssets.profileCard,
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
+            child: _ProfileCardPlate(
               width: width,
               height: height,
-              gaplessPlayback: true,
-              filterQuality: FilterQuality.high,
             ),
           ),
           Positioned(
@@ -87,7 +81,7 @@ class ProfilePortraitCard extends ConsumerWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: ColorTokens.vdInkPrimary.withValues(alpha: 0.22),
+                  color: q.journal.ink.withValues(alpha: 0.22),
                   width: context.hairlineWidth * 2,
                 ),
               ),
@@ -113,10 +107,13 @@ class ProfilePortraitCard extends ConsumerWidget {
 
     final card = QPressable(
       onTap: onTap,
+      onLongPress: isActive ? () => _togglePin(ref) : null,
       radius: q.radius.md,
       semanticLabel: [
         entry.primaryName,
         if (entry.isPinned) 'Pinned',
+        if (isActive)
+          entry.isPinned ? 'Long press to unpin from top' : 'Long press to pin to top',
         if (relationship != null) relationship,
         if (isActive) entry.countdownLabel(),
         if (memory != null && memory!.hasMemories) memory!.countLabel(),
@@ -124,33 +121,9 @@ class ProfilePortraitCard extends ConsumerWidget {
       child: plate,
     );
 
-    final composed = !isActive
-        ? card
-        : SizedBox(
-            width: width,
-            height: height,
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                card,
-                Positioned(
-                  top: height * ProfileCardGeometry.photoTop + q.space.xs,
-                  right:
-                      width * (1 - ProfileCardGeometry.photoRight) + q.space.xs,
-                  child: _PinButton(
-                    pinned: entry.isPinned,
-                    onToggle: () => _togglePin(ref),
-                  ),
-                ),
-              ],
-            ),
-          );
-
-    return SizedBox(
-      width: double.infinity,
-      height: height,
-      child: composed,
-    );
+    // Intrinsic size is the plate width — do not expand to infinity or the
+    // carousel's Center cannot balance left/right margins.
+    return card;
   }
 
   Future<void> _togglePin(WidgetRef ref) async {
@@ -266,34 +239,7 @@ class _CreateProfileInk extends StatelessWidget {
   }
 }
 
-class _PinButton extends StatelessWidget {
-  const _PinButton({required this.pinned, required this.onToggle});
-
-  final bool pinned;
-  final VoidCallback onToggle;
-
-  @override
-  Widget build(BuildContext context) {
-    final q = context.quiet;
-    final ink = pinned ? ColorTokens.vdBurgundy : ColorTokens.vdInkSecondary;
-
-    return QPressable(
-      onTap: onToggle,
-      radius: q.radius.full,
-      semanticLabel: pinned ? 'Unpin from top' : 'Pin to top',
-      child: Padding(
-        padding: EdgeInsets.all(q.space.sm),
-        child: QGlyphIcon(
-          QuietGlyph.pin,
-          color: ink,
-          size: context.structuralTextScaler.scale(18),
-        ),
-      ),
-    );
-  }
-}
-
-/// The empty state of the gallery: one card, and an invitation.
+/// Empty-gallery invitation — two lines and a rule, no nested surface.
 class CreateProfilePortraitCard extends StatelessWidget {
   const CreateProfilePortraitCard({
     required this.onTap,
@@ -320,13 +266,7 @@ class CreateProfilePortraitCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.asset(
-              VintageDiaryAssets.profileCard,
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-              gaplessPlayback: true,
-              filterQuality: FilterQuality.high,
-            ),
+            _ProfileCardPlate(width: width, height: height),
             _ParchmentTextAnchor(
               width: width,
               height: height,
@@ -369,13 +309,7 @@ class AddProfileCarouselCard extends StatelessWidget {
           children: [
             Opacity(
               opacity: 0.92,
-              child: Image.asset(
-                VintageDiaryAssets.profileCard,
-                fit: BoxFit.cover,
-                alignment: Alignment.topCenter,
-                gaplessPlayback: true,
-                filterQuality: FilterQuality.high,
-              ),
+              child: _ProfileCardPlate(width: width, height: height),
             ),
             _ParchmentTextAnchor(
               width: width,
@@ -403,6 +337,45 @@ class AddProfileCarouselCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Profile plate � theme chrome image or solid paper fallback.
+class _ProfileCardPlate extends StatelessWidget {
+  const _ProfileCardPlate({required this.width, required this.height});
+
+  final double width;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final asset = context.appTheme.assets.chrome.profileCard;
+    if (asset != null) {
+      return Image.asset(
+        asset,
+        fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
+        width: width,
+        height: height,
+        gaplessPlayback: true,
+        filterQuality: FilterQuality.high,
+      );
+    }
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: q.journal.paper,
+        borderRadius: BorderRadius.circular(q.radius.sm),
+        border: Border.all(color: q.journal.edge, width: context.hairlineWidth),
+        boxShadow: [
+          BoxShadow(
+            color: q.journal.shadow,
+            blurRadius: 12,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
     );
   }

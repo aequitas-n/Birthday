@@ -27,7 +27,7 @@ class FoundationScreen extends ConsumerWidget {
             q.space.xl,
           ),
           children: [
-            Text('Kin', style: q.text.voiceLg.tinted(q.color.textPrimary)),
+            Text('Kin', style: q.text.pageTitle.tinted(q.color.textPrimary)),
             SizedBox(height: q.space.sm),
             Text(
               'Phase 2 foundation is live. Routing, persistence, the database, '

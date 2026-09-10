@@ -46,7 +46,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       journal = const QuietJournal.light(),
       interactive = const QuietInteractive.light(),
       navigation = const QuietNavigation.light(),
-      text = const QuietTypography(),
+      text = const QuietTypography.vintageDiary(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
       radius = const QuietRadius(),
@@ -60,7 +60,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       journal = const QuietJournal.dark(),
       interactive = const QuietInteractive.dark(),
       navigation = const QuietNavigation.dark(),
-      text = const QuietTypography(),
+      text = const QuietTypography.vintageDiary(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
       radius = const QuietRadius(),
@@ -74,7 +74,22 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       journal = const QuietJournal.amoled(),
       interactive = const QuietInteractive.amoled(),
       navigation = const QuietNavigation.amoled(),
-      text = const QuietTypography(),
+      text = const QuietTypography.vintageDiary(),
+      space = const QuietSpace(),
+      layout = const QuietLayout(),
+      radius = const QuietRadius(),
+      motion = const QuietMotionTokens(),
+      photo = const QuietPhotography();
+
+  /// Original Quiet Default — warm paper, ember accent, no Vintage typefaces.
+  const QuietTheme.quietDefault()
+    : mode = QuietBrightness.light,
+      color = const QuietColors.neutral(),
+      elevation = const QuietElevation.light(),
+      journal = const QuietJournal.neutral(),
+      interactive = const QuietInteractive.neutral(),
+      navigation = const QuietNavigation.neutral(),
+      text = const QuietTypography.quietDefault(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
       radius = const QuietRadius(),
@@ -83,14 +98,16 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
 
   /// Resolves a collection and a brightness into a complete theme.
   ///
-  /// The metrics — space, layout, radius, motion, typography — are identical
-  /// across every collection. A collection changes the light in the room, not
-  /// the architecture of it.
+  /// Metrics (space, layout, radius, motion) stay shared. Collection selects
+  /// colour atmosphere and typography expression.
   factory QuietTheme.of(
     QuietCollection collection, {
     required bool dark,
     bool amoled = false,
   }) {
+    if (collection == QuietCollection.quietDefault) {
+      return const QuietTheme.quietDefault();
+    }
     final mode = !dark
         ? QuietBrightness.light
         : (amoled ? QuietBrightness.amoled : QuietBrightness.dark);
@@ -103,8 +120,17 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
         QuietBrightness.amoled => const QuietElevation.amoled(),
       },
       journal: QuietJournal.of(collection, mode: mode),
-      interactive: QuietInteractive.of(dark: dark, amoled: amoled),
-      navigation: QuietNavigation.of(dark: dark, amoled: amoled),
+      interactive: QuietInteractive.of(
+        collection: collection,
+        dark: dark,
+        amoled: amoled,
+      ),
+      navigation: QuietNavigation.of(
+        collection: collection,
+        dark: dark,
+        amoled: amoled,
+      ),
+      text: const QuietTypography.vintageDiary(),
     );
   }
 

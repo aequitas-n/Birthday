@@ -145,9 +145,12 @@ final class QuietLayout {
 
   // ── Portrait gallery ──────────────────────────────────────────────────
 
-  /// Profile card uses the full gallery viewport width. Screen gutter lives in
-  /// [_HomePane]; do not apply a second fractional width here.
-  double get galleryCardWidthFraction => 1.0;
+  /// Profile card width as a fraction of the gallery content width.
+  ///
+  /// Content is already gutter-inset (~90% of screen). Using 8/9 of that leaves
+  /// roughly double the side breathing room vs the search strip above — about
+  /// 80% of the full screen width.
+  double get galleryCardWidthFraction => 8 / 9;
 
   /// PageView page width fraction. Full width so neighbours stay off-screen
   /// at rest; the card itself is sized by [galleryCardWidthFraction].

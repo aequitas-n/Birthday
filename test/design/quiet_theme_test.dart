@@ -2,10 +2,13 @@ import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/app/theme_controller.dart';
+import 'package:kin/design/theme/product_theme_id.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_colors.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/tokens/type_tokens.dart';
 
 import '../support/quiet_test_app.dart';
 
@@ -69,17 +72,28 @@ void main() {
     });
   });
 
-  group('Vintage Diary theme', () {
-    test('is the only collection', () {
-      expect(QuietCollection.values, [QuietCollection.vintageDiary]);
+  group('product collections', () {
+    test('exposes Default and Vintage Diary', () {
+      expect(QuietCollection.values, [
+        QuietCollection.quietDefault,
+        QuietCollection.vintageDiary,
+      ]);
     });
 
-    test('uses dark parchment canvas with cream ink', () {
+    test('Vintage uses dark parchment canvas with cream ink', () {
       const colors = QuietColors.light();
       expect(colors.collection, QuietCollection.vintageDiary);
       expect(colors.brightness, Brightness.dark);
       expect(colors.textPrimary.computeLuminance(), greaterThan(0.7));
       expect(colors.canvas.computeLuminance(), lessThan(0.15));
+    });
+
+    test('Default uses warm paper with dark ink', () {
+      const colors = QuietColors.neutral();
+      expect(colors.collection, QuietCollection.quietDefault);
+      expect(colors.brightness, Brightness.light);
+      expect(colors.canvas.computeLuminance(), greaterThan(0.8));
+      expect(colors.textPrimary.computeLuminance(), lessThan(0.2));
     });
 
     test('AMOLED is deepest black-brown, not pure black', () {
@@ -93,9 +107,14 @@ void main() {
       expect(dark.textPrimary.toARGB32(), isNot(0xFFFFFFFF));
     });
 
-    test('primary accent is faded burgundy', () {
+    test('Vintage primary accent is faded burgundy', () {
       const colors = QuietColors.light();
       expect(colors.accent.toARGB32(), 0xFF713D3A);
+    });
+
+    test('Default primary accent is ember', () {
+      const colors = QuietColors.neutral();
+      expect(colors.accent.toARGB32(), 0xFFBF6039);
     });
   });
 
@@ -116,10 +135,65 @@ void main() {
   });
 
   group('ThemePreference', () {
-    test('always resolves Vintage Diary', () {
+    test('defaults to Default product theme', () {
       const pref = ThemePreference();
+      expect(pref.productThemeId, ProductThemeId.quietDefault);
+      expect(pref.resolve().collection, QuietCollection.quietDefault);
+      expect(
+        pref.resolve().text.expression.primaryFamily,
+        'Caveat',
+      );
+      expect(
+        pref.resolve().text.expression.secondaryFamily,
+        'Fraunces',
+      );
+    });
+
+    test('resolves Vintage Diary when selected', () {
+      const pref = ThemePreference(
+        productThemeId: ProductThemeId.vintageDiary,
+      );
       expect(pref.resolve().collection, QuietCollection.vintageDiary);
-      expect(pref.resolve(Brightness.dark).mode, QuietBrightness.light);
+      expect(pref.definition.assets.backgrounds.app, isNotNull);
+      expect(
+        pref.resolve().text.expression.primaryFamily,
+        'Caveat',
+      );
+    });
+  });
+
+  group('ProductThemes registry', () {
+    test('Default has null decorative assets', () {
+      final assets = ProductThemes.quietDefault.assets;
+      expect(assets.backgrounds.app, isNull);
+      expect(assets.backgrounds.journalCard, isNull);
+      expect(assets.chrome.navStrip, isNull);
+      expect(assets.mood.emptyInvite, isNull);
+    });
+
+    test('Vintage fills every audited asset slot', () {
+      final assets = ProductThemes.vintageDiary.assets;
+      expect(assets.backgrounds.app, isNotNull);
+      expect(assets.backgrounds.journalCard, isNotNull);
+      expect(assets.backgrounds.calendar, isNotNull);
+      expect(assets.chrome.navStrip, isNotNull);
+      expect(assets.chrome.searchStrip, isNotNull);
+      expect(assets.chrome.birthdayStrip, isNotNull);
+      expect(assets.chrome.profileCard, isNotNull);
+      expect(assets.mood.emptyInvite, isNotNull);
+    });
+  });
+
+  group('Default typography', () {
+    test('uses Caveat for handwriting and Fraunces for editorial', () {
+      const type = QuietTypography.quietDefault();
+      expect(type.expression.primaryFamily, 'Caveat');
+      expect(type.expression.secondaryFamily, 'Fraunces');
+      expect(type.journalWriting.fontFamily, 'Caveat');
+      expect(type.journalPrompt.fontFamily, 'Caveat');
+      expect(type.pageTitle.fontFamily, 'Fraunces');
+      expect(type.sectionTitle.fontFamily, 'Fraunces');
+      expect(type.uiMetadata.fontFamily, 'CourierPrime');
     });
   });
 }

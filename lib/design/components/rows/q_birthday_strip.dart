@@ -2,15 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/media/q_avatar.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/color_tokens.dart';
 import 'package:kin/design/tokens/user_strip_geometry.dart';
-import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 
-/// One hanging birthday paper tag — [user-strip.png] composite artwork.
-///
-/// Content is laid out in the **visible paper** rectangle from
-/// [UserStripGeometry], not the full PNG canvas (which includes chain +
-/// transparent margins).
+/// One birthday row — hanging parchment tag when the theme supplies
+/// [AppThemeChrome.birthdayStrip], otherwise a full-width Default paper strip.
 class QBirthdayStrip extends StatelessWidget {
   const QBirthdayStrip({
     required this.displayName,
@@ -49,6 +44,203 @@ class QBirthdayStrip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final stripAsset = context.appTheme.assets.chrome.birthdayStrip;
+    if (stripAsset == null) {
+      return _DefaultPaperStrip(
+        displayName: displayName,
+        seed: seed,
+        daysUntil: daysUntil,
+        dateLabel: dateLabel,
+        countdown: _countdown,
+        photo: photo,
+        onTap: onTap,
+        heroTag: heroTag,
+      );
+    }
+
+    return _VintageHangingStrip(
+      displayName: displayName,
+      seed: seed,
+      daysUntil: daysUntil,
+      dateLabel: dateLabel,
+      countdown: _countdown,
+      photo: photo,
+      onTap: onTap,
+      heroTag: heroTag,
+      stripAsset: stripAsset,
+    );
+  }
+}
+
+/// Default: warm paper band spanning the content width (~90% of screen).
+class _DefaultPaperStrip extends StatelessWidget {
+  const _DefaultPaperStrip({
+    required this.displayName,
+    required this.seed,
+    required this.daysUntil,
+    required this.countdown,
+    this.dateLabel,
+    this.photo,
+    this.onTap,
+    this.heroTag,
+  });
+
+  final String displayName;
+  final String seed;
+  final int daysUntil;
+  final String countdown;
+  final String? dateLabel;
+  final ImageProvider? photo;
+  final VoidCallback? onTap;
+  final Object? heroTag;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final paper = q.on(QuietSurfaceKind.paper);
+    final emphasized = daysUntil == 0;
+
+    return QPressable(
+      onTap: onTap,
+      radius: q.radius.md,
+      semanticLabel: [
+        displayName,
+        if (dateLabel != null) dateLabel!,
+        countdown,
+      ].join(', '),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: q.journal.paper,
+          borderRadius: BorderRadius.circular(q.radius.md),
+          border: Border.all(
+            color: q.journal.edge,
+            width: context.hairlineWidth,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: q.journal.shadow,
+              blurRadius: 10,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: q.space.base,
+            vertical: q.space.md,
+          ),
+          child: Row(
+            children: [
+              _StripPortrait(
+                displayName: displayName,
+                seed: seed,
+                photo: photo,
+                heroTag: heroTag,
+                diameter: QAvatarSize.md.diameter,
+              ),
+              SizedBox(width: q.space.base),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      displayName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textScaler: context.nameTextScaler,
+                      style: paper.inked(q.text.personName),
+                    ),
+                    if (dateLabel != null && dateLabel!.isNotEmpty) ...[
+                      SizedBox(height: q.space.xs),
+                      Text(
+                        dateLabel!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textScaler: context.structuralTextScaler,
+                        style: paper.inked(
+                          q.text.uiMetadata,
+                          tone: QuietInkTone.secondary,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              SizedBox(width: q.space.sm),
+              _DefaultCountdown(
+                label: countdown,
+                emphasized: emphasized,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DefaultCountdown extends StatelessWidget {
+  const _DefaultCountdown({
+    required this.label,
+    required this.emphasized,
+  });
+
+  final String label;
+  final bool emphasized;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final ink = emphasized ? q.color.accent : q.journal.inkMuted;
+    final fill = emphasized ? q.color.accentWash : q.journal.paperSunken;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: fill,
+        borderRadius: BorderRadius.circular(q.radius.sm),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: q.space.md,
+          vertical: q.space.xs + 1,
+        ),
+        child: Text(
+          label,
+          textScaler: context.structuralTextScaler,
+          style: q.text.stampLabel.copyWith(color: ink),
+        ),
+      ),
+    );
+  }
+}
+
+/// Vintage Diary: content laid out in the visible paper of user-strip.png.
+class _VintageHangingStrip extends StatelessWidget {
+  const _VintageHangingStrip({
+    required this.displayName,
+    required this.seed,
+    required this.daysUntil,
+    required this.countdown,
+    required this.stripAsset,
+    this.dateLabel,
+    this.photo,
+    this.onTap,
+    this.heroTag,
+  });
+
+  final String displayName;
+  final String seed;
+  final int daysUntil;
+  final String countdown;
+  final String stripAsset;
+  final String? dateLabel;
+  final ImageProvider? photo;
+  final VoidCallback? onTap;
+  final Object? heroTag;
+
+  @override
+  Widget build(BuildContext context) {
     final q = context.quiet;
     final paper = q.paper;
 
@@ -58,7 +250,7 @@ class QBirthdayStrip extends StatelessWidget {
       semanticLabel: [
         displayName,
         if (dateLabel != null) dateLabel!,
-        _countdown,
+        countdown,
       ].join(', '),
       child: AspectRatio(
         aspectRatio: UserStripGeometry.aspectRatio,
@@ -85,7 +277,7 @@ class QBirthdayStrip extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Image.asset(
-                  VintageDiaryAssets.userStrip,
+                  stripAsset,
                   fit: BoxFit.fill,
                   gaplessPlayback: true,
                 ),
@@ -140,7 +332,7 @@ class QBirthdayStrip extends StatelessWidget {
                       ),
                       SizedBox(width: stampGap),
                       _StampCountdown(
-                        label: _countdown,
+                        label: countdown,
                         emphasized: daysUntil == 0,
                       ),
                     ],
@@ -155,13 +347,7 @@ class QBirthdayStrip extends StatelessWidget {
   }
 }
 
-/// Stacks strips so each PNG top meets the previous strip's bottom hole.
-///
-/// The chain painted in [user-strip.png] then runs from that hole into the
-/// next strip's top grommet — continuous hanging tags, no extra chain asset.
-///
-/// When [hangFromDivider] is true, the stack is pulled up by [chainTopY] so
-/// the first strip's chain head sits on the month rule above the chain.
+/// Stacks strips — Vintage chain overlap, or Default spaced paper cards.
 class QBirthdayStripChain extends StatelessWidget {
   const QBirthdayStripChain({
     required this.children,
@@ -177,6 +363,22 @@ class QBirthdayStripChain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (children.isEmpty) return const SizedBox.shrink();
+
+    final usesHangingAsset =
+        context.appTheme.assets.chrome.birthdayStrip != null;
+
+    if (!usesHangingAsset) {
+      final gap = context.quiet.space.sm;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (var i = 0; i < children.length; i++) ...[
+            children[i],
+            if (i < children.length - 1) SizedBox(height: gap),
+          ],
+        ],
+      );
+    }
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -228,16 +430,17 @@ class _StripPortrait extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final q = context.quiet;
     return DecoratedBox(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: ColorTokens.vdInkPrimary.withValues(alpha: 0.28),
+          color: q.journal.ink.withValues(alpha: 0.28),
           width: context.hairlineWidth * 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: ColorTokens.vdInkPrimary.withValues(alpha: 0.12),
+            color: q.journal.shadow,
             blurRadius: 4,
             offset: const Offset(0, 1),
           ),
@@ -278,9 +481,7 @@ class _StampCountdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final ink = emphasized
-        ? ColorTokens.vdBurgundy
-        : ColorTokens.vdInkPrimary.withValues(alpha: 0.72);
+    final ink = emphasized ? q.color.accent : q.journal.ink.withValues(alpha: 0.72);
 
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -294,11 +495,7 @@ class _StampCountdown extends StatelessWidget {
         child: Text(
           label,
           textScaler: context.structuralTextScaler,
-          style: q.text.uiCaption.copyWith(
-            color: ink,
-            letterSpacing: 0.45,
-            fontWeight: FontWeight.w600,
-          ),
+          style: q.text.stampLabel.copyWith(color: ink),
         ),
       ),
     );

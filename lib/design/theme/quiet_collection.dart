@@ -2,41 +2,45 @@ import 'dart:ui';
 
 import 'package:kin/design/tokens/color_tokens.dart';
 
-/// The sole product atmosphere: Vintage Diary.
+/// Neutral family a collection is built on.
+enum QuietNeutralFamily { warm, cool, verdant }
+
+/// Visual atmosphere within QuietTheme colour resolution.
 ///
-/// Previous superficial colour collections (Ember, Ocean, etc.) are retired.
-/// The app wears one visual identity — an old personal journal brought into
-/// a modern interface.
+/// Product themes ([ProductThemeId]) select which collection QuietTheme uses.
+/// Prefer product-theme APIs at the app boundary; collections stay an internal
+/// colour-atmosphere concept.
 enum QuietCollection {
-  vintageDiary('Vintage Diary', QuietNeutralFamily.warm)
-  ;
+  /// Original Quiet — warm paper, terracotta accent, black ink.
+  quietDefault('Default', QuietNeutralFamily.warm),
+
+  /// Vintage Diary — cream parchment on dark desk.
+  vintageDiary('Vintage Diary', QuietNeutralFamily.warm);
 
   const QuietCollection(this.label, this.neutrals);
 
-  /// Shown in Settings when relevant. Never an identifier, never uppercased.
   final String label;
-
   final QuietNeutralFamily neutrals;
 
-  /// Faded burgundy accent on the dark diary background.
-  Color accent({required bool dark}) =>
-      dark ? ColorTokens.vdTerracottaSoft : ColorTokens.vdBurgundy;
+  Color accent({required bool dark}) => switch (this) {
+    QuietCollection.quietDefault =>
+      dark ? ColorTokens.ember300 : ColorTokens.ember500,
+    QuietCollection.vintageDiary =>
+      dark ? ColorTokens.vdTerracottaSoft : ColorTokens.vdBurgundy,
+  };
 
-  /// Accent while pressed.
-  Color accentPressed({required bool dark}) =>
-      dark ? ColorTokens.vdTerracotta : ColorTokens.vdBurgundyMuted;
+  Color accentPressed({required bool dark}) => switch (this) {
+    QuietCollection.quietDefault =>
+      dark ? ColorTokens.ember400 : ColorTokens.ember600,
+    QuietCollection.vintageDiary =>
+      dark ? ColorTokens.vdTerracotta : ColorTokens.vdBurgundyMuted,
+  };
 }
 
-/// Neutral family retained for internal resolution — Vintage Diary is warm.
-enum QuietNeutralFamily { warm, cool, verdant }
-
-/// Which presentation adaptation of Vintage Diary is active.
-///
-/// All three share the same visual identity; they differ only in contrast
-/// intensity for accessibility and display type.
+/// Contrast adaptation — orthogonal to product theme identity.
 enum QuietBrightness { light, dark, amoled }
 
-/// Neutrals for the Vintage Diary dark atmosphere.
+/// Neutrals helper retained for Vintage contrast variants.
 class QuietNeutrals {
   const QuietNeutrals({
     required this.canvas,
@@ -62,12 +66,9 @@ class QuietNeutrals {
       inkTertiary = ColorTokens.vdCreamTertiary;
 
   factory QuietNeutrals.of(QuietNeutralFamily _, {required bool dark}) {
-    // Vintage Diary always resolves to the dark parchment atmosphere.
-    // [dark] toggles contrast intensity, not a separate visual identity.
     return dark ? _highContrast : _standard;
   }
 
-  /// Standard Vintage Diary — cream ink on aged dark paper.
   static const _standard = QuietNeutrals(
     canvas: ColorTokens.vdDiaryCanvas,
     surface: ColorTokens.vdDiarySurface,
@@ -80,7 +81,6 @@ class QuietNeutrals {
     inkTertiary: ColorTokens.vdCreamTertiary,
   );
 
-  /// Slightly brighter cream for reduced-glare / high-contrast conditions.
   static const _highContrast = QuietNeutrals(
     canvas: ColorTokens.vdCanvasDark,
     surface: ColorTokens.vdSurfaceDark,

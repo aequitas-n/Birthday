@@ -17,8 +17,8 @@ import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
+import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_day.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/journal_mood.dart';
@@ -188,7 +188,11 @@ class _JournalDayScreenState extends ConsumerState<JournalDayScreen> {
                 children: [
                   Text(
                     'How did this day feel?',
-                    style: q.text.uiBody.tinted(context.controlInkSecondary),
+                    style: q.inked(
+                      q.text.uiBody,
+                      surface: QuietSurfaceKind.paper,
+                      tone: QuietInkTone.secondary,
+                    ),
                   ),
                   SizedBox(height: q.space.lg),
                   QJournalMoodPicker(
@@ -379,7 +383,7 @@ class _DayMoodFooter extends StatelessWidget {
     final label = mood == null ? "Set the day's mood" : 'Change day mood';
     final screenW = MediaQuery.sizeOf(context).width;
     final artWidth = screenW * _artWidthOfViewport;
-    final artHeight = artWidth / VintageMoodTheme.aspectRatio;
+    final artHeight = artWidth / MoodIllustrationMetrics.aspectRatio;
     final layoutArtH = artHeight * _artLayoutFraction;
 
     // Stable action-band height — illustration may overflow upward into the

@@ -39,7 +39,7 @@ class NotificationDebugScreen extends ConsumerWidget {
                 Expanded(
                   child: Text(
                     'Notification Inspector',
-                    style: q.text.voiceLg.tinted(q.color.textPrimary),
+                    style: q.text.pageTitle.tinted(q.color.textPrimary),
                   ),
                 ),
               ],

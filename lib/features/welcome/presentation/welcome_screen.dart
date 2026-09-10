@@ -163,7 +163,7 @@ class _WelcomePanel extends StatelessWidget {
             style: q.text.eyebrow.tinted(q.color.textTertiary),
           ),
           SizedBox(height: q.space.lg),
-          QVoice(headline, style: q.text.voiceXl.tinted(q.color.textPrimary)),
+          QVoice(headline, style: q.text.appTitle.tinted(q.color.textPrimary)),
           SizedBox(height: q.space.lg),
           Text(support, style: q.text.bodyLg.tinted(q.color.textSecondary)),
         ],

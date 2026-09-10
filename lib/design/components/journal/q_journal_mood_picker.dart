@@ -1,13 +1,15 @@
+import 'dart:math' as math;
+
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/journal/q_mood_illustration.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_mood.dart';
 
-/// Vintage Diary mood grid — exactly two rows of four illustrated moods.
+/// Mood grid — exactly two rows of four illustrated moods.
 ///
-/// Shared by Day mood and Memory mood sheets. Transparent PNGs use
-/// [BoxFit.contain]; labels stay fully readable (no ellipsis truncation).
+/// Shared by Day mood and Memory mood sheets across all product themes.
+/// Transparent illustrations use [BoxFit.contain]; labels stay on one line
+/// at a **shared** font size (sized to the longest label in the grid).
 class QJournalMoodPicker extends StatelessWidget {
   const QJournalMoodPicker({
     required this.options,
@@ -37,8 +39,12 @@ class QJournalMoodPicker extends StatelessWidget {
         final gap = q.space.sm;
         final cellW =
             (constraints.maxWidth - gap * (_columns - 1)) / _columns;
-        // Art scales with column width; leave room for a two-line label.
         final artWidth = (cellW * 0.78).clamp(40.0, 72.0);
+        final labelStyle = _sharedLabelStyle(
+          context: context,
+          cellWidth: cellW,
+          labels: [for (final option in options) option.$2],
+        );
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,6 +64,7 @@ class QJournalMoodPicker extends StatelessWidget {
                               label: row[colIndex].$2,
                               selected: selectedId == row[colIndex].$1,
                               artWidth: artWidth,
+                              labelStyle: labelStyle,
                               onTap: () => onSelected(
                                 selectedId == row[colIndex].$1
                                     ? null
@@ -75,6 +82,39 @@ class QJournalMoodPicker extends StatelessWidget {
       },
     );
   }
+
+  /// One size for every mood name — the smallest that fits the longest label.
+  TextStyle _sharedLabelStyle({
+    required BuildContext context,
+    required double cellWidth,
+    required List<String> labels,
+  }) {
+    final q = context.quiet;
+    final base = q.text.moodLabel;
+    final scaler = context.structuralTextScaler.clamp(
+      minScaleFactor: 0.85,
+      maxScaleFactor: 1,
+    );
+    final maxWidth = math.max(1.0, cellWidth - q.space.hair * 2);
+    var scale = 1.0;
+
+    for (final label in labels) {
+      final painter = TextPainter(
+        text: TextSpan(text: label, style: base),
+        textDirection: TextDirection.ltr,
+        textScaler: scaler,
+        maxLines: 1,
+      )..layout();
+      if (painter.width > maxWidth) {
+        scale = math.min(scale, maxWidth / painter.width);
+      }
+    }
+
+    final baseSize = base.fontSize ?? 12;
+    // Floor so Courier stays readable; never larger than the token.
+    final size = (baseSize * scale).clamp(9.0, baseSize);
+    return base.copyWith(fontSize: size);
+  }
 }
 
 class _MoodCell extends StatelessWidget {
@@ -83,6 +123,7 @@ class _MoodCell extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.artWidth,
+    required this.labelStyle,
     required this.onTap,
   });
 
@@ -90,6 +131,7 @@ class _MoodCell extends StatelessWidget {
   final String label;
   final bool selected;
   final double artWidth;
+  final TextStyle labelStyle;
   final VoidCallback onTap;
 
   @override
@@ -127,7 +169,6 @@ class _MoodCell extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Transparent figure — no rectangular image plate.
               QMoodIllustration(
                 moodId: id,
                 size: MoodIllustrationSize.picker,
@@ -138,16 +179,13 @@ class _MoodCell extends StatelessWidget {
               Text(
                 label,
                 textAlign: TextAlign.center,
-                maxLines: 2,
-                softWrap: true,
-                overflow: TextOverflow.visible,
-                textScaler: context.structuralTextScaler.clamp(
-                  minScaleFactor: 0.85,
-                  maxScaleFactor: 1,
+                maxLines: 1,
+                softWrap: false,
+                overflow: TextOverflow.clip,
+                textScaler: TextScaler.noScaling,
+                style: labelStyle.tinted(
+                  selected ? i.ink : i.inkSecondary,
                 ),
-                style: q.text.uiCaption
-                    .tinted(selected ? i.ink : i.inkSecondary)
-                    .copyWith(height: 1.15, letterSpacing: 0.1),
               ),
               SizedBox(height: q.space.hair),
               AnimatedContainer(

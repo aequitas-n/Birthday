@@ -75,7 +75,7 @@ class _GalleryTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Quiet', style: q.text.voiceLg.tinted(q.color.textPrimary)),
+          Text('Quiet', style: q.text.pageTitle.tinted(q.color.textPrimary)),
           SizedBox(height: q.space.xs),
           Text(
             'The design language for Kin.',
@@ -114,7 +114,7 @@ class _TypographySection extends StatelessWidget {
       ('pageTitle — Today', q.text.pageTitle),
       ('sectionTitle — Today’s journal', q.text.sectionTitle),
       ('displayTitle — celebratory', q.text.displayTitle),
-      ('emptyStateTitle / diaryNote — Nothing written yet', q.text.diaryNote),
+      ('journalPrompt — Nothing written yet', q.text.journalPrompt),
       ('editorialBody — 26', q.text.editorialBody),
       ('personName — Ganesh', q.text.personName),
       ('memoryTitle — memory title', q.text.memoryTitle),

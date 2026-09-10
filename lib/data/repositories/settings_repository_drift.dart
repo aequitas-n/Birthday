@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:kin/data/local/database/kin_database.dart';
+import 'package:kin/design/theme/product_theme_id.dart';
 import 'package:kin/domain/models/settings.dart';
 import 'package:kin/domain/repositories/settings_repository.dart';
 
@@ -44,6 +45,7 @@ class DriftSettingsRepository implements SettingsRepository {
             id: const Value(0),
             themeMode: Value(settings.themeMode.name),
             amoled: Value(settings.amoled),
+            productTheme: Value(settings.productThemeId.storageKey),
             showDetailsOnLockScreen: Value(settings.showDetailsOnLockScreen),
             notificationsEnabled: Value(settings.notificationsEnabled),
             onboardingCompletedAt: Value(
@@ -60,6 +62,7 @@ class DriftSettingsRepository implements SettingsRepository {
     return AppSettings(
       themeMode: StoredThemeMode.fromStorage(row.themeMode),
       amoled: row.amoled,
+      productThemeId: ProductThemeId.fromStorage(row.productTheme),
       showDetailsOnLockScreen: row.showDetailsOnLockScreen,
       notificationsEnabled: row.notificationsEnabled,
       onboardingCompletedAt: _fromMillis(row.onboardingCompletedAt),

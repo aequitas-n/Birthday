@@ -113,12 +113,40 @@ final class QuietColors {
       monogramTints = ColorTokens.monogramDark,
       transparent = ColorTokens.transparent;
 
-  /// Resolves Vintage Diary at the requested contrast level.
+  /// Original Quiet Default — warm paper, black ink, terracotta accent.
+  const QuietColors.neutral()
+    : brightness = Brightness.light,
+      collection = QuietCollection.quietDefault,
+      heroTint = ColorTokens.ember500,
+      canvas = ColorTokens.paperCanvas,
+      surface = ColorTokens.paperSurface,
+      raised = ColorTokens.paperSurface,
+      sunken = ColorTokens.paperSunken,
+      hairline = ColorTokens.paperHairline,
+      hairlineStrong = ColorTokens.paperHairlineStrong,
+      textPrimary = ColorTokens.paperInkPrimary,
+      textSecondary = ColorTokens.paperInkSecondary,
+      textTertiary = ColorTokens.paperInkTertiary,
+      textInverse = ColorTokens.paperSurface,
+      accent = ColorTokens.ember500,
+      accentPressed = ColorTokens.ember600,
+      accentWash = ColorTokens.ember50,
+      danger = ColorTokens.dangerLight,
+      dangerWash = ColorTokens.dangerWashLight,
+      scrim = const Color(0x661A1815),
+      selection = ColorTokens.ember100,
+      monogramTints = ColorTokens.monogramLight,
+      transparent = ColorTokens.transparent;
+
+  /// Resolves colours for a collection at the requested contrast level.
   factory QuietColors.of(
-    QuietCollection _, {
+    QuietCollection collection, {
     required bool dark,
     bool amoled = false,
   }) {
+    if (collection == QuietCollection.quietDefault) {
+      return const QuietColors.neutral();
+    }
     if (amoled) return const QuietColors.amoled();
     if (dark) return const QuietColors.dark();
     return const QuietColors.light();

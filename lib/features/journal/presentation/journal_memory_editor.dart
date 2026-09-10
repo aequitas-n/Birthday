@@ -242,7 +242,11 @@ class _JournalMemoryEditorState extends ConsumerState<JournalMemoryEditor> {
                 children: [
                   Text(
                     'How did this memory feel?',
-                    style: q.text.uiBody.tinted(context.controlInkSecondary),
+                    style: q.inked(
+                      q.text.uiBody,
+                      surface: QuietSurfaceKind.paper,
+                      tone: QuietInkTone.secondary,
+                    ),
                   ),
                   SizedBox(height: q.space.lg),
                   QJournalMoodPicker(

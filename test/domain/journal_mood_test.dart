@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:kin/design/theme/vintage_mood.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 import 'package:kin/domain/models/journal_mood.dart';
 
@@ -29,27 +29,33 @@ void main() {
       expect(JournalMood.fromStorage('grateful'), JournalMood.affection);
     });
 
-    test('every mood has an illustration asset', () {
-      for (final mood in JournalMood.values) {
+    test('Vintage theme provides an illustration for every mood', () {
+      final mood = ProductThemes.vintageDiary.assets.mood;
+      for (final entry in JournalMood.values) {
         expect(
-          VintageMoodTheme.assetFor(mood.storageValue),
+          mood.illustration(entry.storageValue),
           isNotNull,
-          reason: mood.name,
+          reason: entry.name,
         );
       }
     });
 
+    test('Default theme intentionally has no mood illustrations', () {
+      final mood = ProductThemes.quietDefault.assets.mood;
+      for (final entry in JournalMood.values) {
+        expect(mood.illustration(entry.storageValue), isNull);
+      }
+      expect(mood.emptyInvite, isNull);
+    });
+
     test('Excited-home is not part of the mood picker set', () {
+      final mood = ProductThemes.vintageDiary.assets.mood;
       expect(
-        JournalMood.values.map(
-          (m) => VintageMoodTheme.assetFor(m.storageValue),
-        ),
+        JournalMood.values.map((m) => mood.illustration(m.storageValue)),
         isNot(contains(VintageDiaryAssets.excitedHome)),
       );
-      expect(
-        VintageMoodTheme.assetFor('excited'),
-        isNull,
-      );
+      expect(mood.illustration('excited'), isNull);
+      expect(mood.emptyInvite, VintageDiaryAssets.excitedHome);
     });
   });
 }

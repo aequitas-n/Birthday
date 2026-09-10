@@ -14,7 +14,7 @@ class QDiaryTopBar extends StatelessWidget {
     super.key,
   });
 
-  /// Handwritten page title (Caveat), e.g. Today / Kin / Journal.
+  /// Editorial page title (Fraunces), e.g. Today / Kin / Journal.
   final String? title;
 
   /// Courier supporting line under the title (e.g. Birthdays).

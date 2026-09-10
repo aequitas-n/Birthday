@@ -15,10 +15,10 @@ enum PrimaryDestination {
   final String label;
 }
 
-/// Custom bottom navigation on the Vintage Diary parchment strip.
+/// Custom bottom navigation on the product-theme chrome strip.
 ///
 /// Labels only: no icons. The underline carries selection.
-/// Cream strip background → brown ink (readable on the paper asset).
+/// Theme [AppThemeChrome.navStrip] may supply artwork; otherwise a solid bar.
 class QPrimaryNav extends StatelessWidget {
   const QPrimaryNav({
     required this.selected,
@@ -86,7 +86,7 @@ class _NavItem extends StatelessWidget {
               textScaler: context.structuralTextScaler,
               style: selected
                   ? q.text.uiNavigation.tinted(color)
-                  : q.text.uiCaption.tinted(color),
+                  : q.text.tab.tinted(color),
             ),
             SizedBox(height: q.space.hair),
             AnimatedOpacity(

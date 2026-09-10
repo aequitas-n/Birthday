@@ -1,10 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_mood.dart';
 
-/// Transparent Vintage Diary mood character — never cropped into a circle.
+export 'package:kin/design/theme/mood_illustration_metrics.dart';
+
+/// Transparent mood character from the active product theme — never cropped
+/// into a circle. When the theme has no illustration for [moodId], renders
+/// nothing (null asset is intentional, not an error).
 class QMoodIllustration extends StatelessWidget {
   const QMoodIllustration({
     required this.moodId,
@@ -26,13 +30,13 @@ class QMoodIllustration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final asset = VintageMoodTheme.assetFor(moodId);
+    final asset = context.appTheme.assets.mood.illustration(moodId);
     if (asset == null) return const SizedBox.shrink();
 
-    final resolvedWidth = width ?? VintageMoodTheme.widthFor(size);
+    final resolvedWidth = width ?? MoodIllustrationMetrics.widthFor(size);
     final resolvedHeight = width != null
-        ? width! / VintageMoodTheme.aspectRatio
-        : VintageMoodTheme.extent(size);
+        ? width! / MoodIllustrationMetrics.aspectRatio
+        : MoodIllustrationMetrics.extent(size);
 
     Widget art = Image.asset(
       asset,
@@ -100,7 +104,7 @@ class QMoodCardDecoration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (VintageMoodTheme.assetFor(moodId) == null) {
+    if (context.appTheme.assets.mood.illustration(moodId) == null) {
       return const SizedBox.shrink();
     }
 
@@ -112,9 +116,9 @@ class QMoodCardDecoration extends StatelessWidget {
       MoodCardPlacement.todaySecondInset => MoodIllustrationSize.todayPreview,
     };
     final extent = artWidth != null
-        ? artWidth! / VintageMoodTheme.aspectRatio
-        : VintageMoodTheme.extent(size);
-    final width = artWidth ?? VintageMoodTheme.widthFor(size);
+        ? artWidth! / MoodIllustrationMetrics.aspectRatio
+        : MoodIllustrationMetrics.extent(size);
+    final width = artWidth ?? MoodIllustrationMetrics.widthFor(size);
     final mirror = switch (placement) {
       MoodCardPlacement.todaySecondInset => false,
       _ => true,
@@ -220,11 +224,12 @@ class QMoodDecoratedPaper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final moodAssets = context.appTheme.assets.mood;
     final firstOk =
-        moodId != null && VintageMoodTheme.assetFor(moodId!) != null;
+        moodId != null && moodAssets.illustration(moodId!) != null;
     final secondOk =
         secondMoodId != null &&
-        VintageMoodTheme.assetFor(secondMoodId!) != null;
+        moodAssets.illustration(secondMoodId!) != null;
 
     if (!firstOk && !secondOk) return child;
 

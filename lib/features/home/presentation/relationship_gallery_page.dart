@@ -43,6 +43,7 @@ class RelationshipGalleryPage extends ConsumerWidget {
               constraints.maxHeight * q.layout.galleryCardHeightFraction,
               q.layout.galleryCardMaxHeight,
             ),
+            widthFraction: q.layout.galleryCardWidthFraction,
           );
           return QPaneLoading(minHeight: size.height);
         },
@@ -58,6 +59,7 @@ class RelationshipGalleryPage extends ConsumerWidget {
               constraints.maxHeight * q.layout.galleryCardHeightFraction,
               q.layout.galleryCardMaxHeight,
             ),
+            widthFraction: q.layout.galleryCardWidthFraction,
           );
           return _EntranceFrame(
             child: Center(

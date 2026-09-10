@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/theme/app_theme_definition.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_control_surface.dart';
 import 'package:kin/design/theme/quiet_surface_ink.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
@@ -11,6 +13,7 @@ export 'package:kin/design/theme/quiet_surface_ink.dart';
 ///
 /// ```dart
 /// final q = context.quiet;
+/// final theme = context.appTheme;
 /// // Surface-aware type (preferred):
 /// Text('Priya', style: q.inked(q.text.pageTitle));
 /// Text(date, style: q.inked(q.text.uiDate, tone: QuietInkTone.secondary));
@@ -27,6 +30,17 @@ extension QuietThemeX on BuildContext {
       'tests.',
     );
     return theme ?? const QuietTheme.light();
+  }
+
+  /// The active product theme (Quiet roles + semantic assets).
+  AppThemeDefinition get appTheme {
+    final theme = Theme.of(this).extension<AppThemeDefinition>();
+    assert(
+      theme != null,
+      'AppThemeDefinition is missing. Wrap the app in KinApp, or use '
+      'pumpQuiet() in tests.',
+    );
+    return theme ?? ProductThemes.matchingQuiet(quiet);
   }
 
   /// A true hairline: one physical pixel, not one logical pixel.

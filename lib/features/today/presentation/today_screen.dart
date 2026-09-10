@@ -16,7 +16,7 @@ import 'package:kin/design/components/surfaces/q_hairline.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_diary_background.dart';
+import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
@@ -256,7 +256,7 @@ class _TodayJournalSection extends StatelessWidget {
         SizedBox(height: space.sectionLead),
         if (!hasEntries)
           QTodayEmptyJournalInvite(
-            child: VintageDiaryJournalCard(
+            child: QJournalCardSurface(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -280,7 +280,7 @@ class _TodayJournalSection extends StatelessWidget {
                   Text(
                     'Nothing written yet.',
                     style: q.inked(
-                      q.text.diaryNote,
+                      q.text.journalPrompt,
                       surface: QuietSurfaceKind.paper,
                     ),
                   ),
@@ -309,7 +309,7 @@ class _TodayJournalSection extends StatelessWidget {
                 ? preview[1].mood?.storageValue
                 : null,
             placement: MoodCardPlacement.todayFirstOverlap,
-            child: VintageDiaryJournalCard(
+            child: QJournalCardSurface(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -531,7 +531,10 @@ class _BirthdayTodaySection extends StatelessWidget {
             entry: entries[index],
             heroPrefix: 'today-bday',
           ),
-          if (index < entries.length - 1) QHairline(indent: indent),
+          if (index < entries.length - 1)
+            personRowUsesPaperStrip(context)
+                ? SizedBox(height: space.sm)
+                : QHairline(indent: indent),
         ],
       ],
     );
@@ -595,7 +598,10 @@ class _ComingUpSection extends StatelessWidget {
               entry: entries[index],
               heroPrefix: 'today-up',
             ),
-            if (index < entries.length - 1) QHairline(indent: indent),
+            if (index < entries.length - 1)
+              personRowUsesPaperStrip(context)
+                  ? SizedBox(height: space.sm)
+                  : QHairline(indent: indent),
           ],
           SizedBox(height: space.sm),
           Align(

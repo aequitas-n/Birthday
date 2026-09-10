@@ -25,6 +25,7 @@ import 'package:kin/features/home/application/gallery_memory.dart';
 import 'package:kin/features/home/application/gallery_providers.dart';
 import 'package:kin/features/home/application/home_providers.dart';
 import 'package:kin/features/home/presentation/home_screen.dart';
+import 'package:kin/features/home/presentation/profile_portrait_card.dart';
 import 'package:kin/features/person/application/person_detail_providers.dart';
 import 'package:kin/features/person/presentation/person_screen.dart';
 import 'package:riverpod/misc.dart' show Override;
@@ -331,6 +332,22 @@ void main() {
     expect(find.text('Mom').hitTestable(), findsNothing);
     expect(find.bySemanticsLabel('1 of 3'), findsOneWidget);
 
+    // Outer card bounds are centered in the page — equal left/right margins.
+    final card = tester.getRect(
+      find
+          .ancestor(
+            of: find.text('Ganesh').hitTestable().first,
+            matching: find.byType(ProfilePortraitCard),
+          )
+          .first,
+    );
+    final page = tester.getRect(find.byType(PageView).last);
+    expect(
+      ((card.left - page.left) - (page.right - card.right)).abs(),
+      lessThan(2.0),
+      reason: 'profile card should be horizontally centered',
+    );
+
     await tester.fling(
       find.text('Ganesh').hitTestable().first,
       const Offset(-320, 0),
@@ -340,9 +357,22 @@ void main() {
 
     expect(find.text('Mom').hitTestable(), findsWidgets);
     expect(find.bySemanticsLabel('2 of 3'), findsOneWidget);
+
+    final nextCard = tester.getRect(
+      find
+          .ancestor(
+            of: find.text('Mom').hitTestable().first,
+            matching: find.byType(ProfilePortraitCard),
+          )
+          .first,
+    );
+    expect(
+      ((nextCard.left - page.left) - (page.right - nextCard.right)).abs(),
+      lessThan(2.0),
+    );
   });
 
-  testWidgets('pin button toggles profile pinned state', (tester) async {
+  testWidgets('long-press toggles profile pinned state', (tester) async {
     final database = KinDatabase(NativeDatabase.memory());
     addTearDown(database.close);
     final profiles = [
@@ -363,9 +393,12 @@ void main() {
       ],
     );
 
-    expect(find.bySemanticsLabel('Pin to top'), findsOneWidget);
+    expect(
+      find.bySemanticsLabel(RegExp(r'Long press to pin to top')),
+      findsOneWidget,
+    );
 
-    await tester.tap(find.bySemanticsLabel('Pin to top'));
+    await tester.longPress(find.text('Ganesh').hitTestable().first);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 200));
 

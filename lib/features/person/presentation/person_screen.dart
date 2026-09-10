@@ -278,7 +278,7 @@ class _IdentityCopy extends StatelessWidget {
           title,
           maxLines: 2,
           textScaler: context.nameTextScaler,
-          style: q.text.voiceLg.tinted(q.color.textPrimary),
+          style: q.text.pageTitle.tinted(q.color.textPrimary),
         ),
         if (legalName != null && legalName!.isNotEmpty) ...[
           SizedBox(height: q.space.xs),

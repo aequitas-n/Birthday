@@ -20,12 +20,13 @@ class KinApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final preference = ref.watch(themePreferenceProvider);
     final router = ref.watch(routerProvider);
-    final quiet = preference.resolve();
+    final definition = preference.definition;
+    final quiet = definition.quiet;
 
     return MaterialApp.router(
       title: 'Kin',
       debugShowCheckedModeBanner: false,
-      theme: buildMaterialShim(quiet),
+      theme: buildMaterialShim(quiet, appTheme: definition),
       themeMode: ThemeMode.light,
       // A theme change animates over `base` rather than snapping, which is
       // free once QuietTheme.lerp is correct.

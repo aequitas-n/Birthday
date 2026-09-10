@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/journal/q_mood_illustration.dart';
+import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_diary_background.dart';
 
-/// Fixed-geometry diary memory card — [Journal-Card.webp] is the paper.
+/// Fixed-geometry diary memory card — theme journal-card paper when present.
 ///
 /// Outer size is supplied by the parent deck. Content never changes card
 /// dimensions; text truncates and the photo region stays fixed.
@@ -52,7 +52,7 @@ class QJournalMemoryCard extends StatelessWidget {
       aspectRatio: aspectRatio,
       child: QMoodDecoratedPaper(
         moodId: showContent ? moodId : null,
-        child: VintageDiaryJournalCard(
+        child: QJournalCardSurface(
           padding: EdgeInsets.fromLTRB(
             q.space.lg,
             q.space.md,

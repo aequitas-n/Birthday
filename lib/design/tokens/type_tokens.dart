@@ -22,10 +22,21 @@ final class QuietTypeExpression {
       primaryFallback = const <String>['cursive'],
       secondaryFallback = const <String>['Georgia', 'serif'];
 
-  /// Handwritten personal content (Vintage: Caveat).
+  /// Default — same three-voice architecture as Vintage for semantics:
+  /// Caveat = personal handwriting, Fraunces = editorial structure,
+  /// Courier Prime = universal metadata (product-owned, not on this object).
+  ///
+  /// Personality vs Vintage comes from colour / assets, not a parallel type tree.
+  const QuietTypeExpression.quietDefault()
+    : primaryFamily = 'Caveat',
+      secondaryFamily = 'Fraunces',
+      primaryFallback = const <String>['cursive'],
+      secondaryFallback = const <String>['Georgia', 'serif'];
+
+  /// Handwritten personal content (Caveat in both product themes).
   final String primaryFamily;
 
-  /// Editorial / application interface (Vintage: Fraunces).
+  /// Editorial / application interface (Fraunces).
   final String secondaryFamily;
 
   final List<String> primaryFallback;
@@ -54,11 +65,20 @@ final class QuietTypeExpression {
 /// ```
 ///
 /// Styles carry no colour — apply via surface ink (`q.inked`).
+/// Metrics (size / weight / height / tracking) are shared across product themes;
+/// only [QuietTypeExpression] families may differ — today both themes use the
+/// same Caveat + Fraunces pairing so hierarchy stays identical when switching.
 @immutable
 final class QuietTypography {
   const QuietTypography({
     this.expression = const QuietTypeExpression.vintageDiary(),
   });
+
+  const QuietTypography.quietDefault()
+    : expression = const QuietTypeExpression.quietDefault();
+
+  const QuietTypography.vintageDiary()
+    : expression = const QuietTypeExpression.vintageDiary();
 
   final QuietTypeExpression expression;
 
@@ -119,6 +139,9 @@ final class QuietTypography {
   // SECONDARY — Fraunces (editorial / application interface)
   // ═══════════════════════════════════════════════════════════════════════
 
+  /// Brand / welcome hero — strongest editorial presence.
+  TextStyle get appTitle => displayTitle;
+
   TextStyle get displayTitle => voiceXl;
 
   TextStyle get pageTitle => voiceLg;
@@ -134,6 +157,9 @@ final class QuietTypography {
     fontVariations: _fraunces(opsz: 18, soft: 12, wght: 500),
   );
 
+  /// Nested heading under a section (sheets, profile blocks).
+  TextStyle get subsectionTitle => voiceMd;
+
   TextStyle get emptyStateTitle => sectionTitle;
 
   TextStyle get personName => voiceSm;
@@ -142,6 +168,8 @@ final class QuietTypography {
 
   /// Editorial day numbers / quoted literary scale (e.g. card “26”).
   TextStyle get editorialBody => voiceLg;
+
+  TextStyle get bodyEmphasis => voiceSmEmphasis;
 
   // ═══════════════════════════════════════════════════════════════════════
   // PRIMARY — Caveat (handwritten personal content)
@@ -152,14 +180,17 @@ final class QuietTypography {
   TextStyle get annotation => handwrittenSm;
   TextStyle get diaryNote => handwrittenMd;
 
-  /// Memory body, prompts, and user writing on paper.
+  /// Empty-journal / invite lines that speak in the user's hand.
+  TextStyle get journalPrompt => diaryNote;
+
+  /// Memory body and user writing on paper.
   TextStyle get journalWriting => TextStyle(
     inherit: false,
     fontFamily: _primary,
     fontFamilyFallback: _primaryFb,
     fontSize: 20,
     height: 30 / 20,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     letterSpacing: 0.1,
   );
 
@@ -169,6 +200,35 @@ final class QuietTypography {
 
   TextStyle get emptyStateBody => uiBody;
   TextStyle get decorativeLabel => archiveLabel;
+
+  /// Quiet supporting copy under controls and empty states.
+  TextStyle get supportingText => uiMetadata;
+
+  /// Tab / bottom-nav label (selected and unselected share metrics).
+  TextStyle get tab => uiNavigation;
+
+  /// Compact countdown stamp on birthday strips.
+  TextStyle get stampLabel => TextStyle(
+    inherit: false,
+    fontFamily: _universal,
+    fontFamilyFallback: _universalFb,
+    fontSize: 12,
+    height: 16 / 12,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.4,
+    fontFeatures: _numericFeatures,
+  );
+
+  /// Single-line mood name under an illustration chip.
+  TextStyle get moodLabel => TextStyle(
+    inherit: false,
+    fontFamily: _universal,
+    fontFamilyFallback: _universalFb,
+    fontSize: 12,
+    height: 1.1,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0,
+  );
 
   // ── Scale tokens ──────────────────────────────────────────────────────
 
@@ -473,7 +533,7 @@ final class QuietTypography {
     fontFamilyFallback: _primaryFb,
     fontSize: 22,
     height: 28 / 22,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     letterSpacing: 0.18,
   );
 
@@ -483,7 +543,7 @@ final class QuietTypography {
     fontFamilyFallback: _primaryFb,
     fontSize: 17,
     height: 24 / 17,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     letterSpacing: 0.14,
   );
 
@@ -493,7 +553,7 @@ final class QuietTypography {
     fontFamilyFallback: _primaryFb,
     fontSize: 15,
     height: 20 / 15,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w400,
     letterSpacing: 0.1,
   );
 
