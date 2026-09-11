@@ -8,6 +8,7 @@ import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_colors.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
+import 'package:kin/design/tokens/neon_arcade_tokens.dart';
 import 'package:kin/design/tokens/type_tokens.dart';
 
 import '../support/quiet_test_app.dart';
@@ -73,10 +74,11 @@ void main() {
   });
 
   group('product collections', () {
-    test('exposes Default and Vintage Diary', () {
+    test('exposes Default, Vintage Diary, and Neon Arcade', () {
       expect(QuietCollection.values, [
         QuietCollection.quietDefault,
         QuietCollection.vintageDiary,
+        QuietCollection.neonArcade,
       ]);
     });
 
@@ -94,6 +96,15 @@ void main() {
       expect(colors.brightness, Brightness.light);
       expect(colors.canvas.computeLuminance(), greaterThan(0.8));
       expect(colors.textPrimary.computeLuminance(), lessThan(0.2));
+    });
+
+    test('Neon Arcade uses cool cream canvas with magenta accent', () {
+      const colors = QuietColors.neonArcade();
+      expect(colors.collection, QuietCollection.neonArcade);
+      expect(colors.brightness, Brightness.light);
+      expect(colors.canvas.computeLuminance(), greaterThan(0.8));
+      expect(colors.textPrimary.computeLuminance(), lessThan(0.2));
+      expect(colors.accent.computeLuminance(), lessThan(0.5));
     });
 
     test('AMOLED is deepest black-brown, not pure black', () {
@@ -141,12 +152,13 @@ void main() {
       expect(pref.resolve().collection, QuietCollection.quietDefault);
       expect(
         pref.resolve().text.expression.primaryFamily,
-        'Caveat',
+        'CourierPrime',
       );
       expect(
         pref.resolve().text.expression.secondaryFamily,
         'Fraunces',
       );
+      expect(pref.resolve().text.journalWriting.fontFamily, isNot('Caveat'));
     });
 
     test('resolves Vintage Diary when selected', () {
@@ -182,18 +194,44 @@ void main() {
       expect(assets.chrome.profileCard, isNotNull);
       expect(assets.mood.emptyInvite, isNotNull);
     });
+
+    test('Neon fills HUD slots; search null; emptyInvite + birthday strip set', () {
+      final assets = ProductThemes.neonArcade.assets;
+      expect(assets.backgrounds.app, isNotNull);
+      expect(assets.backgrounds.journalCard, isNotNull);
+      expect(assets.backgrounds.calendar, isNotNull);
+      expect(assets.chrome.navStrip, isNotNull);
+      expect(assets.chrome.profileCard, isNotNull);
+      expect(assets.chrome.searchStrip, isNull);
+      expect(assets.chrome.birthdayStrip, NeonArcadeAssets.userStrip);
+      expect(assets.mood.emptyInvite, NeonArcadeAssets.excitedHome);
+      expect(assets.mood.illustration('joyful'), isNotNull);
+      expect(assets.backgrounds.app, isNot(contains('Vintage-Diary')));
+    });
   });
 
   group('Default typography', () {
-    test('uses Caveat for handwriting and Fraunces for editorial', () {
+    test('uses CourierPrime for personal voice and Fraunces for editorial', () {
       const type = QuietTypography.quietDefault();
-      expect(type.expression.primaryFamily, 'Caveat');
+      expect(type.expression.primaryFamily, 'CourierPrime');
       expect(type.expression.secondaryFamily, 'Fraunces');
-      expect(type.journalWriting.fontFamily, 'Caveat');
-      expect(type.journalPrompt.fontFamily, 'Caveat');
+      expect(type.journalWriting.fontFamily, 'CourierPrime');
+      expect(type.journalPrompt.fontFamily, 'CourierPrime');
       expect(type.pageTitle.fontFamily, 'Fraunces');
       expect(type.sectionTitle.fontFamily, 'Fraunces');
       expect(type.uiMetadata.fontFamily, 'CourierPrime');
+    });
+  });
+
+  group('Neon typography', () {
+    test('uses CourierPrime for primary and secondary — never Caveat/Fraunces', () {
+      const type = QuietTypography.neonArcade();
+      expect(type.expression.primaryFamily, 'CourierPrime');
+      expect(type.expression.secondaryFamily, 'CourierPrime');
+      expect(type.journalWriting.fontFamily, 'CourierPrime');
+      expect(type.pageTitle.fontFamily, 'CourierPrime');
+      expect(type.expression.primaryFamily, isNot('Caveat'));
+      expect(type.expression.secondaryFamily, isNot('Fraunces'));
     });
   });
 }

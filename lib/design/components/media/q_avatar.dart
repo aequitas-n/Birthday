@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/surfaces/q_surface.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// Avatar sizes. See docs/04-design-system.md §10.
@@ -88,10 +89,16 @@ class QAvatar extends StatelessWidget {
     final content = photo == null
         ? monogram
         : Image(
-            image: photo!,
+            image: QuietDisplayImage.at(
+              photo!,
+              context: context,
+              logicalWidth: size.diameter,
+              logicalHeight: size.diameter,
+            ),
             fit: BoxFit.cover,
             width: size.diameter,
             height: size.diameter,
+            gaplessPlayback: true,
             frameBuilder: (context, child, frame, wasSync) {
               if (wasSync || frame != null) return child;
               return monogram;

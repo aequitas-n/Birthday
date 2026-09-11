@@ -15,7 +15,10 @@ enum QuietCollection {
   quietDefault('Default', QuietNeutralFamily.warm),
 
   /// Vintage Diary — cream parchment on dark desk.
-  vintageDiary('Vintage Diary', QuietNeutralFamily.warm);
+  vintageDiary('Vintage Diary', QuietNeutralFamily.warm),
+
+  /// Neon Arcade — cool cream canvas, magenta/cyan HUD, dark CRT cards.
+  neonArcade('Neon Arcade', QuietNeutralFamily.cool);
 
   const QuietCollection(this.label, this.neutrals);
 
@@ -27,6 +30,7 @@ enum QuietCollection {
       dark ? ColorTokens.ember300 : ColorTokens.ember500,
     QuietCollection.vintageDiary =>
       dark ? ColorTokens.vdTerracottaSoft : ColorTokens.vdBurgundy,
+    QuietCollection.neonArcade => ColorTokens.naMagenta,
   };
 
   Color accentPressed({required bool dark}) => switch (this) {
@@ -34,6 +38,7 @@ enum QuietCollection {
       dark ? ColorTokens.ember400 : ColorTokens.ember600,
     QuietCollection.vintageDiary =>
       dark ? ColorTokens.vdTerracotta : ColorTokens.vdBurgundyMuted,
+    QuietCollection.neonArcade => ColorTokens.naMagentaPressed,
   };
 }
 

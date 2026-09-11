@@ -6,7 +6,10 @@ enum ProductThemeId {
   quietDefault('default', 'Default'),
 
   /// Vintage Diary parchment experience.
-  vintageDiary('vintage_diary', 'Vintage Diary');
+  vintageDiary('vintage_diary', 'Vintage Diary'),
+
+  /// Neon Arcade — cool cream canvas, magenta/cyan HUD chrome.
+  neonArcade('neon_arcade', 'Neon Arcade');
 
   const ProductThemeId(this.storageKey, this.label);
 

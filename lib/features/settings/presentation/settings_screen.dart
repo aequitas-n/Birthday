@@ -181,9 +181,12 @@ class SettingsScreen extends ConsumerWidget {
           QChoice(
             theme.label,
             support: switch (theme.id) {
-              ProductThemeId.quietDefault => 'Warm paper, black ink, no decoration.',
+              ProductThemeId.quietDefault =>
+                'Warm paper, black ink, no decoration.',
               ProductThemeId.vintageDiary =>
                 'Aged parchment journal on a dark desk.',
+              ProductThemeId.neonArcade =>
+                'Cool cream canvas, magenta/cyan HUD, dark CRT cards.',
             },
           ),
       ],

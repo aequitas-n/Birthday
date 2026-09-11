@@ -86,6 +86,21 @@ final class QuietJournal {
       shadow = ColorTokens.journalShadowLight,
       washStrength = 0.42;
 
+  /// Neon Arcade — dark CRT panels (journal / calendar art) on cream desk.
+  const QuietJournal.neonArcade()
+    : desk = ColorTokens.naCanvas,
+      paper = ColorTokens.naCard,
+      paperSunken = ColorTokens.naCardSunken,
+      ink = ColorTokens.naCardInk,
+      inkMuted = ColorTokens.naCardInkMuted,
+      edge = ColorTokens.naCardEdge,
+      rule = ColorTokens.naCardRule,
+      tape = ColorTokens.naMagenta,
+      clip = ColorTokens.naCyanMuted,
+      photoMat = ColorTokens.naCardRaised,
+      shadow = ColorTokens.naCardShadow,
+      washStrength = 0.36;
+
   /// Resolves journal atmosphere for the active collection.
   factory QuietJournal.of(
     QuietCollection collection, {
@@ -93,6 +108,9 @@ final class QuietJournal {
   }) {
     if (collection == QuietCollection.quietDefault) {
       return const QuietJournal.neutral();
+    }
+    if (collection == QuietCollection.neonArcade) {
+      return const QuietJournal.neonArcade();
     }
     return switch (mode) {
       QuietBrightness.amoled => const QuietJournal.amoled(),

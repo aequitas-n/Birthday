@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kin/app/profile_creation_launcher.dart';
@@ -37,13 +35,19 @@ class RelationshipGalleryPage extends ConsumerWidget {
     if (peopleAsync.isLoading || profilesAsync.isLoading) {
       return LayoutBuilder(
         builder: (context, constraints) {
-          final size = VintagePortraitLayout.fitIn(
+          final layout = context.appTheme.assets.layout;
+          final size = VintagePortraitLayout.fitGalleryCard(
             maxWidth: constraints.maxWidth,
-            maxHeight: math.min(
-              constraints.maxHeight * q.layout.galleryCardHeightFraction,
-              q.layout.galleryCardMaxHeight,
-            ),
-            widthFraction: q.layout.galleryCardWidthFraction,
+            maxHeight: constraints.maxHeight,
+            widthFraction: layout.galleryCardWidthFraction ??
+                q.layout.galleryCardWidthFraction,
+            heightFraction: layout.galleryCardHeightFraction ??
+                q.layout.galleryCardHeightFraction,
+            maxHeightCap:
+                layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
+            maxWidthCap: layout.galleryCardMaxWidth,
+            aspectRatio: layout.profileCard?.aspectRatio ??
+                ProfileCardGeometry.aspectRatio,
           );
           return QPaneLoading(minHeight: size.height);
         },
@@ -53,13 +57,19 @@ class RelationshipGalleryPage extends ConsumerWidget {
     if (allEntries.isEmpty) {
       return LayoutBuilder(
         builder: (context, constraints) {
-          final size = VintagePortraitLayout.fitIn(
+          final layout = context.appTheme.assets.layout;
+          final size = VintagePortraitLayout.fitGalleryCard(
             maxWidth: constraints.maxWidth,
-            maxHeight: math.min(
-              constraints.maxHeight * q.layout.galleryCardHeightFraction,
-              q.layout.galleryCardMaxHeight,
-            ),
-            widthFraction: q.layout.galleryCardWidthFraction,
+            maxHeight: constraints.maxHeight,
+            widthFraction: layout.galleryCardWidthFraction ??
+                q.layout.galleryCardWidthFraction,
+            heightFraction: layout.galleryCardHeightFraction ??
+                q.layout.galleryCardHeightFraction,
+            maxHeightCap:
+                layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
+            maxWidthCap: layout.galleryCardMaxWidth,
+            aspectRatio: layout.profileCard?.aspectRatio ??
+                ProfileCardGeometry.aspectRatio,
           );
           return _EntranceFrame(
             child: Center(

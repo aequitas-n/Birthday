@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/design/tokens/search_strip_geometry.dart';
 
@@ -112,6 +113,11 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
                 h * (1 - SearchStripGeometry.contentPadY * 2);
 
             final searchAsset = context.appTheme.assets.chrome.searchStrip;
+            final cache = QuietDisplayImage.cacheSize(
+              context,
+              Size(w, h),
+              fit: BoxFit.fill,
+            );
 
             return Stack(
               fit: StackFit.expand,
@@ -120,6 +126,8 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
                   Image.asset(
                     searchAsset,
                     fit: BoxFit.fill,
+                    cacheWidth: cache.$1,
+                    cacheHeight: cache.$2,
                     gaplessPlayback: true,
                     filterQuality: FilterQuality.high,
                   )

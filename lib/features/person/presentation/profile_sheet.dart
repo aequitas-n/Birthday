@@ -552,7 +552,7 @@ class _MemoriesBookState extends ConsumerState<_MemoriesBook> {
                     'make for them — details save as you go.'
                 : 'Nothing yet. Save a photo, note what they love, or a plan '
                     'you want to make for them.',
-            style: q.text.body.tinted(q.color.textSecondary),
+            style: q.text.body.tinted(context.controlInkSecondary),
           ),
         if (photoNotes.isNotEmpty) ...[
           SizedBox(height: q.space.sm),
@@ -591,7 +591,7 @@ class _PhotoJournalSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Moments', style: q.text.headline.tinted(q.color.textPrimary)),
+        Text('Moments', style: q.text.headline.tinted(context.controlInk)),
         SizedBox(height: q.space.md),
         Wrap(
           spacing: q.space.sm,
@@ -701,7 +701,7 @@ class _PhotoMemoryActionsSheet extends ConsumerWidget {
         'A moment you saved. Open it full-screen, or remove it if it no '
         'longer belongs here.',
         style: context.quiet.text.body.tinted(
-          context.quiet.color.textSecondary,
+          context.controlInkSecondary,
         ),
       ),
     );
@@ -728,7 +728,7 @@ class _JournalSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: q.text.headline.tinted(q.color.textPrimary)),
+        Text(title, style: q.text.headline.tinted(context.controlInk)),
         SizedBox(height: q.space.sm),
         for (final (header, note) in notesWithKindHeaders(section, notes)) ...[
           if (header != null) ...[
@@ -736,7 +736,7 @@ class _JournalSection extends StatelessWidget {
             Text(
               header,
               textScaler: context.structuralTextScaler,
-              style: q.text.metadata.tinted(q.color.textSecondary),
+              style: q.text.metadata.tinted(context.controlInkSecondary),
             ),
             SizedBox(height: q.space.xs),
           ] else if (note != notes.first)
@@ -799,14 +799,14 @@ class _MemoryRow extends StatelessWidget {
           children: [
             Text(
               note.value,
-              style: q.text.bodyLg.tinted(q.color.textPrimary),
+              style: q.text.bodyLg.tinted(context.controlInk),
             ),
             if (subtitle != null) ...[
               SizedBox(height: q.space.xs),
               Text(
                 subtitle,
                 textScaler: context.structuralTextScaler,
-                style: q.text.metadata.tinted(q.color.textTertiary),
+                style: q.text.metadata.tinted(context.controlInkMuted),
               ),
             ],
           ],

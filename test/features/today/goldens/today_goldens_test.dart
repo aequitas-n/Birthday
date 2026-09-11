@@ -173,6 +173,7 @@ void main() {
             theme: themeEntry.value,
           );
           await tester.pumpAndSettle();
+          await tester.pumpQuietImages();
 
           await expectLater(
             find.byType(TodayScreen),

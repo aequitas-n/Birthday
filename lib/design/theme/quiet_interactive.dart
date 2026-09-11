@@ -159,6 +159,36 @@ final class QuietInteractive {
       toggleThumbOn = ColorTokens.paperSurface,
       disabledSurface = ColorTokens.paperSunken;
 
+  /// Neon Arcade — magenta CTAs on cream canvas; dark HUD sheets matching cards.
+  /// Sheet ink is light-on-dark; never reuse canvas (dark-on-cream) roles inside
+  /// sheets or the copy vanishes.
+  const QuietInteractive.neonArcade()
+    : primaryAction = ColorTokens.naMagenta,
+      primaryActionPressed = ColorTokens.naMagentaPressed,
+      primaryActionInk = ColorTokens.naInkInverse,
+      secondaryAction = ColorTokens.naSurface,
+      secondaryActionBorder = ColorTokens.naHairlineStrong,
+      secondaryActionInk = ColorTokens.naInkPrimary,
+      sheet = ColorTokens.naCard,
+      sheetElevated = ColorTokens.naCardRaised,
+      sheetBorder = ColorTokens.naCyanMuted,
+      sheetGrabber = ColorTokens.naCardInkMuted,
+      ink = ColorTokens.naCardInk,
+      inkSecondary = ColorTokens.naCardInkMuted,
+      inkMuted = ColorTokens.naCyanMuted,
+      inkDisabled = ColorTokens.naCardInkMuted,
+      accent = ColorTokens.naMagenta,
+      selectedSurface = ColorTokens.naCardRaised,
+      selectedInk = ColorTokens.naCyan,
+      input = ColorTokens.naCardSunken,
+      inputFocused = ColorTokens.naCardRaised,
+      inputBorder = ColorTokens.naCyan,
+      toggleTrackOff = ColorTokens.naCardEdge,
+      toggleTrackOn = ColorTokens.naMagenta,
+      toggleThumbOff = ColorTokens.naCardInkMuted,
+      toggleThumbOn = ColorTokens.naInkInverse,
+      disabledSurface = ColorTokens.naCardSunken;
+
   factory QuietInteractive.of({
     required QuietCollection collection,
     required bool dark,
@@ -166,6 +196,9 @@ final class QuietInteractive {
   }) {
     if (collection == QuietCollection.quietDefault) {
       return const QuietInteractive.neutral();
+    }
+    if (collection == QuietCollection.neonArcade) {
+      return const QuietInteractive.neonArcade();
     }
     if (amoled) return const QuietInteractive.amoled();
     if (dark) return const QuietInteractive.dark();

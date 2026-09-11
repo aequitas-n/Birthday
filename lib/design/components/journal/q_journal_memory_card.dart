@@ -47,18 +47,23 @@ class QJournalMemoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final paper = q.paper;
+    final layout = context.appTheme.assets.layout;
+    final cardAspect = layout.journalCardAspectRatio ?? aspectRatio;
 
     final card = AspectRatio(
-      aspectRatio: aspectRatio,
+      aspectRatio: cardAspect,
       child: QMoodDecoratedPaper(
         moodId: showContent ? moodId : null,
         child: QJournalCardSurface(
-          padding: EdgeInsets.fromLTRB(
-            q.space.lg,
-            q.space.md,
-            q.space.lg,
-            q.space.md,
-          ),
+          scaleContentToFit: false,
+          padding: layout.journalCardContent != null
+              ? null
+              : EdgeInsets.fromLTRB(
+                  q.space.lg,
+                  q.space.md,
+                  q.space.lg,
+                  q.space.md,
+                ),
           child: showContent
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

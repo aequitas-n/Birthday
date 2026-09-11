@@ -75,6 +75,57 @@ void main() {
 
       expect(summary.hasMemories, isTrue);
       expect(summary.hasLatestPreview, isFalse);
+      expect(summary.hasNote, isFalse);
+      expect(summary.hasMoment, isTrue);
+      expect(summary.momentPreview, 'A moment');
+    });
+
+    test('fromNotes splits latest note and moment previews', () {
+      final summary = GalleryMemorySummary.fromNotes([
+        Note(
+          id: 'n1',
+          profileId: 'p1',
+          kind: NoteKind.flower,
+          value: 'Peonies',
+          position: 0,
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026, 1, 3),
+        ),
+        Note(
+          id: 'photo-1',
+          profileId: 'p1',
+          kind: NoteKind.photo,
+          value: 'photo-hash',
+          label: 'At the beach',
+          position: 1,
+          createdAt: DateTime.utc(2026, 2),
+          updatedAt: DateTime.utc(2026, 2),
+        ),
+      ]);
+
+      expect(summary.notePreview, 'Peonies — Favorite flower');
+      expect(summary.momentPreview, 'At the beach');
+      expect(summary.hasNote, isTrue);
+      expect(summary.hasMoment, isTrue);
+    });
+
+    test('fromNotes appends kind label for favorite place notes', () {
+      final summary = GalleryMemorySummary.fromNotes([
+        Note(
+          id: 'n1',
+          profileId: 'p1',
+          kind: NoteKind.place,
+          value: 'The beach near Mahabalipuram',
+          position: 0,
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026),
+        ),
+      ]);
+
+      expect(
+        summary.notePreview,
+        'The beach near Mahabalipuram — Favorite place',
+      );
     });
   });
 }

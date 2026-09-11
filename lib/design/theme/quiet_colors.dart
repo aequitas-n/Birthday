@@ -138,6 +138,32 @@ final class QuietColors {
       monogramTints = ColorTokens.monogramLight,
       transparent = ColorTokens.transparent;
 
+  /// Neon Arcade — cool cream canvas from arcade-bg; magenta accent; dark HUD
+  /// cards carry their own ink via [QuietJournal.neonArcade].
+  const QuietColors.neonArcade()
+    : brightness = Brightness.light,
+      collection = QuietCollection.neonArcade,
+      heroTint = ColorTokens.naMagenta,
+      canvas = ColorTokens.naCanvas,
+      surface = ColorTokens.naSurface,
+      raised = ColorTokens.naRaised,
+      sunken = ColorTokens.naSunken,
+      hairline = ColorTokens.naHairline,
+      hairlineStrong = ColorTokens.naHairlineStrong,
+      textPrimary = ColorTokens.naInkPrimary,
+      textSecondary = ColorTokens.naInkSecondary,
+      textTertiary = ColorTokens.naInkTertiary,
+      textInverse = ColorTokens.naInkInverse,
+      accent = ColorTokens.naMagenta,
+      accentPressed = ColorTokens.naMagentaPressed,
+      accentWash = ColorTokens.naMagentaWash,
+      danger = ColorTokens.dangerLight,
+      dangerWash = ColorTokens.dangerWashLight,
+      scrim = ColorTokens.naScrim,
+      selection = ColorTokens.naSelection,
+      monogramTints = ColorTokens.monogramLight,
+      transparent = ColorTokens.transparent;
+
   /// Resolves colours for a collection at the requested contrast level.
   factory QuietColors.of(
     QuietCollection collection, {
@@ -146,6 +172,9 @@ final class QuietColors {
   }) {
     if (collection == QuietCollection.quietDefault) {
       return const QuietColors.neutral();
+    }
+    if (collection == QuietCollection.neonArcade) {
+      return const QuietColors.neonArcade();
     }
     if (amoled) return const QuietColors.amoled();
     if (dark) return const QuietColors.dark();

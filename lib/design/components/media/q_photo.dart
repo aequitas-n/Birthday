@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/media/q_avatar.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// A photograph that fills whatever box it is given.
@@ -40,22 +41,31 @@ class QPhoto extends StatelessWidget {
     final monogram = _Monogram(displayName: displayName, seed: seed);
     if (photo == null) return monogram;
 
-    return Image(
-      image: photo!,
-      fit: BoxFit.cover,
-      alignment: alignment,
-      width: double.infinity,
-      height: double.infinity,
-      gaplessPlayback: true,
-      excludeFromSemantics: true,
-      frameBuilder: (context, child, frame, wasSync) {
-        if (wasSync || frame != null) return child;
-        // The monogram is the placeholder. "Who is this" deserves a better
-        // answer than a grey rectangle.
-        return monogram;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final image = QuietDisplayImage.maybeAt(
+          photo!,
+          context: context,
+          constraints: constraints,
+        );
+        return Image(
+          image: image,
+          fit: BoxFit.cover,
+          alignment: alignment,
+          width: double.infinity,
+          height: double.infinity,
+          gaplessPlayback: true,
+          excludeFromSemantics: true,
+          frameBuilder: (context, child, frame, wasSync) {
+            if (wasSync || frame != null) return child;
+            // The monogram is the placeholder. "Who is this" deserves a better
+            // answer than a grey rectangle.
+            return monogram;
+          },
+          // A photo that fails to decode falls back permanently and silently.
+          errorBuilder: (context, error, stack) => monogram,
+        );
       },
-      // A photo that fails to decode falls back permanently and silently.
-      errorBuilder: (context, error, stack) => monogram,
     );
   }
 }

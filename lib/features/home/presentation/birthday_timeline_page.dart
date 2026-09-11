@@ -143,9 +143,9 @@ class _MonthHeading extends StatelessWidget {
     final q = context.quiet;
     final rule = q.color.textTertiary.withValues(alpha: 0.45);
 
-    // Vintage: no bottom gap — first strip chain hangs from this rule.
-    // Default: small lead so paper cards clear the divider.
-    final hang = context.appTheme.assets.chrome.birthdayStrip != null;
+    // Chain-linked strips hang from this rule; HUD / Default keep a small lead.
+    final layout = context.appTheme.assets.chrome.birthdayStripLayout;
+    final hang = layout?.chainStack ?? false;
     return Padding(
       padding: EdgeInsets.only(
         top: isFirst ? q.space.sm : q.space.xl,

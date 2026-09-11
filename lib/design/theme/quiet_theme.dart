@@ -81,7 +81,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       motion = const QuietMotionTokens(),
       photo = const QuietPhotography();
 
-  /// Original Quiet Default — warm paper, ember accent, no Vintage typefaces.
+  /// Original Quiet Default — warm paper, ember accent, no Caveat handwriting.
   const QuietTheme.quietDefault()
     : mode = QuietBrightness.light,
       color = const QuietColors.neutral(),
@@ -90,6 +90,21 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       interactive = const QuietInteractive.neutral(),
       navigation = const QuietNavigation.neutral(),
       text = const QuietTypography.quietDefault(),
+      space = const QuietSpace(),
+      layout = const QuietLayout(),
+      radius = const QuietRadius(),
+      motion = const QuietMotionTokens(),
+      photo = const QuietPhotography();
+
+  /// Neon Arcade — cool cream canvas, magenta/cyan HUD, dark CRT cards.
+  const QuietTheme.neonArcade()
+    : mode = QuietBrightness.light,
+      color = const QuietColors.neonArcade(),
+      elevation = const QuietElevation.light(),
+      journal = const QuietJournal.neonArcade(),
+      interactive = const QuietInteractive.neonArcade(),
+      navigation = const QuietNavigation.neonArcade(),
+      text = const QuietTypography.neonArcade(),
       space = const QuietSpace(),
       layout = const QuietLayout(),
       radius = const QuietRadius(),
@@ -107,6 +122,9 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
   }) {
     if (collection == QuietCollection.quietDefault) {
       return const QuietTheme.quietDefault();
+    }
+    if (collection == QuietCollection.neonArcade) {
+      return const QuietTheme.neonArcade();
     }
     final mode = !dark
         ? QuietBrightness.light

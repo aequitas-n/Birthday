@@ -109,7 +109,7 @@ class _PlacePickerSheetState extends ConsumerState<PlacePickerSheet> {
             child: results.isEmpty && !showSameAsMe
                 ? Text(
                     'Nothing matches that place yet. Try another spelling.',
-                    style: q.text.body.tinted(q.color.textSecondary),
+                    style: q.text.body.tinted(context.controlInkSecondary),
                   )
                 : ListView.separated(
                     keyboardDismissBehavior:

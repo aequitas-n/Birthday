@@ -23,6 +23,7 @@ import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/feedback/quiet_haptics.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
@@ -845,7 +846,18 @@ class _PhotoFragmentView extends ConsumerWidget {
         constraints: const BoxConstraints(maxWidth: 280),
         child: QJournalPhotoPrint(
           caption: draft.caption,
-          child: Image(image: image, fit: BoxFit.cover),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return Image(
+                image: QuietDisplayImage.maybeAt(
+                  image,
+                  context: context,
+                  constraints: constraints,
+                ),
+                fit: BoxFit.cover,
+              );
+            },
+          ),
         ),
       ),
     );

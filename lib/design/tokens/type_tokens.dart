@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
-/// Theme-owned personality typefaces.
+/// Theme-owned typeface expression for shared semantic roles.
 ///
-/// Themes supply **primary** (handwritten personal voice) and **secondary**
+/// Themes supply **primary** (personal / journal voice) and **secondary**
 /// (editorial / interface). They do **not** own the universal archive face —
 /// that is product constant [QuietTypography.universalFamily] (Courier Prime).
+///
+/// Roles stay shared in [QuietTypography]; only these families swap per theme.
 @immutable
 final class QuietTypeExpression {
   const QuietTypeExpression({
@@ -15,28 +17,34 @@ final class QuietTypeExpression {
     this.secondaryFallback = const <String>['Georgia', 'serif'],
   });
 
-  /// Vintage Diary — Caveat handwriting on paper, Fraunces editorial chrome.
+  /// Vintage Diary — Caveat personal writing, Fraunces editorial chrome.
   const QuietTypeExpression.vintageDiary()
     : primaryFamily = 'Caveat',
       secondaryFamily = 'Fraunces',
       primaryFallback = const <String>['cursive'],
       secondaryFallback = const <String>['Georgia', 'serif'];
 
-  /// Default — same three-voice architecture as Vintage for semantics:
-  /// Caveat = personal handwriting, Fraunces = editorial structure,
-  /// Courier Prime = universal metadata (product-owned, not on this object).
-  ///
-  /// Personality vs Vintage comes from colour / assets, not a parallel type tree.
+  /// Default — coherent quiet system: Courier Prime for personal/journal voice,
+  /// Fraunces for editorial titles. Never Caveat (Vintage-only handwriting).
   const QuietTypeExpression.quietDefault()
-    : primaryFamily = 'Caveat',
+    : primaryFamily = QuietTypography.universalFamily,
       secondaryFamily = 'Fraunces',
-      primaryFallback = const <String>['cursive'],
+      primaryFallback = QuietTypography.universalFallback,
       secondaryFallback = const <String>['Georgia', 'serif'];
 
-  /// Handwritten personal content (Caveat in both product themes).
+  /// Neon Arcade — digital HUD voice throughout. Artwork is CRT/pixel/neon;
+  /// CourierPrime matches that language for both journal writing and titles.
+  /// Never Caveat or Fraunces (those are Vintage/Default editorial).
+  const QuietTypeExpression.neonArcade()
+    : primaryFamily = QuietTypography.universalFamily,
+      secondaryFamily = QuietTypography.universalFamily,
+      primaryFallback = QuietTypography.universalFallback,
+      secondaryFallback = QuietTypography.universalFallback;
+
+  /// Personal / journal voice (Caveat in Vintage; Courier Prime in Default).
   final String primaryFamily;
 
-  /// Editorial / application interface (Fraunces).
+  /// Editorial / application interface (Fraunces in both current themes).
   final String secondaryFamily;
 
   final List<String> primaryFallback;
@@ -56,18 +64,17 @@ final class QuietTypeExpression {
   List<String> get archiveFallback => QuietTypography.universalFallback;
 }
 
-/// Semantic typography — three voices only.
+/// Semantic typography — three voices; families come from [expression].
 ///
 /// ```text
-/// APP / INTERFACE  → secondary (Fraunces)
-/// HANDWRITING      → primary   (Caveat)
-/// METADATA / UI    → universal (Courier Prime)
+/// APP / INTERFACE  → secondary  (theme expression)
+/// PERSONAL / JOURNAL → primary  (theme expression)
+/// METADATA / UI    → universal  (Courier Prime, product-owned)
 /// ```
 ///
 /// Styles carry no colour — apply via surface ink (`q.inked`).
 /// Metrics (size / weight / height / tracking) are shared across product themes;
-/// only [QuietTypeExpression] families may differ — today both themes use the
-/// same Caveat + Fraunces pairing so hierarchy stays identical when switching.
+/// only [QuietTypeExpression] families may differ.
 @immutable
 final class QuietTypography {
   const QuietTypography({
@@ -79,6 +86,9 @@ final class QuietTypography {
 
   const QuietTypography.vintageDiary()
     : expression = const QuietTypeExpression.vintageDiary();
+
+  const QuietTypography.neonArcade()
+    : expression = const QuietTypeExpression.neonArcade();
 
   final QuietTypeExpression expression;
 
@@ -136,7 +146,7 @@ final class QuietTypography {
   TextStyle get uiControl => label;
 
   // ═══════════════════════════════════════════════════════════════════════
-  // SECONDARY — Fraunces (editorial / application interface)
+  // SECONDARY — editorial / application interface (theme expression)
   // ═══════════════════════════════════════════════════════════════════════
 
   /// Brand / welcome hero — strongest editorial presence.
@@ -172,7 +182,7 @@ final class QuietTypography {
   TextStyle get bodyEmphasis => voiceSmEmphasis;
 
   // ═══════════════════════════════════════════════════════════════════════
-  // PRIMARY — Caveat (handwritten personal content)
+  // PRIMARY — personal / journal voice (theme expression)
   // ═══════════════════════════════════════════════════════════════════════
 
   TextStyle get emotionalBody => handwrittenMd;
@@ -180,7 +190,7 @@ final class QuietTypography {
   TextStyle get annotation => handwrittenSm;
   TextStyle get diaryNote => handwrittenMd;
 
-  /// Empty-journal / invite lines that speak in the user's hand.
+  /// Empty-journal / invite lines in the theme's personal voice.
   TextStyle get journalPrompt => diaryNote;
 
   /// Memory body and user writing on paper.
@@ -390,7 +400,7 @@ final class QuietTypography {
     letterSpacing: 0.66,
   );
 
-  /// Large editorial numerals still use secondary (Fraunces) — e.g. day "26".
+  /// Large editorial numerals use secondary expression — e.g. day "26".
   TextStyle get numeralXl => TextStyle(
     inherit: false,
     fontFamily: _secondary,

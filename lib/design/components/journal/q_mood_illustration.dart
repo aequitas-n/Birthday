@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -38,10 +39,18 @@ class QMoodIllustration extends StatelessWidget {
         ? width! / MoodIllustrationMetrics.aspectRatio
         : MoodIllustrationMetrics.extent(size);
 
+    final cache = QuietDisplayImage.cacheSize(
+      context,
+      Size(resolvedWidth, resolvedHeight),
+      fit: BoxFit.contain,
+    );
+
     Widget art = Image.asset(
       asset,
       width: resolvedWidth,
       height: resolvedHeight,
+      cacheWidth: cache.$1,
+      cacheHeight: cache.$2,
       fit: BoxFit.contain,
       gaplessPlayback: true,
     );
@@ -70,11 +79,6 @@ class QMoodIllustration extends StatelessWidget {
 
 /// Card-relative top-right peek recipes (fractions of card / art — not px).
 abstract final class _CardMoodPeek {
-  /// Today home journal preview.
-  static const todayWidthOfCard = 0.46;
-  static const todayHangAbove = 0.50;
-  static const todayRightOfArt = 0.08;
-
   /// Journal of the Day memory card — freer hang, ~25–30% past the right edge.
   static const memoryWidthOfCard = 0.46;
   static const memoryHangAbove = 0.58;
@@ -132,13 +136,13 @@ class QMoodCardDecoration extends StatelessWidget {
     );
 
     final hangAbove = switch (placement) {
-      MoodCardPlacement.todayFirstOverlap => _CardMoodPeek.todayHangAbove,
+      MoodCardPlacement.todayFirstOverlap => TodayJournalMoodPeek.hangAbove,
       MoodCardPlacement.memoryTopRightOverlap ||
       MoodCardPlacement.dayTopRightOverlap => _CardMoodPeek.memoryHangAbove,
       MoodCardPlacement.todaySecondInset => 0.0,
     };
     final rightFrac = switch (placement) {
-      MoodCardPlacement.todayFirstOverlap => _CardMoodPeek.todayRightOfArt,
+      MoodCardPlacement.todayFirstOverlap => TodayJournalMoodPeek.rightOfArt,
       MoodCardPlacement.memoryTopRightOverlap ||
       MoodCardPlacement.dayTopRightOverlap => _CardMoodPeek.memoryRightOfArt,
       MoodCardPlacement.todaySecondInset => 0.0,
@@ -185,7 +189,7 @@ bool _isTopRightCardPeek(MoodCardPlacement placement) => switch (placement) {
 };
 
 double _peekWidthFraction(MoodCardPlacement placement) => switch (placement) {
-  MoodCardPlacement.todayFirstOverlap => _CardMoodPeek.todayWidthOfCard,
+  MoodCardPlacement.todayFirstOverlap => TodayJournalMoodPeek.widthOfCard,
   _ => _CardMoodPeek.memoryWidthOfCard,
 };
 
@@ -245,16 +249,25 @@ class QMoodDecoratedPaper extends StatelessWidget {
 
     if (!firstOk) return paper;
 
-    // Top-right peeks — size/position from the card box; no layout clearance.
+    // Top-right peeks — size/position from the card box.
     if (_isTopRightCardPeek(placement)) {
       return LayoutBuilder(
         builder: (context, constraints) {
           final cardWidth = constraints.maxWidth.isFinite
               ? constraints.maxWidth
               : MediaQuery.sizeOf(context).width;
-          final artWidth = cardWidth * _peekWidthFraction(placement);
+          final journalAspect =
+              context.appTheme.assets.layout.journalCardAspectRatio;
+          final artWidth = placement == MoodCardPlacement.todayFirstOverlap
+              ? TodayJournalMoodPeek.artWidthFor(
+                  cardWidth: cardWidth,
+                  journalCardAspectRatio: journalAspect,
+                )
+              : cardWidth * _peekWidthFraction(placement);
           final maxRight = _viewportRoomPastCard(context, cardWidth);
 
+          // Overflow only — hang paints above the card without inventing gap
+          // under the section title (standard card size keeps it clear of type).
           return Stack(
             clipBehavior: Clip.none,
             children: [

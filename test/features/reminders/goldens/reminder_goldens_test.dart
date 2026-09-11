@@ -52,6 +52,7 @@ void main() {
       surfaceSize: size,
     );
     await tester.pumpAndSettle();
+    await tester.pumpQuietImages();
   }
 
   for (final theme in quietThemes.entries) {

@@ -121,24 +121,46 @@ extension QuietPump on WidgetTester {
       await pump();
     }
   }
+
+  /// Lets real image codecs finish (fake-async [pump] alone will not).
+  ///
+  /// Display-size [ResizeImage] / WebP decode runs off the test fake clock.
+  /// Call after the widget tree and data streams have settled.
+  Future<void> pumpQuietImages([
+    Duration wallTime = const Duration(milliseconds: 1500),
+  ]) async {
+    await runAsync(() async {
+      await Future<void>.delayed(wallTime);
+    });
+    await pump();
+    for (var i = 0; i < 8; i++) {
+      await pump(const Duration(milliseconds: 50));
+    }
+  }
 }
 
 /// Collects asset paths from [Image] / [DecoratedBox] decoration images.
 Set<String> collectAssetImagePaths(WidgetTester tester) {
   final paths = <String>{};
-  for (final image in tester.widgetList<Image>(find.byType(Image))) {
-    final provider = image.image;
-    if (provider is AssetImage) {
-      paths.add(provider.assetName);
+
+  void consider(ImageProvider? provider) {
+    var current = provider;
+    // Display-size decode wraps providers in [ResizeImage].
+    while (current is ResizeImage) {
+      current = current.imageProvider;
     }
+    if (current is AssetImage) {
+      paths.add(current.assetName);
+    }
+  }
+
+  for (final image in tester.widgetList<Image>(find.byType(Image))) {
+    consider(image.image);
   }
   for (final box in tester.widgetList<DecoratedBox>(find.byType(DecoratedBox))) {
     final decoration = box.decoration;
     if (decoration is BoxDecoration) {
-      final image = decoration.image?.image;
-      if (image is AssetImage) {
-        paths.add(image.assetName);
-      }
+      consider(decoration.image?.image);
     }
   }
   return paths;

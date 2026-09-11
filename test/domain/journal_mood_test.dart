@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/design/theme/product_themes.dart';
+import 'package:kin/design/tokens/neon_arcade_tokens.dart';
 import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 import 'package:kin/domain/models/journal_mood.dart';
 
@@ -56,6 +57,16 @@ void main() {
       );
       expect(mood.illustration('excited'), isNull);
       expect(mood.emptyInvite, VintageDiaryAssets.excitedHome);
+    });
+
+    test('Neon Excited-home is invite-only, not a picker mood', () {
+      final mood = ProductThemes.neonArcade.assets.mood;
+      expect(
+        JournalMood.values.map((m) => mood.illustration(m.storageValue)),
+        isNot(contains(NeonArcadeAssets.excitedHome)),
+      );
+      expect(mood.illustration('excited'), isNull);
+      expect(mood.emptyInvite, NeonArcadeAssets.excitedHome);
     });
   });
 }

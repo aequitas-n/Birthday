@@ -20,6 +20,7 @@ import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/feedback/quiet_haptics.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/domain/models/note.dart';
 import 'package:kin/domain/models/person.dart';
@@ -345,7 +346,12 @@ class _PhotoMemoryReview extends StatelessWidget {
                         child: QClip(
                           radius: q.radius.xl,
                           child: Image(
-                            image: photo,
+                            image: QuietDisplayImage.at(
+                              photo,
+                              context: context,
+                              logicalWidth: constraints.maxWidth,
+                              logicalHeight: constraints.maxHeight,
+                            ),
                             fit: BoxFit.contain,
                             width: constraints.maxWidth,
                             height: constraints.maxHeight,

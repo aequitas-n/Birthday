@@ -17,6 +17,7 @@ import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/domain/models/journal_day.dart';
@@ -353,8 +354,20 @@ class _DeckRegion extends ConsumerWidget {
     if (list.isEmpty) return null;
     final image = ref.watch(journalPhotoProvider(list.first.photoId));
     return image.when(
-      data: (provider) =>
-          provider == null ? null : Image(image: provider, fit: BoxFit.cover),
+      data: (provider) => provider == null
+          ? null
+          : LayoutBuilder(
+              builder: (context, constraints) {
+                return Image(
+                  image: QuietDisplayImage.maybeAt(
+                    provider,
+                    context: context,
+                    constraints: constraints,
+                  ),
+                  fit: BoxFit.cover,
+                );
+              },
+            ),
       loading: () => const SizedBox.expand(),
       error: (_, _) => null,
     );

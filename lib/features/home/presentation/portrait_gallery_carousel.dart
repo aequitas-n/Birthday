@@ -123,6 +123,7 @@ class _PortraitGalleryCarouselState
           maxWidth: constraints.maxWidth,
           maxHeight: math.max(0.0, constraints.maxHeight - indicatorSpace),
           q: q,
+          context: context,
         );
 
         return Column(
@@ -131,7 +132,7 @@ class _PortraitGalleryCarouselState
               child: PageView.builder(
                 controller: controller,
                 itemCount: _virtualCount,
-                clipBehavior: Clip.hardEdge,
+                clipBehavior: Clip.none,
                 itemBuilder: (context, index) {
                   final real = _realIndex(index);
                   final isSettledFront = (_page - index).abs() < 0.5;
@@ -186,17 +187,35 @@ class _PortraitGalleryCarouselState
     required double maxWidth,
     required double maxHeight,
     required QuietTheme q,
+    required BuildContext context,
   }) {
-    final cappedH = math.min(maxHeight, q.layout.galleryCardMaxHeight);
-    final size = VintagePortraitLayout.fitIn(
+    final layout = context.appTheme.assets.layout;
+    final size = VintagePortraitLayout.fitGalleryCard(
       maxWidth: maxWidth,
-      maxHeight: cappedH,
-      widthFraction: q.layout.galleryCardWidthFraction,
+      maxHeight: maxHeight,
+      widthFraction:
+          layout.galleryCardWidthFraction ?? q.layout.galleryCardWidthFraction,
+      heightFraction: layout.galleryCardHeightFraction ??
+          q.layout.galleryCardHeightFraction,
+      maxHeightCap:
+          layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
+      maxWidthCap: layout.galleryCardMaxWidth,
+      aspectRatio:
+          layout.profileCard?.aspectRatio ?? ProfileCardGeometry.aspectRatio,
     );
     // Keep a usable minimum on tiny heights without inventing a new ratio.
     if (size.height < 260 && maxWidth > 0) {
-      final minH = math.min(260.0, cappedH);
-      return Size(size.width, minH);
+      final minH = math.min(
+        260.0,
+        layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
+      );
+      final aspect =
+          layout.profileCard?.aspectRatio ?? ProfileCardGeometry.aspectRatio;
+      final w = math.min(
+        size.width,
+        VintagePortraitLayout.widthForHeight(minH, aspectRatio: aspect),
+      );
+      return Size(w, minH);
     }
     return size;
   }

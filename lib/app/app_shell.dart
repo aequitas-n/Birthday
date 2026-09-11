@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/design/components/navigation/q_primary_nav.dart';
+import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 
 /// Shell framing Today, Kin, and Journal with primary bottom navigation.
 ///
@@ -11,6 +12,10 @@ import 'package:kin/design/components/navigation/q_primary_nav.dart';
 /// Kin's Birthdays/People modes are local home-screen state and never appear
 /// here. Child routes (person, journal day, …) live on the root navigator and
 /// pop before this shell back-target is consulted.
+///
+/// A single full-bleed [QuietThemeBackdrop] sits behind both the tab body and
+/// the primary nav. Nested [QThemeCanvas] skips a second paint via
+/// [QuietShellBackdropScope], so arcade-bg is never cover-fitted twice.
 class AppShell extends StatefulWidget {
   const AppShell({
     required this.navigationShell,
@@ -119,12 +124,21 @@ class AppShellState extends State<AppShell> {
         if (didPop) return;
         _handleRootBack();
       },
-      child: Column(
+      child: Stack(
+        fit: StackFit.expand,
         children: [
-          Expanded(child: _shell),
-          QPrimaryNav(
-            selected: _selected,
-            onSelected: _selectModule,
+          // One continuous backdrop for body + nav (do not re-paint in tabs).
+          const QuietThemeBackdrop(),
+          QuietShellBackdropScope(
+            child: Column(
+              children: [
+                Expanded(child: _shell),
+                QPrimaryNav(
+                  selected: _selected,
+                  onSelected: _selectModule,
+                ),
+              ],
+            ),
           ),
         ],
       ),

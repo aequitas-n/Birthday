@@ -53,3 +53,45 @@ abstract final class MoodIllustrationMetrics {
   static double widthFor(MoodIllustrationSize size) =>
       extent(size) * aspectRatio;
 }
+
+/// Today home journal card peek — shared by empty-invite and first-mood chrome.
+///
+/// Hang is paint-only overflow (`clipBehavior: Clip.none`) — it must not add
+/// top padding under the section title. Art is capped vs card height when the
+/// theme locks a journal aspect ratio so the peek stays clear of the heading.
+abstract final class TodayJournalMoodPeek {
+  /// Art width as a fraction of card width.
+  static const widthOfCard = 0.40;
+
+  /// Fraction of art height that peeks above the card top edge.
+  static const hangAbove = 0.36;
+
+  /// Desired right overflow as a fraction of art width (clamped to gutter).
+  static const rightOfArt = 0.08;
+
+  /// Max art height as a fraction of the standard journal card height.
+  static const maxHeightOfCard = 0.52;
+
+  static double artWidthFor({
+    required double cardWidth,
+    double? journalCardAspectRatio,
+  }) {
+    var width = cardWidth * widthOfCard;
+    if (journalCardAspectRatio != null &&
+        journalCardAspectRatio > 0 &&
+        cardWidth > 0) {
+      final cardHeight = cardWidth / journalCardAspectRatio;
+      final maxArtHeight = cardHeight * maxHeightOfCard;
+      final artHeight = width / aspectRatio;
+      if (artHeight > maxArtHeight) {
+        width = maxArtHeight * aspectRatio;
+      }
+    }
+    return width;
+  }
+
+  static double hangForArtWidth(double artWidth) =>
+      (artWidth / aspectRatio) * hangAbove;
+
+  static double get aspectRatio => MoodIllustrationMetrics.aspectRatio;
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/media/q_avatar.dart';
+import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/design/tokens/user_strip_geometry.dart';
 
@@ -68,6 +69,8 @@ class QBirthdayStrip extends StatelessWidget {
       onTap: onTap,
       heroTag: heroTag,
       stripAsset: stripAsset,
+      layout: context.appTheme.assets.chrome.birthdayStripLayout ??
+          UserStripGeometry.vintage,
     );
   }
 }
@@ -215,7 +218,7 @@ class _DefaultCountdown extends StatelessWidget {
   }
 }
 
-/// Vintage Diary: content laid out in the visible paper of user-strip.png.
+/// Theme hanging tag: content laid out in the visible paper of user-strip.
 class _VintageHangingStrip extends StatelessWidget {
   const _VintageHangingStrip({
     required this.displayName,
@@ -223,6 +226,7 @@ class _VintageHangingStrip extends StatelessWidget {
     required this.daysUntil,
     required this.countdown,
     required this.stripAsset,
+    required this.layout,
     this.dateLabel,
     this.photo,
     this.onTap,
@@ -234,6 +238,7 @@ class _VintageHangingStrip extends StatelessWidget {
   final int daysUntil;
   final String countdown;
   final String stripAsset;
+  final UserStripLayout layout;
   final String? dateLabel;
   final ImageProvider? photo;
   final VoidCallback? onTap;
@@ -243,6 +248,7 @@ class _VintageHangingStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final paper = q.paper;
+    final geo = layout;
 
     return QPressable(
       onTap: onTap,
@@ -253,32 +259,42 @@ class _VintageHangingStrip extends StatelessWidget {
         countdown,
       ].join(', '),
       child: AspectRatio(
-        aspectRatio: UserStripGeometry.aspectRatio,
+        aspectRatio: geo.aspectRatio,
         child: LayoutBuilder(
           builder: (context, constraints) {
             final w = constraints.maxWidth;
             final h = constraints.maxHeight;
 
-            final stripTop = h * UserStripGeometry.stripTop;
-            final stripBottom = h * UserStripGeometry.stripBottom;
-            final stripH = stripBottom - stripTop;
-            final contentLeft = w * UserStripGeometry.contentLeft;
-            final contentRight = w * UserStripGeometry.contentRight;
-            final contentTop =
-                stripTop + stripH * UserStripGeometry.contentPadY;
-            final contentBottom =
-                stripBottom - stripH * UserStripGeometry.contentPadY;
+            final stripTop = h * geo.stripTop;
+            final stripBottom = h * geo.stripBottom;
+            final stripH = (stripBottom - stripTop).clamp(1.0, h);
+            final contentLeft = w * geo.contentLeft;
+            final contentRight = w * geo.contentRight;
+            final contentTop = stripTop + stripH * geo.contentPadY;
+            final contentBottom = stripBottom - stripH * geo.contentPadY;
             final contentH = (contentBottom - contentTop).clamp(1.0, h);
-            final avatarSize = (contentH * 0.92).clamp(32.0, 56.0);
-            final photoGap = w * UserStripGeometry.contentGap;
-            final stampGap = w * UserStripGeometry.countdownGap;
+            // Neon bars are short — size the portrait to the band, with a little
+            // slack so borders/type never trip a 1px overflow.
+            final avatarSize = geo.chainStack
+                ? (contentH * 0.92).clamp(32.0, 56.0)
+                : (contentH * 0.72).clamp(32.0, 52.0);
+            final photoGap = w * geo.contentGap;
+            final stampGap = w * geo.countdownGap;
+            final denseHud = !geo.chainStack;
 
+            final cache = QuietDisplayImage.cacheSize(
+              context,
+              Size(w, h),
+              fit: BoxFit.fill,
+            );
             return Stack(
               fit: StackFit.expand,
               children: [
                 Image.asset(
                   stripAsset,
                   fit: BoxFit.fill,
+                  cacheWidth: cache.$1,
+                  cacheHeight: cache.$2,
                   gaplessPlayback: true,
                 ),
                 Positioned(
@@ -286,63 +302,221 @@ class _VintageHangingStrip extends StatelessWidget {
                   right: w - contentRight,
                   top: contentTop,
                   height: contentH,
-                  child: Row(
-                    children: [
-                      _StripPortrait(
-                        displayName: displayName,
-                        seed: seed,
-                        photo: photo,
-                        heroTag: heroTag,
-                        diameter: avatarSize,
-                      ),
-                      SizedBox(width: photoGap),
-                      Expanded(
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                displayName,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                textScaler: context.nameTextScaler,
-                                style: paper.inked(q.text.personName),
-                              ),
-                              if (dateLabel != null &&
-                                  dateLabel!.isNotEmpty) ...[
-                                SizedBox(height: q.space.hair),
-                                Text(
-                                  dateLabel!,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.clip,
-                                  softWrap: false,
-                                  textScaler: context.structuralTextScaler,
-                                  style: paper.inked(
-                                    q.text.uiMetadata,
-                                    tone: QuietInkTone.secondary,
-                                  ),
-                                ),
-                              ],
-                            ],
-                          ),
+                  child: denseHud
+                      ? _NeonHudStripBody(
+                          displayName: displayName,
+                          seed: seed,
+                          dateLabel: dateLabel,
+                          countdown: countdown,
+                          daysUntil: daysUntil,
+                          photo: photo,
+                          heroTag: heroTag,
+                          avatarSize: avatarSize,
+                          photoGap: photoGap,
+                          stampGap: stampGap,
+                          paper: paper,
+                        )
+                      : _VintageTagStripBody(
+                          displayName: displayName,
+                          seed: seed,
+                          dateLabel: dateLabel,
+                          countdown: countdown,
+                          daysUntil: daysUntil,
+                          photo: photo,
+                          heroTag: heroTag,
+                          avatarSize: avatarSize,
+                          photoGap: photoGap,
+                          stampGap: stampGap,
+                          paper: paper,
                         ),
-                      ),
-                      SizedBox(width: stampGap),
-                      _StampCountdown(
-                        label: countdown,
-                        emphasized: daysUntil == 0,
-                      ),
-                    ],
-                  ),
                 ),
               ],
             );
           },
         ),
       ),
+    );
+  }
+}
+
+/// Neon HUD: avatar left; name + date stack; countdown pinned to the plate's
+/// right edge — fills the bar without a stranded middle void or overflow.
+class _NeonHudStripBody extends StatelessWidget {
+  const _NeonHudStripBody({
+    required this.displayName,
+    required this.seed,
+    required this.countdown,
+    required this.daysUntil,
+    required this.avatarSize,
+    required this.photoGap,
+    required this.stampGap,
+    required this.paper,
+    this.dateLabel,
+    this.photo,
+    this.heroTag,
+  });
+
+  final String displayName;
+  final String seed;
+  final String countdown;
+  final int daysUntil;
+  final double avatarSize;
+  final double photoGap;
+  final double stampGap;
+  final QuietSurfaceInk paper;
+  final String? dateLabel;
+  final ImageProvider? photo;
+  final Object? heroTag;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    final nameStyle = paper.inked(q.text.personName).copyWith(height: 1);
+    final dateStyle = paper
+        .inked(q.text.uiMetadata, tone: QuietInkTone.secondary)
+        .copyWith(height: 1);
+
+    return Row(
+      children: [
+        _StripPortrait(
+          displayName: displayName,
+          seed: seed,
+          photo: photo,
+          heroTag: heroTag,
+          diameter: avatarSize,
+        ),
+        SizedBox(width: photoGap),
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
+                  width: constraints.maxWidth,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              displayName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textScaler: context.nameTextScaler,
+                              style: nameStyle,
+                            ),
+                          ),
+                          SizedBox(width: stampGap),
+                          _StampCountdown(
+                            label: countdown,
+                            emphasized: daysUntil == 0,
+                          ),
+                        ],
+                      ),
+                      if (dateLabel != null && dateLabel!.isNotEmpty)
+                        Text(
+                          dateLabel!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textScaler: context.structuralTextScaler,
+                          style: dateStyle,
+                        ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Vintage parchment tag: name/date left, stamp anchored to the right edge.
+class _VintageTagStripBody extends StatelessWidget {
+  const _VintageTagStripBody({
+    required this.displayName,
+    required this.seed,
+    required this.countdown,
+    required this.daysUntil,
+    required this.avatarSize,
+    required this.photoGap,
+    required this.stampGap,
+    required this.paper,
+    this.dateLabel,
+    this.photo,
+    this.heroTag,
+  });
+
+  final String displayName;
+  final String seed;
+  final String countdown;
+  final int daysUntil;
+  final double avatarSize;
+  final double photoGap;
+  final double stampGap;
+  final QuietSurfaceInk paper;
+  final String? dateLabel;
+  final ImageProvider? photo;
+  final Object? heroTag;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+
+    return Row(
+      children: [
+        _StripPortrait(
+          displayName: displayName,
+          seed: seed,
+          photo: photo,
+          heroTag: heroTag,
+          diameter: avatarSize,
+        ),
+        SizedBox(width: photoGap),
+        Expanded(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  displayName,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textScaler: context.nameTextScaler,
+                  style: paper.inked(q.text.personName),
+                ),
+                if (dateLabel != null && dateLabel!.isNotEmpty) ...[
+                  SizedBox(height: q.space.hair),
+                  Text(
+                    dateLabel!,
+                    maxLines: 1,
+                    overflow: TextOverflow.clip,
+                    softWrap: false,
+                    textScaler: context.structuralTextScaler,
+                    style: paper.inked(
+                      q.text.uiMetadata,
+                      tone: QuietInkTone.secondary,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+        SizedBox(width: stampGap),
+        _StampCountdown(
+          label: countdown,
+          emphasized: daysUntil == 0,
+        ),
+      ],
     );
   }
 }
@@ -364,10 +538,12 @@ class QBirthdayStripChain extends StatelessWidget {
   Widget build(BuildContext context) {
     if (children.isEmpty) return const SizedBox.shrink();
 
-    final usesHangingAsset =
-        context.appTheme.assets.chrome.birthdayStrip != null;
+    final chrome = context.appTheme.assets.chrome;
+    final stripLayout = chrome.birthdayStripLayout;
+    final usesStripAsset = chrome.birthdayStrip != null;
+    final chainStack = stripLayout?.chainStack ?? false;
 
-    if (!usesHangingAsset) {
+    if (!usesStripAsset || !chainStack) {
       final gap = context.quiet.space.sm;
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -380,15 +556,15 @@ class QBirthdayStripChain extends StatelessWidget {
       );
     }
 
+    final geo = stripLayout ?? UserStripGeometry.vintage;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final height = UserStripGeometry.renderedHeightForWidth(width);
-        final advance = UserStripGeometry.chainAdvance(height);
+        final height = geo.renderedHeightForWidth(width);
+        final advance = geo.chainAdvance(height);
         final n = children.length;
-        final pullUp = hangFromDivider
-            ? height * UserStripGeometry.chainTopY
-            : 0.0;
+        final pullUp = hangFromDivider ? height * geo.chainTopY : 0.0;
         final totalHeight = height + (n - 1) * advance - pullUp;
 
         return SizedBox(
@@ -468,7 +644,7 @@ class _StripPortrait extends StatelessWidget {
   }
 }
 
-/// Ink-stamp countdown — rectangular imprint, not a modern pill.
+/// Countdown label — plain stamp type, no box.
 class _StampCountdown extends StatelessWidget {
   const _StampCountdown({
     required this.label,
@@ -483,20 +659,12 @@ class _StampCountdown extends StatelessWidget {
     final q = context.quiet;
     final ink = emphasized ? q.color.accent : q.journal.ink.withValues(alpha: 0.72);
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: ink, width: 1.2),
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: q.space.xs,
-          vertical: q.space.hair,
-        ),
-        child: Text(
-          label,
-          textScaler: context.structuralTextScaler,
-          style: q.text.stampLabel.copyWith(color: ink),
-        ),
+    return Text(
+      label,
+      textScaler: context.structuralTextScaler,
+      style: q.text.stampLabel.copyWith(
+        color: ink,
+        height: 1,
       ),
     );
   }

@@ -5,6 +5,8 @@ import 'package:kin/design/components/navigation/q_primary_nav.dart';
 import 'package:kin/design/theme/app_theme_definition.dart';
 import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
+import 'package:kin/design/tokens/color_tokens.dart';
+import 'package:kin/design/tokens/neon_arcade_tokens.dart';
 import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 
 import '../support/quiet_test_app.dart';
@@ -47,8 +49,13 @@ void main() {
     return tester.getSize(find.byType(QPrimaryNav));
   }
 
+  double opaqueBandHeight(double width, double aspect, double opaque) =>
+      width / aspect * opaque;
+
   group('QPrimaryNav theme-surface geometry', () {
-    testWidgets('Default and Vintage share identical nav bounds', (tester) async {
+    testWidgets('Default stays compact; themed chrome contains opaque band', (
+      tester,
+    ) async {
       final defaultSize = await pumpNav(
         tester,
         theme: const QuietTheme.quietDefault(),
@@ -59,10 +66,36 @@ void main() {
         theme: const QuietTheme.light(),
         appTheme: ProductThemes.vintageDiary,
       );
+      final neonSize = await pumpNav(
+        tester,
+        theme: const QuietTheme.neonArcade(),
+        appTheme: ProductThemes.neonArcade,
+      );
 
       expect(defaultSize.width, 390);
-      expect(vintageSize, defaultSize);
       expect(defaultSize.height, greaterThan(48));
+      expect(defaultSize.height, lessThan(120));
+
+      final vintageOpaque = opaqueBandHeight(
+        390,
+        VintageDiaryAssets.chromeStripAspectRatio,
+        VintageDiaryAssets.chromeStripOpaqueFraction,
+      );
+      final neonOpaque = opaqueBandHeight(
+        390,
+        NeonArcadeAssets.chromeStripAspectRatio,
+        NeonArcadeAssets.chromeStripOpaqueFraction,
+      );
+
+      // Opaque-band floor — not the full transparent asset frame (~130px).
+      expect(vintageSize.height, greaterThanOrEqualTo(vintageOpaque - 0.5));
+      expect(neonSize.height, greaterThanOrEqualTo(neonOpaque - 0.5));
+      expect(vintageSize.height, lessThan(120));
+      expect(neonSize.height, lessThan(120));
+      expect(
+        ProductThemes.vintageDiary.quiet.navigation.surface,
+        ColorTokens.transparent,
+      );
     });
 
     testWidgets('Default paints solid surface — no navStrip asset', (tester) async {
@@ -77,7 +110,7 @@ void main() {
       expect(find.byType(Image), findsNothing);
     });
 
-    testWidgets('Vintage paints configured navStrip inside the same container', (
+    testWidgets('Themed strip cover-zooms opaque band (no bottom-gap pin)', (
       tester,
     ) async {
       await pumpNav(
@@ -98,7 +131,7 @@ void main() {
       expect(image.alignment, Alignment.center);
     });
 
-    testWidgets('navStrip never changes label hit geometry across themes', (
+    testWidgets('nav labels stay hittable across Default and Vintage', (
       tester,
     ) async {
       await pumpNav(

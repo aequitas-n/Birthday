@@ -3,7 +3,8 @@ import 'dart:ui' show Size;
 /// Layout geometry for the People profile card container.
 ///
 /// The **container** owns size. `profile_card.webp` is artwork that fills the
-/// container with cover fit — its pixel aspect ratio does **not** drive layout.
+/// container with cover fit — its pixel aspect ratio does **not** drive layout
+/// unless a theme supplies [AppThemeProfileLayout.aspectRatio].
 abstract final class ProfileCardGeometry {
   /// `profile_card.webp` canvas metadata — for reference only.
   static const double assetCanvasWidth = 842;
@@ -24,6 +25,9 @@ abstract final class ProfileCardGeometry {
   /// Bottom of the photograph window (normalized from top, 0–1).
   static const double photoBottom = 0.66;
 
+  /// Where note/moment peeks begin, as a fraction of **full card height**.
+  static const double notesStartFraction = 0.40;
+
   /// Lower text band as a fraction of card height (ink sits on parchment).
   static const double textBandFraction = 0.18;
 
@@ -35,14 +39,24 @@ abstract final class ProfileCardGeometry {
 
 /// Portrait composition helpers for the People gallery card.
 abstract final class VintagePortraitLayout {
-  static double heightForWidth(double width) =>
-      width / ProfileCardGeometry.aspectRatio;
+  static double heightForWidth(
+    double width, {
+    double aspectRatio = ProfileCardGeometry.aspectRatio,
+  }) =>
+      width / aspectRatio;
 
-  static double widthForHeight(double height) =>
-      height * ProfileCardGeometry.aspectRatio;
+  static double widthForHeight(
+    double height, {
+    double aspectRatio = ProfileCardGeometry.aspectRatio,
+  }) =>
+      height * aspectRatio;
 
-  static double textHeightForWidth(double width) =>
-      heightForWidth(width) * ProfileCardGeometry.textBandFraction;
+  static double textHeightForWidth(
+    double width, {
+    double aspectRatio = ProfileCardGeometry.aspectRatio,
+    double textBandFraction = ProfileCardGeometry.textBandFraction,
+  }) =>
+      heightForWidth(width, aspectRatio: aspectRatio) * textBandFraction;
 
   /// Fit a profile card into [maxWidth] × [maxHeight].
   ///
@@ -52,13 +66,43 @@ abstract final class VintagePortraitLayout {
     required double maxWidth,
     required double maxHeight,
     double widthFraction = 1.0,
+    double aspectRatio = ProfileCardGeometry.aspectRatio,
   }) {
-    final w = maxWidth * widthFraction;
-    final idealH = heightForWidth(w);
-    final h = idealH <= maxHeight ? idealH : maxHeight;
-    return Size(w, h);
+    final maxW = maxWidth * widthFraction;
+    final idealH = heightForWidth(maxW, aspectRatio: aspectRatio);
+    if (idealH <= maxHeight) return Size(maxW, idealH);
+    // Height-bound: shrink width so the plate aspect stays true (no stretch).
+    final h = maxHeight;
+    final w = widthForHeight(h, aspectRatio: aspectRatio);
+    return Size(w <= maxW ? w : maxW, h);
+  }
+
+  /// Fit a People gallery plate into available space using theme layout when
+  /// present, otherwise shared [QuietLayout] gallery constants.
+  static Size fitGalleryCard({
+    required double maxWidth,
+    required double maxHeight,
+    required double widthFraction,
+    required double heightFraction,
+    required double maxHeightCap,
+    required double aspectRatio,
+    double? maxWidthCap,
+  }) {
+    final paneW =
+        maxWidthCap == null ? maxWidth : (maxWidth < maxWidthCap ? maxWidth : maxWidthCap);
+    final cappedH = maxHeight * heightFraction;
+    return fitIn(
+      maxWidth: paneW,
+      maxHeight: cappedH < maxHeightCap ? cappedH : maxHeightCap,
+      widthFraction: widthFraction,
+      aspectRatio: aspectRatio,
+    );
   }
 
   /// Photograph bottom edge (normalized from top).
-  static double photoBottomNorm(double width) => ProfileCardGeometry.photoBottom;
+  static double photoBottomNorm(
+    double width, {
+    double photoBottom = ProfileCardGeometry.photoBottom,
+  }) =>
+      photoBottom;
 }

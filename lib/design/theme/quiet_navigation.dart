@@ -15,22 +15,25 @@ final class QuietNavigation {
     required this.indicator,
   });
 
+  /// Vintage Diary — ink on parchment chrome. Surface is transparent so the
+  /// shell theme backdrop (vintage-bg) continues through the strip's torn
+  /// alpha margins — never a separate cream slab under the bar.
   const QuietNavigation.light()
-    : surface = ColorTokens.vdJournalCardCream,
+    : surface = ColorTokens.transparent,
       border = ColorTokens.vdPaperAged,
       inkActive = ColorTokens.vdInkPrimary,
       inkInactive = ColorTokens.vdInkSecondary,
       indicator = ColorTokens.vdBurgundy;
 
   const QuietNavigation.dark()
-    : surface = ColorTokens.vdJournalCardCream,
+    : surface = ColorTokens.transparent,
       border = ColorTokens.vdPaperAged,
       inkActive = ColorTokens.vdInkPrimary,
       inkInactive = ColorTokens.vdInkSecondary,
       indicator = ColorTokens.vdBurgundyMuted;
 
   const QuietNavigation.amoled()
-    : surface = ColorTokens.vdJournalCardCream,
+    : surface = ColorTokens.transparent,
       border = ColorTokens.vdPaperAged,
       inkActive = ColorTokens.vdInkPrimary,
       inkInactive = ColorTokens.vdInkSecondary,
@@ -44,6 +47,16 @@ final class QuietNavigation {
       inkInactive = ColorTokens.paperInkSecondary,
       indicator = ColorTokens.ember500;
 
+  /// Neon Arcade — dark HUD bar under bottom-navbar.webp; cyan active, magenta
+  /// indicator. Surface is transparent so the shell theme backdrop (arcade-bg)
+  /// continues through the strip's alpha margins — never a separate black slab.
+  const QuietNavigation.neonArcade()
+    : surface = ColorTokens.transparent,
+      border = ColorTokens.naNavBorder,
+      inkActive = ColorTokens.naCyan,
+      inkInactive = ColorTokens.naCardInkMuted,
+      indicator = ColorTokens.naMagenta;
+
   factory QuietNavigation.of({
     required QuietCollection collection,
     required bool dark,
@@ -51,6 +64,9 @@ final class QuietNavigation {
   }) {
     if (collection == QuietCollection.quietDefault) {
       return const QuietNavigation.neutral();
+    }
+    if (collection == QuietCollection.neonArcade) {
+      return const QuietNavigation.neonArcade();
     }
     if (amoled) return const QuietNavigation.amoled();
     if (dark) return const QuietNavigation.dark();

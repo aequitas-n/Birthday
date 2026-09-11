@@ -351,4 +351,48 @@ abstract final class ColorTokens {
   static const vdJournalShadowDark = Color(0x4D000000);
   static const vdJournalShadowAmoled = Color(0x66000000);
   static const vdJournalEdgeAmoled = Color(0xFFC9B8A0);
+
+  // ── Neon Arcade ────────────────────────────────────────────────────────
+  // Sampled from arcade-bg (cool cream canvas), dark HUD cards, magenta/cyan
+  // neon tubes on chrome. Not Vintage parchment and not Default ember paper.
+
+  /// Cool off-white matching arcade-bg centre field.
+  static const naCanvas = Color(0xFFF2F0F7);
+  static const naSurface = Color(0xFFE8E4F2);
+  static const naRaised = Color(0xFFDED8EC);
+  static const naSunken = Color(0xFFD6D0E4);
+  static const naHairline = Color(0xFFB8B0CC);
+  static const naHairlineStrong = Color(0xFF9A90B0);
+
+  static const naInkPrimary = Color(0xFF0B1028);
+  static const naInkSecondary = Color(0xFF2E3458);
+  static const naInkTertiary = Color(0xFF5A6180);
+  static const naInkInverse = Color(0xFFF5F8FF);
+
+  /// Hot magenta from neon tube accents.
+  static const naMagenta = Color(0xFFFF1AB8);
+  static const naMagentaPressed = Color(0xFFE0009E);
+  static const naMagentaWash = Color(0x44FF1AB8);
+
+  /// Electric cyan from HUD glows / eyes.
+  static const naCyan = Color(0xFF00E5FF);
+  static const naCyanMuted = Color(0xFF6AE8F5);
+  static const naYellow = Color(0xFFFFE600);
+
+  /// Dark CRT panel — journal card / calendar / profile interiors.
+  static const naCard = Color(0xFF020616);
+  static const naCardRaised = Color(0xFF121A38);
+  static const naCardSunken = Color(0xFF01030C);
+  /// Primary reading ink on dark HUD sheets / CRT panels.
+  static const naCardInk = Color(0xFFF5F8FF);
+  /// Supporting copy on dark HUD — kept bright for legibility.
+  static const naCardInkMuted = Color(0xFFC2CEEA);
+  static const naCardEdge = Color(0xFF3A4A7A);
+  static const naCardRule = Color(0xFF1A2848);
+  static const naCardShadow = Color(0x6600D4F5);
+
+  static const naNavSurface = Color(0xFF0A1230);
+  static const naNavBorder = Color(0xFF2A3A6A);
+  static const naScrim = Color(0x660B1028);
+  static const naSelection = Color(0x44FF1AB8);
 }

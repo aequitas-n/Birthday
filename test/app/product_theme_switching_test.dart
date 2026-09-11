@@ -9,6 +9,7 @@ import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/repositories/settings_repository_drift.dart';
 import 'package:kin/design/theme/product_theme_id.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
+import 'package:kin/design/tokens/neon_arcade_tokens.dart';
 import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 
 void main() {
@@ -74,7 +75,7 @@ void main() {
             .text
             .expression
             .primaryFamily,
-        'Caveat',
+        'CourierPrime',
       );
       expect(
         container
@@ -83,7 +84,16 @@ void main() {
             .text
             .journalWriting
             .fontFamily,
-        'Caveat',
+        'CourierPrime',
+      );
+      expect(
+        container
+            .read(themePreferenceProvider)
+            .resolve()
+            .text
+            .journalPrompt
+            .fontFamily,
+        isNot('Caveat'),
       );
       expect(
         container
@@ -142,7 +152,16 @@ void main() {
             .text
             .expression
             .primaryFamily,
-        'Caveat',
+        'CourierPrime',
+      );
+      expect(
+        container
+            .read(themePreferenceProvider)
+            .resolve()
+            .text
+            .journalWriting
+            .fontFamily,
+        'CourierPrime',
       );
       expect(
         container
@@ -150,6 +169,61 @@ void main() {
             .resolve()
             .collection,
         QuietCollection.quietDefault,
+      );
+    });
+
+    test('Default → Neon → Vintage isolates assets with no leakage', () async {
+      await container
+          .read(themePreferenceProvider.notifier)
+          .setProductTheme(ProductThemeId.neonArcade);
+      await waitForTheme(ProductThemeId.neonArcade);
+
+      final neon = container.read(themePreferenceProvider).definition.assets;
+      expect(neon.backgrounds.app, NeonArcadeAssets.background);
+      expect(neon.chrome.searchStrip, isNull);
+      expect(neon.chrome.birthdayStrip, NeonArcadeAssets.userStrip);
+      expect(neon.mood.emptyInvite, NeonArcadeAssets.excitedHome);
+      expect(neon.backgrounds.app, isNot(contains('Vintage-Diary')));
+      expect(
+        container.read(themePreferenceProvider).resolve().collection,
+        QuietCollection.neonArcade,
+      );
+      expect(
+        container
+            .read(themePreferenceProvider)
+            .resolve()
+            .text
+            .expression
+            .secondaryFamily,
+        'CourierPrime',
+      );
+
+      await container
+          .read(themePreferenceProvider.notifier)
+          .setProductTheme(ProductThemeId.vintageDiary);
+      await waitForTheme(ProductThemeId.vintageDiary);
+
+      final vin = container.read(themePreferenceProvider).definition.assets;
+      expect(vin.backgrounds.app, VintageDiaryAssets.background);
+      expect(vin.chrome.searchStrip, isNotNull);
+      expect(vin.backgrounds.app, isNot(contains('Neon-Arcade')));
+      expect(
+        container
+            .read(themePreferenceProvider)
+            .resolve()
+            .text
+            .expression
+            .primaryFamily,
+        'Caveat',
+      );
+
+      await container
+          .read(themePreferenceProvider.notifier)
+          .setProductTheme(ProductThemeId.quietDefault);
+      await waitForTheme(ProductThemeId.quietDefault);
+      expect(
+        container.read(themePreferenceProvider).definition.assets.backgrounds.app,
+        isNull,
       );
     });
   });

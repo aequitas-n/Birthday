@@ -244,6 +244,7 @@ void main() {
             theme: theme.value,
             surfaceSize: specimen.value.size,
           );
+          await tester.pumpQuietImages();
           await tester.pump(const Duration(milliseconds: 600));
           await expectLater(
             find.byType(QuietTestApp),

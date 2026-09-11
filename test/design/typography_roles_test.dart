@@ -3,14 +3,104 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/design/tokens/type_tokens.dart';
 
 void main() {
-  group('QuietTypography three-font architecture', () {
+  group('QuietTypography shared roles + theme expression', () {
     const vintage = QuietTypography.vintageDiary();
     const defaults = QuietTypography.quietDefault();
+
+    final personalRoles = <TextStyle Function(QuietTypography)>[
+      (t) => t.diaryNote,
+      (t) => t.journalPrompt,
+      (t) => t.emotionalBody,
+      (t) => t.annotation,
+      (t) => t.journalWriting,
+      (t) => t.handwrittenMd,
+      (t) => t.handwrittenSm,
+      (t) => t.handwrittenLabel,
+    ];
+
+    final editorialRoles = <TextStyle Function(QuietTypography)>[
+      (t) => t.appTitle,
+      (t) => t.pageTitle,
+      (t) => t.sectionTitle,
+      (t) => t.subsectionTitle,
+      (t) => t.displayTitle,
+      (t) => t.emptyStateTitle,
+      (t) => t.personName,
+      (t) => t.memoryTitle,
+      (t) => t.journalTitle,
+      (t) => t.editorialBody,
+      (t) => t.bodyEmphasis,
+      (t) => t.headline,
+      (t) => t.numeralLg,
+      (t) => t.numeralXl,
+    ];
+
+    final chromeRoles = <TextStyle Function(QuietTypography)>[
+      (t) => t.uiButton,
+      (t) => t.uiNavigation,
+      (t) => t.tab,
+      (t) => t.uiLabel,
+      (t) => t.uiBody,
+      (t) => t.uiDate,
+      (t) => t.uiTimestamp,
+      (t) => t.uiCount,
+      (t) => t.uiMetadata,
+      (t) => t.supportingText,
+      (t) => t.uiCaption,
+      (t) => t.body,
+      (t) => t.label,
+      (t) => t.caption,
+      (t) => t.metadata,
+      (t) => t.buttonLabel,
+      (t) => t.decorativeLabel,
+      (t) => t.emptyStateBody,
+      (t) => t.numeralSm,
+      (t) => t.numeralMd,
+      (t) => t.archiveBody,
+      (t) => t.stampLabel,
+      (t) => t.moodLabel,
+    ];
 
     test('product universal is CourierPrime and theme cannot own it', () {
       expect(QuietTypography.universalFamily, 'CourierPrime');
       expect(vintage.expression.archiveFamily, QuietTypography.universalFamily);
       expect(defaults.expression.archiveFamily, QuietTypography.universalFamily);
+    });
+
+    test('Default expression never uses Caveat', () {
+      expect(defaults.expression.primaryFamily, isNot('Caveat'));
+      expect(defaults.expression.secondaryFamily, isNot('Caveat'));
+      for (final role in [...personalRoles, ...editorialRoles, ...chromeRoles]) {
+        expect(role(defaults).fontFamily, isNot('Caveat'));
+      }
+    });
+
+    test('Default personal/journal voice uses CourierPrime', () {
+      expect(defaults.expression.primaryFamily, 'CourierPrime');
+      for (final role in personalRoles) {
+        expect(role(defaults).fontFamily, 'CourierPrime');
+      }
+    });
+
+    test('Default editorial voice uses Fraunces', () {
+      expect(defaults.expression.secondaryFamily, 'Fraunces');
+      for (final role in editorialRoles) {
+        expect(role(defaults).fontFamily, 'Fraunces');
+      }
+    });
+
+    test('Vintage retains Caveat for personal/journal roles', () {
+      expect(vintage.expression.primaryFamily, 'Caveat');
+      expect(vintage.expression.secondaryFamily, 'Fraunces');
+      for (final role in personalRoles) {
+        expect(role(vintage).fontFamily, 'Caveat');
+      }
+    });
+
+    test('Vintage editorial voice stays Fraunces', () {
+      for (final role in editorialRoles) {
+        expect(role(vintage).fontFamily, 'Fraunces');
+      }
     });
 
     for (final entry in [
@@ -21,94 +111,19 @@ void main() {
       final type = entry.$2;
 
       group(label, () {
-        test('handwriting is Caveat; editorial is Fraunces; chrome is Courier', () {
-          expect(type.expression.primaryFamily, 'Caveat');
-          expect(type.expression.secondaryFamily, 'Fraunces');
-        });
-
         test('universal / archive / chrome roles stay on CourierPrime', () {
-          for (final style in [
-            type.uiButton,
-            type.uiNavigation,
-            type.tab,
-            type.uiLabel,
-            type.uiBody,
-            type.uiDate,
-            type.uiTimestamp,
-            type.uiCount,
-            type.uiMetadata,
-            type.supportingText,
-            type.uiCaption,
-            type.body,
-            type.label,
-            type.caption,
-            type.metadata,
-            type.buttonLabel,
-            type.decorativeLabel,
-            type.emptyStateBody,
-            type.numeralSm,
-            type.numeralMd,
-            type.archiveBody,
-            type.stampLabel,
-            type.moodLabel,
-          ]) {
-            expect(style.fontFamily, 'CourierPrime');
+          for (final role in chromeRoles) {
+            expect(role(type).fontFamily, 'CourierPrime');
           }
         });
 
-        test('editorial interface roles use Fraunces', () {
-          expect(type.appTitle.fontFamily, 'Fraunces');
-          expect(type.pageTitle.fontFamily, 'Fraunces');
-          expect(type.sectionTitle.fontFamily, 'Fraunces');
-          expect(type.subsectionTitle.fontFamily, 'Fraunces');
-          expect(type.displayTitle.fontFamily, 'Fraunces');
-          expect(type.emptyStateTitle.fontFamily, 'Fraunces');
-          expect(type.personName.fontFamily, 'Fraunces');
-          expect(type.memoryTitle.fontFamily, 'Fraunces');
-          expect(type.journalTitle.fontFamily, 'Fraunces');
-          expect(type.editorialBody.fontFamily, 'Fraunces');
-          expect(type.bodyEmphasis.fontFamily, 'Fraunces');
-          expect(type.headline.fontFamily, 'Fraunces');
-          expect(type.numeralLg.fontFamily, 'Fraunces');
-          expect(type.numeralXl.fontFamily, 'Fraunces');
-        });
-
-        test('handwritten personal content uses Caveat', () {
-          expect(type.diaryNote.fontFamily, 'Caveat');
-          expect(type.journalPrompt.fontFamily, 'Caveat');
-          expect(type.emotionalBody.fontFamily, 'Caveat');
-          expect(type.annotation.fontFamily, 'Caveat');
-          expect(type.journalWriting.fontFamily, 'Caveat');
-          expect(type.handwrittenMd.fontFamily, 'Caveat');
-          expect(type.handwrittenSm.fontFamily, 'Caveat');
-        });
-
         test('visible styles never use Inter', () {
-          final styles = [
-            type.appTitle,
-            type.pageTitle,
-            type.sectionTitle,
-            type.journalPrompt,
-            type.diaryNote,
-            type.personName,
-            type.memoryTitle,
-            type.editorialBody,
-            type.journalWriting,
-            type.emptyStateTitle,
-            type.emptyStateBody,
-            type.uiButton,
-            type.uiNavigation,
-            type.uiBody,
-            type.uiDate,
-            type.body,
-            type.label,
-            type.buttonLabel,
-            type.voiceXl,
-            type.numeralSm,
-            type.numeralLg,
-          ];
-          for (final style in styles) {
-            expect(style.fontFamily, isNot('Inter'));
+          for (final role in [
+            ...personalRoles,
+            ...editorialRoles,
+            ...chromeRoles.take(8),
+          ]) {
+            expect(role(type).fontFamily, isNot('Inter'));
           }
         });
 
@@ -129,6 +144,13 @@ void main() {
       expect(defaults.journalWriting.fontSize, vintage.journalWriting.fontSize);
       expect(defaults.uiMetadata.fontSize, vintage.uiMetadata.fontSize);
       expect(defaults.personName.fontSize, vintage.personName.fontSize);
+    });
+
+    test('Today empty-journal roles resolve via expression not hardcoded Caveat', () {
+      expect(defaults.journalPrompt.fontFamily, 'CourierPrime');
+      expect(defaults.journalWriting.fontFamily, 'CourierPrime');
+      expect(vintage.journalPrompt.fontFamily, 'Caveat');
+      expect(vintage.journalWriting.fontFamily, 'Caveat');
     });
   });
 }

@@ -5,11 +5,11 @@ import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// The most important component in the app.
 ///
-/// Vintage Diary keeps this chrome-free: typography on the desk. Default wraps
-/// the same hierarchy in a full-width paper strip so Coming up / birthdays
-/// match the journal card weight (~90% of the screen after gutters).
+/// Coming-up rows stay chrome-free on every product theme: typography + avatar
+/// on the canvas (same hierarchy as decorative birthday strips). No paper
+/// capsules — Default matches Vintage / Neon.
 ///
-/// Hierarchy: name → date/place → countdown badge.
+/// Hierarchy: name → date/place → countdown.
 class QPersonRow extends StatelessWidget {
   const QPersonRow({
     required this.displayName,
@@ -64,9 +64,9 @@ class QPersonRow extends StatelessWidget {
         _ => '$daysUntil days',
       };
 
-  /// Default theme: no hanging-tag asset → paper strip chrome.
+  /// Paper capsules are retired — Coming up is bare type on every theme.
   bool _usesPaperStrip(BuildContext context) =>
-      context.appTheme.assets.chrome.birthdayStrip == null;
+      personRowUsesPaperStrip(context);
 
   @override
   Widget build(BuildContext context) {
@@ -217,43 +217,17 @@ class _CountdownBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final Color ink;
-    final Color fill;
-    if (onPaper) {
-      ink = emphasized
-          ? q.color.accent
-          : q.journal.inkMuted;
-      fill = emphasized
-          ? q.color.accentWash
-          : q.journal.paperSunken;
-    } else {
-      ink = emphasized ? q.color.accent : q.color.textSecondary;
-      fill = emphasized ? q.color.accentWash : q.color.sunken;
-    }
+    final ink = emphasized
+        ? q.color.accent
+        : (onPaper ? q.journal.inkMuted : q.color.textSecondary);
 
     return Align(
       alignment: alignStart ? Alignment.centerLeft : Alignment.centerRight,
-      child: DecoratedBox(
-        decoration: ShapeDecoration(
-          color: fill,
-          shape: onPaper
-              ? RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(q.radius.sm),
-                )
-              : const StadiumBorder(),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: onPaper ? q.space.md : q.space.sm,
-            vertical: onPaper ? q.space.xs + 1 : q.space.xs,
-          ),
-          child: Text(
-            label,
-            maxLines: 1,
-            textScaler: context.structuralTextScaler,
-            style: q.text.numeralSm.tinted(ink),
-          ),
-        ),
+      child: Text(
+        label,
+        maxLines: 1,
+        textScaler: context.structuralTextScaler,
+        style: q.text.numeralSm.tinted(ink),
       ),
     );
   }
@@ -268,6 +242,5 @@ double personRowHairlineIndent(BuildContext context) {
 
 /// Whether person rows should use gap separation instead of hairlines.
 ///
-/// True for Default (paper strips); false for Vintage (typography timeline).
-bool personRowUsesPaperStrip(BuildContext context) =>
-    context.appTheme.assets.chrome.birthdayStrip == null;
+/// Always false — Coming up is bare type on Default, Vintage, and Neon.
+bool personRowUsesPaperStrip(BuildContext context) => false;

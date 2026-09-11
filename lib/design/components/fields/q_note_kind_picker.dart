@@ -63,7 +63,8 @@ class QPill extends StatelessWidget {
     if (onParchment) {
       fill = selected ? i.accent : i.input;
       border = selected ? i.accent : i.inputBorder;
-      ink = selected ? i.primaryAction : i.ink;
+      // Ink on solid accent — never primaryAction (same hue as the fill on Neon).
+      ink = selected ? i.primaryActionInk : i.ink;
     } else {
       fill = selected ? c.accentWash : c.surface;
       border = selected ? c.accent : c.hairline;

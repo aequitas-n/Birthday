@@ -201,6 +201,9 @@ void main() {
     for (var i = 0; i < 12; i++) {
       await tester.pump(const Duration(milliseconds: 50));
     }
+    // ResizeImage / WebP codecs need real wall time (fake-async pump alone
+    // leaves Vintage textures unloaded).
+    await tester.pumpQuietImages();
   }
 
   for (final themeEntry in quietThemes.entries) {

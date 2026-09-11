@@ -86,16 +86,16 @@ class _ProfileCreationChooserSheet extends StatelessWidget {
           Text(
             'Link someone you already remember by date, '
             'or start fresh with a new birthday.',
-            style: q.text.body.tinted(q.color.textSecondary),
+            style: q.text.body.tinted(context.controlInkSecondary),
           ),
           SizedBox(height: q.space.xl),
-          QButton(
+          QButton.primary(
             label: 'Link Existing Birthday',
             onPressed: () => Navigator.of(context).pop(
               _ProfileCreationStart.linkExisting,
             ),
           ),
-          const QHairline(),
+          SizedBox(height: q.space.sm),
           QButton(
             label: 'Create New Birthday',
             onPressed: () => Navigator.of(context).pop(
@@ -121,7 +121,7 @@ class _LinkExistingBirthdaySheet extends ConsumerWidget {
       child: unlinked.isEmpty
           ? Text(
               'Every birthday already has a relationship profile.',
-              style: q.text.body.tinted(q.color.textSecondary),
+              style: q.text.body.tinted(context.controlInkSecondary),
             )
           : Column(
               mainAxisSize: MainAxisSize.min,

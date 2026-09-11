@@ -38,8 +38,8 @@ void main() {
   group('QuietNavigation', () {
     const nav = QuietNavigation.light();
 
-    test('nav surface matches Journal-Card cream', () {
-      expect(nav.surface, ColorTokens.vdJournalCardCream);
+    test('nav surface is transparent so vintage-bg continues under chrome', () {
+      expect(nav.surface, ColorTokens.transparent);
       expect(nav.surface, isNot(ColorTokens.vdDiaryCanvas));
       expect(nav.inkActive, ColorTokens.vdInkPrimary);
       expect(nav.indicator, ColorTokens.vdBurgundy);
