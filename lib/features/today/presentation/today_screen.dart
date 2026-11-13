@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/journal_memory_launcher.dart';
 import 'package:kin/app/person_editor_launcher.dart';
+import 'package:kin/app/phase5_diag.dart';
+import 'package:kin/app/phase6_diag.dart';
 import 'package:kin/app/router.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
@@ -67,6 +69,8 @@ class TodayScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return Phase5Diag.timedValue('today_build', () {
+    return Phase6Diag.timedValue('today_build', () {
     final q = context.quiet;
     final space = q.space;
     final today = ref.watch(journalTodayProvider);
@@ -84,6 +88,9 @@ class TodayScreen extends ConsumerWidget {
       ...ref.watch(todayActiveRemindersProvider),
     ]..sort((a, b) => a.localTime.compareTo(b.localTime));
 
+    if (!peopleLoading) {
+      Phase6Diag.onTodayUsable();
+    }
     return QScreen(
       child: QMeasure(
         child: Column(
@@ -158,6 +165,8 @@ class TodayScreen extends ConsumerWidget {
         ),
       ),
     );
+    });
+    });
   }
 
   Future<void> _addMemory(

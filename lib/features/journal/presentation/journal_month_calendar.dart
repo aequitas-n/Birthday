@@ -47,31 +47,56 @@ class JournalMonthCalendar extends StatelessWidget {
                     child: Text(
                       label,
                       textScaler: context.structuralTextScaler,
-                      style: q.inked(q.text.decorativeLabel, surface: QuietSurfaceKind.paper, tone: QuietInkTone.secondary),
+                      style: q.inked(
+                        q.text.decorativeLabel,
+                        surface: QuietSurfaceKind.paper,
+                        tone: QuietInkTone.secondary,
+                      ),
                     ),
                   ),
                 ),
             ],
           ),
           SizedBox(height: q.space.sm),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 7,
-              mainAxisSpacing: 2,
-              crossAxisSpacing: 2,
-            ),
-            itemCount: cells.length,
-            itemBuilder: (context, index) {
-              final cell = cells[index];
-              final marker = markerByDate[cell.date.storageKey];
-              return _DayCell(
-                date: cell.date,
-                inMonth: cell.inMonth,
-                isToday: cell.date == today,
-                marker: marker,
-                onTap: cell.inMonth ? () => onDaySelected(cell.date) : null,
+          // Fixed-height grid: avoid shrinkWrap, which forces GridView to
+          // measure every cell to size itself (Phase 7/8 first-visit cost).
+          LayoutBuilder(
+            builder: (context, constraints) {
+              const crossAxisCount = 7;
+              const mainAxisSpacing = 2.0;
+              const crossAxisSpacing = 2.0;
+              final width = constraints.maxWidth;
+              final cellExtent =
+                  (width - (crossAxisCount - 1) * crossAxisSpacing) /
+                  crossAxisCount;
+              final rows = (cells.length / crossAxisCount).ceil();
+              final gridHeight =
+                  rows * cellExtent + (rows - 1) * mainAxisSpacing;
+
+              return SizedBox(
+                height: gridHeight,
+                child: GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: mainAxisSpacing,
+                    crossAxisSpacing: crossAxisSpacing,
+                  ),
+                  itemCount: cells.length,
+                  itemBuilder: (context, index) {
+                    final cell = cells[index];
+                    final marker = markerByDate[cell.date.storageKey];
+                    return _DayCell(
+                      date: cell.date,
+                      inMonth: cell.inMonth,
+                      isToday: cell.date == today,
+                      marker: marker,
+                      onTap: cell.inMonth
+                          ? () => onDaySelected(cell.date)
+                          : null,
+                    );
+                  },
+                ),
               );
             },
           ),

@@ -1,0 +1,5 @@
+ARMED; recording 12s
+WROTE 7441 -> e:\~Work\Birthday\tmp\phase7\cold_kinapp.json
+=== Top 50 by max µs ===
+=== BUILD-like events (top 40) ===
+=== PAINT-like events (top 40) ===

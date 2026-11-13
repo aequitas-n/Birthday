@@ -25,6 +25,12 @@ class PortraitGalleryCarousel extends ConsumerStatefulWidget {
 
   final List<GalleryEntry> entries;
 
+  @visibleForTesting
+  static int debugBuildCount = 0;
+
+  @visibleForTesting
+  static void debugResetBuildCount() => debugBuildCount = 0;
+
   @override
   ConsumerState<PortraitGalleryCarousel> createState() =>
       _PortraitGalleryCarouselState();
@@ -35,7 +41,11 @@ class _PortraitGalleryCarouselState
   static const _loopBlocks = 500;
 
   PageController? _controller;
-  double _page = 0;
+
+  /// Settled virtual page index. Updated via [PageView.onPageChanged] only —
+  /// not on every scroll tick — so swipe animation does not rebuild the
+  /// carousel (indicator + heroTag only need the settled page).
+  var _activePage = 0;
   var _baseItemCount = 0;
   var _initialPage = 0;
 
@@ -89,29 +99,30 @@ class _PortraitGalleryCarouselState
 
     _baseItemCount = count;
     _initialPage = _loops ? count * (_loopBlocks ~/ 2) : 0;
-    _page = _initialPage.toDouble();
+    _activePage = _initialPage;
 
-    final created = PageController(
+    return _controller = PageController(
       viewportFraction: viewportFraction,
       initialPage: _initialPage,
     );
-    created.addListener(() {
-      if (!created.hasClients) return;
-      final page = created.page;
-      if (page != null && page != _page) {
-        setState(() => _page = page);
-      }
-    });
-    return _controller = created;
+  }
+
+  void _onPageChanged(int page) {
+    if (page == _activePage) return;
+    setState(() => _activePage = page);
   }
 
   @override
   Widget build(BuildContext context) {
+    assert(() {
+      PortraitGalleryCarousel.debugBuildCount++;
+      return true;
+    }());
     final q = context.quiet;
     final memories =
         ref.watch(galleryMemorySummariesProvider).asData?.value ?? const {};
     final controller = _controllerFor(q.layout.galleryViewportFraction);
-    final realActive = _realIndex(_page.round());
+    final realActive = _realIndex(_activePage);
     final pageCount = _itemCount;
     final showIndicator = pageCount > 1;
     final indicatorIndex = realActive.clamp(0, pageCount - 1);
@@ -133,9 +144,10 @@ class _PortraitGalleryCarouselState
                 controller: controller,
                 itemCount: _virtualCount,
                 clipBehavior: Clip.none,
+                onPageChanged: _onPageChanged,
                 itemBuilder: (context, index) {
                   final real = _realIndex(index);
-                  final isSettledFront = (_page - index).abs() < 0.5;
+                  final isSettledFront = index == _activePage;
 
                   final child = real == widget.entries.length
                       ? AddProfileCarouselCard(
@@ -195,7 +207,8 @@ class _PortraitGalleryCarouselState
       maxHeight: maxHeight,
       widthFraction:
           layout.galleryCardWidthFraction ?? q.layout.galleryCardWidthFraction,
-      heightFraction: layout.galleryCardHeightFraction ??
+      heightFraction:
+          layout.galleryCardHeightFraction ??
           q.layout.galleryCardHeightFraction,
       maxHeightCap:
           layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,

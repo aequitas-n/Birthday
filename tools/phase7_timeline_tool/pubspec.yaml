@@ -1,0 +1,6 @@
+name: phase7_vm_timeline
+publish_to: none
+environment:
+  sdk: ^3.10.0
+dependencies:
+  vm_service: ^15.0.0

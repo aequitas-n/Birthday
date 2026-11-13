@@ -47,7 +47,8 @@ abstract final class MoodIllustrationMetrics {
     MoodIllustrationSize.todayPreview => 144,
   };
 
-  /// Intrinsic asset ratio (mood WebPs keep the original 1230∶1278 proportions).
+  /// Mood WebP aspect (Vintage + Neon moods share the 1230∶1278 proportions;
+  /// sources are display-budgeted at max edge 768).
   static const double aspectRatio = 1230 / 1278;
 
   static double widthFor(MoodIllustrationSize size) =>

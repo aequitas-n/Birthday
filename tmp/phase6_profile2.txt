@@ -1,0 +1,101 @@
+﻿
+09-11 23:49:44.324  2674  2674 I flutter : PHASE6 rss_boot bytes=204460032 ms=0
+09-11 23:49:44.324  2674  2674 I flutter : PHASE6 ensureInitialized_begin ms=2
+09-11 23:49:44.335  2674  2674 I flutter : PHASE6 ensureInitialized_done ms=13
+09-11 23:49:44.336  2674  2674 I flutter : PHASE6 desktopShell_done ms=13
+09-11 23:49:44.337  2674  2674 I flutter : PHASE6 runApp ms=14
+09-11 23:49:44.344  2674  2674 I flutter : PHASE6 settingsOpen_begin ms=21
+09-11 23:49:44.364  2674  2674 I flutter : PHASE6 firstFlutterFrame ms=42
+09-11 23:49:44.364  2674  2674 I flutter : PHASE6 whiteWindow_begin ms=42
+09-11 23:49:44.364  2674  2674 I flutter : PHASE6 tzPrewarm_begin ms=42
+09-11 23:49:44.398  2674  2674 I flutter : PHASE6 tzPrewarm_done_33ms ms=76
+09-11 23:49:45.313  2674  2674 I Choreographer: Skipped 36 frames!  The application may be doing too much work on its 
+main thread.
+09-11 23:49:45.348  2674  2674 I flutter : PHASE6 settingsOpen_done ms=1026
+09-11 23:49:45.349  2674  2674 I flutter : PHASE6 whiteFrames_at_settingsOpen_done count=0 buildMs=0 rasterMs=0 
+worstTotalMs=0 at=1026
+09-11 23:49:45.349  2674  2674 I flutter : PHASE6 rss_settingsOpen_done bytes=209223680 ms=1026
+09-11 23:49:45.349  2674  2674 I flutter : PHASE6 notifColdStart_begin ms=1027
+09-11 23:49:45.370  2674  2674 I flutter : PHASE6 whiteFrame buildMs=0 rasterMs=41 vsyncMs=31 totalMs=43 at=1047
+09-11 23:49:45.561  2674  2674 I flutter : PHASE6 notifInitialize_done_210ms ms=1239
+09-11 23:49:45.651  2674  2674 I flutter : PHASE6 whiteFrame buildMs=0 rasterMs=24 vsyncMs=98 totalMs=25 at=1329
+09-11 23:49:45.692  2674  2674 I flutter : PHASE6 notifSyncStartup_done_130ms ms=1370
+09-11 23:49:45.692  2674  2674 I flutter : PHASE6 notifColdStart_done_341ms ms=1370
+09-11 23:49:45.692  2674  2674 I flutter : PHASE6 whiteFrames_at_beforeKinApp count=2 buildMs=1 rasterMs=67 
+worstTotalMs=43 at=1370
+09-11 23:49:45.693  2674  2674 I flutter : PHASE6 whiteWindow_end ms=1370
+09-11 23:49:45.693  2674  2674 I flutter : PHASE6 rss_beforeKinApp bytes=213233664 ms=1370
+09-11 23:49:45.693  2674  2674 I flutter : PHASE6 imageCache_beforeKinApp currentSize=0 currentSizeBytes=0 ms=1370
+09-11 23:49:45.693  2674  2674 I flutter : PHASE6 postMountWindow_begin ms=1370
+09-11 23:49:45.693  2674  2674 I flutter : PHASE6 appReady_setState_begin ms=1370
+09-11 23:49:45.693  2674  2674 I flutter : PHASE6 appReady_setState_end ms=1370
+09-11 23:49:45.714  2674  2674 I flutter : PHASE6 today_build sync_ms=3 at=1392
+09-11 23:49:45.735  2674  2674 I flutter : PHASE6 kinApp_firstFrame ms=1412
+09-11 23:49:45.735  2674  2674 I flutter : PHASE6 imageCache_kinApp_firstFrame currentSize=0 currentSizeBytes=0 ms=1412
+09-11 23:49:45.770  2674  2674 I flutter : PHASE6 todayUsable_peopleReady ms=1447
+09-11 23:49:45.770  2674  2674 I flutter : PHASE6 rss_todayUsable bytes=228626432 ms=1448
+09-11 23:49:45.770  2674  2674 I flutter : PHASE6 imageCache_todayUsable currentSize=0 currentSizeBytes=0 ms=1448
+09-11 23:49:45.770  2674  2674 I flutter : PHASE6 today_build sync_ms=0 at=1448
+09-11 23:49:45.824  2674  2674 I flutter : PHASE6 today_build sync_ms=0 at=1502
+09-11 23:49:45.932  2674  2674 I flutter : PHASE6 frame i=1 buildMs=31 rasterMs=73 vsyncMs=1 spanMs=107 totalMs=105 
+EXPENSIVE at=1609
+09-11 23:49:45.932  2674  2674 I flutter : PHASE6 frame i=2 buildMs=20 rasterMs=43 vsyncMs=16 spanMs=143 totalMs=64 
+EXPENSIVE at=1610
+09-11 23:49:45.932  2674  2674 I flutter : PHASE6 frame i=3 buildMs=3 rasterMs=18 vsyncMs=5 spanMs=96 totalMs=22 
+EXPENSIVE at=1610
+09-11 23:49:45.933  2674  2674 I flutter : PHASE6 frame i=4 buildMs=2 rasterMs=13 vsyncMs=1 spanMs=28 totalMs=16 
+at=1610
+09-11 23:49:46.045  2674  2674 I flutter : PHASE6 frame i=5 buildMs=1 rasterMs=12 vsyncMs=2 spanMs=25 totalMs=14 
+at=1723
+09-11 23:49:49.696  2674  2674 I flutter : PHASE6 postMountWindow_end expensiveFrames=3 worstFrameMs=105 
+framesLogged=5 at=5373
+09-11 23:49:49.696  2674  2674 I flutter : PHASE6 rss_postMountWindow_end bytes=224284672 ms=5373
+09-11 23:49:49.696  2674  2674 I flutter : PHASE6 imageCache_postMountWindow_end currentSize=4 
+currentSizeBytes=11608268 ms=5373
+09-11 23:49:53.015  2674  2674 I flutter : PHASE6 tab_journal ms=8692
+09-11 23:49:53.015  2674  2674 I flutter : PHASE6 rss_tab_journal bytes=225579008 ms=8693
+09-11 23:49:53.015  2674  2674 I flutter : PHASE6 imageCache_tab_journal currentSize=4 currentSizeBytes=11608268 
+ms=8693
+09-11 23:49:53.075  2674  2674 I flutter : PHASE6 tabFrame_journal ms=8752
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=1 buildMs=53 rasterMs=102 vsyncMs=2 spanMs=159 totalMs=156 
+EXPENSIVE at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=2 buildMs=5 rasterMs=17 vsyncMs=7 spanMs=111 totalMs=23 
+EXPENSIVE at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=3 buildMs=1 rasterMs=16 vsyncMs=1 spanMs=28 totalMs=18 
+at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=4 buildMs=0 rasterMs=15 vsyncMs=7 spanMs=27 totalMs=16 
+at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=5 buildMs=0 rasterMs=13 vsyncMs=1 spanMs=26 totalMs=14 
+at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=6 buildMs=0 rasterMs=17 vsyncMs=2 spanMs=28 totalMs=18 
+EXPENSIVE at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=7 buildMs=0 rasterMs=16 vsyncMs=1 spanMs=29 totalMs=17 
+at=8973
+09-11 23:49:53.296  2674  2674 I flutter : PHASE6 frame i=8 buildMs=0 rasterMs=13 vsyncMs=1 spanMs=26 totalMs=15 
+at=8973
+09-11 23:49:55.018  2674  2674 I flutter : PHASE6 tabWindow_end_journal expensiveFrames=6 worstFrameMs=156 at=10695
+09-11 23:49:56.093  2674  2674 I flutter : PHASE6 tab_kin ms=11770
+09-11 23:49:56.093  2674  2674 I flutter : PHASE6 rss_tab_kin bytes=224141312 ms=11770
+09-11 23:49:56.093  2674  2674 I flutter : PHASE6 imageCache_tab_kin currentSize=5 currentSizeBytes=15410768 ms=11770
+09-11 23:49:56.116  2674  2674 I flutter : PHASE6 tabFrame_kin ms=11794
+09-11 23:49:56.266  2674  2674 I flutter : PHASE6 frame i=1 buildMs=12 rasterMs=4 vsyncMs=2 spanMs=19 totalMs=17 
+at=11944
+09-11 23:49:56.266  2674  2674 I flutter : PHASE6 frame i=2 buildMs=1 rasterMs=39 vsyncMs=1 spanMs=43 totalMs=41 
+EXPENSIVE at=11944
+09-11 23:49:56.266  2674  2674 I flutter : PHASE6 frame i=3 buildMs=1 rasterMs=67 vsyncMs=1 spanMs=96 totalMs=69 
+EXPENSIVE at=11944
+09-11 23:49:56.267  2674  2674 I flutter : PHASE6 frame i=4 buildMs=0 rasterMs=15 vsyncMs=1 spanMs=80 totalMs=17 
+at=11944
+09-11 23:49:56.394  2674  2674 I flutter : PHASE6 frame i=5 buildMs=3 rasterMs=14 vsyncMs=3 spanMs=29 totalMs=17 
+at=12072
+09-11 23:49:56.394  2674  2674 I flutter : PHASE6 frame i=6 buildMs=1 rasterMs=14 vsyncMs=1 spanMs=28 totalMs=17 
+at=12072
+09-11 23:49:56.394  2674  2674 I flutter : PHASE6 frame i=7 buildMs=2 rasterMs=16 vsyncMs=1 spanMs=29 totalMs=19 
+EXPENSIVE at=12072
+09-11 23:49:56.394  2674  2674 I flutter : PHASE6 frame i=8 buildMs=0 rasterMs=12 vsyncMs=2 spanMs=25 totalMs=13 
+at=12072
+09-11 23:49:56.514  2674  2674 I flutter : PHASE6 frame i=13 buildMs=0 rasterMs=18 vsyncMs=1 spanMs=27 totalMs=19 
+EXPENSIVE at=12191
+09-11 23:49:58.094  2674  2674 I flutter : PHASE6 tabWindow_end_kin expensiveFrames=10 worstFrameMs=156 at=13772
+
+

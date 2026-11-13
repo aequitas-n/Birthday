@@ -1,0 +1,170 @@
+{
+  "type": "Phase7TimelineDump",
+  "eventCount": 16,
+  "traceEvents": [
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133435156033616,
+      "args": {
+        "name": "1.ui (133435156033616)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420292584480,
+      "args": {
+        "name": "DartWorker (133420292584480)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420371006496,
+      "args": {
+        "name": "DartWorker (133420371006496)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420407723040,
+      "args": {
+        "name": "FlutterConcurrentMessageLoopWorker (133420407723040)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420293682208,
+      "args": {
+        "name": "DartWorker (133420293682208)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420384334880,
+      "args": {
+        "name": "Dart Profiler ThreadInterrupter (133420384334880)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420382139424,
+      "args": {
+        "name": "DartWorker (133420382139424)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420383237152,
+      "args": {
+        "name": "Dart Profiler SampleBlockProcessor (133420383237152)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420248171552,
+      "args": {
+        "name": "DartWorker (133420248171552)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420406658080,
+      "args": {
+        "name": "FlutterConcurrentMessageLoopWorker (133420406658080)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420510430240,
+      "args": {
+        "name": "1.raster (133420510430240)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420508283936,
+      "args": {
+        "name": "1.io (133420508283936)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133422702130208,
+      "args": {
+        "name": "DartWorker (133422702130208)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3083,
+      "tid": 133420372104224,
+      "args": {
+        "name": "DartWorker (133420372104224)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "Dart_IntegerFitsIntoInt64",
+      "cat": "API",
+      "tid": 133422702130208,
+      "pid": 3083,
+      "ts": 265555793967,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/2449413817973911",
+        "isolateGroupId": "isolateGroups/8028482061320597"
+      }
+    },
+    {
+      "name": "Dart_IntegerFitsIntoInt64",
+      "cat": "API",
+      "tid": 133422702130208,
+      "pid": 3083,
+      "ts": 265555794011,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/2449413817973911",
+        "isolateGroupId": "isolateGroups/8028482061320597"
+      }
+    }
+  ]
+}

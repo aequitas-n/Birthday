@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kin/app/phase6_diag.dart';
+import 'package:kin/app/phase7_diag.dart';
 import 'package:kin/design/components/navigation/q_primary_nav.dart';
 import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 
@@ -80,9 +82,17 @@ class AppShellState extends State<AppShell> {
 
   void _goBranch(int index) {
     _mutatingBranch = true;
+    final name = switch (index) {
+      0 => 'today',
+      1 => 'kin',
+      _ => 'journal',
+    };
+    Phase6Diag.onTab(name);
+    Phase7Diag.mark('tab_$name');
     _shell.goBranch(index);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _mutatingBranch = false;
+      Phase6Diag.mark('tabFrame_$name');
     });
   }
 

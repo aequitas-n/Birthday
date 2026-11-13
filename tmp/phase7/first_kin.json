@@ -1,0 +1,406 @@
+{
+  "type": "Phase7TimelineDump",
+  "eventCount": 37,
+  "traceEvents": [
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133435156033616,
+      "args": {
+        "name": "1.ui (133435156033616)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420513068064,
+      "args": {
+        "name": "1.raster (133420513068064)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133422670668832,
+      "args": {
+        "name": "DartWorker (133422670668832)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133422661993504,
+      "args": {
+        "name": "DartWorker (133422661993504)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420310279200,
+      "args": {
+        "name": "DartWorker (133420310279200)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420402332704,
+      "args": {
+        "name": "Dart Profiler SampleBlockProcessor (133420402332704)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420510921760,
+      "args": {
+        "name": "1.io (133420510921760)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133422669571104,
+      "args": {
+        "name": "DartWorker (133422669571104)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420399039520,
+      "args": {
+        "name": "DartWorker (133420399039520)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420403430432,
+      "args": {
+        "name": "Dart Profiler ThreadInterrupter (133420403430432)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420312474656,
+      "args": {
+        "name": "DartWorker (133420312474656)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133422668473376,
+      "args": {
+        "name": "DartWorker (133422668473376)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133422667375648,
+      "args": {
+        "name": "DartWorker (133422667375648)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420401234976,
+      "args": {
+        "name": "DartWorker (133420401234976)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420426818592,
+      "args": {
+        "name": "FlutterConcurrentMessageLoopWorker (133420426818592)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420425753632,
+      "args": {
+        "name": "FlutterConcurrentMessageLoopWorker (133420425753632)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420400137248,
+      "args": {
+        "name": "DartWorker (133420400137248)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420311376928,
+      "args": {
+        "name": "DartWorker (133420311376928)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "thread_name",
+      "ph": "M",
+      "pid": 3338,
+      "tid": 133420301009952,
+      "args": {
+        "name": "DartWorker (133420301009952)",
+        "mode": "basic"
+      }
+    },
+    {
+      "name": "DartIsolate::HandleMessage",
+      "cat": "Embedder",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864405869,
+      "ph": "B",
+      "args": {}
+    },
+    {
+      "name": "Dart_HandleMessage",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864405990,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_NewInteger",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406061,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_NewInteger",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406078,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_NewInteger",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406114,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_NewInteger",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406132,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_StringToUTF8",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406203,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_StringToUTF8",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406211,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_SendPortGetId",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406364,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_SendPortGetId",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406395,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_SendPortGetId",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406442,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_SendPortGetId",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406455,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "Dart_HandleMessage",
+      "cat": "API",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406481,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/5372859365679471",
+        "isolateGroupId": "isolateGroups/2298283814841366"
+      }
+    },
+    {
+      "name": "DartIsolate::HandleMessage",
+      "cat": "Embedder",
+      "tid": 133435156033616,
+      "pid": 3338,
+      "ts": 265864406494,
+      "ph": "E",
+      "args": {}
+    },
+    {
+      "name": "Dart_IntegerFitsIntoInt64",
+      "cat": "API",
+      "tid": 133422670668832,
+      "pid": 3338,
+      "ts": 265871041013,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/896762106492851",
+        "isolateGroupId": "isolateGroups/8398066468967396"
+      }
+    },
+    {
+      "name": "Dart_IntegerFitsIntoInt64",
+      "cat": "API",
+      "tid": 133422670668832,
+      "pid": 3338,
+      "ts": 265871041221,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/896762106492851",
+        "isolateGroupId": "isolateGroups/8398066468967396"
+      }
+    },
+    {
+      "name": "Dart_IntegerFitsIntoInt64",
+      "cat": "API",
+      "tid": 133422670668832,
+      "pid": 3338,
+      "ts": 265871042637,
+      "ph": "B",
+      "args": {
+        "isolateId": "isolates/896762106492851",
+        "isolateGroupId": "isolateGroups/8398066468967396"
+      }
+    },
+    {
+      "name": "Dart_IntegerFitsIntoInt64",
+      "cat": "API",
+      "tid": 133422670668832,
+      "pid": 3338,
+      "ts": 265871042752,
+      "ph": "E",
+      "args": {
+        "isolateId": "isolates/896762106492851",
+        "isolateGroupId": "isolateGroups/8398066468967396"
+      }
+    }
+  ]
+}

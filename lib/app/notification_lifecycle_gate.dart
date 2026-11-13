@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
+import 'package:kin/app/phase5_diag.dart';
 import 'package:kin/app/router.dart';
 import 'package:kin/domain/models/notification_plan.dart';
 import 'package:kin/notifications/application/notification_coordinator.dart';
@@ -39,8 +40,11 @@ class _NotificationLifecycleGateState
         .read(notificationCoordinatorProvider)
         .launchRequests
         .listen(_openLaunchRequest);
+    // Cold-start initialize + synchronizeStartup already ran on the white
+    // bootstrap canvas (see bootstrap.dart). After first paint, only consume
+    // launch deep-links and arm resume refresh.
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      unawaited(_bootstrapNotifications());
+      unawaited(_finishNotificationBootstrap());
     });
   }
 
@@ -62,15 +66,15 @@ class _NotificationLifecycleGateState
     }
   }
 
-  Future<void> _bootstrapNotifications() async {
+  Future<void> _finishNotificationBootstrap() async {
+    Phase5Diag.mark('notifBootstrap_begin');
     final coordinator = ref.read(notificationCoordinatorProvider);
-    await coordinator.initialize();
     final launchRequest = await coordinator.consumeLaunchRequest();
-    await coordinator.synchronizeStartup();
     ref
       ..invalidate(notificationStatusProvider)
       ..invalidate(notificationDebugSnapshotProvider);
     _bootstrapped = true;
+    Phase5Diag.mark('notifBootstrap_end');
     if (!mounted || launchRequest == null) {
       return;
     }

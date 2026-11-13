@@ -1,0 +1,5 @@
+ARMED; recording 10s
+WROTE 3510 -> e:\~Work\Birthday\tmp\phase7\first_kin_only.json
+=== Top 50 by max µs ===
+=== BUILD-like events (top 40) ===
+=== PAINT-like events (top 40) ===

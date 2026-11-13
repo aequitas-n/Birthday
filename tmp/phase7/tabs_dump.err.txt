@@ -1,0 +1,5 @@
+ARMED; recording 18s
+WROTE 14256 -> e:\~Work\Birthday\tmp\phase7\tabs_session.json
+=== Top 50 by max µs ===
+=== BUILD-like events (top 40) ===
+=== PAINT-like events (top 40) ===

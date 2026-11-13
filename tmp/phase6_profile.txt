@@ -1,0 +1,106 @@
+﻿
+09-11 23:47:10.520   775   856 W ActivityTaskManager: callingPackage for (uid=2000, pid=2452) has no WPC
+09-11 23:47:10.548   775   856 I ActivityTaskManager: START u0 {flg=0x10000000 xflg=0x5 
+cmp=com.kinapp.kin/.MainActivity} with LAUNCH_SINGLE_TOP from uid 2000 (com.android.shell) (BAL_ALLOW_PERMISSION) 
+result code=0
+09-11 23:47:11.702  2455  2474 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+09-11 23:47:12.125  2455  2485 I flutter : The Dart VM service is listening on http://127.0.0.1:40897/g_sMLFG_RHM=/
+09-11 23:47:13.012  2455  2478 I flutter : 
+[IMPORTANT:flutter/shell/platform/android/android_context_gl_impeller.cc(104)] Using the Impeller rendering backend 
+(OpenGLES).
+09-11 23:47:13.186  2455  2455 I flutter : PHASE6 rss_boot bytes=203849728 ms=0
+09-11 23:47:13.186  2455  2455 I flutter : PHASE5 ensureInitialized_begin ms=0
+09-11 23:47:13.186  2455  2455 I flutter : PHASE6 ensureInitialized_begin ms=0
+09-11 23:47:13.240  2455  2455 I flutter : PHASE5 ensureInitialized_done ms=54
+09-11 23:47:13.240  2455  2455 I flutter : PHASE6 ensureInitialized_done ms=55
+09-11 23:47:13.242  2455  2455 I flutter : PHASE5 desktopShell_done ms=56
+09-11 23:47:13.242  2455  2455 I flutter : PHASE6 desktopShell_done ms=56
+09-11 23:47:13.245  2455  2455 I flutter : PHASE5 runApp ms=59
+09-11 23:47:13.245  2455  2455 I flutter : PHASE6 runApp ms=59
+09-11 23:47:13.260  2455  2455 I flutter : PHASE5 settingsOpen_begin ms=74
+09-11 23:47:13.260  2455  2455 I flutter : PHASE6 settingsOpen_begin ms=74
+09-11 23:47:13.286  2455  2455 I flutter : PHASE5 firstFlutterFrame ms=100
+09-11 23:47:13.286  2455  2455 I flutter : PHASE6 firstFlutterFrame ms=100
+09-11 23:47:13.286  2455  2455 I flutter : PHASE6 whiteWindow_begin ms=101
+09-11 23:47:13.286  2455  2455 I flutter : PHASE5 tzPrewarm_begin ms=101
+09-11 23:47:13.286  2455  2455 I flutter : PHASE6 tzPrewarm_begin ms=101
+09-11 23:47:13.322  2455  2455 I flutter : PHASE5 tzPrewarm_done_34ms ms=136
+09-11 23:47:13.322  2455  2455 I flutter : PHASE6 tzPrewarm_done_35ms ms=136
+09-11 23:47:14.186  2455  2455 I Choreographer: Skipped 35 frames!  The application may be doing too much work on its 
+main thread.
+09-11 23:47:14.214  2455  2455 I flutter : PHASE5 settingsOpen_done ms=1028
+09-11 23:47:14.214  2455  2455 I flutter : PHASE6 settingsOpen_done ms=1028
+09-11 23:47:14.214  2455  2455 I flutter : PHASE6 whiteFrames_at_settingsOpen_done count=0 buildMs=0 rasterMs=0 
+worstTotalMs=0 at=1028
+09-11 23:47:14.214  2455  2455 I flutter : PHASE6 rss_settingsOpen_done bytes=218304512 ms=1028
+09-11 23:47:14.214  2455  2455 I flutter : PHASE5 notifColdStart_begin ms=1028
+09-11 23:47:14.214  2455  2455 I flutter : PHASE6 notifColdStart_begin ms=1029
+09-11 23:47:14.247  2455  2455 I flutter : PHASE6 whiteFrame buildMs=1 rasterMs=40 vsyncMs=37 totalMs=43 at=1061
+09-11 23:47:14.357   775   803 I ActivityTaskManager: Displayed com.kinapp.kin/.MainActivity for user 0: +3s809ms
+09-11 23:47:14.357   775   803 I ActivityTaskManager: Fully drawn com.kinapp.kin/.MainActivity: +3s809ms
+09-11 23:47:14.408  2455  2455 I flutter : PHASE6 notifInitialize_done_190ms ms=1222
+09-11 23:47:14.613  2455  2455 I flutter : PHASE6 whiteFrame buildMs=0 rasterMs=29 vsyncMs=129 totalMs=30 at=1427
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 notifSyncStartup_done_276ms ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE5 notifColdStart_done_467ms ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 notifColdStart_done_467ms ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE5 frameWatchStart ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE5 imageCache_appReady_beforeKinApp currentSize=0 currentSizeBytes=0 
+ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 whiteFrames_at_beforeKinApp count=2 buildMs=2 rasterMs=71 
+worstTotalMs=43 at=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 whiteWindow_end ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 rss_beforeKinApp bytes=223457280 ms=1498
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 imageCache_beforeKinApp currentSize=0 currentSizeBytes=0 ms=1499
+09-11 23:47:14.684  2455  2455 I flutter : PHASE6 postMountWindow_begin ms=1499
+09-11 23:47:14.684  2455  2455 I flutter : PHASE5 appReady_setState_begin ms=1499
+09-11 23:47:14.685  2455  2455 I flutter : PHASE6 appReady_setState_begin ms=1499
+09-11 23:47:14.685  2455  2455 I flutter : PHASE5 appReady_setState_end ms=1499
+09-11 23:47:14.685  2455  2455 I flutter : PHASE6 appReady_setState_end ms=1499
+09-11 23:47:14.689  2455  2455 I flutter : PHASE5 materialShim sync_ms=1 at=1503
+09-11 23:47:14.689  2455  2455 I flutter : PHASE5 kinApp_build sync_ms=3 at=1504
+09-11 23:47:14.704  2455  2455 I flutter : PHASE6 today_build sync_ms=3 at=1518
+09-11 23:47:14.704  2455  2455 I flutter : PHASE5 today_build sync_ms=3 at=1519
+09-11 23:47:14.763  2455  2455 I flutter : PHASE5 kinApp_firstFrame ms=1577
+09-11 23:47:14.763  2455  2455 I flutter : PHASE5 imageCache_kinApp_firstFrame currentSize=0 currentSizeBytes=0 ms=1577
+09-11 23:47:14.763  2455  2455 I flutter : PHASE6 kinApp_firstFrame ms=1577
+09-11 23:47:14.763  2455  2455 I flutter : PHASE6 imageCache_kinApp_firstFrame currentSize=0 currentSizeBytes=0 ms=1577
+09-11 23:47:14.763  2455  2455 I flutter : PHASE5 notifBootstrap_begin ms=1577
+09-11 23:47:14.805  2455  2455 I flutter : PHASE6 todayUsable_peopleReady ms=1619
+09-11 23:47:14.805  2455  2455 I flutter : PHASE6 rss_todayUsable bytes=229363712 ms=1619
+09-11 23:47:14.805  2455  2455 I flutter : PHASE6 imageCache_todayUsable currentSize=0 currentSizeBytes=0 ms=1619
+09-11 23:47:14.805  2455  2455 I flutter : PHASE6 today_build sync_ms=0 at=1619
+09-11 23:47:14.805  2455  2455 I flutter : PHASE5 today_build sync_ms=0 at=1620
+09-11 23:47:14.821  2455  2455 I flutter : PHASE5 notifBootstrap_end ms=1636
+09-11 23:47:14.837  2455  2455 I flutter : PHASE6 today_build sync_ms=0 at=1651
+09-11 23:47:14.837  2455  2455 I flutter : PHASE5 today_build sync_ms=0 at=1651
+09-11 23:47:14.916  2455  2455 I flutter : PHASE6 frame i=1 buildMs=76 rasterMs=50 vsyncMs=1 spanMs=129 totalMs=127 
+EXPENSIVE at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE6 frame i=2 buildMs=15 rasterMs=26 vsyncMs=18 spanMs=71 totalMs=42 
+EXPENSIVE at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE6 frame i=3 buildMs=2 rasterMs=24 vsyncMs=1 spanMs=47 totalMs=27 
+EXPENSIVE at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE6 frame i=4 buildMs=0 rasterMs=14 vsyncMs=1 spanMs=28 totalMs=15 
+at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE6 frame i=5 buildMs=1 rasterMs=13 vsyncMs=1 spanMs=26 totalMs=15 
+at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE5 expensiveFrame buildMs=76 rasterMs=50 totalMs=127 at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE5 expensiveFrame buildMs=15 rasterMs=26 totalMs=42 at=1730
+09-11 23:47:14.916  2455  2455 I flutter : PHASE5 expensiveFrame buildMs=2 rasterMs=24 totalMs=27 at=1731
+09-11 23:47:15.049  2455  2455 I flutter : PHASE6 frame i=6 buildMs=1 rasterMs=6 vsyncMs=2 spanMs=10 totalMs=8 at=1863
+09-11 23:47:16.686  2455  2455 I flutter : PHASE5 frameWatchEnd expensiveFrames=3 worstFrameMs=127 at=3500
+09-11 23:47:18.686  2455  2455 I flutter : PHASE6 postMountWindow_end expensiveFrames=3 worstFrameMs=127 
+framesLogged=6 at=5500
+09-11 23:47:18.686  2455  2455 I flutter : PHASE6 rss_postMountWindow_end bytes=236072960 ms=5500
+09-11 23:47:18.686  2455  2455 I flutter : PHASE6 imageCache_postMountWindow_end currentSize=4 
+currentSizeBytes=11608268 ms=5500
+09-11 23:47:22.733  2455  2455 I flutter : PHASE6 tab_journal ms=9547
+09-11 23:47:22.733  2455  2455 I flutter : PHASE6 rss_tab_journal bytes=234905600 ms=9548
+09-11 23:47:22.733  2455  2455 I flutter : PHASE6 imageCache_tab_journal currentSize=4 currentSizeBytes=11608268 
+ms=9548
+09-11 23:47:22.763  2455  2455 I flutter : PHASE6 tabFrame_journal ms=9577
+09-11 23:47:24.793  2455  2455 I flutter : PHASE6 tab_kin ms=11607
+09-11 23:47:24.793  2455  2455 I flutter : PHASE6 rss_tab_kin bytes=233447424 ms=11607
+09-11 23:47:24.793  2455  2455 I flutter : PHASE6 imageCache_tab_kin currentSize=5 currentSizeBytes=15410768 ms=11607
+09-11 23:47:24.816  2455  2455 I flutter : PHASE6 tabFrame_kin ms=11630
+
+
