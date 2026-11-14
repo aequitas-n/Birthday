@@ -5,10 +5,10 @@
 <title>Kin · Every page, seven worlds</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f0e7;color:#283b34;font:15px/1.55 system-ui,sans-serif}header{max-width:1500px;margin:auto;padding:40px 5vw 20px}h1{font:clamp(32px,5vw,62px)/1.1 Georgia,serif;margin:14px 0}p{max-width:780px;color:#5d6b60}a{color:inherit}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:24px 0}select,button{font:inherit;border:1px solid #bdc8bb;background:#fff9;color:inherit;border-radius:12px;padding:10px 14px;max-width:100%}button{cursor:pointer}button[aria-pressed=true]{background:#344d3e;color:#fff}select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #a7672a;outline-offset:4px}main{max-width:1500px;margin:auto;padding:0 5vw 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}figure{margin:0;min-width:0}figcaption{font:20px/1.25 Georgia,serif;margin:12px 0 7px}figure a{display:block}figure img{width:100%;height:auto;border-radius:15px;box-shadow:0 5px 24px #253d2c14;border:1px solid #0001}footer{border-top:1px solid #d1d8cc;padding:24px 5vw;font-size:13px}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase}.meta{font-size:12px}label{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-</style>
+main.compare-all{max-width:2000px;padding:0 24px 45px;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px}main.compare-all figcaption{font-size:18px;min-height:45px}header{max-width:2000px} [hidden]{display:none!important}@media(max-width:1199px){main.compare-all{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:760px){main.compare-all{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:420px){main.compare-all{grid-template-columns:1fr}}</style>
 </head>
 <body>
-<header><a href="../index.html">← Animated artwork library</a><a href="../typography/index.html" style="margin-left:20px">Compare the type pairings →</a><div class="eyebrow" style="margin-top:28px">Actual Flutter screens · Local review</div><h1>Every page, seven worlds.</h1><p>Vintage is the reference for coverage. Choose a theme to inspect its screens, sections, sheets, and editors—or compare one view across all seven. Captures use the same sample data, bundled fonts, and reduced motion.</p><div class="toolbar"><label>Theme <select id="theme"></select></label><button id="mode" aria-pressed="false">Compare one screen across themes</button><label id="screen-label" hidden>Screen <select id="screen"></select></label></div><p class="meta" id="count" aria-live="polite"></p></header>
+<header><a href="../index.html">← Animated artwork library</a><a href="../typography/index.html" style="margin-left:20px">Compare the type pairings →</a><div class="eyebrow" style="margin-top:28px">Actual Flutter screens · Local review</div><h1>Every page, seven worlds.</h1><p>Vintage is the reference for coverage. All seven themes are shown together. Choose a screen to compare its layout across every theme, or switch to a single theme’s full screen collection. Captures use the same sample data, bundled fonts, and reduced motion.</p><div class="toolbar"><label>Theme <select id="theme"></select></label><button id="mode" aria-pressed="false">Compare one screen across themes</button><label id="screen-label" hidden>Screen <select id="screen"></select></label></div><p class="meta" id="count" aria-live="polite"></p></header>
 <main id="gallery"></main>
 <footer>Render checks also cover 320 × 640 at 160% text and keyboard insets. These are review artifacts, not images used to build the app. Native Android camera, photo-library, and permission screens belong to the operating system.</footer>
 <script>
@@ -207,12 +207,12 @@ const screens=[
     "Edit reminder · keyboard"
   ]
 ];
-const $=id=>document.getElementById(id);let compare=false;
+const $=id=>document.getElementById(id);let compare=true;
 for(const [id,name] of themes){const option=new Option(name,id);$('theme').add(option)}
 for(const [id,name] of screens){$('screen').add(new Option(name,id))}
 function render(){
 const theme=$('theme').value,screen=$('screen').value;
-$('screen-label').hidden=!compare;$('theme').disabled=compare;$('mode').setAttribute('aria-pressed',compare);$('mode').textContent=compare?'View all screens in one theme':'Compare one screen across themes';
+$('gallery').classList.toggle('compare-all',compare);$('screen-label').hidden=!compare;$('theme').disabled=compare;$('mode').setAttribute('aria-pressed',compare);$('mode').textContent=compare?'View all screens in one theme':'Compare one screen across themes';
 const items=compare?themes.map(([id,name])=>[id,screen,name]):screens.map(([id,name])=>[theme,id,name]);
 $('gallery').replaceChildren(...items.map(([id,view,name])=>{const fig=document.createElement('figure');const caption=document.createElement('figcaption');caption.textContent=name;const link=document.createElement('a');link.href=`${id}/${view}.png`;link.target='_blank';link.rel='noopener';const img=document.createElement('img');img.src=link.href;img.alt=`${name} — ${themes.find(t=>t[0]===id)[1]}`;img.loading='lazy';img.width=390;img.height=844;link.append(img);fig.append(caption,link);return fig}));
 $('count').textContent=compare?`${themes.length} themes · ${screens.find(s=>s[0]===screen)[1]}`:`${screens.length} views · ${themes.find(t=>t[0]===theme)[1]} · click a capture to inspect full size`;
