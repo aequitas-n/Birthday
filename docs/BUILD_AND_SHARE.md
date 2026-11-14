@@ -1,6 +1,6 @@
 # Build and share Kin
 
-The current source and dependency lockfile are tested with **Flutter 3.47.7 / Dart 3.13.5**. The lockfile requires Flutter 3.47 or newer. Fonts and artwork are bundled locally.
+The current source and dependency lockfile are tested with **Flutter 3.47.7 / Dart 3.13.5**. The lockfile requires Flutter 3.47 or newer; use 3.47.7 to match the verified builds and CI. Fonts and artwork are bundled locally.
 
 ## Windows: pull and build an APK
 
