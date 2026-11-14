@@ -333,6 +333,7 @@ class _TodayJournalSection extends StatelessWidget {
                 : null,
             placement: MoodCardPlacement.todayFirstOverlap,
             child: QJournalCardSurface(
+              scaleContentToFit: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
