@@ -349,6 +349,7 @@ class _TodayJournalSection extends StatelessWidget {
                     if (index > 0) SizedBox(height: space.listItem),
                     _MemoryPreviewLine(
                       entry: entry,
+                      compact: preview.length > 1,
                       onTap: () => onOpenEntry(entry),
                     ),
                   ],
@@ -375,10 +376,12 @@ class _MemoryPreviewLine extends StatelessWidget {
   const _MemoryPreviewLine({
     required this.entry,
     required this.onTap,
+    this.compact = false,
   });
 
   final JournalEntry entry;
   final VoidCallback onTap;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -407,7 +410,7 @@ class _MemoryPreviewLine extends StatelessWidget {
               SizedBox(height: q.space.hair),
               Text(
                 body,
-                maxLines: 2,
+                maxLines: compact ? 1 : 2,
                 overflow: TextOverflow.ellipsis,
                 style: q.inked(
                   q.text.journalWriting,

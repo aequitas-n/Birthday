@@ -22,5 +22,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: golden-baselines
-          path: test/**/_goldens/*.png
+          path: |
+            test/**/_goldens/*.png
+            test/**/goldens/*.png
           if-no-files-found: error
