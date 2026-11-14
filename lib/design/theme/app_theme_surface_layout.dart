@@ -1,5 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
+import 'package:kin/design/components/media/q_avatar.dart' show QAvatarSize;
+import 'package:kin/design/theme/app_theme_assets.dart'
+    show AppThemeBackgrounds, AppThemeChrome;
+import 'package:kin/design/tokens/radius_tokens.dart' show QuietRadius;
+import 'package:kin/design/tokens/space_tokens.dart' show QuietLayout;
 
 /// Fractional content rects for theme surface artwork (normalized 0–1).
 ///

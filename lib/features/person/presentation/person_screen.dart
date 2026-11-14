@@ -19,6 +19,7 @@ import 'package:kin/design/components/sheets/q_choice_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_hairline.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/components/surfaces/q_surface.dart';
 import 'package:kin/design/components/text/q_voice.dart';
@@ -103,6 +104,24 @@ class _PersonScreenState extends ConsumerState<PersonScreen> {
     // composition. The global phone gutter is tighter; this screen needs the
     // extra 4pt so the portrait and identity breathe against the edge.
     final pad = q.space.xl;
+
+    if (MediaQuery.textScalerOf(context).scale(16) > 20 ||
+        MediaQuery.sizeOf(context).height < 700) {
+      return QScreen(
+        child: QMeasure(
+          child: ListView(
+            padding: EdgeInsets.all(pad),
+            children: [
+              _TopBar(summary: summary),
+              SizedBox(height: q.space.md),
+              _IdentityHeader(summary: summary, portraitSide: 112),
+              SizedBox(height: q.space.xl),
+              _MemoryArea(summary: summary, scrollable: false),
+            ],
+          ),
+        ),
+      );
+    }
 
     return QScreen(
       child: QMeasure(
@@ -345,9 +364,10 @@ class _SquarePortrait extends StatelessWidget {
 /// Two plates: Moments (photos) and Notes (text details). Owns most of the
 /// viewport — birthday date and location stay behind Edit.
 class _MemoryArea extends ConsumerWidget {
-  const _MemoryArea({required this.summary});
+  const _MemoryArea({required this.summary, this.scrollable = true});
 
   final PersonSummary summary;
+  final bool scrollable;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -365,6 +385,8 @@ class _MemoryArea extends ConsumerWidget {
 
     return ListView(
       padding: EdgeInsets.zero,
+      shrinkWrap: !scrollable,
+      physics: scrollable ? null : const NeverScrollableScrollPhysics(),
       children: [
         _MomentsPlate(
           photos: photos,
@@ -858,20 +880,25 @@ class _PersonParchmentPlate extends StatelessWidget {
 
     return QuietControlSurfaceScope(
       surface: QuietControlSurface.parchment,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: i.sheet,
-          borderRadius: BorderRadius.circular(q.radius.xl),
-          border: Border.all(
-            color: i.sheetBorder,
-            width: context.hairlineWidth,
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(q.space.xl),
-          child: child,
-        ),
-      ),
+      child: context.appTheme.art != null
+          ? QIllustratedSurface(
+              padding: EdgeInsets.all(q.space.xl),
+              child: child,
+            )
+          : DecoratedBox(
+              decoration: BoxDecoration(
+                color: i.sheet,
+                borderRadius: BorderRadius.circular(q.radius.xl),
+                border: Border.all(
+                  color: i.sheetBorder,
+                  width: context.hairlineWidth,
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(q.space.xl),
+                child: child,
+              ),
+            ),
     );
   }
 }
@@ -1008,9 +1035,7 @@ class _EditBirthdaySheetState extends ConsumerState<_EditBirthdaySheet> {
     final nameError = _showErrors && _nameController.text.trim().isEmpty
         ? 'Add a name.'
         : null;
-    final birthdayError = _showErrors
-        ? _birthdayValidationError()
-        : null;
+    final birthdayError = _showErrors ? _birthdayValidationError() : null;
 
     return QSheet(
       title: 'Edit birthday',

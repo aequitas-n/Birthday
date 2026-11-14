@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// The four surface levels. There is no fifth.
@@ -68,6 +69,18 @@ class QSurface extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final c = q.color;
+
+    if (context.appTheme.art != null &&
+        (level == QuietLevel.surface || level == QuietLevel.raised)) {
+      return SizedBox(
+        width: width,
+        height: height,
+        child: QIllustratedSurface(
+          padding: padding ?? EdgeInsets.zero,
+          child: child,
+        ),
+      );
+    }
 
     final fill = switch (level) {
       QuietLevel.canvas => c.canvas,

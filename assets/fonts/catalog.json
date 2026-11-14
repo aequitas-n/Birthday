@@ -1,0 +1,58 @@
+{
+  "Fraunces": [
+    "Fraunces-Variable.ttf"
+  ],
+  "CourierPrime": [
+    "CourierPrime-Regular.ttf"
+  ],
+  "Caveat": [
+    "Caveat-Variable.ttf"
+  ],
+  "DMSans": [
+    "DMSans-Variable.ttf"
+  ],
+  "DMMono": [
+    "DMMono-Regular.ttf"
+  ],
+  "CormorantGaramond": [
+    "CormorantGaramond-Variable.ttf"
+  ],
+  "ChakraPetch": [
+    "ChakraPetch-Regular.ttf",
+    "ChakraPetch-SemiBold.ttf"
+  ],
+  "SpaceMono": [
+    "SpaceMono-Regular.ttf"
+  ],
+  "DMSerifDisplay": [
+    "DMSerifDisplay-Regular.ttf"
+  ],
+  "SpecialElite": [
+    "SpecialElite-Regular.ttf"
+  ],
+  "Bangers": [
+    "Bangers-Regular.ttf"
+  ],
+  "ComicNeue": [
+    "ComicNeue-Regular.ttf",
+    "ComicNeue-Bold.ttf"
+  ],
+  "Lora": [
+    "Lora-Variable.ttf"
+  ],
+  "Kalam": [
+    "Kalam-Regular.ttf"
+  ],
+  "BreeSerif": [
+    "BreeSerif-Regular.ttf"
+  ],
+  "PatrickHand": [
+    "PatrickHand-Regular.ttf"
+  ],
+  "Cinzel": [
+    "Cinzel-Variable.ttf"
+  ],
+  "CrimsonPro": [
+    "CrimsonPro-Variable.ttf"
+  ]
+}

@@ -4,8 +4,7 @@ import 'package:meta/meta.dart';
 enum StoredThemeMode {
   system,
   light,
-  dark
-  ;
+  dark;
 
   static StoredThemeMode fromStorage(String value) {
     return values.firstWhere(

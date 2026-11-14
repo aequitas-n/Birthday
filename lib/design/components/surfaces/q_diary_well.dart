@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// Bordered content well whose ink/border come from the active theme surface.
@@ -28,6 +29,26 @@ class QDiaryWell extends StatelessWidget {
     final borderColor = focused && surface == QuietSurfaceKind.canvas
         ? ink.primary
         : ink.border;
+
+    if (context.appTheme.art != null) {
+      return DefaultTextStyle(
+        style: q.text.journalWriting.copyWith(color: ink.primary),
+        child: QIllustratedSurface(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(context.appTheme.art!.corner),
+              border: focused
+                  ? Border.all(color: q.color.accent, width: 1.5)
+                  : null,
+            ),
+            child: Padding(
+              padding: pad.add(const EdgeInsets.symmetric(horizontal: 6)),
+              child: child,
+            ),
+          ),
+        ),
+      );
+    }
 
     return DefaultTextStyle(
       style: q.text.journalWriting.copyWith(color: ink.primary),

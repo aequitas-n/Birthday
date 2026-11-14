@@ -13,6 +13,7 @@ import 'package:kin/app/theme_controller.dart';
 import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/local/files/image_store.dart';
 import 'package:kin/data/repositories/settings_repository_drift.dart';
+import 'package:kin/design/tokens/color_tokens.dart';
 import 'package:kin/notifications/application/notification_coordinator.dart';
 import 'package:kin/notifications/flutter_local_notification_service.dart';
 import 'package:kin/notifications/notification_service.dart';
@@ -20,7 +21,7 @@ import 'package:timezone/data/latest_all.dart' as tzdata;
 
 /// Matches Android `launch_background` (white) so the first Flutter frame does
 /// not flash a different color while Drift/settings finish opening.
-const Color _bootstrapCanvas = Color(0xFFFFFFFF);
+const Color _bootstrapCanvas = ColorTokens.launchCanvas;
 
 Future<void> bootstrap() async {
   Phase5Diag.ensureBoot();

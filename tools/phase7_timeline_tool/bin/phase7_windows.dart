@@ -1,16 +1,23 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final d = jsonDecode(File(r'e:\~Work\Birthday\tmp\phase7\tabs_session.json').readAsStringSync());
-  final ev = (d['traceEvents'] as List).cast<Map>();
+  final d =
+      jsonDecode(
+            File(
+              r'e:\~Work\Birthday\tmp\phase7\tabs_session.json',
+            ).readAsStringSync(),
+          )
+          as Map<String, dynamic>;
+  final ev = (d['traceEvents'] as List<dynamic>).cast<Map<String, dynamic>>();
   final marks = <String, num>{};
   for (final e in ev) {
     final n = '${e['name']}';
     if (n.startsWith('PHASE7_') && e['ph'] == 'B') marks[n] = e['ts'] as num;
   }
   print('marks=$marks');
-  final sorted = marks.entries.toList()..sort((a, b) => a.value.compareTo(b.value));
+  final sorted = marks.entries.toList()
+    ..sort((a, b) => a.value.compareTo(b.value));
   for (var i = 0; i < sorted.length; i++) {
     final start = sorted[i].value;
     final end = i + 1 < sorted.length ? sorted[i + 1].value : start + 5000000;

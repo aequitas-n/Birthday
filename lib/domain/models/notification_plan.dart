@@ -3,8 +3,7 @@ import 'package:meta/meta.dart';
 
 enum NotificationPlanSource {
   birthday,
-  personal
-  ;
+  personal;
 
   static NotificationPlanSource fromStorage(String value) {
     return values.firstWhere(
@@ -19,8 +18,7 @@ enum NotificationPlanSource {
 enum NotificationPlanKind {
   birthdayToday,
   birthdayUpcoming,
-  personalReminder
-  ;
+  personalReminder;
 
   static NotificationPlanKind fromStorage(String value) {
     return values.firstWhere(

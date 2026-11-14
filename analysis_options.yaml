@@ -25,6 +25,10 @@ analyzer:
     - "**/*.freezed.dart"
     - "**/generated_plugin_registrant.dart"
     - "build/**"
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
 
 linter:
   rules:

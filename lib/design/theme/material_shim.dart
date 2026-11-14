@@ -3,7 +3,6 @@ import 'package:kin/design/theme/app_theme_definition.dart';
 import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/tokens/color_tokens.dart';
-import 'package:kin/design/tokens/type_tokens.dart';
 
 /// A deliberately minimal [ThemeData].
 ///
@@ -55,7 +54,7 @@ ThemeData buildMaterialShim(
 
     // Escape hatch for stray Text — product universal archive face, never
     // a fourth theme personality.
-    fontFamily: QuietTypography.universalFamily,
+    fontFamily: t.uiFamily,
     textTheme: TextTheme(
       displayLarge: t.voiceXl,
       displayMedium: t.voiceLg,

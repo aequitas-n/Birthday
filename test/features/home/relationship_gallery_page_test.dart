@@ -394,7 +394,7 @@ void main() {
     );
 
     expect(
-      find.bySemanticsLabel(RegExp(r'Long press to pin to top')),
+      find.bySemanticsLabel(RegExp('Long press to pin to top')),
       findsOneWidget,
     );
 

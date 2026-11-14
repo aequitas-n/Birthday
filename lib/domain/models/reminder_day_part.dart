@@ -5,8 +5,7 @@ enum ReminderDayPart {
   anytime,
   morning,
   afternoon,
-  evening
-  ;
+  evening;
 
   static ReminderDayPart fromStorage(String value) {
     return values.firstWhere(

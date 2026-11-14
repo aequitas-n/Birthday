@@ -8,7 +8,6 @@ import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_colors.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/neon_arcade_tokens.dart';
 import 'package:kin/design/tokens/type_tokens.dart';
 
 import '../support/quiet_test_app.dart';
@@ -183,31 +182,23 @@ void main() {
       expect(assets.mood.emptyInvite, isNull);
     });
 
-    test('Vintage fills every audited asset slot', () {
-      final assets = ProductThemes.vintageDiary.assets;
-      expect(assets.backgrounds.app, isNotNull);
-      expect(assets.backgrounds.journalCard, isNotNull);
-      expect(assets.backgrounds.calendar, isNotNull);
-      expect(assets.chrome.navStrip, isNotNull);
-      expect(assets.chrome.searchStrip, isNotNull);
-      expect(assets.chrome.birthdayStrip, isNotNull);
-      expect(assets.chrome.profileCard, isNotNull);
-      expect(assets.mood.emptyInvite, isNotNull);
-    });
-
-    test('Neon fills HUD slots; search null; emptyInvite + birthday strip set', () {
-      final assets = ProductThemes.neonArcade.assets;
-      expect(assets.backgrounds.app, isNotNull);
-      expect(assets.backgrounds.journalCard, isNotNull);
-      expect(assets.backgrounds.calendar, isNotNull);
-      expect(assets.chrome.navStrip, isNotNull);
-      expect(assets.chrome.profileCard, isNotNull);
-      expect(assets.chrome.searchStrip, isNull);
-      expect(assets.chrome.birthdayStrip, NeonArcadeAssets.userStrip);
-      expect(assets.mood.emptyInvite, NeonArcadeAssets.excitedHome);
-      expect(assets.mood.illustration('joyful'), isNotNull);
-      expect(assets.backgrounds.app, isNot(contains('Vintage-Diary')));
-    });
+    for (final theme in [
+      ProductThemes.vintageDiary,
+      ProductThemes.neonArcade,
+    ]) {
+      test(
+        '${theme.label} uses generated backdrops and live drawn surfaces',
+        () {
+          final assets = theme.assets;
+          expect(theme.art, isNotNull);
+          expect(assets.backgrounds.app, theme.art!.background);
+          expect(assets.backgrounds.journalCard, isNull);
+          expect(assets.chrome.navStrip, isNull);
+          expect(assets.mood.emptyInvite, theme.art!.atlas);
+          expect(assets.mood.illustration('joyful'), theme.art!.atlas);
+        },
+      );
+    }
   });
 
   group('Default typography', () {
@@ -224,14 +215,17 @@ void main() {
   });
 
   group('Neon typography', () {
-    test('uses CourierPrime for primary and secondary — never Caveat/Fraunces', () {
-      const type = QuietTypography.neonArcade();
-      expect(type.expression.primaryFamily, 'CourierPrime');
-      expect(type.expression.secondaryFamily, 'CourierPrime');
-      expect(type.journalWriting.fontFamily, 'CourierPrime');
-      expect(type.pageTitle.fontFamily, 'CourierPrime');
-      expect(type.expression.primaryFamily, isNot('Caveat'));
-      expect(type.expression.secondaryFamily, isNot('Fraunces'));
-    });
+    test(
+      'uses CourierPrime for primary and secondary — never Caveat/Fraunces',
+      () {
+        const type = QuietTypography.neonArcade();
+        expect(type.expression.primaryFamily, 'CourierPrime');
+        expect(type.expression.secondaryFamily, 'CourierPrime');
+        expect(type.journalWriting.fontFamily, 'CourierPrime');
+        expect(type.pageTitle.fontFamily, 'CourierPrime');
+        expect(type.expression.primaryFamily, isNot('Caveat'));
+        expect(type.expression.secondaryFamily, isNot('Fraunces'));
+      },
+    );
   });
 }

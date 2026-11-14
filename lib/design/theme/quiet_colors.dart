@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
+import 'package:kin/design/theme/quiet_journal.dart' show QuietJournal;
 import 'package:kin/design/tokens/color_tokens.dart';
 
 /// Semantic colour roles.
@@ -133,7 +134,7 @@ final class QuietColors {
       accentWash = ColorTokens.ember50,
       danger = ColorTokens.dangerLight,
       dangerWash = ColorTokens.dangerWashLight,
-      scrim = const Color(0x661A1815),
+      scrim = ColorTokens.paperScrim,
       selection = ColorTokens.ember100,
       monogramTints = ColorTokens.monogramLight,
       transparent = ColorTokens.transparent;

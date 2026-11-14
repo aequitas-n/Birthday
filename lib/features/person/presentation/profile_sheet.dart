@@ -101,7 +101,9 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
       if (mounted) setState(() {});
     });
     if (widget.profile == null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _refreshLiveProfile());
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _refreshLiveProfile(),
+      );
     }
   }
 
@@ -273,8 +275,8 @@ class _ProfileSheetState extends ConsumerState<ProfileSheet> {
     if (decoded == null) {
       if (mounted) {
         setState(
-          () => _photoError =
-              'That photo could not be read. Try another image.',
+          () =>
+              _photoError = 'That photo could not be read. Try another image.',
         );
       }
       return;
@@ -549,9 +551,9 @@ class _MemoriesBookState extends ConsumerState<_MemoriesBook> {
           Text(
             profile == null
                 ? 'Add a photo, note what they love, or a plan you want to '
-                    'make for them — details save as you go.'
+                      'make for them — details save as you go.'
                 : 'Nothing yet. Save a photo, note what they love, or a plan '
-                    'you want to make for them.',
+                      'you want to make for them.',
             style: q.text.body.tinted(context.controlInkSecondary),
           ),
         if (photoNotes.isNotEmpty) ...[

@@ -1,10 +1,11 @@
 import 'package:kin/design/theme/app_theme_assets.dart';
 import 'package:kin/design/theme/app_theme_definition.dart';
+import 'package:kin/design/theme/birthday_strip_geometry.dart';
+import 'package:kin/design/theme/illustrated_theme.dart';
 import 'package:kin/design/theme/product_theme_id.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/tokens/neon_arcade_tokens.dart';
-import 'package:kin/design/tokens/user_strip_geometry.dart';
 import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 
 /// Registry of first-class product themes.
@@ -19,17 +20,17 @@ abstract final class ProductThemes {
     assets: AppThemeAssets.none(),
   );
 
-  static final AppThemeDefinition vintageDiary = AppThemeDefinition(
+  static final AppThemeDefinition _legacyVintageDiary = AppThemeDefinition(
     id: ProductThemeId.vintageDiary,
     label: 'Vintage Diary',
     quiet: const QuietTheme.light(),
     assets: AppThemeAssets(
-      backgrounds: AppThemeBackgrounds(
+      backgrounds: const AppThemeBackgrounds(
         app: VintageDiaryAssets.background,
         journalCard: VintageDiaryAssets.journalCard,
         calendar: VintageDiaryAssets.calendar,
       ),
-      chrome: AppThemeChrome(
+      chrome: const AppThemeChrome(
         navStrip: VintageDiaryAssets.chromeStrip,
         navStripOpaqueFraction: VintageDiaryAssets.chromeStripOpaqueFraction,
         navStripAspectRatio: VintageDiaryAssets.chromeStripAspectRatio,
@@ -56,7 +57,7 @@ abstract final class ProductThemes {
         },
         emptyInvite: VintageDiaryAssets.excitedHome,
       ),
-      layout: AppThemeSurfaceLayout(
+      layout: const AppThemeSurfaceLayout(
         journalCardAspectRatio: VintageDiaryAssets.journalCardAspectRatio,
         journalCardCornerRadius: VintageDiaryAssets.journalCardCornerRadius,
         profileCard: VintageDiaryAssets.profileLayout,
@@ -71,17 +72,17 @@ abstract final class ProductThemes {
   /// Neon Arcade — HUD chrome + CRT cards. Search strip stays null so that
   /// component keeps the intentional Default simple fallback. Birthday strip
   /// uses the Neon hanging tag asset.
-  static final AppThemeDefinition neonArcade = AppThemeDefinition(
+  static final AppThemeDefinition _legacyNeonArcade = AppThemeDefinition(
     id: ProductThemeId.neonArcade,
     label: 'Neon Arcade',
     quiet: const QuietTheme.neonArcade(),
     assets: AppThemeAssets(
-      backgrounds: AppThemeBackgrounds(
+      backgrounds: const AppThemeBackgrounds(
         app: NeonArcadeAssets.background,
         journalCard: NeonArcadeAssets.journalCard,
         calendar: NeonArcadeAssets.calendar,
       ),
-      chrome: AppThemeChrome(
+      chrome: const AppThemeChrome(
         navStrip: NeonArcadeAssets.chromeStrip,
         navStripOpaqueFraction: NeonArcadeAssets.chromeStripOpaqueFraction,
         navStripAspectRatio: NeonArcadeAssets.chromeStripAspectRatio,
@@ -108,7 +109,7 @@ abstract final class ProductThemes {
         },
         emptyInvite: NeonArcadeAssets.excitedHome,
       ),
-      layout: AppThemeSurfaceLayout(
+      layout: const AppThemeSurfaceLayout(
         journalCardContent: NeonArcadeAssets.journalCardContent,
         journalCardAspectRatio: NeonArcadeAssets.journalCardAspectRatio,
         journalCardCornerRadius: NeonArcadeAssets.journalCardCornerRadius,
@@ -120,24 +121,100 @@ abstract final class ProductThemes {
     ),
   );
 
+  static AppThemeDefinition _illustrated(
+    ProductThemeId id,
+    IllustratedTheme art, {
+    QuietCollection collection = QuietCollection.quietDefault,
+  }) => AppThemeDefinition(
+    id: id,
+    label: id.label,
+    quiet: art.buildQuiet(collection: collection),
+    art: art,
+    assets: AppThemeAssets(
+      backgrounds: AppThemeBackgrounds(app: art.background),
+      chrome: const AppThemeChrome.none(),
+      mood: AppThemeMoodAssets(
+        illustrations: {
+          for (final mood in const [
+            'joyful',
+            'calm',
+            'sad',
+            'affection',
+            'anxious',
+            'frustrated',
+            'surprised',
+            'neutral',
+          ])
+            mood: art.atlas,
+        },
+        emptyInvite: art.atlas,
+      ),
+    ),
+  );
+
+  static final AppThemeDefinition vintageDiary = _illustrated(
+    ProductThemeId.vintageDiary,
+    IllustratedTheme.vintage,
+    collection: QuietCollection.vintageDiary,
+  );
+  static final AppThemeDefinition neonArcade = _illustrated(
+    ProductThemeId.neonArcade,
+    IllustratedTheme.arcade,
+    collection: QuietCollection.neonArcade,
+  );
+
+  static final AppThemeDefinition retroPostcard = _illustrated(
+    ProductThemeId.retroPostcard,
+    IllustratedTheme.postcard,
+  );
+  static final AppThemeDefinition sundayComics = _illustrated(
+    ProductThemeId.sundayComics,
+    IllustratedTheme.comic,
+  );
+  static final AppThemeDefinition botanicalSketchbook = _illustrated(
+    ProductThemeId.botanicalSketchbook,
+    IllustratedTheme.botanical,
+  );
+  static final AppThemeDefinition seasideWatercolor = _illustrated(
+    ProductThemeId.seasideWatercolor,
+    IllustratedTheme.seaside,
+  );
+  static final AppThemeDefinition midnightStorybook = _illustrated(
+    ProductThemeId.midnightStorybook,
+    IllustratedTheme.storybook,
+  );
+
   static List<AppThemeDefinition> get all => [
     quietDefault,
     vintageDiary,
     neonArcade,
+    retroPostcard,
+    sundayComics,
+    botanicalSketchbook,
+    seasideWatercolor,
+    midnightStorybook,
   ];
 
   static AppThemeDefinition resolve(ProductThemeId id) => switch (id) {
     ProductThemeId.quietDefault => quietDefault,
     ProductThemeId.vintageDiary => vintageDiary,
     ProductThemeId.neonArcade => neonArcade,
+    ProductThemeId.retroPostcard => retroPostcard,
+    ProductThemeId.sundayComics => sundayComics,
+    ProductThemeId.botanicalSketchbook => botanicalSketchbook,
+    ProductThemeId.seasideWatercolor => seasideWatercolor,
+    ProductThemeId.midnightStorybook => midnightStorybook,
   };
 
-  /// Fallback for tests that only supply a [QuietTheme].
+  /// Legacy callers supplying only a QuietTheme keep the matching original
+  /// artwork and contrast. Product runtime always supplies its full definition.
   static AppThemeDefinition matchingQuiet(QuietTheme quiet) {
     return switch (quiet.collection) {
-      QuietCollection.quietDefault => quietDefault,
-      QuietCollection.neonArcade => neonArcade.copyWith(quiet: quiet),
-      QuietCollection.vintageDiary => vintageDiary.copyWith(quiet: quiet),
+      QuietCollection.quietDefault => quietDefault.copyWith(quiet: quiet),
+      QuietCollection.neonArcade => _legacyNeonArcade.copyWith(quiet: quiet),
+      QuietCollection.vintageDiary => _legacyVintageDiary.copyWith(
+        quiet: quiet,
+      ),
     };
   }
 }

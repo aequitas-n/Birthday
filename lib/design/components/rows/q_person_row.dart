@@ -154,8 +154,8 @@ class QPersonRow extends StatelessWidget {
           minHeight: restacked
               ? q.layout.personRowHeightStacked
               : paperStrip
-                  ? q.layout.personRowHeight + q.space.sm
-                  : q.layout.personRowHeight,
+              ? q.layout.personRowHeight + q.space.sm
+              : q.layout.personRowHeight,
         ),
         child: body,
       ),

@@ -1,14 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/navigation/q_diary_chrome_strip.dart';
+import 'package:kin/design/components/navigation/q_illustrated_nav.dart';
+import 'package:kin/design/theme/app_theme_assets.dart' show AppThemeChrome;
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// Primary app destinations — Today, Kin, and Journal.
 enum PrimaryDestination {
   today('Today'),
   kin('Kin'),
-  journal('Journal')
-  ;
+  journal('Journal');
 
   const PrimaryDestination(this.label);
 
@@ -32,6 +33,13 @@ class QPrimaryNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
+
+    if (context.appTheme.art != null) {
+      return QIllustratedNav(
+        selectedIndex: selected.index,
+        onSelected: (index) => onSelected(PrimaryDestination.values[index]),
+      );
+    }
 
     return QDiaryChromeStrip(
       safeBottom: true,

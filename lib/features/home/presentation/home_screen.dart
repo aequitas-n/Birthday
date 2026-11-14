@@ -24,8 +24,7 @@ enum HomeScreenMode {
 /// Two ways of looking at the same people.
 enum _HomeMode {
   birthdays('Birthdays'),
-  people('People')
-  ;
+  people('People');
 
   const _HomeMode(this.label);
 
@@ -106,7 +105,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: context.gutter),
                 child: QPeopleSearchStrip(
                   controller: _peopleSearchController,
-                  placeholder: 'Search people',
                   onChanged: (_) => setState(() {}),
                 ),
               ),

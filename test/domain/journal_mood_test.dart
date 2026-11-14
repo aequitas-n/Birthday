@@ -56,7 +56,7 @@ void main() {
         isNot(contains(VintageDiaryAssets.excitedHome)),
       );
       expect(mood.illustration('excited'), isNull);
-      expect(mood.emptyInvite, VintageDiaryAssets.excitedHome);
+      expect(mood.emptyInvite, ProductThemes.vintageDiary.art!.atlas);
     });
 
     test('Neon Excited-home is invite-only, not a picker mood', () {
@@ -66,7 +66,7 @@ void main() {
         isNot(contains(NeonArcadeAssets.excitedHome)),
       );
       expect(mood.illustration('excited'), isNull);
-      expect(mood.emptyInvite, NeonArcadeAssets.excitedHome);
+      expect(mood.emptyInvite, ProductThemes.neonArcade.art!.atlas);
     });
   });
 }

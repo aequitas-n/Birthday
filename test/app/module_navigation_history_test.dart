@@ -205,9 +205,11 @@ void main() {
     expect(shellState(tester).debugJournalBackTarget, 1);
 
     final router = container.read(routerProvider);
-    router.pushNamed(
-      AppRoute.journalDay.name,
-      pathParameters: {'date': '2026-10-24'},
+    unawaited(
+      router.pushNamed(
+        AppRoute.journalDay.name,
+        pathParameters: {'date': '2026-10-24'},
+      ),
     );
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 400));

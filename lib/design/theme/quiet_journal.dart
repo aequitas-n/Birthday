@@ -71,7 +71,7 @@ final class QuietJournal {
   /// Original Quiet Default — warm paper archive, no parchment texture.
   ///
   /// Secondary ink is a warm brown-grey (not cool taupe) so supporting copy
-  /// on [journalPaperLight] stays legible without competing with primary ink.
+  /// on `journalPaperLight` stays legible without competing with primary ink.
   const QuietJournal.neutral()
     : desk = ColorTokens.paperCanvas,
       paper = ColorTokens.journalPaperLight,

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// Soft paper stock for Journal fragments and writing surfaces.
@@ -39,6 +40,10 @@ class QJournalPaper extends StatelessWidget {
         EdgeInsets.symmetric(horizontal: q.space.md, vertical: q.space.md);
     final paper = tint ?? j.paper;
     final content = Padding(padding: pad, child: child);
+
+    if (context.appTheme.art != null && tint == null) {
+      return QIllustratedSurface(child: content);
+    }
 
     if (torn) {
       return CustomPaint(

@@ -48,7 +48,11 @@ void main() {
       await tester.pumpWidget(
         const QuietTestApp(
           child: Center(
-            child: QButton.primary(label: 'Save', onPressed: null, loading: true),
+            child: QButton.primary(
+              label: 'Save',
+              onPressed: null,
+              loading: true,
+            ),
           ),
         ),
       );
@@ -287,13 +291,16 @@ void main() {
       expect(find.text('3'), findsOneWidget);
     });
 
-    testWidgets('uses theme editorial sectionTitle (Fraunces in Vintage Diary)', (
-      tester,
-    ) async {
-      await tester.pumpQuiet(const QSectionTitle('Their year'));
-      final style = tester.widget<Text>(find.text('Their year')).style!;
-      expect(style.fontFamily, 'Fraunces');
-    });
+    testWidgets(
+      'uses theme editorial sectionTitle (Fraunces in Vintage Diary)',
+      (
+        tester,
+      ) async {
+        await tester.pumpQuiet(const QSectionTitle('Their year'));
+        final style = tester.widget<Text>(find.text('Their year')).style!;
+        expect(style.fontFamily, 'Fraunces');
+      },
+    );
   });
 
   group('QVoice', () {
@@ -413,7 +420,9 @@ void main() {
   });
 
   group('Product theme labels', () {
-    testWidgets('Default and Vintage Diary labels are available', (tester) async {
+    testWidgets('Default and Vintage Diary labels are available', (
+      tester,
+    ) async {
       await tester.pumpQuiet(const Text('Default'));
       expect(find.text('Default'), findsOneWidget);
       await tester.pumpQuiet(const Text('Vintage Diary'));

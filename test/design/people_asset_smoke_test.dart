@@ -1,4 +1,4 @@
-﻿import 'package:flutter/material.dart' show MaterialApp;
+import 'package:flutter/material.dart' show MaterialApp;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/design/components/fields/q_people_search_strip.dart';
@@ -12,12 +12,18 @@ import '../support/quiet_test_app.dart';
 void main() {
   setUpAll(loadQuietFonts);
 
-  testWidgets('People-style MaterialApp still loads Vintage search + bg', (tester) async {
+  testWidgets('People-style MaterialApp still loads Vintage search + bg', (
+    tester,
+  ) async {
     const theme = QuietTheme.light();
     await tester.binding.setSurfaceSize(const Size(390, 844));
-    tester.view..physicalSize = const Size(390, 844)..devicePixelRatio = 1;
+    tester.view
+      ..physicalSize = const Size(390, 844)
+      ..devicePixelRatio = 1;
     addTearDown(() {
-      tester.view..resetPhysicalSize()..resetDevicePixelRatio();
+      tester.view
+        ..resetPhysicalSize()
+        ..resetDevicePixelRatio();
       tester.binding.setSurfaceSize(null);
     });
 
@@ -35,7 +41,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final paths = collectAssetImagePaths(tester);
-    print('paths=$paths');
+    debugPrint('paths=$paths');
     expect(paths, contains(VintageDiaryAssets.background));
     expect(paths, contains(VintageDiaryAssets.search));
   });

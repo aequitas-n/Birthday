@@ -9,7 +9,12 @@ enum ProductThemeId {
   vintageDiary('vintage_diary', 'Vintage Diary'),
 
   /// Neon Arcade — cool cream canvas, magenta/cyan HUD chrome.
-  neonArcade('neon_arcade', 'Neon Arcade');
+  neonArcade('neon_arcade', 'Neon Arcade'),
+  retroPostcard('retro_postcard', 'Retro Postcard'),
+  sundayComics('sunday_comics', 'Sunday Comics'),
+  botanicalSketchbook('botanical_sketchbook', 'Botanical Sketchbook'),
+  seasideWatercolor('seaside_watercolor', 'Seaside Watercolor'),
+  midnightStorybook('midnight_storybook', 'Midnight Storybook');
 
   const ProductThemeId(this.storageKey, this.label);
 

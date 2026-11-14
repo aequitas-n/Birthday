@@ -1,11 +1,10 @@
-import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:kin/design/components/journal/q_animated_illustration.dart';
 import 'package:kin/design/components/journal/q_mood_illustration.dart';
 import 'package:kin/design/components/navigation/q_diary_chrome_strip.dart';
 import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/theme/app_theme_definition.dart';
-import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 
@@ -21,7 +20,9 @@ void main() {
       ..clearLiveImages();
   });
 
-  testWidgets('PHASE3: Vintage shell uses display-sized decode', (tester) async {
+  testWidgets('PHASE3: Vintage shell uses display-sized decode', (
+    tester,
+  ) async {
     await _pumpShell(tester, ProductThemes.vintageDiary);
 
     final cache = PaintingBinding.instance.imageCache;
@@ -41,10 +42,9 @@ void main() {
     expect(cache.currentSizeBytes, lessThan(6 * 1024 * 1024));
   });
 
-  testWidgets('PHASE3: Neon mood decode target is display-sized', (tester) async {
+  testWidgets('Neon moods share one bounded atlas decode', (tester) async {
     const moodId = 'joyful';
-    final neonPath =
-        ProductThemes.neonArcade.assets.mood.illustration(moodId)!;
+    final neonPath = ProductThemes.neonArcade.assets.mood.illustration(moodId)!;
 
     await tester.binding.setSurfaceSize(const Size(390, 844));
     tester.view
@@ -73,25 +73,21 @@ void main() {
     await tester.pump();
     await tester.pumpQuietImages();
 
-    final image = _firstAssetImage(tester, neonPath);
-    expect(image.image, isA<ResizeImage>());
-    final resize = image.image as ResizeImage;
-    final logical = MoodIllustrationMetrics.extent(
-      MoodIllustrationSize.todayPreview,
+    final sprite = tester.widget<QAnimatedIllustration>(
+      find.byType(QAnimatedIllustration),
     );
-    final expectedPx = (logical * 3).round();
-    final edge = resize.width ?? resize.height!;
-
-    // ignore: avoid_print — Phase 3 evidence
-    print(
-      'PHASE3_NEON_MOOD '
-      'logical=$logical dpr=3 expectedPx=$expectedPx '
-      'cacheW=${resize.width} cacheH=${resize.height} '
-      'bytes=${PaintingBinding.instance.imageCache.currentSizeBytes}',
+    expect(sprite.asset, neonPath);
+    final status = await AssetImage(
+      neonPath,
+    ).obtainCacheStatus(configuration: ImageConfiguration.empty);
+    expect(status?.keepAlive, isTrue);
+    // Four-frame loops share one atlas, rather than decoding a large image for
+    // every mood or scheduling an always-running GIF decoder.
+    expect(
+      PaintingBinding.instance.imageCache.currentSizeBytes,
+      lessThan(8 * 1024 * 1024),
     );
-
-    expect(edge, expectedPx);
-    expect(edge, lessThan(500));
+    expect(find.byType(Image), findsNothing);
   });
 }
 

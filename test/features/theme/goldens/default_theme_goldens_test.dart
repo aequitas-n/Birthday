@@ -13,7 +13,6 @@ import 'package:kin/design/components/sheets/q_choice_sheet.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/theme/material_shim.dart';
 import 'package:kin/design/theme/product_themes.dart';
-import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
@@ -53,7 +52,7 @@ void main() {
   const today = LocalCalendarDate(year: 2026, month: 8, day: 11);
   const clock = _FixedClock();
   const settings = AppSettings();
-  final defaultTheme = ProductThemes.quietDefault;
+  const defaultTheme = ProductThemes.quietDefault;
 
   Person person({
     required String id,
@@ -196,7 +195,7 @@ void main() {
       ),
       HomeEntry(
         person: people[1],
-        nextBirthday: DateTime(2026, 9, 1),
+        nextBirthday: DateTime(2026, 9),
         daysUntil: 21,
         turningAge: null,
       ),
@@ -248,7 +247,7 @@ void main() {
         ),
         personPhotoProvider.overrideWith((ref, photoId) async => null),
       ],
-      child: const HomeScreen(initialMode: HomeScreenMode.birthdays),
+      child: const HomeScreen(),
     );
 
     expect(hasVintageDiaryAsset(collectAssetImagePaths(tester)), isFalse);
@@ -323,7 +322,7 @@ void main() {
   });
 
   testWidgets('default-journal-day', (tester) async {
-    final day = today;
+    const day = today;
     await pumpDefault(
       tester,
       overrides: [

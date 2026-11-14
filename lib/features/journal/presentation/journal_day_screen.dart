@@ -10,6 +10,7 @@ import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/journal/q_journal_card_deck.dart';
+import 'package:kin/design/components/journal/q_journal_fragment.dart';
 import 'package:kin/design/components/journal/q_journal_mood_picker.dart';
 import 'package:kin/design/components/journal/q_mood_illustration.dart';
 import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
@@ -18,7 +19,6 @@ import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
-import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/domain/models/journal_day.dart';
 import 'package:kin/domain/models/journal_entry.dart';
@@ -51,6 +51,72 @@ class _JournalDayScreenState extends ConsumerState<JournalDayScreen> {
     final entries = ref.watch(journalEntriesProvider(widget.dateKey));
     final entryList = entries.asData?.value ?? const <JournalEntry>[];
     final dayMood = day.asData?.value?.mood;
+
+    // A physical deck needs room around its cards. With large text or a short
+    // viewport, preserve readable type and access to every memory in a list.
+    final media = MediaQuery.of(context);
+    if (media.size.height < 700 || media.textScaler.scale(16) > 20) {
+      return QScreen(
+        child: QMeasure(
+          child: ListView(
+            padding: EdgeInsets.only(bottom: q.space.xl),
+            children: [
+              QDiaryTopBar(
+                leading: QIconButton(
+                  glyph: QuietGlyph.chevronLeft,
+                  onPressed: () => context.pop(),
+                  semanticLabel: 'Back',
+                ),
+                actions: [
+                  QIconButton(
+                    glyph: QuietGlyph.plus,
+                    onPressed: () => _addEntry(context, date, entryList),
+                    semanticLabel: 'Add memory',
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(context.gutter),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _DayHeader(date: date, mood: dayMood),
+                    SizedBox(height: q.space.xl),
+                    if (entryList.isEmpty)
+                      _EmptyDay(
+                        onAdd: () => _addEntry(context, date, entryList),
+                      )
+                    else
+                      for (final (index, entry) in entryList.indexed) ...[
+                        QJournalFragment(
+                          title: entry.title,
+                          bodyPreview: entry.body,
+                          moodId: entry.mood?.storageValue,
+                          moodLabel: entry.mood?.displayName,
+                          archiveIndex: 'No. ${index + 1}',
+                          onTap: () => context.pushNamed(
+                            AppRoute.journalEntry.name,
+                            pathParameters: {
+                              'date': widget.dateKey,
+                              'entryId': entry.id,
+                            },
+                          ),
+                        ),
+                        SizedBox(height: q.space.xl),
+                      ],
+                    _DayMoodFooter(
+                      mood: dayMood,
+                      onPressed: () =>
+                          _setDayMood(context, date, day.asData?.value),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     return QScreen(
       child: QMeasure(
@@ -401,7 +467,7 @@ class _DayMoodFooter extends StatelessWidget {
 
     // Stable action-band height — illustration may overflow upward into the
     // deck breathing room without collapsing the card when mood appears.
-    final actionBand = context.structuralTextScaler.scale(48.0);
+    final actionBand = context.structuralTextScaler.scale(48);
     final bandH = moodId == null
         ? actionBand
         : math.max(actionBand, layoutArtH);

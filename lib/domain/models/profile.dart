@@ -11,8 +11,7 @@ enum RelationshipKind {
   friend,
   colleague,
   family,
-  other
-  ;
+  other;
 
   static RelationshipKind? fromStorage(String? value) {
     if (value == null || value.isEmpty) return null;

@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_arc.dart';
@@ -75,7 +76,21 @@ class _GalleryTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Quiet', style: q.text.pageTitle.tinted(q.color.textPrimary)),
+          Row(
+            children: [
+              QIconButton(
+                glyph: QuietGlyph.chevronLeft,
+                onPressed: () => context.pop(),
+                semanticLabel: 'Back',
+              ),
+              Expanded(
+                child: Text(
+                  'Quiet',
+                  style: q.text.pageTitle.tinted(q.color.textPrimary),
+                ),
+              ),
+            ],
+          ),
           SizedBox(height: q.space.xs),
           Text(
             'The design language for Kin.',
@@ -92,9 +107,10 @@ class _CollectionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const QSectionTitle(
-      'Vintage Diary',
-      support: 'The sole product theme — an old personal journal.',
+    return QSectionTitle(
+      context.appTheme.label,
+      support:
+          context.appTheme.art?.description ?? 'A quiet place to remember.',
       isFirst: true,
     );
   }
@@ -543,7 +559,9 @@ class _FeedbackSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const QSectionHeader('Surfaces and loading'),
-        Row(
+        Wrap(
+          spacing: q.space.md,
+          runSpacing: q.space.md,
           children: [
             QSurface(
               radius: q.radius.lg,
@@ -557,7 +575,6 @@ class _FeedbackSection extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: q.space.md),
             QSurface(
               radius: q.radius.lg,
               elevation: QuietElevationLevel.lift,
@@ -570,7 +587,6 @@ class _FeedbackSection extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: q.space.md),
             QSurface(
               level: QuietLevel.sunken,
               radius: q.radius.lg,

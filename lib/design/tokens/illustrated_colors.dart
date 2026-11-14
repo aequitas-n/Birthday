@@ -1,0 +1,56 @@
+import 'package:flutter/painting.dart';
+
+/// Paint pigments for the illustrated collections.
+abstract final class IllustratedColors {
+  static const c00000000 = Color(0x00000000);
+  static const c99141622 = Color(0x99141622);
+  static const cff1c1932 = Color(0xFF1C1932);
+  static const cff202038 = Color(0xFF202038);
+  static const cff202b42 = Color(0xFF202B42);
+  static const cff222d3e = Color(0xFF222D3E);
+  static const cff263047 = Color(0xFF263047);
+  static const cff276575 = Color(0xFF276575);
+  static const cff294c58 = Color(0xFF294C58);
+  static const cff2b2545 = Color(0xFF2B2545);
+  static const cff2d4437 = Color(0xFF2D4437);
+  static const cff303d3d = Color(0xFF303D3D);
+  static const cff303d57 = Color(0xFF303D57);
+  static const cff3b302c = Color(0xFF3B302C);
+  static const cff426749 = Color(0xFF426749);
+  static const cff452c40 = Color(0xFF452C40);
+  static const cff457c79 = Color(0xFF457C79);
+  static const cff566173 = Color(0xFF566173);
+  static const cff587079 = Color(0xFF587079);
+  static const cff596b55 = Color(0xFF596B55);
+  static const cff636154 = Color(0xFF636154);
+  static const cff706057 = Color(0xFF706057);
+  static const cff75b7d0 = Color(0xFF75B7D0);
+  static const cff874a4b = Color(0xFF874A4B);
+  static const cff8ee3d2 = Color(0xFF8EE3D2);
+  static const cff9b302f = Color(0xFF9B302F);
+  static const cffa0a47e = Color(0xFFA0A47E);
+  static const cffa34531 = Color(0xFFA34531);
+  static const cffa8adc9 = Color(0xFFA8ADC9);
+  static const cffb33f38 = Color(0xFFB33F38);
+  static const cffc3a65b = Color(0xFFC3A65B);
+  static const cffc8bedb = Color(0xFFC8BEDB);
+  static const cffccc9d2 = Color(0xFFCCC9D2);
+  static const cffda9a7c = Color(0xFFDA9A7C);
+  static const cffe3f0ef = Color(0xFFE3F0EF);
+  static const cffe6ebdb = Color(0xFFE6EBDB);
+  static const cffede2d0 = Color(0xFFEDE2D0);
+  static const cfff2e6d0 = Color(0xFFF2E6D0);
+  static const cfff3cd83 = Color(0xFFF3CD83);
+  static const cfff8a7c5 = Color(0xFFF8A7C5);
+  static const cfff8dfd8 = Color(0xFFF8DFD8);
+  static const cfffbfaed = Color(0xFFFBFAED);
+  static const cffffa9a1 = Color(0xFFFFA9A1);
+  static const cfffff1ba = Color(0xFFFFF1BA);
+  static const cfffff2e4 = Color(0xFFFFF2E4);
+  static const cfffff3dd = Color(0xFFFFF3DD);
+  static const cfffff8e8 = Color(0xFFFFF8E8);
+  static const cfffff9ea = Color(0xFFFFF9EA);
+  static const cfffffcf2 = Color(0xFFFFFCF2);
+  static const cfffffdf0 = Color(0xFFFFFDF0);
+  static const cfffffdf2 = Color(0xFFFFFDF2);
+}

@@ -1,9 +1,15 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final d = jsonDecode(File(r'e:\~Work\Birthday\tmp\phase8\fresh_session.json').readAsStringSync());
-  final ev = (d['traceEvents'] as List).cast<Map>();
+  final d =
+      jsonDecode(
+            File(
+              r'e:\~Work\Birthday\tmp\phase8\fresh_session.json',
+            ).readAsStringSync(),
+          )
+          as Map<String, dynamic>;
+  final ev = (d['traceEvents'] as List<dynamic>).cast<Map<String, dynamic>>();
   final marks = <String, num>{
     for (final e in ev)
       if ('${e['name']}'.startsWith('PHASE7_') && e['ph'] == 'B')
@@ -27,7 +33,9 @@ void main() {
     }
 
     final sorted = ev.where((e) => e['tid'] == uiTid).toList()
-      ..sort((a, b) => ((a['ts'] as num?) ?? 0).compareTo((b['ts'] as num?) ?? 0));
+      ..sort(
+        (a, b) => ((a['ts'] as num?) ?? 0).compareTo((b['ts'] as num?) ?? 0),
+      );
     for (final e in sorted) {
       final ts = e['ts'];
       if (ts is! num || ts < start || ts > end) continue;
@@ -36,7 +44,9 @@ void main() {
         stack.add(_Open(name, ts.toDouble()));
       } else if (e['ph'] == 'E' && stack.isNotEmpty) {
         var idx = stack.length - 1;
-        while (idx >= 0 && stack[idx].name != name) idx--;
+        while (idx >= 0 && stack[idx].name != name) {
+          idx--;
+        }
         if (idx < 0) continue;
         final open = stack.removeAt(idx);
         final i = ts.toDouble() - open.start;
@@ -47,12 +57,14 @@ void main() {
       }
     }
     print('\n=== $label UI exclusive max ===');
-    final er = excl.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+    final er = excl.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
     for (final e in er.take(25)) {
       print('  ${e.value.round().toString().padLeft(8)}  ${e.key}');
     }
     print('=== $label UI inclusive max ===');
-    final ir = incl.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
+    final ir = incl.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
     for (final e in ir.take(20)) {
       print('  ${e.value.round().toString().padLeft(8)}  ${e.key}');
     }

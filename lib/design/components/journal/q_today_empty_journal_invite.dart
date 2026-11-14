@@ -1,7 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/journal/q_animated_illustration.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
+import 'package:kin/design/theme/app_theme_assets.dart' show AppThemeMoodAssets;
 import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -20,6 +22,20 @@ class QTodayEmptyJournalInvite extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final art = context.appTheme.art;
+    if (art != null) {
+      return Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Padding(padding: const EdgeInsets.only(top: 48), child: child),
+          Positioned(
+            top: 0,
+            right: 12,
+            child: QAnimatedIllustration(asset: art.atlas, size: 96),
+          ),
+        ],
+      );
+    }
     final inviteAsset = context.appTheme.assets.mood.emptyInvite;
     if (inviteAsset == null) return child;
 

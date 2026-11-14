@@ -10,12 +10,11 @@ import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/controls/q_toggle.dart';
 import 'package:kin/design/components/rows/q_section_title.dart';
 import 'package:kin/design/components/rows/q_setting_row.dart';
-import 'package:kin/design/components/sheets/q_choice_sheet.dart';
+import 'package:kin/design/components/sheets/q_theme_picker.dart';
 import 'package:kin/design/components/surfaces/q_hairline.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/components/text/q_voice.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
-import 'package:kin/design/theme/product_theme_id.dart';
 import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/domain/models/settings.dart';
@@ -159,7 +158,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
               const QHairline(),
             ],
-            const QSettingRow(label: 'Version', value: '0.1.0+1'),
+            const QSettingRow(label: 'Version', value: '1.0.0-rc1 (4)'),
           ],
         ),
       ),
@@ -172,29 +171,12 @@ class SettingsScreen extends ConsumerWidget {
     required int selectedIndex,
   }) async {
     final themes = ProductThemes.all;
-    final index = await showQChoiceSheet(
+    final id = await showQThemePicker(
       context: context,
-      title: 'Theme',
-      selectedIndex: selectedIndex,
-      choices: [
-        for (final theme in themes)
-          QChoice(
-            theme.label,
-            support: switch (theme.id) {
-              ProductThemeId.quietDefault =>
-                'Warm paper, black ink, no decoration.',
-              ProductThemeId.vintageDiary =>
-                'Aged parchment journal on a dark desk.',
-              ProductThemeId.neonArcade =>
-                'Cool cream canvas, magenta/cyan HUD, dark CRT cards.',
-            },
-          ),
-      ],
+      selected: themes[selectedIndex].id,
     );
-    if (index == null || !context.mounted) return;
-    await ref
-        .read(themePreferenceProvider.notifier)
-        .setProductTheme(themes[index].id);
+    if (id == null || !context.mounted) return;
+    await ref.read(themePreferenceProvider.notifier).setProductTheme(id);
   }
 
   String _reminderTimezoneLabel(AppSettings settings) {

@@ -15,8 +15,7 @@ enum QAvatarSize {
   lg(96),
 
   /// Photo viewer entry state.
-  hero(148)
-  ;
+  hero(148);
 
   const QAvatarSize(this.diameter);
   final double diameter;

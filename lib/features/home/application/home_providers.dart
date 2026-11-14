@@ -69,8 +69,7 @@ enum HomeSection {
   today('Today'),
   thisWeek('This week'),
   thisMonth('This month'),
-  later('Later this year')
-  ;
+  later('Later this year');
 
   const HomeSection(this.label);
 

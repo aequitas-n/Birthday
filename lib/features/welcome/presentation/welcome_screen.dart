@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kin/app/app_providers.dart';
 import 'package:kin/core/clock.dart';
 import 'package:kin/design/components/buttons/q_button.dart';
+import 'package:kin/design/components/journal/q_ambient_scene.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/components/text/q_voice.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
@@ -151,22 +152,46 @@ class _WelcomePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
 
-    return Padding(
-      padding: EdgeInsets.only(right: q.space.xl),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            kicker,
-            textScaler: context.structuralTextScaler,
-            style: q.text.eyebrow.tinted(q.color.textTertiary),
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: constraints.maxHeight),
+          child: Padding(
+            padding: EdgeInsets.only(
+              right: q.space.xl,
+              top: q.space.lg,
+              bottom: q.space.lg,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (context.appTheme.art != null) ...[
+                  const Align(
+                    alignment: Alignment.centerRight,
+                    child: QAmbientScene(width: 150),
+                  ),
+                  SizedBox(height: q.space.lg),
+                ],
+                Text(
+                  kicker,
+                  textScaler: context.structuralTextScaler,
+                  style: q.text.eyebrow.tinted(q.color.textTertiary),
+                ),
+                SizedBox(height: q.space.lg),
+                QVoice(
+                  headline,
+                  style: q.text.appTitle.tinted(q.color.textPrimary),
+                ),
+                SizedBox(height: q.space.lg),
+                Text(
+                  support,
+                  style: q.text.bodyLg.tinted(q.color.textSecondary),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: q.space.lg),
-          QVoice(headline, style: q.text.appTitle.tinted(q.color.textPrimary)),
-          SizedBox(height: q.space.lg),
-          Text(support, style: q.text.bodyLg.tinted(q.color.textSecondary)),
-        ],
+        ),
       ),
     );
   }

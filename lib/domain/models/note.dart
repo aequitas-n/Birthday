@@ -23,8 +23,7 @@ enum NoteKind {
 
   /// A photograph saved as a memory. [Note.value] holds the photos.id;
   /// [Note.label] is an optional caption.
-  photo
-  ;
+  photo;
 
   static NoteKind fromStorage(String value) {
     return switch (value) {

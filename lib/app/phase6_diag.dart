@@ -14,7 +14,6 @@ abstract final class Phase6Diag {
 
   static const enabled = bool.fromEnvironment(
     'KIN_PHASE6_DIAG',
-    defaultValue: false,
   );
 
   static final Stopwatch _boot = Stopwatch();

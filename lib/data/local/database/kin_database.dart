@@ -152,13 +152,13 @@ class Settings extends Table {
   TextColumn get themeMode =>
       text().named('theme_mode').withDefault(const Constant('system'))();
   BoolColumn get amoled => boolean().withDefault(const Constant(false))();
+
   /// Product theme id (`default` | `vintage_diary` | future keys).
   ///
   /// Fresh installs seed `default`. Schema v9 migration stamps existing rows
   /// as `vintage_diary` so current Vintage users keep their experience.
-  TextColumn get productTheme => text()
-      .named('product_theme')
-      .withDefault(const Constant('default'))();
+  TextColumn get productTheme =>
+      text().named('product_theme').withDefault(const Constant('default'))();
   BoolColumn get showDetailsOnLockScreen => boolean()
       .named('show_details_on_lock_screen')
       .withDefault(const Constant(true))();

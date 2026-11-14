@@ -1,7 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
+import 'package:kin/design/theme/app_theme_assets.dart' show AppThemeChrome;
+import 'package:kin/design/theme/quiet_navigation.dart' show QuietNavigation;
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// Bottom navigation strip — textured when the theme provides
@@ -61,6 +64,13 @@ class QDiaryChromeStrip extends StatelessWidget {
         top: safeTop,
         bottom: safeBottom,
         maintainBottomViewPadding: safeBottom,
+        child: content,
+      );
+    }
+
+    if (context.appTheme.art != null) {
+      return QIllustratedSurface(
+        kind: IllustratedSurfaceKind.navigation,
         child: content,
       );
     }
@@ -154,13 +164,11 @@ class _NavStripCover extends StatelessWidget {
         Widget image = Image.asset(
           asset,
           fit: BoxFit.cover,
-          alignment: Alignment.center,
           width: constraints.maxWidth,
           height: constraints.maxHeight,
           cacheWidth: cache.$1,
           cacheHeight: cache.$2,
           gaplessPlayback: true,
-          filterQuality: FilterQuality.medium,
           excludeFromSemantics: true,
         );
 

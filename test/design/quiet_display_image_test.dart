@@ -4,7 +4,9 @@ import 'package:kin/design/media/quiet_display_image.dart';
 
 void main() {
   group('QuietDisplayImage', () {
-    testWidgets('px multiplies logical extent by devicePixelRatio', (tester) async {
+    testWidgets('px multiplies logical extent by devicePixelRatio', (
+      tester,
+    ) async {
       late int pixels;
       await tester.pumpWidget(
         MediaQuery(
@@ -75,7 +77,9 @@ void main() {
       expect(identical(result, original), isTrue);
     });
 
-    testWidgets('cacheSize cover uses longer edge; fill uses both', (tester) async {
+    testWidgets('cacheSize cover uses longer edge; fill uses both', (
+      tester,
+    ) async {
       late (int?, int?) cover;
       late (int?, int?) fill;
       await tester.pumpWidget(

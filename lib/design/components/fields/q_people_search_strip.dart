@@ -5,10 +5,12 @@ import 'package:flutter/material.dart' show materialTextSelectionHandleControls;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
+import 'package:kin/design/theme/app_theme_assets.dart' show AppThemeChrome;
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/search_strip_geometry.dart';
+import 'package:kin/design/theme/search_surface_geometry.dart';
 
 /// People search field — textured when the theme provides
 /// [AppThemeChrome.searchStrip], otherwise a solid paper bar.
@@ -98,19 +100,30 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
     final q = context.quiet;
     final paper = q.paper;
 
-    return QuietControlSurfaceScope(
+    final illustrated = context.appTheme.art != null;
+    final body = QuietControlSurfaceScope(
       surface: QuietControlSurface.parchment,
       child: AspectRatio(
-        aspectRatio: SearchStripGeometry.aspectRatio,
+        aspectRatio: illustrated
+            ? (MediaQuery.sizeOf(context).width - context.gutter * 2) /
+                  (56 * context.structuralTextScaler.scale(1))
+            : SearchStripGeometry.aspectRatio,
         child: LayoutBuilder(
           builder: (context, constraints) {
             final w = constraints.maxWidth;
             final h = constraints.maxHeight;
-            final fieldLeft = w * SearchStripGeometry.contentLeft;
-            final fieldRight = w * (1 - SearchStripGeometry.contentRight);
-            final fieldTop = h * SearchStripGeometry.contentPadY;
-            final fieldHeight =
-                h * (1 - SearchStripGeometry.contentPadY * 2);
+            final fieldLeft = illustrated
+                ? 16.0
+                : w * SearchStripGeometry.contentLeft;
+            final fieldRight = illustrated
+                ? 12.0
+                : w * (1 - SearchStripGeometry.contentRight);
+            final fieldTop = illustrated
+                ? 4.0
+                : h * SearchStripGeometry.contentPadY;
+            final fieldHeight = illustrated
+                ? h - 8
+                : h * (1 - SearchStripGeometry.contentPadY * 2);
 
             final searchAsset = context.appTheme.assets.chrome.searchStrip;
             final cache = QuietDisplayImage.cacheSize(
@@ -122,7 +135,12 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
             return Stack(
               fit: StackFit.expand,
               children: [
-                if (searchAsset != null)
+                if (context.appTheme.art != null)
+                  const QIllustratedSurface(
+                    kind: IllustratedSurfaceKind.search,
+                    child: SizedBox.expand(),
+                  )
+                else if (searchAsset != null)
                   Image.asset(
                     searchAsset,
                     fit: BoxFit.fill,
@@ -171,7 +189,6 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
                             textInputAction: TextInputAction.search,
                             autocorrect: false,
                             enableSuggestions: false,
-                            maxLines: 1,
                             onChanged: widget.onChanged,
                             onSubmitted: widget.onSubmitted,
                           ),
@@ -222,5 +239,6 @@ class _QPeopleSearchStripState extends State<QPeopleSearchStrip>
         ),
       ),
     );
+    return body;
   }
 }

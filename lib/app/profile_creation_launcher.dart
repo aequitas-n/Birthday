@@ -123,18 +123,20 @@ class _LinkExistingBirthdaySheet extends ConsumerWidget {
               'Every birthday already has a relationship profile.',
               style: q.text.body.tinted(context.controlInkSecondary),
             )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final (index, person) in unlinked.indexed) ...[
-                  QSettingRow(
-                    label: person.displayName,
-                    subtitle: _birthdayLabel(person),
-                    onTap: () => Navigator.of(context).pop(person),
-                  ),
-                  if (index < unlinked.length - 1) const QHairline(),
+          : SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final (index, person) in unlinked.indexed) ...[
+                    QSettingRow(
+                      label: person.displayName,
+                      subtitle: _birthdayLabel(person),
+                      onTap: () => Navigator.of(context).pop(person),
+                    ),
+                    if (index < unlinked.length - 1) const QHairline(),
+                  ],
                 ],
-              ],
+              ),
             ),
     );
   }

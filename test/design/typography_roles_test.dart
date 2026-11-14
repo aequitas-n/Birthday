@@ -64,13 +64,20 @@ void main() {
     test('product universal is CourierPrime and theme cannot own it', () {
       expect(QuietTypography.universalFamily, 'CourierPrime');
       expect(vintage.expression.archiveFamily, QuietTypography.universalFamily);
-      expect(defaults.expression.archiveFamily, QuietTypography.universalFamily);
+      expect(
+        defaults.expression.archiveFamily,
+        QuietTypography.universalFamily,
+      );
     });
 
     test('Default expression never uses Caveat', () {
       expect(defaults.expression.primaryFamily, isNot('Caveat'));
       expect(defaults.expression.secondaryFamily, isNot('Caveat'));
-      for (final role in [...personalRoles, ...editorialRoles, ...chromeRoles]) {
+      for (final role in [
+        ...personalRoles,
+        ...editorialRoles,
+        ...chromeRoles,
+      ]) {
         expect(role(defaults).fontFamily, isNot('Caveat'));
       }
     });
@@ -146,11 +153,14 @@ void main() {
       expect(defaults.personName.fontSize, vintage.personName.fontSize);
     });
 
-    test('Today empty-journal roles resolve via expression not hardcoded Caveat', () {
-      expect(defaults.journalPrompt.fontFamily, 'CourierPrime');
-      expect(defaults.journalWriting.fontFamily, 'CourierPrime');
-      expect(vintage.journalPrompt.fontFamily, 'Caveat');
-      expect(vintage.journalWriting.fontFamily, 'Caveat');
-    });
+    test(
+      'Today empty-journal roles resolve via expression not hardcoded Caveat',
+      () {
+        expect(defaults.journalPrompt.fontFamily, 'CourierPrime');
+        expect(defaults.journalWriting.fontFamily, 'CourierPrime');
+        expect(vintage.journalPrompt.fontFamily, 'Caveat');
+        expect(vintage.journalWriting.fontFamily, 'Caveat');
+      },
+    );
   });
 }

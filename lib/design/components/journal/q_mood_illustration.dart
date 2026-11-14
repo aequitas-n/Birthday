@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/journal/q_animated_illustration.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/mood_illustration_metrics.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
@@ -45,15 +46,23 @@ class QMoodIllustration extends StatelessWidget {
       fit: BoxFit.contain,
     );
 
-    Widget art = Image.asset(
-      asset,
-      width: resolvedWidth,
-      height: resolvedHeight,
-      cacheWidth: cache.$1,
-      cacheHeight: cache.$2,
-      fit: BoxFit.contain,
-      gaplessPlayback: true,
-    );
+    final direction = context.appTheme.art;
+    Widget art = direction != null
+        ? QAnimatedIllustration(
+            asset: direction.atlas,
+            mood: moodId,
+            size: resolvedWidth,
+            animate: size != MoodIllustrationSize.picker,
+          )
+        : Image.asset(
+            asset,
+            width: resolvedWidth,
+            height: resolvedHeight,
+            cacheWidth: cache.$1,
+            cacheHeight: cache.$2,
+            fit: BoxFit.contain,
+            gaplessPlayback: true,
+          );
 
     if (mirror) {
       art = Transform(
@@ -178,7 +187,7 @@ double _clampedRightOverflow(
 }) {
   final desired = artWidth * desiredFraction;
   final room = maxRoom ?? context.gutter;
-  return math.min(desired, math.max(0.0, room));
+  return math.min(desired, math.max(0, room));
 }
 
 bool _isTopRightCardPeek(MoodCardPlacement placement) => switch (placement) {
@@ -201,7 +210,7 @@ double _viewportRoomPastCard(BuildContext context, double cardWidth) {
   final box = context.findRenderObject();
   if (box is RenderBox && box.hasSize && box.size.width > 0) {
     final cardRight = box.localToGlobal(Offset(box.size.width, 0)).dx;
-    return math.max(0.0, screenW - cardRight);
+    return math.max(0, screenW - cardRight);
   }
   // First frame / unbounded: card is inset by the screen gutter (and a slim
   // deck peek pad). That band is the only safe right overflow.
@@ -229,13 +238,42 @@ class QMoodDecoratedPaper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final moodAssets = context.appTheme.assets.mood;
-    final firstOk =
-        moodId != null && moodAssets.illustration(moodId!) != null;
+    final firstOk = moodId != null && moodAssets.illustration(moodId!) != null;
     final secondOk =
-        secondMoodId != null &&
-        moodAssets.illustration(secondMoodId!) != null;
+        secondMoodId != null && moodAssets.illustration(secondMoodId!) != null;
 
     if (!firstOk && !secondOk) return child;
+
+    final art = context.appTheme.art;
+    if (art != null) {
+      return Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Padding(padding: const EdgeInsets.only(top: 48), child: child),
+          Positioned(
+            top: 0,
+            right: 14,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (secondOk)
+                  QAnimatedIllustration(
+                    asset: art.atlas,
+                    mood: secondMoodId!,
+                    size: 72,
+                  ),
+                if (firstOk)
+                  QAnimatedIllustration(
+                    asset: art.atlas,
+                    mood: moodId!,
+                    size: 72,
+                  ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
 
     var paper = child;
 

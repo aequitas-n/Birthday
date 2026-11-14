@@ -9,8 +9,7 @@ enum JournalMood {
   anxious,
   frustrated,
   surprised,
-  neutral
-  ;
+  neutral;
 
   /// Resolves a stored mood id. Retired vocabulary is mapped to the closest
   /// current mood so older rows remain coherent without inventing UI aliases.

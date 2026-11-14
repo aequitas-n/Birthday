@@ -186,7 +186,7 @@ class _QFieldState extends State<QField>
       selectionControls: _selectionControls,
       cursorWidth: 1.5,
       cursorRadius: const Radius.circular(1),
-      cursorOpacityAnimates: true,
+      cursorOpacityAnimates: !context.prefersReducedMotion,
       // The gesture detector below owns pointer handling.
       rendererIgnoresPointer: true,
       showSelectionHandles: true,

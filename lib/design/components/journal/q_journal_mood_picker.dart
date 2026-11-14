@@ -37,8 +37,7 @@ class QJournalMoodPicker extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final gap = q.space.sm;
-        final cellW =
-            (constraints.maxWidth - gap * (_columns - 1)) / _columns;
+        final cellW = (constraints.maxWidth - gap * (_columns - 1)) / _columns;
         final artWidth = (cellW * 0.78).clamp(40.0, 72.0);
         final labelStyle = _sharedLabelStyle(
           context: context,
@@ -95,7 +94,7 @@ class QJournalMoodPicker extends StatelessWidget {
       minScaleFactor: 0.85,
       maxScaleFactor: 1,
     );
-    final maxWidth = math.max(1.0, cellWidth - q.space.hair * 2);
+    final maxWidth = math.max(1, cellWidth - q.space.hair * 2);
     var scale = 1.0;
 
     for (final label in labels) {

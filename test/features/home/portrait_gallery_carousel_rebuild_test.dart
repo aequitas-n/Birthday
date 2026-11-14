@@ -36,7 +36,7 @@ void main() {
             profilesStreamProvider.overrideWith((ref) => const Stream.empty()),
           ],
           child: QuietTestApp(
-            theme: QuietTheme.quietDefault(),
+            theme: const QuietTheme.quietDefault(),
             child: SizedBox(
               width: 390,
               height: 700,

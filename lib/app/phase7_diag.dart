@@ -1,6 +1,5 @@
 import 'dart:developer' show Timeline;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,7 +12,6 @@ abstract final class Phase7Diag {
 
   static const enabled = bool.fromEnvironment(
     'KIN_PHASE7_DIAG',
-    defaultValue: false,
   );
 
   static var _installed = false;

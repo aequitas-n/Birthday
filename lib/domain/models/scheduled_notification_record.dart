@@ -5,8 +5,7 @@ enum ScheduledNotificationState {
   planned,
   registered,
   fired,
-  stale
-  ;
+  stale;
 
   static ScheduledNotificationState fromStorage(String value) {
     return switch (value) {

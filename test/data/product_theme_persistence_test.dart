@@ -68,23 +68,26 @@ void main() {
       expect(events, contains(ProductThemeId.vintageDiary));
     });
 
-    test('product theme is the single authoritative preference field', () async {
-      final base = await repository.readSettings();
-      await repository.saveSettings(
-        base.copyWith(
-          productThemeId: ProductThemeId.vintageDiary,
-          themeMode: StoredThemeMode.dark,
-          amoled: true,
-          notificationsEnabled: true,
-        ),
-      );
-      final next = await repository.readSettings();
-      expect(next.productThemeId, ProductThemeId.vintageDiary);
-      // Unrelated appearance/privacy flags remain independently stored.
-      expect(next.themeMode, StoredThemeMode.dark);
-      expect(next.amoled, isTrue);
-      expect(next.notificationsEnabled, isTrue);
-    });
+    test(
+      'product theme is the single authoritative preference field',
+      () async {
+        final base = await repository.readSettings();
+        await repository.saveSettings(
+          base.copyWith(
+            productThemeId: ProductThemeId.vintageDiary,
+            themeMode: StoredThemeMode.dark,
+            amoled: true,
+            notificationsEnabled: true,
+          ),
+        );
+        final next = await repository.readSettings();
+        expect(next.productThemeId, ProductThemeId.vintageDiary);
+        // Unrelated appearance/privacy flags remain independently stored.
+        expect(next.themeMode, StoredThemeMode.dark);
+        expect(next.amoled, isTrue);
+        expect(next.notificationsEnabled, isTrue);
+      },
+    );
   });
 
   group('schema v8 → v9 migration', () {
@@ -93,14 +96,14 @@ void main() {
       addTearDown(database.close);
 
       // Preserve an "existing user" row, then strip product_theme to mimic v8.
-      await (database.update(database.settings)
-            ..where((tbl) => tbl.id.equals(0)))
-          .write(
-            const SettingsCompanion(
-              notificationsEnabled: Value(true),
-              showDetailsOnLockScreen: Value(false),
-            ),
-          );
+      await (database.update(
+        database.settings,
+      )..where((tbl) => tbl.id.equals(0))).write(
+        const SettingsCompanion(
+          notificationsEnabled: Value(true),
+          showDetailsOnLockScreen: Value(false),
+        ),
+      );
 
       await database.customStatement('''
 CREATE TABLE settings_v8 (

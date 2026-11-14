@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:kin/design/theme/product_theme_id.dart' show ProductThemeId;
 import 'package:kin/design/tokens/color_tokens.dart';
 
 /// Neutral family a collection is built on.

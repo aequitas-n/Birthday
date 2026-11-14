@@ -5,7 +5,7 @@ import 'package:flutter/painting.dart';
 ///
 /// Themes supply **primary** (personal / journal voice) and **secondary**
 /// (editorial / interface). They do **not** own the universal archive face —
-/// that is product constant [QuietTypography.universalFamily] (Courier Prime).
+/// that is product-owned; current themes use DM Sans and DM Mono for utility UI.
 ///
 /// Roles stay shared in [QuietTypography]; only these families swap per theme.
 @immutable
@@ -73,26 +73,44 @@ final class QuietTypeExpression {
 /// ```
 ///
 /// Styles carry no colour — apply via surface ink (`q.inked`).
-/// Metrics (size / weight / height / tracking) are shared across product themes;
-/// only [QuietTypeExpression] families may differ.
+/// Current product themes share UI roles and behavior while [QuietTypeMetrics]
+/// tunes heading scale, weight, tracking, and journal leading to each typeface.
 @immutable
 final class QuietTypography {
   const QuietTypography({
     this.expression = const QuietTypeExpression.vintageDiary(),
+    this.metrics,
+    this.sharedUi = false,
   });
 
   const QuietTypography.quietDefault()
-    : expression = const QuietTypeExpression.quietDefault();
+    : expression = const QuietTypeExpression.quietDefault(),
+      metrics = null,
+      sharedUi = false;
 
   const QuietTypography.vintageDiary()
-    : expression = const QuietTypeExpression.vintageDiary();
+    : expression = const QuietTypeExpression.vintageDiary(),
+      metrics = null,
+      sharedUi = false;
 
   const QuietTypography.neonArcade()
-    : expression = const QuietTypeExpression.neonArcade();
+    : expression = const QuietTypeExpression.neonArcade(),
+      metrics = null,
+      sharedUi = false;
 
   final QuietTypeExpression expression;
+  final QuietTypeMetrics? metrics;
+  final bool sharedUi;
 
-  /// Product-owned universal archive / utility face — never theme-swapped.
+  /// Stable interface families used by every current product theme.
+  static const sharedUiFamily = 'DMSans';
+  static const sharedMetaFamily = 'DMMono';
+  String get uiFamily => _universal;
+  String get metadataFamily => _meta;
+  String get headingFamily => _secondary;
+  String get journalFamily => _primary;
+
+  /// Legacy archive face retained for Default personal writing and old callers.
   static const universalFamily = 'CourierPrime';
 
   static const universalFallback = <String>[
@@ -123,11 +141,22 @@ final class QuietTypography {
   List<String> get _primaryFb => expression.primaryFallback;
   String get _secondary => expression.secondaryFamily;
   List<String> get _secondaryFb => expression.secondaryFallback;
-  String get _universal => universalFamily;
-  List<String> get _universalFb => universalFallback;
+  String get _universal => sharedUi ? sharedUiFamily : universalFamily;
+  List<String> get _universalFb =>
+      sharedUi ? const ['sans-serif'] : universalFallback;
+  String get _meta => sharedUi ? sharedMetaFamily : universalFamily;
+  List<String> get _metaFb =>
+      sharedUi ? const ['monospace'] : universalFallback;
+  List<FontVariation>? _editorialAxes({
+    required double opsz,
+    required double soft,
+    required double wght,
+  }) => _secondary == 'Fraunces'
+      ? _fraunces(opsz: opsz, soft: soft, wght: wght)
+      : null;
 
   // ═══════════════════════════════════════════════════════════════════════
-  // UNIVERSAL — Courier Prime (product)
+  // SHARED UI — DM Sans / DM Mono (legacy callers retain Courier Prime)
   // ═══════════════════════════════════════════════════════════════════════
 
   TextStyle get uiButton => buttonLabel;
@@ -160,11 +189,11 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _secondary,
     fontFamilyFallback: _secondaryFb,
-    fontSize: 22,
-    height: 28 / 22,
-    fontWeight: FontWeight.w500,
-    letterSpacing: -0.18,
-    fontVariations: _fraunces(opsz: 18, soft: 12, wght: 500),
+    fontSize: metrics?.sectionSize ?? 22,
+    height: metrics?.headingHeight ?? 28 / 22,
+    fontWeight: metrics?.headingWeight ?? FontWeight.w500,
+    letterSpacing: metrics?.headingTracking ?? -0.18,
+    fontVariations: _editorialAxes(opsz: 18, soft: 12, wght: 500),
   );
 
   /// Nested heading under a section (sheets, profile blocks).
@@ -175,6 +204,12 @@ final class QuietTypography {
   TextStyle get personName => voiceSm;
   TextStyle get memoryTitle => voiceSm;
   TextStyle get journalTitle => voiceSm;
+
+  /// Invitation copy keeps each display face's optical scale and leading.
+  TextStyle get invitationTitle => pageTitle.copyWith(
+    fontSize: (metrics?.pageSize ?? 32) * 0.9,
+    height: metrics?.headingHeight ?? 1.12,
+  );
 
   /// Editorial day numbers / quoted literary scale (e.g. card “26”).
   TextStyle get editorialBody => voiceLg;
@@ -198,14 +233,14 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _primary,
     fontFamilyFallback: _primaryFb,
-    fontSize: 20,
-    height: 30 / 20,
+    fontSize: metrics?.journalSize ?? 20,
+    height: metrics?.journalHeight ?? 30 / 20,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.1,
   );
 
   // ═══════════════════════════════════════════════════════════════════════
-  // UNIVERSAL body / chrome (Courier Prime)
+  // SHARED body / chrome (DM Sans; DM Mono for dates and metadata)
   // ═══════════════════════════════════════════════════════════════════════
 
   TextStyle get emptyStateBody => uiBody;
@@ -220,8 +255,8 @@ final class QuietTypography {
   /// Compact countdown stamp on birthday strips.
   TextStyle get stampLabel => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 12,
     height: 16 / 12,
     fontWeight: FontWeight.w600,
@@ -250,60 +285,60 @@ final class QuietTypography {
     height: 1,
     fontWeight: FontWeight.w400,
     letterSpacing: -1.568,
-    fontVariations: _fraunces(opsz: 144, soft: 50, wght: 400),
+    fontVariations: _editorialAxes(opsz: 144, soft: 50, wght: 400),
   );
 
   TextStyle get voiceXl => TextStyle(
     inherit: false,
     fontFamily: _secondary,
     fontFamilyFallback: _secondaryFb,
-    fontSize: 44,
-    height: 48 / 44,
-    fontWeight: FontWeight.w400,
-    letterSpacing: -0.88,
-    fontVariations: _fraunces(opsz: 72, soft: 40, wght: 400),
+    fontSize: metrics?.displaySize ?? 44,
+    height: metrics?.headingHeight ?? 48 / 44,
+    fontWeight: metrics?.headingWeight ?? FontWeight.w400,
+    letterSpacing: metrics?.headingTracking ?? -0.88,
+    fontVariations: _editorialAxes(opsz: 72, soft: 40, wght: 400),
   );
 
   TextStyle get voiceLg => TextStyle(
     inherit: false,
     fontFamily: _secondary,
     fontFamilyFallback: _secondaryFb,
-    fontSize: 32,
-    height: 38 / 32,
-    fontWeight: FontWeight.w400,
-    letterSpacing: -0.48,
-    fontVariations: _fraunces(opsz: 36, soft: 30, wght: 400),
+    fontSize: metrics?.pageSize ?? 32,
+    height: metrics?.headingHeight ?? 38 / 32,
+    fontWeight: metrics?.headingWeight ?? FontWeight.w400,
+    letterSpacing: metrics?.headingTracking ?? -0.48,
+    fontVariations: _editorialAxes(opsz: 36, soft: 30, wght: 400),
   );
 
   TextStyle get voiceMd => TextStyle(
     inherit: false,
     fontFamily: _secondary,
     fontFamilyFallback: _secondaryFb,
-    fontSize: 24,
-    height: 30 / 24,
-    fontWeight: FontWeight.w400,
-    letterSpacing: -0.24,
-    fontVariations: _fraunces(opsz: 24, soft: 20, wght: 400),
+    fontSize: metrics?.sectionSize ?? 24,
+    height: metrics?.headingHeight ?? 30 / 24,
+    fontWeight: metrics?.headingWeight ?? FontWeight.w400,
+    letterSpacing: metrics?.headingTracking ?? -0.24,
+    fontVariations: _editorialAxes(opsz: 24, soft: 20, wght: 400),
   );
 
   TextStyle get voiceSm => TextStyle(
     inherit: false,
     fontFamily: _secondary,
     fontFamilyFallback: _secondaryFb,
-    fontSize: 17,
-    height: 24 / 17,
-    fontWeight: FontWeight.w500,
-    fontVariations: _fraunces(opsz: 14, soft: 10, wght: 500),
+    fontSize: metrics?.nameSize ?? 17,
+    height: metrics?.headingHeight ?? 24 / 17,
+    fontWeight: metrics?.headingWeight ?? FontWeight.w500,
+    fontVariations: _editorialAxes(opsz: 14, soft: 10, wght: 500),
   );
 
   TextStyle get voiceSmEmphasis => TextStyle(
     inherit: false,
     fontFamily: _secondary,
     fontFamilyFallback: _secondaryFb,
-    fontSize: 17,
-    height: 24 / 17,
+    fontSize: metrics?.nameSize ?? 17,
+    height: metrics?.headingHeight ?? 24 / 17,
     fontWeight: FontWeight.w600,
-    fontVariations: _fraunces(opsz: 14, soft: 10, wght: 600),
+    fontVariations: _editorialAxes(opsz: 14, soft: 10, wght: 600),
   );
 
   TextStyle get titleLg => TextStyle(
@@ -343,7 +378,7 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _universal,
     fontFamilyFallback: _universalFb,
-    fontSize: 15,
+    fontSize: sharedUi ? 16 : 15,
     height: 22 / 15,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.12,
@@ -353,7 +388,7 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _universal,
     fontFamilyFallback: _universalFb,
-    fontSize: 13,
+    fontSize: sharedUi ? 14 : 13,
     height: 18 / 13,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.2,
@@ -363,7 +398,7 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _universal,
     fontFamilyFallback: _universalFb,
-    fontSize: 12,
+    fontSize: sharedUi ? 13 : 12,
     height: 16 / 12,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.24,
@@ -371,8 +406,8 @@ final class QuietTypography {
 
   TextStyle get metadata => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 12,
     height: 16 / 12,
     fontWeight: FontWeight.w400,
@@ -381,8 +416,8 @@ final class QuietTypography {
 
   TextStyle get tiny => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 10,
     height: 13 / 10,
     fontWeight: FontWeight.w400,
@@ -392,8 +427,8 @@ final class QuietTypography {
 
   TextStyle get eyebrow => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 11,
     height: 14 / 11,
     fontWeight: FontWeight.w400,
@@ -409,7 +444,7 @@ final class QuietTypography {
     height: 68 / 76,
     fontWeight: FontWeight.w300,
     letterSpacing: -2.66,
-    fontVariations: _fraunces(opsz: 144, soft: 40, wght: 300),
+    fontVariations: _editorialAxes(opsz: 144, soft: 40, wght: 300),
     fontFeatures: _numericFeatures,
   );
 
@@ -421,7 +456,7 @@ final class QuietTypography {
     height: 1,
     fontWeight: FontWeight.w400,
     letterSpacing: -1.92,
-    fontVariations: _fraunces(opsz: 72, soft: 30, wght: 400),
+    fontVariations: _editorialAxes(opsz: 72, soft: 30, wght: 400),
     fontFeatures: _numericFeatures,
   );
 
@@ -433,14 +468,14 @@ final class QuietTypography {
     height: 32 / 28,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.56,
-    fontVariations: _fraunces(opsz: 28, soft: 20, wght: 500),
+    fontVariations: _editorialAxes(opsz: 28, soft: 20, wght: 500),
     fontFeatures: _numericFeatures,
   );
 
   TextStyle get numeralMd => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 17,
     height: 22 / 17,
     fontWeight: FontWeight.w400,
@@ -450,8 +485,8 @@ final class QuietTypography {
 
   TextStyle get numeralSm => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 13,
     height: 18 / 13,
     fontWeight: FontWeight.w400,
@@ -467,7 +502,7 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _universal,
     fontFamilyFallback: _universalFb,
-    fontSize: 13,
+    fontSize: sharedUi ? 14 : 13,
     height: 18 / 13,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.2,
@@ -507,8 +542,8 @@ final class QuietTypography {
 
   TextStyle get archiveMeta => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 12,
     height: 16 / 12,
     fontWeight: FontWeight.w400,
@@ -517,8 +552,8 @@ final class QuietTypography {
 
   TextStyle get archiveCaption => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 11,
     height: 15 / 11,
     fontWeight: FontWeight.w400,
@@ -527,8 +562,8 @@ final class QuietTypography {
 
   TextStyle get archiveLabel => TextStyle(
     inherit: false,
-    fontFamily: _universal,
-    fontFamilyFallback: _universalFb,
+    fontFamily: _meta,
+    fontFamilyFallback: _metaFb,
     fontSize: 11,
     height: 14 / 11,
     fontWeight: FontWeight.w400,
@@ -541,8 +576,8 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _primary,
     fontFamilyFallback: _primaryFb,
-    fontSize: 22,
-    height: 28 / 22,
+    fontSize: metrics?.promptSize ?? 22,
+    height: metrics?.journalHeight ?? 28 / 22,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.18,
   );
@@ -551,8 +586,8 @@ final class QuietTypography {
     inherit: false,
     fontFamily: _primary,
     fontFamilyFallback: _primaryFb,
-    fontSize: 17,
-    height: 24 / 17,
+    fontSize: (metrics?.journalSize ?? 20) * 0.85,
+    height: metrics?.journalHeight ?? 24 / 17,
     fontWeight: FontWeight.w400,
     letterSpacing: 0.14,
   );
@@ -588,4 +623,153 @@ final class QuietTypography {
   double get nameScaleCap => 1.4;
   double get heroScaleCap => 1.2;
   double get structuralScaleCap => 1.3;
+}
+
+/// Optical adjustments for theme fonts; independent of navigation and behavior.
+@immutable
+final class QuietTypeMetrics {
+  const QuietTypeMetrics({
+    this.pageSize = 32,
+    this.sectionSize = 23,
+    this.displaySize = 44,
+    this.nameSize = 19,
+    this.headingHeight = 1.22,
+    this.headingTracking = -0.2,
+    this.headingWeight = FontWeight.w500,
+    this.journalSize = 21,
+    this.journalHeight = 1.5,
+    this.promptSize = 23,
+  });
+  final double pageSize;
+  final double sectionSize;
+  final double displaySize;
+  final double nameSize;
+  final double headingHeight;
+  final double headingTracking;
+  final FontWeight headingWeight;
+  final double journalSize;
+  final double journalHeight;
+  final double promptSize;
+}
+
+/// Current product typography: shared interface, individual editorial voices.
+abstract final class ThemeTypography {
+  static const plain = QuietTypography(
+    expression: QuietTypeExpression.quietDefault(),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(journalSize: 18, promptSize: 20),
+  );
+  static const vintage = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'Caveat',
+      secondaryFamily: 'CormorantGaramond',
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      pageSize: 36,
+      sectionSize: 26,
+      nameSize: 21,
+      headingWeight: FontWeight.w600,
+      journalSize: 23,
+      promptSize: 25,
+      journalHeight: 1.4,
+    ),
+  );
+  static const arcade = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'SpaceMono',
+      secondaryFamily: 'ChakraPetch',
+      primaryFallback: ['monospace'],
+      secondaryFallback: ['sans-serif'],
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      pageSize: 30,
+      sectionSize: 22,
+      nameSize: 18,
+      headingTracking: 0.1,
+      headingWeight: FontWeight.w600,
+      journalSize: 17,
+      promptSize: 18,
+      journalHeight: 1.65,
+    ),
+  );
+  static const postcard = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'SpecialElite',
+      secondaryFamily: 'DMSerifDisplay',
+      primaryFallback: ['monospace'],
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      pageSize: 33,
+      headingWeight: FontWeight.w400,
+      journalSize: 18,
+      promptSize: 20,
+      journalHeight: 1.65,
+    ),
+  );
+  static const comic = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'ComicNeue',
+      secondaryFamily: 'Bangers',
+      primaryFallback: ['sans-serif'],
+      secondaryFallback: ['sans-serif'],
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      pageSize: 38,
+      sectionSize: 28,
+      displaySize: 48,
+      nameSize: 23,
+      headingTracking: 0.6,
+      headingHeight: 1.12,
+      headingWeight: FontWeight.w400,
+      journalHeight: 1.4,
+    ),
+  );
+  static const botanical = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'Kalam',
+      secondaryFamily: 'Lora',
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      pageSize: 30,
+      sectionSize: 22,
+      nameSize: 18,
+      journalSize: 20,
+      promptSize: 22,
+      journalHeight: 1.55,
+    ),
+  );
+  static const seaside = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'PatrickHand',
+      secondaryFamily: 'BreeSerif',
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      headingWeight: FontWeight.w400,
+      journalSize: 23,
+      promptSize: 24,
+      journalHeight: 1.4,
+    ),
+  );
+  static const storybook = QuietTypography(
+    expression: QuietTypeExpression(
+      primaryFamily: 'CrimsonPro',
+      secondaryFamily: 'Cinzel',
+      primaryFallback: ['serif'],
+    ),
+    sharedUi: true,
+    metrics: QuietTypeMetrics(
+      pageSize: 29,
+      sectionSize: 21,
+      nameSize: 17,
+      headingTracking: 0.1,
+      headingHeight: 1.3,
+      journalSize: 22,
+    ),
+  );
 }

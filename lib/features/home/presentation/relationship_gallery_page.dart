@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kin/app/profile_creation_launcher.dart';
 import 'package:kin/design/components/feedback/q_pane_loading.dart';
 import 'package:kin/design/motion/quiet_motion.dart';
+import 'package:kin/design/theme/profile_surface_geometry.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/vintage_portrait_geometry.dart';
 import 'package:kin/features/home/application/gallery_providers.dart';
 import 'package:kin/features/home/application/home_providers.dart';
+
 // ignore: always_use_package_imports -- ARCH-03 requires relative imports within a feature
 import 'portrait_gallery_carousel.dart';
 // ignore: always_use_package_imports -- ARCH-03
@@ -14,7 +15,7 @@ import 'profile_portrait_card.dart';
 
 /// Relationship gallery — the "who" mode. Vintage portrait collection.
 ///
-/// Search lives in [HomeScreen] above this pane. [query] filters the deck.
+/// Search lives in `HomeScreen` above this pane. [query] filters the deck.
 class RelationshipGalleryPage extends ConsumerWidget {
   const RelationshipGalleryPage({this.query = '', super.key});
 
@@ -39,14 +40,17 @@ class RelationshipGalleryPage extends ConsumerWidget {
           final size = VintagePortraitLayout.fitGalleryCard(
             maxWidth: constraints.maxWidth,
             maxHeight: constraints.maxHeight,
-            widthFraction: layout.galleryCardWidthFraction ??
+            widthFraction:
+                layout.galleryCardWidthFraction ??
                 q.layout.galleryCardWidthFraction,
-            heightFraction: layout.galleryCardHeightFraction ??
+            heightFraction:
+                layout.galleryCardHeightFraction ??
                 q.layout.galleryCardHeightFraction,
             maxHeightCap:
                 layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
             maxWidthCap: layout.galleryCardMaxWidth,
-            aspectRatio: layout.profileCard?.aspectRatio ??
+            aspectRatio:
+                layout.profileCard?.aspectRatio ??
                 ProfileCardGeometry.aspectRatio,
           );
           return QPaneLoading(minHeight: size.height);
@@ -61,14 +65,17 @@ class RelationshipGalleryPage extends ConsumerWidget {
           final size = VintagePortraitLayout.fitGalleryCard(
             maxWidth: constraints.maxWidth,
             maxHeight: constraints.maxHeight,
-            widthFraction: layout.galleryCardWidthFraction ??
+            widthFraction:
+                layout.galleryCardWidthFraction ??
                 q.layout.galleryCardWidthFraction,
-            heightFraction: layout.galleryCardHeightFraction ??
+            heightFraction:
+                layout.galleryCardHeightFraction ??
                 q.layout.galleryCardHeightFraction,
             maxHeightCap:
                 layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
             maxWidthCap: layout.galleryCardMaxWidth,
-            aspectRatio: layout.profileCard?.aspectRatio ??
+            aspectRatio:
+                layout.profileCard?.aspectRatio ??
                 ProfileCardGeometry.aspectRatio,
           );
           return _EntranceFrame(

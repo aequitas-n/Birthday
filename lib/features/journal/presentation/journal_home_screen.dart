@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kin/app/router.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/journal/q_ambient_scene.dart';
 import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
@@ -180,6 +181,13 @@ class _JournalHomeScreenState extends ConsumerState<JournalHomeScreen> {
                       },
                     ),
                   ),
+                  if (context.appTheme.art != null) ...[
+                    SizedBox(height: q.space.lg),
+                    const Align(
+                      alignment: Alignment.centerRight,
+                      child: QAmbientScene(width: 174),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -214,8 +222,11 @@ class _JournalHomeScreenState extends ConsumerState<JournalHomeScreen> {
   }) {
     final parts = <String>[
       '$daysInMonth days',
-      if (written > 0) written == 1 ? '1 day written' : '$written days written',
-      if (moods > 0) moods == 1 ? '1 mood' : '$moods moods',
+      if (written == 1)
+        '1 day written'
+      else if (written > 1)
+        '$written days written',
+      if (moods == 1) '1 mood' else if (moods > 1) '$moods moods',
     ];
     return parts.join(' · ');
   }

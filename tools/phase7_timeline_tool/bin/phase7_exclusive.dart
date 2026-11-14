@@ -95,7 +95,7 @@ void main(List<String> args) {
   }
 
   printTop('UI exclusive max (self time)', exclusive, n: 60);
-  printTop('UI inclusive max', inclusive, n: 40);
+  printTop('UI inclusive max', inclusive);
 
   // Raster-ish threads
   stdout.writeln('\n=== Non-UI thread long B/E spans ===');
@@ -125,7 +125,7 @@ void main(List<String> args) {
       if (st.isNotEmpty) st.last.childUs += incl;
     }
   }
-  printTop('Non-UI exclusive', rasterExcl, n: 40);
+  printTop('Non-UI exclusive', rasterExcl);
 
   // Highlight design-system widgets
   stdout.writeln('\n=== Kin/Quiet widget exclusive (filtered) ===');
@@ -173,7 +173,7 @@ final class _Open {
 }
 
 final class _Agg {
-  var count = 0;
-  var totalUs = 0.0;
-  var maxUs = 0.0;
+  int count = 0;
+  double totalUs = 0;
+  double maxUs = 0;
 }

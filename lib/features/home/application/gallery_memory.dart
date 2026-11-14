@@ -25,8 +25,9 @@ class GalleryMemorySummary {
       latestPreview: _previewFor(latest),
       latestAt: latest.updatedAt,
       notePreview: notesOnly.isEmpty ? null : _previewFor(notesOnly.first),
-      momentPreview:
-          momentsOnly.isEmpty ? null : _momentPreview(momentsOnly.first),
+      momentPreview: momentsOnly.isEmpty
+          ? null
+          : _momentPreview(momentsOnly.first),
     );
   }
 

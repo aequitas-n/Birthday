@@ -328,9 +328,9 @@ class QJournalCardDeckState extends State<QJournalCardDeck>
         // Slim side pad for stacked page peeks only — mood art overlays and
         // does not consume layout width. Card fills the rest of the deck.
         final stackPad = q.space.sm;
-        final availW = math.max(0.0, maxW - stackPad * 2);
+        final availW = math.max<double>(0, maxW - stackPad * 2);
         final availH = maxH.isFinite && maxH > 0
-            ? math.max(0.0, maxH - stackPad)
+            ? math.max<double>(0, maxH - stackPad)
             : double.infinity;
         var cardW = availW;
         var cardH = cardW / QJournalMemoryCard.aspectRatio;

@@ -3,8 +3,7 @@ import 'package:meta/meta.dart';
 enum ReminderRuleKind {
   daysBefore,
   atTheirMidnight,
-  morningOf
-  ;
+  morningOf;
 
   static ReminderRuleKind fromStorage(String value) {
     return switch (value) {

@@ -27,8 +27,7 @@ enum AppRoute {
   reminders('/reminders'),
   settings('/settings'),
   gallery('/gallery'),
-  debugNotifications('/debug/notifications')
-  ;
+  debugNotifications('/debug/notifications');
 
   const AppRoute(this.path);
 

@@ -9,8 +9,7 @@ enum JournalFragmentKind {
   writing,
   list,
   photograph,
-  audio
-  ;
+  audio;
 
   static JournalFragmentKind fromStorage(String value) {
     return switch (value) {

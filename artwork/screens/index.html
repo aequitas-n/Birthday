@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kin · Every page, seven worlds</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f0e7;color:#283b34;font:15px/1.55 system-ui,sans-serif}header{max-width:1500px;margin:auto;padding:40px 5vw 20px}h1{font:clamp(32px,5vw,62px)/1.1 Georgia,serif;margin:14px 0}p{max-width:780px;color:#5d6b60}a{color:inherit}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:24px 0}select,button{font:inherit;border:1px solid #bdc8bb;background:#fff9;color:inherit;border-radius:12px;padding:10px 14px;max-width:100%}button{cursor:pointer}button[aria-pressed=true]{background:#344d3e;color:#fff}select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #a7672a;outline-offset:4px}main{max-width:1500px;margin:auto;padding:0 5vw 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}figure{margin:0;min-width:0}figcaption{font:20px/1.25 Georgia,serif;margin:12px 0 7px}figure a{display:block}figure img{width:100%;height:auto;border-radius:15px;box-shadow:0 5px 24px #253d2c14;border:1px solid #0001}footer{border-top:1px solid #d1d8cc;padding:24px 5vw;font-size:13px}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase}.meta{font-size:12px}label{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header><a href="../index.html">← Animated artwork library</a><a href="../typography/index.html" style="margin-left:20px">Compare the type pairings →</a><div class="eyebrow" style="margin-top:28px">Actual Flutter screens · Local review</div><h1>Every page, seven worlds.</h1><p>Vintage is the reference for coverage. Choose a theme to inspect its screens, sections, sheets, and editors—or compare one view across all seven. Captures use the same sample data, bundled fonts, and reduced motion.</p><div class="toolbar"><label>Theme <select id="theme"></select></label><button id="mode" aria-pressed="false">Compare one screen across themes</button><label id="screen-label" hidden>Screen <select id="screen"></select></label></div><p class="meta" id="count" aria-live="polite"></p></header>
+<main id="gallery"></main>
+<footer>Render checks also cover 320 × 640 at 160% text and keyboard insets. These are review artifacts, not images used to build the app. Native Android camera, photo-library, and permission screens belong to the operating system.</footer>
+<script>
+const themes=[['vintage','Vintage Diary'],['neon','Neon Arcade'],['retro','Retro Postcard'],['comic','Sunday Comics'],['botanical','Botanical Sketchbook'],['seaside','Seaside Watercolor'],['midnight','Midnight Storybook']];
+const screens=[
+  [
+    "today",
+    "Today · with memories"
+  ],
+  [
+    "today-empty",
+    "Today · first memory"
+  ],
+  [
+    "birthdays",
+    "Kin · Birthdays"
+  ],
+  [
+    "people",
+    "Kin · People"
+  ],
+  [
+    "people-empty",
+    "Kin · create a profile"
+  ],
+  [
+    "profile-start",
+    "Create profile · starting choices"
+  ],
+  [
+    "link-birthday",
+    "Create profile · link a birthday"
+  ],
+  [
+    "journal",
+    "Journal · month calendar"
+  ],
+  [
+    "journal-day",
+    "Journal · day deck"
+  ],
+  [
+    "day-mood",
+    "Journal · day mood picker"
+  ],
+  [
+    "journal-day-empty",
+    "Journal · empty day"
+  ],
+  [
+    "memory",
+    "Memory · reading"
+  ],
+  [
+    "memory-editor",
+    "Memory · editing fragments"
+  ],
+  [
+    "memory-editor-more",
+    "Memory · lower editor sections"
+  ],
+  [
+    "memory-mood",
+    "Memory · mood picker"
+  ],
+  [
+    "memory-editor-empty",
+    "Memory · new entry"
+  ],
+  [
+    "fragment-chooser",
+    "Memory · fragment choices"
+  ],
+  [
+    "person",
+    "Person · Moments and Notes"
+  ],
+  [
+    "person-more",
+    "Person · scrolled Notes and plans"
+  ],
+  [
+    "person-empty",
+    "Person · empty sections"
+  ],
+  [
+    "reminders",
+    "Reminder planner"
+  ],
+  [
+    "reminders-empty",
+    "Reminder planner · empty day"
+  ],
+  [
+    "settings",
+    "Settings"
+  ],
+  [
+    "settings-more",
+    "Settings · lower sections"
+  ],
+  [
+    "notification-inspector",
+    "Notification inspector"
+  ],
+  [
+    "design-gallery",
+    "Component gallery"
+  ],
+  [
+    "design-gallery-more",
+    "Component gallery · lower sections"
+  ],
+  [
+    "welcome",
+    "Welcome · introduction"
+  ],
+  [
+    "welcome-2",
+    "Welcome · small details"
+  ],
+  [
+    "welcome-3",
+    "Welcome · privacy"
+  ],
+  [
+    "birthday-sheet",
+    "Add birthday"
+  ],
+  [
+    "month-picker",
+    "Birthday · month picker"
+  ],
+  [
+    "profile-sheet",
+    "Edit relationship profile"
+  ],
+  [
+    "profile-sheet-more",
+    "Profile · relationships and saved details"
+  ],
+  [
+    "profile-new",
+    "Create relationship profile"
+  ],
+  [
+    "reminder-sheet",
+    "Edit reminder · time controls"
+  ],
+  [
+    "place-picker",
+    "City and timezone picker"
+  ],
+  [
+    "place-picker-more",
+    "City picker · scrolled list"
+  ],
+  [
+    "note-editor",
+    "Edit note · kinds and fields"
+  ],
+  [
+    "gift-editor",
+    "Gift · Mark as given action"
+  ],
+  [
+    "custom-editor",
+    "Note · custom category"
+  ],
+  [
+    "date-note-editor",
+    "Note · important date"
+  ],
+  [
+    "choices",
+    "Confirmation sheet"
+  ],
+  [
+    "moments",
+    "Moments · photo collection"
+  ],
+  [
+    "photo-review",
+    "Photograph · review"
+  ],
+  [
+    "audio-recorder",
+    "Audio · recording sheet"
+  ],
+  [
+    "birthday-keyboard",
+    "Add birthday · keyboard"
+  ],
+  [
+    "reminder-keyboard",
+    "Edit reminder · keyboard"
+  ]
+];
+const $=id=>document.getElementById(id);let compare=false;
+for(const [id,name] of themes){const option=new Option(name,id);$('theme').add(option)}
+for(const [id,name] of screens){$('screen').add(new Option(name,id))}
+function render(){
+const theme=$('theme').value,screen=$('screen').value;
+$('screen-label').hidden=!compare;$('theme').disabled=compare;$('mode').setAttribute('aria-pressed',compare);$('mode').textContent=compare?'View all screens in one theme':'Compare one screen across themes';
+const items=compare?themes.map(([id,name])=>[id,screen,name]):screens.map(([id,name])=>[theme,id,name]);
+$('gallery').replaceChildren(...items.map(([id,view,name])=>{const fig=document.createElement('figure');const caption=document.createElement('figcaption');caption.textContent=name;const link=document.createElement('a');link.href=`${id}/${view}.png`;link.target='_blank';link.rel='noopener';const img=document.createElement('img');img.src=link.href;img.alt=`${name} — ${themes.find(t=>t[0]===id)[1]}`;img.loading='lazy';img.width=390;img.height=844;link.append(img);fig.append(caption,link);return fig}));
+$('count').textContent=compare?`${themes.length} themes · ${screens.find(s=>s[0]===screen)[1]}`:`${screens.length} views · ${themes.find(t=>t[0]===theme)[1]} · click a capture to inspect full size`;
+}
+$('theme').onchange=render;$('screen').onchange=render;$('mode').onclick=()=>{compare=!compare;render()};render();
+</script>
+</body>
+</html>

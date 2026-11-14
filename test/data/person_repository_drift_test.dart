@@ -97,26 +97,28 @@ void main() {
         ),
       );
 
-      await database.into(database.notes).insert(
-        NotesCompanion.insert(
-          id: 'note-1',
-          profileId: profile.id,
-          kind: 'free',
-          value: 'A note',
-          position: 0,
-          createdAt: DateTime.utc(2026).millisecondsSinceEpoch,
-          updatedAt: DateTime.utc(2026).millisecondsSinceEpoch,
-        ),
-      );
+      await database
+          .into(database.notes)
+          .insert(
+            NotesCompanion.insert(
+              id: 'note-1',
+              profileId: profile.id,
+              kind: 'free',
+              value: 'A note',
+              position: 0,
+              createdAt: DateTime.utc(2026).millisecondsSinceEpoch,
+              updatedAt: DateTime.utc(2026).millisecondsSinceEpoch,
+            ),
+          );
 
       await repository.softDelete(person.id);
 
-      final profileRow = await (database.select(database.profiles)
-            ..where((tbl) => tbl.id.equals(profile.id)))
-          .getSingle();
-      final noteRow = await (database.select(database.notes)
-            ..where((tbl) => tbl.id.equals('note-1')))
-          .getSingle();
+      final profileRow = await (database.select(
+        database.profiles,
+      )..where((tbl) => tbl.id.equals(profile.id))).getSingle();
+      final noteRow = await (database.select(
+        database.notes,
+      )..where((tbl) => tbl.id.equals('note-1'))).getSingle();
 
       expect(profileRow.deletedAt, isNotNull);
       expect(noteRow.deletedAt, isNotNull);

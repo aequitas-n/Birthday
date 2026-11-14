@@ -10,16 +10,17 @@ import 'package:kin/design/components/buttons/q_button.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_arc.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/journal/q_ambient_scene.dart';
+import 'package:kin/design/components/journal/q_illustrated_journal_invite.dart';
 import 'package:kin/design/components/journal/q_mood_illustration.dart';
 import 'package:kin/design/components/journal/q_today_empty_journal_invite.dart';
 import 'package:kin/design/components/navigation/q_diary_top_bar.dart';
 import 'package:kin/design/components/rows/q_person_row.dart';
 import 'package:kin/design/components/surfaces/q_hairline.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
+import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
-import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';
 import 'package:kin/domain/models/personal_reminder.dart';
@@ -70,102 +71,102 @@ class TodayScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Phase5Diag.timedValue('today_build', () {
-    return Phase6Diag.timedValue('today_build', () {
-    final q = context.quiet;
-    final space = q.space;
-    final today = ref.watch(journalTodayProvider);
-    final dateKey = today.storageKey;
-    final entries =
-        ref.watch(journalEntriesProvider(dateKey)).asData?.value ??
-        const <JournalEntry>[];
-    final birthdaysToday = ref.watch(todayBirthdayProvider);
-    final upcoming = [
-      for (final entry in ref.watch(todayUpcomingProvider))
-        if (entry.daysUntil > 0) entry,
-    ];
-    final peopleLoading = ref.watch(peopleStreamProvider).isLoading;
-    final reminders = [
-      ...ref.watch(todayActiveRemindersProvider),
-    ]..sort((a, b) => a.localTime.compareTo(b.localTime));
+      return Phase6Diag.timedValue('today_build', () {
+        final q = context.quiet;
+        final space = q.space;
+        final today = ref.watch(journalTodayProvider);
+        final dateKey = today.storageKey;
+        final entries =
+            ref.watch(journalEntriesProvider(dateKey)).asData?.value ??
+            const <JournalEntry>[];
+        final birthdaysToday = ref.watch(todayBirthdayProvider);
+        final upcoming = [
+          for (final entry in ref.watch(todayUpcomingProvider))
+            if (entry.daysUntil > 0) entry,
+        ];
+        final peopleLoading = ref.watch(peopleStreamProvider).isLoading;
+        final reminders = [
+          ...ref.watch(todayActiveRemindersProvider),
+        ]..sort((a, b) => a.localTime.compareTo(b.localTime));
 
-    if (!peopleLoading) {
-      Phase6Diag.onTodayUsable();
-    }
-    return QScreen(
-      child: QMeasure(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            QDiaryTopBar(
-              title: 'Today',
-              actions: [
-                QIconButton(
-                  glyph: QuietGlyph.plus,
-                  onPressed: () => showAddPersonFlow(context, ref),
-                  semanticLabel: 'Add someone',
-                ),
-                QIconButton(
-                  glyph: QuietGlyph.settings,
-                  onPressed: () => context.push('/settings'),
-                  semanticLabel: 'Settings',
-                ),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.fromLTRB(
-                  context.gutter,
-                  q.space.sectionLead,
-                  context.gutter,
-                  space.pageBottom,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _DateStamp(today: today),
-                    SizedBox(height: space.sectionGap),
-                    _TodayJournalSection(
-                      today: today,
-                      entries: entries,
-                      onAddMemory: () =>
-                          _addMemory(context, ref, today, entries),
-                      onOpenDay: () => context.pushNamed(
-                        AppRoute.journalDay.name,
-                        pathParameters: {'date': dateKey},
-                      ),
-                      onOpenEntry: (entry) => context.pushNamed(
-                        AppRoute.journalEntry.name,
-                        pathParameters: {
-                          'date': dateKey,
-                          'entryId': entry.id,
-                        },
-                      ),
+        if (!peopleLoading) {
+          Phase6Diag.onTodayUsable();
+        }
+        return QScreen(
+          child: QMeasure(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                QDiaryTopBar(
+                  title: 'Today',
+                  actions: [
+                    QIconButton(
+                      glyph: QuietGlyph.plus,
+                      onPressed: () => showAddPersonFlow(context, ref),
+                      semanticLabel: 'Add someone',
                     ),
-                    SizedBox(height: space.cardToSection),
-                    _TodayRemindersSection(
-                      reminders: reminders,
-                      onOpen: () => context.push(AppRoute.reminders.path),
-                    ),
-                    if (birthdaysToday.isNotEmpty) ...[
-                      SizedBox(height: space.sectionGap),
-                      _BirthdayTodaySection(entries: birthdaysToday),
-                    ],
-                    SizedBox(height: space.sectionGap),
-                    _ComingUpSection(
-                      entries: upcoming,
-                      loading: peopleLoading,
-                      onSeeAll: () => context.goNamed(AppRoute.kin.name),
-                      onAdd: () => showAddPersonFlow(context, ref),
+                    QIconButton(
+                      glyph: QuietGlyph.settings,
+                      onPressed: () => context.push('/settings'),
+                      semanticLabel: 'Settings',
                     ),
                   ],
                 ),
-              ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.fromLTRB(
+                      context.gutter,
+                      q.space.sectionLead,
+                      context.gutter,
+                      space.pageBottom,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _DateStamp(today: today),
+                        SizedBox(height: space.sectionGap),
+                        _TodayJournalSection(
+                          today: today,
+                          entries: entries,
+                          onAddMemory: () =>
+                              _addMemory(context, ref, today, entries),
+                          onOpenDay: () => context.pushNamed(
+                            AppRoute.journalDay.name,
+                            pathParameters: {'date': dateKey},
+                          ),
+                          onOpenEntry: (entry) => context.pushNamed(
+                            AppRoute.journalEntry.name,
+                            pathParameters: {
+                              'date': dateKey,
+                              'entryId': entry.id,
+                            },
+                          ),
+                        ),
+                        SizedBox(height: space.cardToSection),
+                        _TodayRemindersSection(
+                          reminders: reminders,
+                          onOpen: () => context.push(AppRoute.reminders.path),
+                        ),
+                        if (birthdaysToday.isNotEmpty) ...[
+                          SizedBox(height: space.sectionGap),
+                          _BirthdayTodaySection(entries: birthdaysToday),
+                        ],
+                        SizedBox(height: space.sectionGap),
+                        _ComingUpSection(
+                          entries: upcoming,
+                          loading: peopleLoading,
+                          onSeeAll: () => context.goNamed(AppRoute.kin.name),
+                          onAdd: () => showAddPersonFlow(context, ref),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
-    });
+          ),
+        );
+      });
     });
   }
 
@@ -208,7 +209,7 @@ class _DateStamp extends StatelessWidget {
             ).weekday -
             1];
 
-    return Column(
+    final stamp = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -220,6 +221,14 @@ class _DateStamp extends StatelessWidget {
           weekday,
           style: q.inked(q.text.uiCaption, tone: QuietInkTone.tertiary),
         ),
+      ],
+    );
+    if (context.appTheme.art == null) return stamp;
+    return Row(
+      children: [
+        Expanded(child: stamp),
+        const SizedBox(width: 8),
+        const QAmbientScene(width: 130),
       ],
     );
   }
@@ -263,7 +272,12 @@ class _TodayJournalSection extends StatelessWidget {
           ),
         ),
         SizedBox(height: space.sectionLead),
-        if (!hasEntries)
+        if (!hasEntries && context.appTheme.art != null)
+          QIllustratedJournalInvite(
+            dateLabel: '${today.day} ${TodayScreen._months[today.month - 1]}',
+            onAdd: onAddMemory,
+          )
+        else if (!hasEntries)
           QTodayEmptyJournalInvite(
             child: QJournalCardSurface(
               child: Column(
@@ -541,9 +555,10 @@ class _BirthdayTodaySection extends StatelessWidget {
             heroPrefix: 'today-bday',
           ),
           if (index < entries.length - 1)
-            personRowUsesPaperStrip(context)
-                ? SizedBox(height: space.sm)
-                : QHairline(indent: indent),
+            if (personRowUsesPaperStrip(context))
+              SizedBox(height: space.sm)
+            else
+              QHairline(indent: indent),
         ],
       ],
     );
@@ -608,9 +623,10 @@ class _ComingUpSection extends StatelessWidget {
               heroPrefix: 'today-up',
             ),
             if (index < entries.length - 1)
-              personRowUsesPaperStrip(context)
-                  ? SizedBox(height: space.sm)
-                  : QHairline(indent: indent),
+              if (personRowUsesPaperStrip(context))
+                SizedBox(height: space.sm)
+              else
+                QHairline(indent: indent),
           ],
           SizedBox(height: space.sm),
           Align(

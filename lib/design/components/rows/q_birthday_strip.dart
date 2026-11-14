@@ -1,9 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
 import 'package:kin/design/components/media/q_avatar.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
+import 'package:kin/design/theme/app_theme_assets.dart' show AppThemeChrome;
+import 'package:kin/design/theme/birthday_strip_geometry.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/user_strip_geometry.dart';
 
 /// One birthday row — hanging parchment tag when the theme supplies
 /// [AppThemeChrome.birthdayStrip], otherwise a full-width Default paper strip.
@@ -46,7 +48,7 @@ class QBirthdayStrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stripAsset = context.appTheme.assets.chrome.birthdayStrip;
-    if (stripAsset == null) {
+    if (stripAsset == null || context.appTheme.art != null) {
       return _DefaultPaperStrip(
         displayName: displayName,
         seed: seed,
@@ -69,7 +71,8 @@ class QBirthdayStrip extends StatelessWidget {
       onTap: onTap,
       heroTag: heroTag,
       stripAsset: stripAsset,
-      layout: context.appTheme.assets.chrome.birthdayStripLayout ??
+      layout:
+          context.appTheme.assets.chrome.birthdayStripLayout ??
           UserStripGeometry.vintage,
     );
   }
@@ -111,22 +114,8 @@ class _DefaultPaperStrip extends StatelessWidget {
         if (dateLabel != null) dateLabel!,
         countdown,
       ].join(', '),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: q.journal.paper,
-          borderRadius: BorderRadius.circular(q.radius.md),
-          border: Border.all(
-            color: q.journal.edge,
-            width: context.hairlineWidth,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: q.journal.shadow,
-              blurRadius: 10,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
+      child: QIllustratedSurface(
+        kind: IllustratedSurfaceKind.tag,
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: q.space.base,
@@ -657,7 +646,9 @@ class _StampCountdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final ink = emphasized ? q.color.accent : q.journal.ink.withValues(alpha: 0.72);
+    final ink = emphasized
+        ? q.color.accent
+        : q.journal.ink.withValues(alpha: 0.72);
 
     return Text(
       label,

@@ -13,7 +13,6 @@ import 'package:kin/design/feedback/quiet_haptics.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/theme/vintage_mood.dart';
 import 'package:kin/domain/models/journal_entry.dart';
 import 'package:kin/domain/models/journal_fragment.dart';
 import 'package:kin/domain/models/local_calendar_date.dart';

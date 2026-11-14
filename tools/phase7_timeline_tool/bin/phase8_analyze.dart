@@ -1,8 +1,8 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final path = r'e:\~Work\Birthday\tmp\phase8\fresh_session.json';
+  const path = r'e:\~Work\Birthday\tmp\phase8\fresh_session.json';
   final d = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
   final ev = (d['traceEvents'] as List).cast<Map<String, dynamic>>();
   print('eventCount=${ev.length}');
@@ -44,13 +44,6 @@ void main() {
 
   final sortedMarks = marks.entries.toList()
     ..sort((a, b) => a.value.compareTo(b.value));
-
-  // Also synthesize a start-of-recording window before first mark
-  final windows = <MapEntry<String, num>>[
-    if (sortedMarks.isNotEmpty)
-      MapEntry('BEFORE_FIRST_MARK', sortedMarks.first.value - 1),
-    ...sortedMarks,
-  ];
 
   for (var i = 0; i < sortedMarks.length; i++) {
     final start = sortedMarks[i].value;
@@ -98,7 +91,9 @@ void main() {
       galleryBuilds++;
     }
   }
-  print('\nAfter tab_kin: HomeScreen B=$homeBuilds BirthdayTimeline B=$birthdayBuilds Gallery/Portrait B=$galleryBuilds');
+  print(
+    '\nAfter tab_kin: HomeScreen B=$homeBuilds BirthdayTimeline B=$birthdayBuilds Gallery/Portrait B=$galleryBuilds',
+  );
   if (homeBuilds > 0) {
     print('SUCCESS: first Kin mount includes HomeScreen builds');
   } else {

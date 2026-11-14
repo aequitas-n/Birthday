@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:kin/design/components/buttons/q_icon_button.dart';
 import 'package:kin/design/components/feedback/q_pressable.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -35,36 +36,69 @@ class QReminderDateStrip extends StatelessWidget {
         selected.add(Duration(days: offset)),
     ];
 
-    return Row(
+    final previous = QIconButton(
+      glyph: QuietGlyph.chevronLeft,
+      onPressed: onPreviousWeek,
+      semanticLabel: 'Previous week',
+    );
+    final next = QIconButton(
+      glyph: QuietGlyph.chevronRight,
+      onPressed: onNextWeek,
+      semanticLabel: 'Next week',
+    );
+    final dayRow = Row(
       children: [
-        QIconButton(
-          glyph: QuietGlyph.chevronLeft,
-          onPressed: onPreviousWeek,
-          semanticLabel: 'Previous week',
-        ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              for (final day in days)
-                _DayCell(
-                  letter: _weekdayLetters[day.weekday - 1],
-                  dayNumber: day.day,
-                  selected:
-                      day.year == selectedYear &&
-                      day.month == selectedMonth &&
-                      day.day == selectedDay,
-                  onTap: () => onSelect(day.year, day.month, day.day),
-                ),
-            ],
+        for (final day in days)
+          Expanded(
+            child: _DayCell(
+              letter: _weekdayLetters[day.weekday - 1],
+              dayNumber: day.day,
+              selected:
+                  day.year == selectedYear &&
+                  day.month == selectedMonth &&
+                  day.day == selectedDay,
+              onTap: () => onSelect(day.year, day.month, day.day),
+            ),
           ),
-        ),
-        QIconButton(
-          glyph: QuietGlyph.chevronRight,
-          onPressed: onNextWeek,
-          semanticLabel: 'Next week',
-        ),
       ],
+    );
+
+    final strip = LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 360) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  previous,
+                  Text(
+                    'Week of $selectedDay / $selectedMonth',
+                    textScaler: context.structuralTextScaler,
+                    style: context.quiet.inked(context.quiet.text.uiCaption),
+                  ),
+                  next,
+                ],
+              ),
+              dayRow,
+            ],
+          );
+        }
+        return Row(
+          children: [
+            previous,
+            Expanded(child: dayRow),
+            next,
+          ],
+        );
+      },
+    );
+    if (context.appTheme.art == null) return strip;
+    return QIllustratedSurface(
+      kind: IllustratedSurfaceKind.calendar,
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 16),
+      child: strip,
     );
   }
 }

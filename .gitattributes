@@ -1,0 +1,6 @@
+# Keep build scripts executable by Bash after Windows checkouts.
+*.sh text eol=lf
+
+# Preserve upstream license bytes, including original line endings and spaces.
+assets/fonts/licenses/** -text -whitespace
+assets/fonts/THIRD_PARTY_LICENSES.txt -whitespace

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
@@ -11,7 +10,6 @@ abstract final class Phase5Diag {
 
   static const enabled = bool.fromEnvironment(
     'KIN_PHASE5_DIAG',
-    defaultValue: false,
   );
 
   static final Stopwatch _boot = Stopwatch();

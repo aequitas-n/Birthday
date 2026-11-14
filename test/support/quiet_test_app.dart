@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart' show MaterialApp;
@@ -30,15 +31,16 @@ const quietTextScales = <String, double>{'1.0x': 1, '1.3x': 1.3};
 /// typography — which is the whole design — is invisible.
 Future<void> loadQuietFonts() async {
   TestWidgetsFlutterBinding.ensureInitialized();
-  for (final family in const {
-    'Fraunces': 'assets/fonts/Fraunces-Variable.ttf',
-    'CourierPrime': 'assets/fonts/CourierPrime-Regular.ttf',
-    'Caveat': 'assets/fonts/Caveat-Variable.ttf',
-  }.entries) {
-    final bytes = File(family.value).readAsBytesSync();
-    await (FontLoader(
-      family.key,
-    )..addFont(Future.value(ByteData.sublistView(bytes)))).load();
+  final catalog =
+      jsonDecode(File('assets/fonts/catalog.json').readAsStringSync())
+          as Map<String, dynamic>;
+  for (final family in catalog.entries) {
+    final loader = FontLoader(family.key);
+    for (final filename in family.value as List<dynamic>) {
+      final bytes = File('assets/fonts/$filename').readAsBytesSync();
+      loader.addFont(Future.value(ByteData.sublistView(bytes)));
+    }
+    await loader.load();
   }
 }
 
@@ -157,7 +159,9 @@ Set<String> collectAssetImagePaths(WidgetTester tester) {
   for (final image in tester.widgetList<Image>(find.byType(Image))) {
     consider(image.image);
   }
-  for (final box in tester.widgetList<DecoratedBox>(find.byType(DecoratedBox))) {
+  for (final box in tester.widgetList<DecoratedBox>(
+    find.byType(DecoratedBox),
+  )) {
     final decoration = box.decoration;
     if (decoration is BoxDecoration) {
       consider(decoration.image?.image);
@@ -169,4 +173,3 @@ Set<String> collectAssetImagePaths(WidgetTester tester) {
 bool hasVintageDiaryAsset(Iterable<String> paths) {
   return paths.any((path) => path.contains('assets/themes/Vintage-Diary/'));
 }
-

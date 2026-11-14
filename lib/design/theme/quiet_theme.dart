@@ -89,7 +89,7 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
       journal = const QuietJournal.neutral(),
       interactive = const QuietInteractive.neutral(),
       navigation = const QuietNavigation.neutral(),
-      text = const QuietTypography.quietDefault(),
+      text = ThemeTypography.plain,
       space = const QuietSpace(),
       layout = const QuietLayout(),
       radius = const QuietRadius(),
@@ -148,7 +148,6 @@ final class QuietTheme extends ThemeExtension<QuietTheme> {
         dark: dark,
         amoled: amoled,
       ),
-      text: const QuietTypography.vintageDiary(),
     );
   }
 

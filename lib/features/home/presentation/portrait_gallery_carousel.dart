@@ -5,10 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kin/app/profile_creation_launcher.dart';
 import 'package:kin/app/router.dart';
+import 'package:kin/design/theme/profile_surface_geometry.dart';
 import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
-import 'package:kin/design/tokens/vintage_portrait_geometry.dart';
 import 'package:kin/features/home/application/gallery_providers.dart';
+
 // ignore: always_use_package_imports -- ARCH-03 requires relative imports within a feature
 import 'profile_portrait_card.dart';
 
@@ -117,7 +118,7 @@ class _PortraitGalleryCarouselState
     assert(() {
       PortraitGalleryCarousel.debugBuildCount++;
       return true;
-    }());
+    }(), 'Count carousel builds in debug mode.');
     final q = context.quiet;
     final memories =
         ref.watch(galleryMemorySummariesProvider).asData?.value ?? const {};
@@ -132,7 +133,7 @@ class _PortraitGalleryCarouselState
         final indicatorSpace = showIndicator ? q.space.xl + q.space.sm : 0.0;
         final size = _cardSizeFor(
           maxWidth: constraints.maxWidth,
-          maxHeight: math.max(0.0, constraints.maxHeight - indicatorSpace),
+          maxHeight: math.max(0, constraints.maxHeight - indicatorSpace),
           q: q,
           context: context,
         );
@@ -218,8 +219,8 @@ class _PortraitGalleryCarouselState
     );
     // Keep a usable minimum on tiny heights without inventing a new ratio.
     if (size.height < 260 && maxWidth > 0) {
-      final minH = math.min(
-        260.0,
+      final minH = math.min<double>(
+        260,
         layout.galleryCardMaxHeight ?? q.layout.galleryCardMaxHeight,
       );
       final aspect =

@@ -1,4 +1,4 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 void main(List<String> args) {
@@ -55,9 +55,15 @@ void main(List<String> args) {
     }
   }
   final stack = <_Open>[];
-  double layoutEx = 0, buildEx = 0, gridIncl = 0, layoutIncl = 0, frame = 0;
+  double layoutEx = 0;
+  double buildEx = 0;
+  double gridIncl = 0;
+  double layoutIncl = 0;
+  double frame = 0;
   final sorted = ev.where((e) => e['tid'] == uiTid).toList()
-    ..sort((a, b) => ((a['ts'] as num?) ?? 0).compareTo((b['ts'] as num?) ?? 0));
+    ..sort(
+      (a, b) => ((a['ts'] as num?) ?? 0).compareTo((b['ts'] as num?) ?? 0),
+    );
   for (final e in sorted) {
     final ts = e['ts'];
     if (ts is! num || ts < journal || ts > today) continue;
@@ -66,7 +72,9 @@ void main(List<String> args) {
       stack.add(_Open(name, ts.toDouble()));
     } else if (e['ph'] == 'E' && stack.isNotEmpty) {
       var idx = stack.length - 1;
-      while (idx >= 0 && stack[idx].name != name) idx--;
+      while (idx >= 0 && stack[idx].name != name) {
+        idx--;
+      }
       if (idx < 0) continue;
       final open = stack.removeAt(idx);
       final incl = ts.toDouble() - open.start;
@@ -79,7 +87,9 @@ void main(List<String> args) {
       if (stack.isNotEmpty) stack.last.child += incl;
     }
   }
-  print('\nJOURNAL summary: frame=${frame.round()} layoutEx=${layoutEx.round()} layoutIncl=${layoutIncl.round()} buildEx=${buildEx.round()} gridIncl=${gridIncl.round()}');
+  print(
+    '\nJOURNAL summary: frame=${frame.round()} layoutEx=${layoutEx.round()} layoutIncl=${layoutIncl.round()} buildEx=${buildEx.round()} gridIncl=${gridIncl.round()}',
+  );
   if (kin != null) {
     print('Kin mark present (first visit armed before tap)');
   }

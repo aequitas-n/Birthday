@@ -1,3 +1,4 @@
+// This command-line audit reports its findings to stdout.
 // ignore_for_file: avoid_print
 import 'dart:io';
 
@@ -14,8 +15,8 @@ void main() {
     final path = entity.path;
     final rel = path
         .substring(root.path.length)
-        .replaceAll('\\', '/')
-        .replaceFirst(RegExp(r'^/+'), '');
+        .replaceAll(r'\', '/')
+        .replaceFirst(RegExp('^/+'), '');
     final bytes = entity.readAsBytesSync();
     final size = bytes.length;
     final ext = path.split('.').last.toLowerCase();
@@ -75,7 +76,9 @@ void main() {
         'transparent=${r.usesTransparency}\tsha=${r.digest}',
       );
     } else {
-      print('${r.rel}\t${r.size}\t${(r.size / 1e6).toStringAsFixed(2)}MB\tsha=${r.digest}');
+      print(
+        '${r.rel}\t${r.size}\t${(r.size / 1e6).toStringAsFixed(2)}MB\tsha=${r.digest}',
+      );
     }
   }
 
@@ -84,11 +87,15 @@ void main() {
   final total = rows.fold(0, (a, r) => a + r.size);
   print('\n=== TOTALS ===');
   print('TOTAL\t$total\t${(total / 1e6).toStringAsFixed(2)} MB');
-  print('PNG\t${sumExt("png")}\t${(sumExt("png") / 1e6).toStringAsFixed(2)} MB');
+  print(
+    'PNG\t${sumExt("png")}\t${(sumExt("png") / 1e6).toStringAsFixed(2)} MB',
+  );
   print('JPG\t${sumExt("jpg") + sumExt("jpeg")}');
   print('WEBP\t${sumExt("webp")}');
   print('SVG\t${sumExt("svg")}');
-  print('TTF\t${sumExt("ttf")}\t${(sumExt("ttf") / 1e6).toStringAsFixed(2)} MB');
+  print(
+    'TTF\t${sumExt("ttf")}\t${(sumExt("ttf") / 1e6).toStringAsFixed(2)} MB',
+  );
   print('TXT\t${sumExt("txt")}');
 
   print('\n=== BYTE-IDENTICAL (sha256) ===');
@@ -109,7 +116,9 @@ void main() {
   final byPx = rows.where((r) => r.w != null).toList()
     ..sort((a, b) => (b.w! * b.h!).compareTo(a.w! * a.h!));
   for (final r in byPx.take(20)) {
-    print('${r.rel}\t${r.w}x${r.h}\t${r.megapixels!.toStringAsFixed(2)}MP\t${(r.size / 1e6).toStringAsFixed(2)}MB');
+    print(
+      '${r.rel}\t${r.w}x${r.h}\t${r.megapixels!.toStringAsFixed(2)}MP\t${(r.size / 1e6).toStringAsFixed(2)}MB',
+    );
   }
 }
 

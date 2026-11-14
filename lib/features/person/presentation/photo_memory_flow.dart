@@ -18,6 +18,7 @@ import 'package:kin/design/components/sheets/q_sheet.dart';
 import 'package:kin/design/components/sheets/q_sheet_route.dart';
 import 'package:kin/design/components/surfaces/q_screen.dart';
 import 'package:kin/design/components/surfaces/q_surface.dart';
+import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/feedback/quiet_haptics.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
@@ -329,8 +330,7 @@ class _PhotoMemoryReview extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
 
-    return ColoredBox(
-      color: q.color.canvas,
+    return QThemeCanvas(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => Navigator.of(context).pop(),

@@ -2,7 +2,7 @@
 /// timeline JSON, plus a hotspot summary.
 ///
 /// Usage:
-///   dart run tools/phase7_vm_timeline.dart <ws-uri> <out.json> [seconds]
+///   dart run tools/phase7_vm_timeline.dart `<ws-uri> <out.json>` `seconds`
 ///
 /// Example ws-uri (from `flutter run` / logcat):
 ///   ws://127.0.0.1:12345/authCode=/ws
@@ -18,7 +18,7 @@ Future<void> main(List<String> args) async {
   if (args.length < 2) {
     stderr.writeln(
       'Usage: dart run tools/phase7_vm_timeline.dart '
-      '<ws-uri> <out.json> [recordSeconds=12]',
+      '`<ws-uri> <out.json>` [recordSeconds=12]',
     );
     exit(64);
   }
@@ -113,7 +113,9 @@ void _printHotspots(List<Map<String, Object?>> events) {
         n.contains('opacity');
   }).toList();
 
-  stdout.writeln('\n=== Filtered framework/raster-interest (top 50 by max) ===');
+  stdout.writeln(
+    '\n=== Filtered framework/raster-interest (top 50 by max) ===',
+  );
   for (final entry in interesting.take(50)) {
     final a = entry.value;
     stdout.writeln(
@@ -124,7 +126,7 @@ void _printHotspots(List<Map<String, Object?>> events) {
 }
 
 final class _Agg {
-  var count = 0;
-  var totalUs = 0.0;
-  var maxUs = 0.0;
+  int count = 0;
+  double totalUs = 0;
+  double maxUs = 0;
 }

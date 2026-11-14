@@ -1,0 +1,25 @@
+name: Refresh golden baselines
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Render baselines on the reference platform
+        run: flutter test --tags golden --update-goldens --reporter expanded
+      - uses: actions/upload-artifact@v4
+        with:
+          name: golden-baselines
+          path: test/**/_goldens/*.png
+          if-no-files-found: error

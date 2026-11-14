@@ -64,7 +64,66 @@ flutter:
       fonts:
         - asset: assets/fonts/Caveat-Variable.ttf
 
+    # Shared interface and individual illustrated-theme voices.
+    - family: DMSans
+      fonts:
+        - asset: assets/fonts/DMSans-Variable.ttf
+    - family: DMMono
+      fonts:
+        - asset: assets/fonts/DMMono-Regular.ttf
+    - family: CormorantGaramond
+      fonts:
+        - asset: assets/fonts/CormorantGaramond-Variable.ttf
+    - family: ChakraPetch
+      fonts:
+        - asset: assets/fonts/ChakraPetch-Regular.ttf
+        - asset: assets/fonts/ChakraPetch-SemiBold.ttf
+          weight: 600
+    - family: SpaceMono
+      fonts:
+        - asset: assets/fonts/SpaceMono-Regular.ttf
+    - family: DMSerifDisplay
+      fonts:
+        - asset: assets/fonts/DMSerifDisplay-Regular.ttf
+    - family: SpecialElite
+      fonts:
+        - asset: assets/fonts/SpecialElite-Regular.ttf
+    - family: Bangers
+      fonts:
+        - asset: assets/fonts/Bangers-Regular.ttf
+    - family: ComicNeue
+      fonts:
+        - asset: assets/fonts/ComicNeue-Regular.ttf
+        - asset: assets/fonts/ComicNeue-Bold.ttf
+          weight: 700
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora-Variable.ttf
+    - family: Kalam
+      fonts:
+        - asset: assets/fonts/Kalam-Regular.ttf
+    - family: BreeSerif
+      fonts:
+        - asset: assets/fonts/BreeSerif-Regular.ttf
+    - family: PatrickHand
+      fonts:
+        - asset: assets/fonts/PatrickHand-Regular.ttf
+    - family: Cinzel
+      fonts:
+        - asset: assets/fonts/Cinzel-Variable.ttf
+    - family: CrimsonPro
+      fonts:
+        - asset: assets/fonts/CrimsonPro-Variable.ttf
+
   assets:
+    - assets/fonts/THIRD_PARTY_LICENSES.txt
+    - assets/themes/Illustrated/retro/
+    - assets/themes/Illustrated/comic/
+    - assets/themes/Illustrated/botanical/
+    - assets/themes/Illustrated/seaside/
+    - assets/themes/Illustrated/midnight/
+    - assets/themes/Illustrated/vintage/
+    - assets/themes/Illustrated/neon/
     - assets/themes/Vintage-Diary/vintage-bg.webp
     - assets/themes/Vintage-Diary/Journal-Card.webp
     - assets/themes/Vintage-Diary/Calendar.webp

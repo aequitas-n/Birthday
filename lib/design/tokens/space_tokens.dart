@@ -154,7 +154,7 @@ final class QuietLayout {
 
   /// PageView page width fraction. Full width so neighbours stay off-screen
   /// at rest; the card itself is sized by [galleryCardWidthFraction].
-  double get galleryViewportFraction => 1.0;
+  double get galleryViewportFraction => 1;
 
   /// Fraction of viewport height a gallery card may occupy when height-bound.
   double get galleryCardHeightFraction => 0.76;

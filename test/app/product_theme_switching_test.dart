@@ -8,9 +8,8 @@ import 'package:kin/app/theme_controller.dart';
 import 'package:kin/data/local/database/kin_database.dart';
 import 'package:kin/data/repositories/settings_repository_drift.dart';
 import 'package:kin/design/theme/product_theme_id.dart';
+import 'package:kin/design/theme/product_themes.dart';
 import 'package:kin/design/theme/quiet_collection.dart';
-import 'package:kin/design/tokens/neon_arcade_tokens.dart';
-import 'package:kin/design/tokens/vintage_diary_tokens.dart';
 
 void main() {
   group('runtime theme switching', () {
@@ -31,9 +30,7 @@ void main() {
             ThemePreference.fromSettings(initial),
           ),
         ],
-      );
-      // Keep providers alive so stream updates rebuild the notifier.
-      container.listen(themePreferenceProvider, (_, __) {});
+      )..listen(themePreferenceProvider, (_, _) {});
     });
 
     tearDown(() async {
@@ -61,7 +58,12 @@ void main() {
         ProductThemeId.quietDefault,
       );
       expect(
-        container.read(themePreferenceProvider).definition.assets.backgrounds.app,
+        container
+            .read(themePreferenceProvider)
+            .definition
+            .assets
+            .backgrounds
+            .app,
         isNull,
       );
       expect(
@@ -111,8 +113,13 @@ void main() {
       await waitForTheme(ProductThemeId.vintageDiary);
 
       expect(
-        container.read(themePreferenceProvider).definition.assets.backgrounds.app,
-        VintageDiaryAssets.background,
+        container
+            .read(themePreferenceProvider)
+            .definition
+            .assets
+            .backgrounds
+            .app,
+        ProductThemes.vintageDiary.art!.background,
       );
       expect(
         container
@@ -124,7 +131,7 @@ void main() {
         'Caveat',
       );
       expect(
-        container.read(themePreferenceProvider).definition.assets.chrome.navStrip,
+        container.read(themePreferenceProvider).definition.art,
         isNotNull,
       );
 
@@ -134,15 +141,30 @@ void main() {
       await waitForTheme(ProductThemeId.quietDefault);
 
       expect(
-        container.read(themePreferenceProvider).definition.assets.backgrounds.app,
+        container
+            .read(themePreferenceProvider)
+            .definition
+            .assets
+            .backgrounds
+            .app,
         isNull,
       );
       expect(
-        container.read(themePreferenceProvider).definition.assets.chrome.navStrip,
+        container
+            .read(themePreferenceProvider)
+            .definition
+            .assets
+            .chrome
+            .navStrip,
         isNull,
       );
       expect(
-        container.read(themePreferenceProvider).definition.assets.mood.emptyInvite,
+        container
+            .read(themePreferenceProvider)
+            .definition
+            .assets
+            .mood
+            .emptyInvite,
         isNull,
       );
       expect(
@@ -164,10 +186,7 @@ void main() {
         'CourierPrime',
       );
       expect(
-        container
-            .read(themePreferenceProvider)
-            .resolve()
-            .collection,
+        container.read(themePreferenceProvider).resolve().collection,
         QuietCollection.quietDefault,
       );
     });
@@ -179,10 +198,10 @@ void main() {
       await waitForTheme(ProductThemeId.neonArcade);
 
       final neon = container.read(themePreferenceProvider).definition.assets;
-      expect(neon.backgrounds.app, NeonArcadeAssets.background);
+      expect(neon.backgrounds.app, ProductThemes.neonArcade.art!.background);
       expect(neon.chrome.searchStrip, isNull);
-      expect(neon.chrome.birthdayStrip, NeonArcadeAssets.userStrip);
-      expect(neon.mood.emptyInvite, NeonArcadeAssets.excitedHome);
+      expect(neon.chrome.birthdayStrip, isNull);
+      expect(neon.mood.emptyInvite, ProductThemes.neonArcade.art!.atlas);
       expect(neon.backgrounds.app, isNot(contains('Vintage-Diary')));
       expect(
         container.read(themePreferenceProvider).resolve().collection,
@@ -195,7 +214,7 @@ void main() {
             .text
             .expression
             .secondaryFamily,
-        'CourierPrime',
+        'ChakraPetch',
       );
 
       await container
@@ -204,8 +223,8 @@ void main() {
       await waitForTheme(ProductThemeId.vintageDiary);
 
       final vin = container.read(themePreferenceProvider).definition.assets;
-      expect(vin.backgrounds.app, VintageDiaryAssets.background);
-      expect(vin.chrome.searchStrip, isNotNull);
+      expect(vin.backgrounds.app, ProductThemes.vintageDiary.art!.background);
+      expect(vin.chrome.searchStrip, isNull);
       expect(vin.backgrounds.app, isNot(contains('Neon-Arcade')));
       expect(
         container
@@ -222,7 +241,12 @@ void main() {
           .setProductTheme(ProductThemeId.quietDefault);
       await waitForTheme(ProductThemeId.quietDefault);
       expect(
-        container.read(themePreferenceProvider).definition.assets.backgrounds.app,
+        container
+            .read(themePreferenceProvider)
+            .definition
+            .assets
+            .backgrounds
+            .app,
         isNull,
       );
     });

@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// The only loading indicator in the app.
 ///
@@ -27,7 +28,17 @@ class _QArcState extends State<QArc> with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 900),
-  )..repeat();
+  );
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (context.prefersReducedMotion || !TickerMode.valuesOf(context).enabled) {
+      _controller.stop();
+    } else if (!_controller.isAnimating) {
+      _controller.repeat();
+    }
+  }
 
   @override
   void dispose() {

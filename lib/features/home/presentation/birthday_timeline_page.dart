@@ -92,8 +92,7 @@ class _HomeTimeline extends ConsumerWidget {
               ),
               QBirthdayStripChain(
                 children: [
-                  for (final entry in chapter.$2)
-                    _TimelineStrip(entry: entry),
+                  for (final entry in chapter.$2) _TimelineStrip(entry: entry),
                 ],
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
 /// The primary presentation surface.
@@ -53,20 +54,7 @@ class QSheet extends StatelessWidget {
           constraints: BoxConstraints(
             maxHeight: media.size.height * maxHeightFraction,
           ),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: i.sheet,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(q.radius.xl),
-              ),
-              boxShadow: q.elevation.overlay,
-              border: Border(
-                top: BorderSide(
-                  color: i.sheetBorder,
-                  width: context.hairlineWidth,
-                ),
-              ),
-            ),
+          child: _SheetSurface(
             child: DefaultTextStyle(
               style: q.text.body.tinted(i.ink),
               child: Column(
@@ -134,7 +122,7 @@ class QSheet extends StatelessWidget {
   }
 }
 
-/// Pinned actions at the foot of a sheet or editor.
+/// Pinned actions at the foot of a sheet or editor. Wraps on small screens.
 ///
 /// Not a persistent bar. The top hairline appears only when content is
 /// scrolling beneath it.
@@ -145,14 +133,14 @@ class QBottomActions extends StatelessWidget {
     super.key,
   });
 
-  /// At most two, right-aligned: tertiary then primary.
+  /// Up to three: dismissal/destructive, optional secondary, then primary.
   final List<Widget> children;
 
   final bool showDivider;
 
   @override
   Widget build(BuildContext context) {
-    assert(children.length <= 2, 'A sheet offers at most two actions.');
+    assert(children.length <= 3, 'A sheet offers at most three actions.');
     final q = context.quiet;
     final i = q.interactive;
     final onParchment = context.isParchmentControls;
@@ -176,15 +164,41 @@ class QBottomActions extends StatelessWidget {
         q.space.xxl,
         q.space.sm,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          for (final (index, child) in children.indexed) ...[
-            if (index > 0) SizedBox(width: q.space.md),
-            child,
-          ],
-        ],
+      child: Wrap(
+        alignment: WrapAlignment.end,
+        spacing: q.space.md,
+        runSpacing: q.space.sm,
+        children: children,
       ),
+    );
+  }
+}
+
+/// Carries the same paper identity as cards, calendars, and profile plates.
+class _SheetSurface extends StatelessWidget {
+  const _SheetSurface({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final q = context.quiet;
+    if (context.appTheme.art != null) {
+      return QIllustratedSurface(child: child);
+    }
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: q.interactive.sheet,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(q.radius.xl)),
+        boxShadow: q.elevation.overlay,
+        border: Border(
+          top: BorderSide(
+            color: q.interactive.sheetBorder,
+            width: context.hairlineWidth,
+          ),
+        ),
+      ),
+      child: child,
     );
   }
 }

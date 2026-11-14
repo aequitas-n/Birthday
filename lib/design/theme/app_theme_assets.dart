@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:kin/design/theme/app_theme_surface_layout.dart';
-import 'package:kin/design/tokens/user_strip_geometry.dart';
+import 'package:kin/design/theme/birthday_strip_geometry.dart';
 
 export 'package:kin/design/theme/app_theme_surface_layout.dart';
-export 'package:kin/design/tokens/user_strip_geometry.dart' show UserStripLayout;
+export 'package:kin/design/theme/birthday_strip_geometry.dart'
+    show UserStripLayout;
 
 /// Semantic image slots for a product theme.
 ///

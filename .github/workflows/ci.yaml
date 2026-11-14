@@ -36,6 +36,7 @@ jobs:
         run: |
           if grep -rq "part '.*\.g\.dart'" lib/; then
             dart run build_runner build --delete-conflicting-outputs
+            dart format lib/
             git diff --exit-code -- lib/
           else
             echo "No generated sources yet; skipping."

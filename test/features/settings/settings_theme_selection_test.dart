@@ -24,7 +24,7 @@ void main() {
     tester,
   ) async {
     final repo = _MemorySettingsRepository(
-      initial: const AppSettings(productThemeId: ProductThemeId.quietDefault),
+      initial: const AppSettings(),
     );
     addTearDown(repo.dispose);
 
@@ -50,7 +50,7 @@ void main() {
       ],
     );
     addTearDown(container.dispose);
-    container.listen(themePreferenceProvider, (_, __) {});
+    container.listen(themePreferenceProvider, (_, _) {});
 
     Future<void> pumpSettings() async {
       final preference = container.read(themePreferenceProvider);

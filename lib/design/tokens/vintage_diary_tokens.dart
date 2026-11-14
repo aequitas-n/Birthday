@@ -1,5 +1,10 @@
+import 'package:flutter/cupertino.dart' show BoxFit;
+import 'package:flutter/material.dart' show BoxFit;
+import 'package:flutter/painting.dart' show BoxFit;
+import 'package:flutter/rendering.dart' show BoxFit;
+import 'package:flutter/widgets.dart' show BoxFit;
 import 'package:kin/design/theme/app_theme_surface_layout.dart';
-import 'package:kin/design/tokens/vintage_portrait_geometry.dart';
+import 'package:kin/design/theme/profile_surface_geometry.dart';
 
 /// Asset paths for the Vintage Diary product theme.
 ///
@@ -19,7 +24,7 @@ abstract final class VintageDiaryAssets {
   static const double journalCardCornerRadius = 6;
 
   /// Intrinsic width / height of [chromeStrip] (2172×724).
-  static const chromeStripAspectRatio = 2172 / 724;
+  static const double chromeStripAspectRatio = 2172 / 724;
 
   /// Opaque parchment band as a fraction of [chromeStrip] height.
   /// Measured from alpha: ~22%–78% → transparent head/foot for the torn edge.
@@ -40,8 +45,6 @@ abstract final class VintageDiaryAssets {
     textLeft: ProfileCardGeometry.textLeft,
     textRight: ProfileCardGeometry.textRight,
     textBottom: ProfileCardGeometry.textBottom,
-    textBandFraction: ProfileCardGeometry.textBandFraction,
-    clipPlateCorners: true,
     cornerRadius: 6,
   );
 

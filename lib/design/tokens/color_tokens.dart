@@ -9,6 +9,9 @@ import 'dart:ui';
 ///
 /// Specified in docs/06-color.md.
 abstract final class ColorTokens {
+  static const launchCanvas = Color(0xFFFFFFFF);
+  static const paperScrim = Color(0x661A1815);
+
   // ── Ember: the single accent ──────────────────────────────────────────
   // Terracotta. The colour of candlelight and baked earth. Chosen partly
   // because it sits nowhere near the indigo that identifies a default
@@ -383,8 +386,10 @@ abstract final class ColorTokens {
   static const naCard = Color(0xFF020616);
   static const naCardRaised = Color(0xFF121A38);
   static const naCardSunken = Color(0xFF01030C);
+
   /// Primary reading ink on dark HUD sheets / CRT panels.
   static const naCardInk = Color(0xFFF5F8FF);
+
   /// Supporting copy on dark HUD — kept bright for legibility.
   static const naCardInkMuted = Color(0xFFC2CEEA);
   static const naCardEdge = Color(0xFF3A4A7A);

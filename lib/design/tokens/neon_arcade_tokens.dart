@@ -49,7 +49,6 @@ abstract final class NeonArcadeAssets {
     textLeft: 0.14,
     textRight: 0.86,
     textBottom: 0.11,
-    textBandFraction: 0.18,
     clipPlateCorners: false,
     avatarDiameterFraction: 0.34,
     avatarInsetLeft: 0.06,

@@ -1,9 +1,15 @@
-﻿import 'dart:convert';
+import 'dart:convert';
 import 'dart:io';
 
 void main() {
-  final d = jsonDecode(File(r'e:\~Work\Birthday\tmp\phase7\tabs_session.json').readAsStringSync());
-  final ev = (d['traceEvents'] as List).cast<Map>();
+  final d =
+      jsonDecode(
+            File(
+              r'e:\~Work\Birthday\tmp\phase7\tabs_session.json',
+            ).readAsStringSync(),
+          )
+          as Map<String, dynamic>;
+  final ev = (d['traceEvents'] as List<dynamic>).cast<Map<String, dynamic>>();
   final names = <String>{};
   for (final e in ev) {
     final n = '${e['name']}';

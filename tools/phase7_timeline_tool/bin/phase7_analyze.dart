@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as math;
 
 void main(List<String> args) {
   final path = args.first;
@@ -14,8 +13,9 @@ void main(List<String> args) {
     ph['${e['ph']}'] = (ph['${e['ph']}'] ?? 0) + 1;
     names['${e['name']}'] = (names['${e['name']}'] ?? 0) + 1;
   }
-  stdout.writeln('ph=$ph');
-  stdout.writeln('\nTop names by count:');
+  stdout
+    ..writeln('ph=$ph')
+    ..writeln('\nTop names by count:');
   final nameRank = names.entries.toList()
     ..sort((a, b) => b.value.compareTo(a.value));
   for (final e in nameRank.take(40)) {

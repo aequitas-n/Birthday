@@ -56,7 +56,10 @@ class QJournalFragment extends StatelessWidget {
 
     Color? moodWash;
     if (moodId != null) {
-      final (fill, _) = JournalMoodColors.resolve(moodId!, dark: true);
+      final (fill, _) = JournalMoodColors.resolve(
+        moodId!,
+        dark: q.color.brightness == Brightness.dark,
+      );
       moodWash = fill.withValues(alpha: 0.14);
     }
 

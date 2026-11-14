@@ -9,8 +9,7 @@ enum DetailKindSection {
   favorites('Favorites'),
   gift('Gift'),
   plan('Plan'),
-  note('Note')
-  ;
+  note('Note');
 
   const DetailKindSection(this.title);
 
@@ -270,9 +269,7 @@ class _SectionBlock extends StatelessWidget {
     final onParchment = context.isParchmentControls;
     final marker = highlighted
         ? i.accent
-        : (onParchment
-              ? i.inkMuted.withValues(alpha: 0.55)
-              : q.color.canvas);
+        : (onParchment ? i.inkMuted.withValues(alpha: 0.55) : q.color.canvas);
     final feedbackFill = onParchment ? i.sheetElevated : q.color.raised;
 
     return DragTarget<DetailKindSection>(

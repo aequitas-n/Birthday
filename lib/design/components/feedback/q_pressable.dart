@@ -96,6 +96,8 @@ class _QPressableState extends State<QPressable> {
       label: widget.semanticLabel,
       hint: widget.semanticHint,
       button: _interactive,
+      onTap: _interactive ? widget.onTap : null,
+      onLongPress: _interactive ? widget.onLongPress : null,
       enabled: widget.enabled,
       selected: widget.selected,
       // A row announces name, relationship and time-to-birthday as one

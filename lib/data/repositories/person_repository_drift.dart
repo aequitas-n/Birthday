@@ -69,32 +69,33 @@ class DriftPersonRepository implements PersonRepository {
   @override
   Future<void> softDelete(String id) async {
     final now = _toMillis(_clock.now());
-    final profileRows = await (_database.select(_database.profiles)
-          ..where((tbl) => tbl.personId.equals(id)))
-        .get();
+    final profileRows = await (_database.select(
+      _database.profiles,
+    )..where((tbl) => tbl.personId.equals(id))).get();
     final profileIds = profileRows.map((row) => row.id).toList(growable: false);
 
     if (profileIds.isNotEmpty) {
-      await (_database.update(_database.notes)
-            ..where((tbl) => tbl.profileId.isIn(profileIds)))
-          .write(
-            NotesCompanion(
-              deletedAt: Value(now),
-              updatedAt: Value(now),
-            ),
-          );
+      await (_database.update(
+        _database.notes,
+      )..where((tbl) => tbl.profileId.isIn(profileIds))).write(
+        NotesCompanion(
+          deletedAt: Value(now),
+          updatedAt: Value(now),
+        ),
+      );
     }
 
-    await (_database.update(_database.profiles)
-          ..where((tbl) => tbl.personId.equals(id)))
-        .write(
-          ProfilesCompanion(
-            deletedAt: Value(now),
-            updatedAt: Value(now),
-          ),
-        );
+    await (_database.update(
+      _database.profiles,
+    )..where((tbl) => tbl.personId.equals(id))).write(
+      ProfilesCompanion(
+        deletedAt: Value(now),
+        updatedAt: Value(now),
+      ),
+    );
 
-    await (_database.update(_database.people)..where((tbl) => tbl.id.equals(id)))
+    await (_database.update(_database.people)
+          ..where((tbl) => tbl.id.equals(id)))
         .write(PeopleCompanion(deletedAt: Value(now), updatedAt: Value(now)));
   }
 

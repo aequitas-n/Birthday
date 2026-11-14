@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:kin/design/components/navigation/q_primary_nav.dart';
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/components/surfaces/q_theme_surfaces.dart';
 import 'package:kin/design/theme/product_themes.dart';
-import 'package:kin/design/theme/quiet_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 import 'package:kin/design/tokens/vintage_portrait_geometry.dart';
 
@@ -25,7 +25,7 @@ void main() {
     ) async {
       await tester.pumpQuiet(
         const _NeonTodayProbe(),
-        theme: const QuietTheme.neonArcade(),
+        theme: ProductThemes.neonArcade.quiet,
         appTheme: ProductThemes.neonArcade,
         surfaceSize: size,
       );
@@ -42,20 +42,18 @@ void main() {
   ) async {
     await tester.pumpQuiet(
       const _NeonPeopleProbe(),
-      theme: const QuietTheme.neonArcade(),
+      theme: ProductThemes.neonArcade.quiet,
       appTheme: ProductThemes.neonArcade,
-      surfaceSize: const Size(390, 844),
     );
     await tester.pumpQuietImages();
     expect(tester.takeException(), isNull);
     expect(find.text('Alex Rivera'), findsOneWidget);
 
-    final layout = ProductThemes.neonArcade.assets.layout.profileCard!;
-    expect(layout.aspectRatio, closeTo(941 / 1672, 0.001));
-    expect(layout.clipPlateCorners, isFalse);
+    final plate = tester.getSize(find.byType(QIllustratedSurface).first);
+    expect(plate.aspectRatio, closeTo(ProfileCardGeometry.aspectRatio, 0.001));
     expect(
-      ProductThemes.neonArcade.assets.layout.galleryCardWidthFraction,
-      1.0,
+      ProductThemes.neonArcade.quiet.journal.ink.computeLuminance(),
+      greaterThan(0.7),
     );
   });
 }
@@ -163,12 +161,14 @@ class _NeonPeopleProbe extends StatelessWidget {
                     final size = VintagePortraitLayout.fitIn(
                       maxWidth: constraints.maxWidth - q.space.lg * 2,
                       maxHeight: constraints.maxHeight * 0.75,
-                      widthFraction: layout.galleryCardWidthFraction ??
+                      widthFraction:
+                          layout.galleryCardWidthFraction ??
                           q.layout.galleryCardWidthFraction,
-                      aspectRatio: layout.profileCard?.aspectRatio ??
+                      aspectRatio:
+                          layout.profileCard?.aspectRatio ??
                           ProfileCardGeometry.aspectRatio,
                     );
-                    final asset = context.appTheme.assets.chrome.profileCard!;
+                    final asset = context.appTheme.assets.chrome.profileCard;
                     final photo = layout.profileCard;
                     return Center(
                       child: SizedBox(
@@ -177,20 +177,28 @@ class _NeonPeopleProbe extends StatelessWidget {
                         child: Stack(
                           fit: StackFit.expand,
                           children: [
-                            Image.asset(asset, fit: BoxFit.cover),
+                            if (asset != null)
+                              Image.asset(asset, fit: BoxFit.cover)
+                            else
+                              const QIllustratedSurface(
+                                kind: IllustratedSurfaceKind.profile,
+                                child: SizedBox.expand(),
+                              ),
                             Positioned(
                               left: size.width * (photo?.photoLeft ?? 0.14),
-                              right: size.width *
+                              right:
+                                  size.width *
                                   (1 - (photo?.photoRight ?? 0.86)),
                               top: size.height * (photo?.photoTop ?? 0.11),
-                              bottom: size.height *
+                              bottom:
+                                  size.height *
                                   (1 - (photo?.photoBottom ?? 0.66)),
                               child: const ColoredBox(color: Color(0xFF334455)),
                             ),
                             Positioned(
                               left: size.width * (photo?.textLeft ?? 0.1),
-                              right: size.width *
-                                  (1 - (photo?.textRight ?? 0.9)),
+                              right:
+                                  size.width * (1 - (photo?.textRight ?? 0.9)),
                               bottom:
                                   size.height * (photo?.textBottom ?? 0.055),
                               child: Text(

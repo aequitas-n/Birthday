@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 /// Themes and screens keep using semantic assets; this only limits how large a
 /// bitmap Flutter materializes. Visual crop / [BoxFit] / layout stay unchanged.
 ///
-/// Decode target = logical display extent × [MediaQuery.devicePixelRatio].
+/// Decode target = logical display extent × `MediaQuery.devicePixelRatioOf`.
 ///
 /// Important: for [BoxFit.cover] / [BoxFit.contain], only **one** of
 /// cacheWidth/cacheHeight is set so the codec preserves intrinsic aspect ratio.

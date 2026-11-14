@@ -1,4 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:kin/app/app_shell.dart' show AppShell;
+import 'package:kin/design/components/surfaces/q_illustrated_surface.dart';
 import 'package:kin/design/media/quiet_display_image.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -34,7 +36,8 @@ class QuietThemeBackdrop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final q = context.quiet;
-    final asset = context.appTheme.assets.backgrounds.app;
+    final art = context.appTheme.art;
+    final asset = art?.background ?? context.appTheme.assets.backgrounds.app;
     final viewport = MediaQuery.sizeOf(context);
     final cache = QuietDisplayImage.cacheSize(context, viewport);
 
@@ -53,7 +56,7 @@ class QuietThemeBackdrop extends StatelessWidget {
               excludeFromSemantics: true,
             ),
           ),
-          if (includeScrim)
+          if (includeScrim && art == null)
             Positioned.fill(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -75,7 +78,7 @@ class QuietThemeBackdrop extends StatelessWidget {
 
 /// Full-screen app canvas from the active product theme.
 ///
-/// When [AppThemeAssets.backgrounds.app] is null, renders a solid canvas.
+/// When `AppThemeAssets.backgrounds.app` is null, renders a solid canvas.
 /// When set, draws the texture over the theme canvas colour — unless an
 /// ancestor [QuietShellBackdropScope] already owns the full-bleed art.
 class QThemeCanvas extends StatelessWidget {
@@ -112,7 +115,7 @@ class QJournalCardSurface extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
 
   /// When true, shrinks [child] uniformly if it exceeds the safe content box.
-  /// Defaults to true whenever theme [journalCardContent] is set (CRT frames).
+  /// Defaults to true whenever theme `journalCardContent` is set (CRT frames).
   /// Memory cards that use [Expanded] must pass false.
   final bool? scaleContentToFit;
 
@@ -120,6 +123,15 @@ class QJournalCardSurface extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final j = q.journal;
+    if (context.appTheme.art != null) {
+      return QIllustratedSurface(
+        padding: padding ?? const EdgeInsets.fromLTRB(24, 24, 24, 26),
+        child: QuietControlSurfaceScope(
+          surface: QuietControlSurface.parchment,
+          child: child,
+        ),
+      );
+    }
     final asset = context.appTheme.assets.backgrounds.journalCard;
     final layout = context.appTheme.assets.layout;
     final contentRect = layout.journalCardContent;
@@ -165,15 +177,17 @@ class QJournalCardSurface extends StatelessWidget {
       final logicalW = constraints.maxWidth.isFinite && constraints.maxWidth > 0
           ? constraints.maxWidth
           : MediaQuery.sizeOf(context).width;
-      final logicalH = constraints.maxHeight.isFinite && constraints.maxHeight > 0
+      final logicalH =
+          constraints.maxHeight.isFinite && constraints.maxHeight > 0
           ? constraints.maxHeight
           : artAspect != null && artAspect > 0
-              ? logicalW / artAspect
-              : logicalW * 1.25;
+          ? logicalW / artAspect
+          : logicalW * 1.25;
       final size = Size(logicalW, logicalH);
       final cache = QuietDisplayImage.cacheSize(context, size);
 
-      final resolvedPadding = padding ??
+      final resolvedPadding =
+          padding ??
           (contentRect != null
               ? contentRect.toPadding(size)
               : EdgeInsets.fromLTRB(
@@ -216,7 +230,8 @@ class QJournalCardSurface extends StatelessWidget {
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.centerLeft,
                             child: SizedBox(
-                              width: size.width -
+                              width:
+                                  size.width -
                                   resolvedPadding
                                       .resolve(TextDirection.ltr)
                                       .horizontal,
@@ -237,14 +252,15 @@ class QJournalCardSurface extends StatelessWidget {
       builder: (context, constraints) {
         final heightBounded =
             constraints.maxHeight.isFinite && constraints.maxHeight > 0;
-        final corner = layout.journalCardCornerRadius ??
-            (hasArt ? 0.0 : q.radius.lg);
+        final corner =
+            layout.journalCardCornerRadius ?? (hasArt ? 0.0 : q.radius.lg);
         final radius = BorderRadius.circular(corner);
 
         // Default solid paper: size to the child when height is unbound
         // (Today). An expand-only Stack collapses to 0 and piles sections.
         if (!hasArt) {
-          final resolvedPadding = padding ??
+          final resolvedPadding =
+              padding ??
               EdgeInsets.fromLTRB(
                 q.space.xl,
                 q.space.lg,
@@ -259,9 +275,7 @@ class QJournalCardSurface extends StatelessWidget {
           );
         }
 
-        if (artAspect != null &&
-            artAspect > 0 &&
-            !heightBounded) {
+        if (artAspect != null && artAspect > 0 && !heightBounded) {
           return AspectRatio(
             aspectRatio: artAspect,
             child: LayoutBuilder(
@@ -290,6 +304,16 @@ class QCalendarSurface extends StatelessWidget {
   Widget build(BuildContext context) {
     final q = context.quiet;
     final j = q.journal;
+    if (context.appTheme.art != null) {
+      return QIllustratedSurface(
+        kind: IllustratedSurfaceKind.calendar,
+        padding: padding ?? const EdgeInsets.fromLTRB(12, 20, 12, 18),
+        child: QuietControlSurfaceScope(
+          surface: QuietControlSurface.parchment,
+          child: child,
+        ),
+      );
+    }
     final asset = context.appTheme.assets.backgrounds.calendar;
     final resolvedPadding =
         padding ??
@@ -297,10 +321,12 @@ class QCalendarSurface extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final logicalW = constraints.maxWidth.isFinite && constraints.maxWidth > 0
+        final logicalW =
+            constraints.maxWidth.isFinite && constraints.maxWidth > 0
             ? constraints.maxWidth
             : MediaQuery.sizeOf(context).width;
-        final logicalH = constraints.maxHeight.isFinite && constraints.maxHeight > 0
+        final logicalH =
+            constraints.maxHeight.isFinite && constraints.maxHeight > 0
             ? constraints.maxHeight
             : logicalW;
         final cache = QuietDisplayImage.cacheSize(

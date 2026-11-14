@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/journal/q_ambient_scene.dart';
 import 'package:kin/design/glyphs/quiet_glyphs.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -25,7 +26,7 @@ class QEmptyState extends StatelessWidget {
     final q = context.quiet;
     final viewportHeight = MediaQuery.sizeOf(context).height;
 
-    return Center(
+    final content = Center(
       child: Padding(
         // True centre reads low, so the content is optically raised.
         padding: EdgeInsets.only(
@@ -38,7 +39,10 @@ class QEmptyState extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (glyph != null) ...[
+              if (context.appTheme.art != null) ...[
+                const QAmbientScene(width: 190),
+                SizedBox(height: q.space.lg),
+              ] else if (glyph != null) ...[
                 // Inside a soft disc rather than floating: a lone thin glyph on
                 // a wide canvas reads as a missing image.
                 DecoratedBox(
@@ -77,6 +81,19 @@ class QEmptyState extends StatelessWidget {
               ],
             ],
           ),
+        ),
+      ),
+    );
+    if (context.appTheme.art == null) return content;
+    return LayoutBuilder(
+      builder: (context, constraints) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: constraints.maxHeight.isFinite
+                ? constraints.maxHeight
+                : 0,
+          ),
+          child: content,
         ),
       ),
     );
