@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/widgets.dart';
+import 'package:kin/design/components/surfaces/illustrated_paper_details.dart';
 import 'package:kin/design/theme/illustrated_theme.dart';
 import 'package:kin/design/theme/quiet_theme_x.dart';
 
@@ -107,6 +108,8 @@ class IllustratedSurfacePainter extends CustomPainter {
       ..drawPath(outline, pen)
       ..save()
       ..clipPath(outline);
+
+    if (!compact) IllustratedPaperDetails.paint(canvas, size, art);
 
     // Quiet, deterministic paper flecks. No shader or per-frame random work.
     final grain = Paint()..color = art.ink.withValues(alpha: 0.045);

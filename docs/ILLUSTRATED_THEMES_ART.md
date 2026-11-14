@@ -4,6 +4,8 @@ Generated with the built-in imagegen tool. Each transparent mood atlas contains 
 
 Cards, calendar plates, search, profile plates, birthday tags and navigation are drawn by `QIllustratedSurface` so text remains live and surfaces grow with their contents. The generated backdrops and characters provide the raster artwork.
 
+Larger paper surfaces also have soft pigment washes and a small corner drawing, painted by `IllustratedPaperDetails`: pressed flowers for Vintage, a pixel heart for Neon, a postage stamp for Retro, halftone and a burst for Comic, a leafy sprig for Botanical, a shell and tidelines for Seaside, and a crescent constellation for Midnight. These static details sit beneath live content, stay clipped to the paper, and scale down on smaller cards. Compact navigation, search and tags keep their simpler decoration. The plain Default theme retains its solid surfaces.
+
 ## Prompts
 
 ### retro / moods
